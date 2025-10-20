@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://begsm8mhsqea2"]
+
+[ext_resource type="Script" uid="uid://dummagf5ia40c" path="res://prefabs/thrown_object.gd" id="1_xnfhp"]
+[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="2_ownrp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovt4c"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_xnfhp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ovt4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ownrp")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

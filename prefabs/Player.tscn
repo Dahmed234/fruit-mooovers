@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=8 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/player.gd" id="1_glu7e"]
 [ext_resource type="Texture2D" uid="uid://ca3vm807yvnr4" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
+[ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://throwController.gd" id="2_p3xyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu7e"]
 radius = 83.39998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+size = Vector2(14.75, 15.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glu7e"]
 size = Vector2(65.333336, 40.666668)
@@ -18,31 +20,39 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-28, -52.666668, 43.666
 sample_partition_type = 1
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(3, 3)
+texture_filter = 1
 script = ExtResource("1_glu7e")
 speed = 300.0
 
 [node name="Throw Radius" type="Area2D" parent="."]
+script = ExtResource("2_p3xyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Radius"]
 shape = SubResource("CircleShape2D_glu7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
 texture = ExtResource("2_ay6yh")
 region_enabled = true
 region_rect = Rect2(384, 16, 16, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="physics Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [node name="visible pikmin" type="Area2D" parent="."]
+position = Vector2(-136, -149)
+scale = Vector2(4.62638, 3.489611)
 collision_layer = 8
-collision_mask = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="visible pikmin"]
-position = Vector2(8.333331, -30.333334)
+position = Vector2(28.74818, 8.596945)
 shape = SubResource("RectangleShape2D_glu7e")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-50.000004, 51.000015)
+scale = Vector2(5.6704693, 5.6704693)
 navigation_polygon = SubResource("NavigationPolygon_glu7e")
 navigation_layers = 3

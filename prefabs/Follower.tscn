@@ -7,16 +7,16 @@
 radius = 72.302315
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmfn7"]
-size = Vector2(11.5, 10.5)
+size = Vector2(21, 20)
 
 [node name="Follower" type="CharacterBody2D"]
-scale = Vector2(2, 2)
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_jmfn7")
 BASESPEED = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_klxf7")
 region_enabled = true
 region_rect = Rect2(432, 112, 16, 16)
@@ -32,7 +32,7 @@ shape = SubResource("CircleShape2D_jmfn7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
-position = Vector2(-0.25, -0.25)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_jmfn7")
 
 [node name="Timer" type="Timer" parent="."]
