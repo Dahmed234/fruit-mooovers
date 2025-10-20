@@ -1,14 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=7 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/player.gd" id="1_glu7e"]
 [ext_resource type="Texture2D" uid="uid://ca3vm807yvnr4" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_glu7e"]
+radius = 83.39998
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glu7e"]
+size = Vector2(65.333336, 40.666668)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_glu7e"]
+vertices = PackedVector2Array(35.210938, -17.8125, -18.773438, -16.84375, -18.210938, -42.65625, 34.101563, -42.65625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-28, -52.666668, 43.666668, -52.666668, 45.666668, -8, -29, -6.666667)])
+sample_partition_type = 1
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_glu7e")
 speed = 300.0
+
+[node name="Throw Radius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Radius"]
+shape = SubResource("CircleShape2D_glu7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ay6yh")
@@ -17,3 +34,15 @@ region_rect = Rect2(384, 16, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jyhfs")
+
+[node name="visible pikmin" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="visible pikmin"]
+position = Vector2(8.333331, -30.333334)
+shape = SubResource("RectangleShape2D_glu7e")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_glu7e")
+navigation_layers = 3
