@@ -43,7 +43,5 @@ target_desired_distance = 34.58
 path_max_distance = 66.0
 navigation_layers = 3
 path_postprocessing = 1
-simplify_path = true
-simplify_epsilon = 7.533
 
 [connection signal="timeout" from="Timer" to="." method="on_timeout"]

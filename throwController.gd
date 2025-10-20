@@ -9,9 +9,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Input.is_action_just_pressed("player_throw")):
-		#throwMade.emit(Throwable.new_throwable(position,to_local(get_viewport().get_mouse_position())))
+		throwMade.emit(Throwable.new_throwable(global_position,get_viewport().get_mouse_position()))
 		
-		add_child(Throwable.new_throwable(position,to_local(get_viewport().get_mouse_position())))
+		
 		var throwables :=self.get_overlapping_bodies() #get all pikmin within area
 		if(throwables.is_empty()):
 			return

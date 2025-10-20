@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+class_name Follower
+const scene :PackedScene = preload("res://prefabs/Follower.tscn")
+
 @export
 var BASESPEED = 100
 
@@ -8,16 +11,23 @@ var SPEEDVARIANCE = 40
 var TIMERLENGTH =0.5
 var TIMERVARIANCE =0.1
 
-@export var playerArea :Area2D
+
 
 @onready var timer := $Timer
 @onready var navAgent := $NavigationAgent2D
 
-@export var navRegion :NavigationRegion2D
-
-@export var leader: Node2D
-
 var direction := Vector2(0,0)
+
+static func newFollower(pos,startingState: State):
+	var follower :Follower = scene.instantiate()
+	
+	follower.currentState = startingState
+	follower.global_position = pos
+	return follower
+	
+	
+	
+	
 
 
 
@@ -34,10 +44,18 @@ enum State {
 }
 
 
+func startWander():
+	on_timeout()
+
 func _ready() -> void:
-	
-	startFollow()
-	timer.start()
+	match currentState:
+		State.WANDER:
+			startWander()
+		State.FOLLOW:
+			startFollow()
+		State.IDLE:
+			startIdle()
+
 	
 	
 
@@ -72,10 +90,12 @@ func _physics_process(delta: float) -> void:
 	# pick new direction
 	move_and_slide()
 
+#initialises states to idle
 func startIdle():
 	currentState = State.IDLE
 	velocity = Vector2.ZERO
 
+#initialises state to follow
 func startFollow():
 	currentState = State.FOLLOW
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
