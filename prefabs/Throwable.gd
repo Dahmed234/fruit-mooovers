@@ -3,7 +3,7 @@ class_name Throwable
 
 
 
-signal objectFinishThrow( pos)
+signal objectFinishThrow( pos, state :Follower.State)
 
 var speed :float
 var direction :Vector2
@@ -47,13 +47,22 @@ func quadratic(x):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	$Sprite2D.scale = baseScale * (1 +  60*quadratic(timer.wait_time - timer.time_left))
-	move_and_slide()
+	$Sprite2D.rotation = 5 * PI*(timer.wait_time - timer.time_left)
+
+	if (move_and_collide(velocity * delta)):
+		delete(Follower.State.FOLLOW)
 
 
 func _on_timer_timeout() -> void:
-	objectFinishThrow.emit(global_position)
+	delete(Follower.State.WANDER)
 	queue_free()
 	pass # Replace with function body.
+
+
+func delete(state :Follower.State):
+	objectFinishThrow.emit(global_position,state)
+	queue_free()
+	

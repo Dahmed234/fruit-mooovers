@@ -4,51 +4,76 @@ class_name Follower
 const scene :PackedScene = preload("res://prefabs/Follower.tscn")
 
 @export
+
+
 var BASESPEED = 100
 
+# variables that effect the followers wander state
 var currentspeed = BASESPEED
 var SPEEDVARIANCE = 40
+
+# how long character moves in a direction for before wandering
 var TIMERLENGTH =0.5
 var TIMERVARIANCE =0.1
 
-
-
-@onready var timer := $Timer
-@onready var navAgent := $NavigationAgent2D
-
 var direction := Vector2(0,0)
 
+
+var currentState = State.FOLLOW
+
+@onready var timer := $WanderTimer
+@onready var navAgent := $NavigationAgent2D
+
+# possible states follower can be in
+enum State {
+	INITIAL,
+	CARRYING,
+	WANDER,
+	FOLLOW,
+	IDLE
+}
+
+# initialises a new follower with given parameters
 static func newFollower(pos,startingState: State):
 	var follower :Follower = scene.instantiate()
 	
 	follower.currentState = startingState
 	follower.global_position = pos
 	return follower
-	
-	
-	
-	
 
 
-
-
-
-var currentState = State.FOLLOW
-
-
-
-enum State {
-	WANDER,
-	FOLLOW,
-	IDLE
-}
 
 
 func startWander():
 	on_timeout()
 
+
+
 func _ready() -> void:
+	$heldItem/Sprite.texture = null
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+
+	
+	
+	
 	match currentState:
+		
+		
+		# decide what to do based on surroundings
+		State.INITIAL:
+
+			
+			#test to see if items are nearby
+			# get all nearby items
+			
+			var nearbyLoot   = $viewRadius.get_overlapping_areas()
+			nearbyLoot = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
+			
+			if(!nearbyLoot.is_empty()):
+				var obtainedItem :Carryable = nearbyLoot.pop_back().get_parent()
+				startCarry(obtainedItem)	
 		State.WANDER:
 			startWander()
 		State.FOLLOW:
@@ -57,13 +82,35 @@ func _ready() -> void:
 			startIdle()
 
 	
+			
+func startCarry(item : Carryable):
 	
+	#setup sprite
+	currentState = State.CARRYING
+	var currentSprite = $heldItem/Sprite
+	var newSprite = item.getSpriteInfo()
+	currentSprite.texture = newSprite.texture
+	currentSprite.region_rect = newSprite.region_rect
+	currentSprite.region_enabled = newSprite.region_enabled
+	currentSprite.transform = newSprite.transform
+	
+	item.onPickup()
+	
+	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
+	
+	
+	
+	
+	
+	pass
 
+# for navigation: need to wait for first physics frame
 func actor_setup():
 	await get_tree().physics_frame
 
 
 func _physics_process(delta: float) -> void:
+	
 	
 	
 	match currentState:
@@ -76,13 +123,23 @@ func _physics_process(delta: float) -> void:
 				startFollow()
 		
 		State.WANDER:
-			velocity = velocity.slerp(currentspeed * direction, 0.1) 
+			velocity = velocity.slerp(0.4* currentspeed * direction, 0.1) 
+		
+		State.CARRYING:
+			if navAgent.is_target_reached():
+				$heldItem/Sprite.texture = null
+				velocity = Vector2.ZERO
+				startWander()
+			else:
+				var next_path_position :Vector2 = navAgent.get_next_path_position()
+				velocity = global_position.direction_to(next_path_position) * BASESPEED
 		State.FOLLOW:
 			if navAgent.is_target_reached():
 				startIdle()
+			
 				pass
 			else:
-				navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
+				navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,false)
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
 				velocity = global_position.direction_to(next_path_position) * BASESPEED
 	# pick direction to move in
@@ -98,6 +155,8 @@ func startIdle():
 #initialises state to follow
 func startFollow():
 	currentState = State.FOLLOW
+	
+	#use 4 as layer number as it is value for home point
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
 	
 	

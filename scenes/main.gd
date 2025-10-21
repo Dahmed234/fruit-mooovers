@@ -11,5 +11,5 @@ func playerMakesThrow(throw: Throwable) -> void:
 	throw.objectFinishThrow.connect(onThrowFinish)
 	add_child(throw)
 
-func onThrowFinish(position :Vector2):
-	add_child(Follower.newFollower(position,Follower.State.WANDER))
+func onThrowFinish(position :Vector2,state :Follower.State):
+	add_child(Follower.newFollower(position,Follower.State.INITIAL))

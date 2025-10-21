@@ -4,15 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmfn7"]
-radius = 72.302315
+radius = 204.07721
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmfn7"]
 size = Vector2(21, 20)
 
 [node name="Follower" type="CharacterBody2D"]
 collision_layer = 6
+collision_mask = 17
 script = ExtResource("1_jmfn7")
 BASESPEED = 200
+
+[node name="viewRadius" type="Area2D" parent="."]
+position = Vector2(-0.25, -0.25)
+scale = Vector2(0.18648437, 0.17880563)
+collision_layer = 16
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="viewRadius"]
+position = Vector2(1.340595, -4.194499)
+shape = SubResource("CircleShape2D_jmfn7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -21,27 +32,27 @@ texture = ExtResource("1_klxf7")
 region_enabled = true
 region_rect = Rect2(432, 112, 16, 16)
 
-[node name="viewRadius" type="Area2D" parent="."]
-position = Vector2(-0.25, -0.25)
-scale = Vector2(0.18648437, 0.17880563)
-collision_layer = 0
-collision_mask = 8
+[node name="heldItem" type="Node2D" parent="."]
+position = Vector2(0, -23)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="viewRadius"]
-shape = SubResource("CircleShape2D_jmfn7")
+[node name="Sprite" type="Sprite2D" parent="heldItem"]
+texture_filter = 1
+texture = ExtResource("1_klxf7")
+region_enabled = true
+region_rect = Rect2(512, 160, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_jmfn7")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="WanderTimer" type="Timer" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 11.19
 target_desired_distance = 34.58
 path_max_distance = 66.0
-navigation_layers = 3
+navigation_layers = 7
 path_postprocessing = 1
 
-[connection signal="timeout" from="Timer" to="." method="on_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]

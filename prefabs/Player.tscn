@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://throwController.gd" id="2_p3xyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu7e"]
-radius = 83.39998
+radius = 221.90314
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(14.75, 15.25)
@@ -14,20 +14,24 @@ size = Vector2(14.75, 15.25)
 size = Vector2(65.333336, 40.666668)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_glu7e"]
-vertices = PackedVector2Array(35.210938, -17.8125, -18.773438, -16.84375, -18.210938, -42.65625, 34.101563, -42.65625)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-28, -52.666668, 43.666668, -52.666668, 45.666668, -8, -29, -6.666667)])
+vertices = PackedVector2Array(-28.851563, -47.492188, 47.203125, -50.109375, 41.851563, 20.523438, -25.5625, 21.890625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-39.326553, -57.138138, 58.019897, -60.48883, 51.14216, 30.332584, -35.0941, 32.096107)])
 sample_partition_type = 1
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
+collision_layer = 0
 script = ExtResource("1_glu7e")
 speed = 300.0
 
 [node name="Throw Radius" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("2_p3xyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Radius"]
+position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_glu7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -55,4 +59,4 @@ shape = SubResource("RectangleShape2D_glu7e")
 position = Vector2(-50.000004, 51.000015)
 scale = Vector2(5.6704693, 5.6704693)
 navigation_polygon = SubResource("NavigationPolygon_glu7e")
-navigation_layers = 3
+navigation_layers = 2
