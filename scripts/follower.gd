@@ -115,6 +115,9 @@ func startCarry(item : Carryable):
 	
 	currentItem = item
 	
+	# Ensure the follower snaps to the item so it doesn't move when picked up
+	global_position = item.global_position
+	
 	item.onPickup(self)
 	
 	if currentItem.followersCarrying.size() > 1:
