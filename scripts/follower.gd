@@ -48,7 +48,7 @@ func canBeThrown():
 func onWhistle():
 	match currentState:
 		State.CARRYING:
-			stopCarry()
+			stopCarrying()
 		State.WANDER:
 			endWander()
 			startFollow()
@@ -111,15 +111,16 @@ func startCarry(item : Carryable):
 	item.onPickup(self)
 	
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
-
-func stopCarry():
+func stopCarrying():
 	if !(currentState == State.CARRYING):
 		return
-	# If the current state is carrying, drop the item
-	currentState = State.WANDER
-	
 	$heldItem.hide()
+	velocity = Vector2.ZERO
 	currentItem.onDrop(self)
+	currentItem = null
+	show()
+	startWander()
+
 
 # for navigation: need to wait for first physics frame
 func actor_setup():
@@ -143,8 +144,7 @@ func _physics_process(delta: float) -> void:
 					cow.stopCarrying()
 				
 				carryFinished.emit(tmp)
-					
-				
+
 			else:
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
 				var local_velocity = 0.0
@@ -165,11 +165,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func stopCarrying():
-	currentItem = null
-	$heldItem/Sprite.texture = null
-	velocity = Vector2.ZERO
-	startWander()
+
 
 const CHANGEDIRECTIONDISTANCE = 150.0 
 #initialises states to idle
