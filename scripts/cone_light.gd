@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var local_size: float
 var target_angle := 0.0
-var in_area
+var in_area : Dictionary[CharacterBody2D,bool] = {}
 var angle_delta: float
 var clockwise
 var anticlockwise
@@ -43,7 +43,7 @@ func update_light(delta: float) -> void:
 				rotation -= turn_speed * delta
 				
 		State.CHASING:
-			look_at(get_parent().target.position)
+			look_at(get_parent().get_closest_unit().position)
 			rotation += PI/2
 		_:
 			pass
@@ -56,8 +56,8 @@ func _process(delta: float) -> void:
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
-	if other_shape_node.get_parent().get_parent() == get_parent().target:
-		in_area = true
+	if other_shape_node.get_parent().get_parent() in get_parent().target:
+		in_area[other_shape_node.get_parent().get_parent()] = true
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#return out if any inputs are invalid
@@ -69,5 +69,5 @@ func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index
 	
 	if !other_shape_node or !other_shape_node.get_parent() or !other_shape_owner.get_parent().get_parent():	return
 	
-	if other_shape_node.get_parent().get_parent() == get_parent().target:
-		in_area = false
+	if other_shape_node.get_parent().get_parent() in get_parent().target:
+		in_area[get_parent().target] = false

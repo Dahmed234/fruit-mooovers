@@ -21,6 +21,7 @@ var TIMERVARIANCE =0.1
 
 var direction := Vector2.ONE
 
+var enemy_weight := 0.2
 
 var currentState = State.FOLLOW
 
@@ -59,6 +60,7 @@ static func newFollower(pos,startingState: State):
 	
 	follower.currentState = startingState
 	follower.global_position = pos
+	# Add follower to the enemy target list
 	return follower
 
 func startWander():

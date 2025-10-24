@@ -26,7 +26,9 @@ shape = SubResource("CapsuleShape2D_kne1u")
 
 [node name="Circle light" parent="." instance=ExtResource("3_2hac7")]
 visible = false
-script = null
+flicker = 0.0
+pulse_rate = 0.0
+pulse_amount = 0.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 5.0

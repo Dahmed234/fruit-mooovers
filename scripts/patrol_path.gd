@@ -16,7 +16,7 @@ extends Node2D
 # enemy objects attatched to this path
 @export var enemy: PackedScene
 
-@export var target: CharacterBody2D
+@export var target: Dictionary[CharacterBody2D,bool]
 var n_node
 var n_enemy
 

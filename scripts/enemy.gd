@@ -10,7 +10,7 @@ extends CharacterBody2D
 const min_alert = 50.0
 const max_alert = 200.0
 
-var target: CharacterBody2D
+var target: Dictionary[CharacterBody2D,bool]
 # Possible enemy states.
 enum State {
 	PATROLLING  = 0,
@@ -43,7 +43,8 @@ func _ready() -> void:
 	target = get_parent().target
 
 func update_alert(delta: float) -> void:
-	if cone_light.in_area:
+	if cone_light.in_area.size() > 0:
+		
 		alert_level = min(max_alert * 2, alert_level + 100 * delta)
 	else:
 		alert_level = max(0,alert_level - 10 * delta)
@@ -57,6 +58,16 @@ func update_alert(delta: float) -> void:
 	else:
 		current_state = State.PATROLLING
 
+func get_closest_unit() -> CharacterBody2D:
+	var closest = null
+	var closest_distance := 1_000_000.0
+	var tmp_distance
+	for unit in target.keys():
+		tmp_distance = global_position.distance_to(unit.global_position)
+		if tmp_distance < closest_distance:
+			closest = unit
+			closest_distance = tmp_distance
+	return closest
 
 # Update the navigation target position, throw an error if state is invalid
 func update_target(delta: float) -> void:
@@ -81,9 +92,11 @@ func update_target(delta: float) -> void:
 			navigation_agent_2d.target_position = get_parent().path[patrol_target].global_position
 		State.ALERT:
 			local_speed = 0.5
+			
 			while idle_time >= (idle_delay / 8.0):
-				
-				navigation_agent_2d.target_position = target.position + Vector2((randf()-0.5)*idle_distance/8, (randf()-0.5)*idle_distance/8)
+				# Get the closest unit (player or follower) to the enemy and wander towards it
+				navigation_agent_2d.target_position = get_closest_unit().position + Vector2((randf()-0.5)*idle_distance/8, (randf()-0.5)*idle_distance/8)
+				# Point the cone light towards the target
 				cone_light.target_angle = (global_position - navigation_agent_2d.target_position).angle()
 				idle_time -= idle_delay
 		# Wander around idly
@@ -98,7 +111,7 @@ func update_target(delta: float) -> void:
 		# Chase the player
 		State.CHASING:
 			local_speed = 1.0
-			navigation_agent_2d.target_position = target.position
+			navigation_agent_2d.target_position = get_closest_unit().position
 		
 		# If the state is invalid, throw an error
 		var other:

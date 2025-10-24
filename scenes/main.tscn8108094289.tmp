@@ -47,20 +47,9 @@ grow_vertical = 2
 text = "Score: "
 script = ExtResource("3_o6xl0")
 
-[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_85g3d")]
-visible = false
-position = Vector2(234, 454)
-path_length = 5
-node_distance = 50.0
-is_loop = true
-enemy_count = 2
-target = {
-NodePath("../Player"): true
-}
-
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(544, 329)
-speed = 8000.0
+speed = 100.0
 
 [node name="Follower" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(669, 333)
@@ -94,6 +83,16 @@ weight = 1.0
 position = Vector2(596, 191)
 value = 100
 weight = 5.0
+
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_85g3d")]
+position = Vector2(234, 454)
+path_length = 5
+node_distance = 50.0
+is_loop = true
+enemy_count = 2
+target = {
+NodePath("../Player"): true
+}
 
 [connection signal="throwMade" from="Player/Throw Radius" to="." method="playerMakesThrow"]
 
