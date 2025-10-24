@@ -14,6 +14,8 @@ var followerValue: int
 @export 
 var weight: float
 
+@export
+var label: Label
 # List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
 var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
 
@@ -37,8 +39,7 @@ func onDrop(carrying: CharacterBody2D):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	pass # Replace with function body.
+	label.text = "0/" + str(int(weight))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

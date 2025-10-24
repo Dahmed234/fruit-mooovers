@@ -11,6 +11,9 @@ var currentItem :StaticBody2D = null
 @export
 var BASESPEED = 100
 
+@export
+var label: Label
+
 # variables that effect the followers wander state
 var currentspeed = BASESPEED
 var SPEEDVARIANCE = 40
@@ -69,6 +72,7 @@ func startWander():
 
 func _ready() -> void:
 	$heldItem/Sprite.texture = null
+	label.hide()
 	
 	#need to wait for all physics components to load in
 	# idk why exactly but DO NOT TOUCH THESE OR CARRYING WILL BREAK
@@ -78,6 +82,7 @@ func _ready() -> void:
 	match currentState:
 		# decide what to do based on surroundings
 		State.INITIAL:
+			
 			#test to see if items are nearby
 			# get all nearby items
 
@@ -135,15 +140,20 @@ func actor_setup():
 func _physics_process(delta: float) -> void:
 	match currentState:
 		State.IDLE:
+			label.hide()
+			
 			# triggers if follower is close enough to an area on a specific layer
 			# uses specific collision layer to only detect player follower
 			if(!$viewRadius.has_overlapping_areas()) :
 				startFollow()
 
 		State.WANDER:
+			label.hide()
 			velocity = velocity.slerp(0.4* currentspeed * direction, 0.1) 
 
 		State.CARRYING:
+			label.show()
+			label.text = str(int(currentItem.followersCarrying.size())) + "/" + str(int(currentItem.weight))
 			if navAgent.is_target_reached():
 				var tmp = currentItem
 				for cow in currentItem.followersCarrying.keys():

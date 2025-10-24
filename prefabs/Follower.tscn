@@ -9,11 +9,12 @@ radius = 204.07721
 [sub_resource type="CircleShape2D" id="CircleShape2D_8j6l1"]
 radius = 6.5
 
-[node name="Follower" type="CharacterBody2D"]
+[node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label")]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jmfn7")
 BASESPEED = 200
+label = NodePath("Label")
 
 [node name="viewRadius" type="Area2D" parent="."]
 position = Vector2(-0.25, -0.25)
@@ -54,5 +55,20 @@ target_desired_distance = 44.48
 path_max_distance = 66.0
 navigation_layers = 7
 path_postprocessing = 1
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/0"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
