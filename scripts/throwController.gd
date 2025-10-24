@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 			return
 		var pikminToThrow :Node2D = throwables.pop_back()
 		pikminToThrow.queue_free()
-		print("Make throw")
 		throwMade.emit(global_position,get_viewport().get_mouse_position())
 		
 		

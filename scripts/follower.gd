@@ -162,7 +162,7 @@ func _physics_process(delta: float) -> void:
 				for cow in currentItem.followersCarrying.keys():
 					cow.stopCarrying()
 				
-				carryFinished.emit(tmp)
+				carryFinished.emit(tmp,position)
 
 			else:
 				var next_path_position :Vector2 = navAgent.get_next_path_position()

@@ -3,6 +3,8 @@ extends Node2D
 @export
 var thown: PackedScene
 
+@export 
+var splashText: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,10 +14,21 @@ func _ready() -> void:
 func _process(delta):
 	$Camera2D.position = $Player.position
 	
-func onCarryFinish(item):
+func onCarryFinish(item,pos):
 	$Camera2D/Control/Label.changeScore(item.value)
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)
+	if item.value > 0:
+		var value = splashText.instantiate()
+		value.text = str(int(item.value)) + "pts!"
+		value.position = pos
+		add_child(value)
+	if item.followerValue > 0:
+		var followers = splashText.instantiate()
+		followers.position = pos
+		followers.text = str(int(item.followerValue)) + "cows!"
+		followers.delay = 0.5
+		add_child(followers)
 	item.queue_free()
 	
 
@@ -43,5 +56,4 @@ func onThrowMade(startPosition,mousePosition) ->void:
 	add_child(throw)
 
 func onThrowFinish(position :Vector2,state :Follower.State):
-	print("throw finish")
 	spawnFollower(position, state)
