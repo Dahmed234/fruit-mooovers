@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2t31yxm0wwmr"]
 
-[ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scenes/Carryable.gd" id="1_lopi8"]
+[ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scripts/Carryable.gd" id="1_lopi8"]
 [ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="2_p364l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
