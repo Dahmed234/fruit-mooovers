@@ -2,15 +2,13 @@ extends Resource
 
 class_name ItemData
 
-@export
-var value: int
+# Points rewarded by the item
 
-@export
-var followerValue: int
 
-@export 
-var weight: int
-func _init(p_value = 0, p_followerValue = 0,p_weight = 0):
-	value =p_value
-	followerValue = p_followerValue
-	weight = p_weight
+# Number of cows carrying the item
+var followersCarrying: float
+#func _init(p_value = 0, p_followerValue = 0,p_weight = 0):
+	#value =p_value
+	#followerValue = p_followerValue
+	#weight = p_weight
+	#followersCarrying = 0.0

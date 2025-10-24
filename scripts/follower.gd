@@ -6,11 +6,9 @@ const scene :PackedScene = preload("res://prefabs/Follower.tscn")
 signal carryFinished(item :Carryable)
 signal carryDropped(item: ItemData)
 
-var currentItem :ItemData = null
+var currentItem :StaticBody2D = null
 
 @export
-
-
 var BASESPEED = 100
 
 # variables that effect the followers wander state
@@ -63,14 +61,9 @@ static func newFollower(pos,startingState: State):
 	follower.global_position = pos
 	return follower
 
-
-
-
 func startWander():
 	currentState = State.WANDER
 	on_timeout()
-
-
 
 func _ready() -> void:
 	$heldItem/Sprite.texture = null
@@ -94,10 +87,10 @@ func _ready() -> void:
 			
 			var nearbyLoot   = $viewRadius.get_overlapping_areas()
 			nearbyLoot = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
-			
 			if(!nearbyLoot.is_empty()):
 				var obtainedItem :Carryable = nearbyLoot.pop_back().get_parent()
-				currentItem = obtainedItem.itemData
+				currentItem = obtainedItem
+				currentItem.followersCarrying += 1
 				startCarry(obtainedItem)
 			else:
 				startWander()
@@ -121,7 +114,7 @@ func startCarry(item : Carryable):
 	currentSprite.region_enabled = newSprite.region_enabled
 	currentSprite.transform = newSprite.transform
 	
-	currentItem = item.itemData
+	currentItem = item
 	
 	item.onPickup()
 	
@@ -163,7 +156,11 @@ func _physics_process(delta: float) -> void:
 				startWander()
 			else:
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
-				velocity = global_position.direction_to(next_path_position) * BASESPEED
+				var local_velocity = 0.0
+				if currentItem.followersCarrying >= currentItem.weight:
+					
+					local_velocity = max(1.0,currentItem.weight / currentItem.followersCarrying / 2.0)
+				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
 		State.FOLLOW:
 			if navAgent.is_target_reached():
 				startIdle()

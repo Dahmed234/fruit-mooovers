@@ -2,16 +2,26 @@ extends StaticBody2D
 
 class_name Carryable
 
-@export
-var itemData = ItemData.new(6,7,1)
 
+@export
+var value: int
+
+# Cows rewarded by the item
+@export
+var followerValue: int
+
+# Weight of the item, defines how many cows are needed to carry it
+@export 
+var weight: float
+
+var followersCarrying := 0.0
 
 func getSpriteInfo() -> Sprite2D:
 	return $Sprite2D
 
 func onPickup():
-	queue_free()
-
+	#queue_free()
+	pass
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
