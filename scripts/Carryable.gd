@@ -14,14 +14,27 @@ var followerValue: int
 @export 
 var weight: float
 
-var followersCarrying := 0.0
+# List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
+var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
+
+#var carrying: CharacterBody2D
 
 func getSpriteInfo() -> Sprite2D:
 	return $Sprite2D
 
-func onPickup():
-	#queue_free()
-	pass
+func onPickup(carrying: CharacterBody2D):
+	if followersCarrying.is_empty():
+		$CollisionShape2D.disabled = true
+	followersCarrying[carrying] = true
+	hide()
+
+
+func onDrop(carrying: CharacterBody2D):
+	followersCarrying.erase(carrying)
+	if followersCarrying.is_empty():
+		$CollisionShape2D.disabled = false
+		show()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -30,4 +43,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if followersCarrying.size() > 0:
+		position = followersCarrying.keys()[0].position

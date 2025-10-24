@@ -14,7 +14,7 @@ func onCarryFinish(item):
 	$Camera2D/Control/Label.changeScore(item.value)
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)
-		
+	item.queue_free()
 	
 
 func onCarryDrop(item :Carryable):

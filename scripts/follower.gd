@@ -47,6 +47,8 @@ func canBeThrown():
 
 func onWhistle():
 	match currentState:
+		State.CARRYING:
+			stopCarry()
 		State.WANDER:
 			endWander()
 			startFollow()
@@ -90,7 +92,7 @@ func _ready() -> void:
 			if(!nearbyLoot.is_empty()):
 				var obtainedItem :Carryable = nearbyLoot.pop_back().get_parent()
 				currentItem = obtainedItem
-				currentItem.followersCarrying += 1
+				#currentItem.followersCarrying += 1
 				startCarry(obtainedItem)
 			else:
 				startWander()
@@ -116,15 +118,20 @@ func startCarry(item : Carryable):
 	
 	currentItem = item
 	
-	item.onPickup()
+	item.onPickup(self)
 	
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
 	
-	
-	
-	
-	
 	pass
+
+func stopCarry():
+	if !(currentState == State.CARRYING):
+		return
+	# If the current state is carrying, drop the item
+	currentState = State.WANDER
+	
+	$heldItem.hide()
+	currentItem.onDrop(self)
 
 # for navigation: need to wait for first physics frame
 func actor_setup():
@@ -149,17 +156,19 @@ func _physics_process(delta: float) -> void:
 		
 		State.CARRYING:
 			if navAgent.is_target_reached():
-				carryFinished.emit(currentItem)
-				currentItem = null
-				$heldItem/Sprite.texture = null
-				velocity = Vector2.ZERO
-				startWander()
+				var tmp = currentItem
+				for cow in currentItem.followersCarrying.keys():
+					cow.stopCarrying()
+				
+				carryFinished.emit(tmp)
+					
+				
 			else:
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
 				var local_velocity = 0.0
-				if currentItem.followersCarrying >= currentItem.weight:
+				if currentItem.followersCarrying.size() >= currentItem.weight:
 					
-					local_velocity = max(1.0,currentItem.weight / currentItem.followersCarrying / 2.0)
+					local_velocity = max(1.0,currentItem.weight / currentItem.followersCarrying.size() / 2.0)
 				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
 		State.FOLLOW:
 			if navAgent.is_target_reached():
@@ -177,6 +186,11 @@ func _physics_process(delta: float) -> void:
 	# pick new direction
 	move_and_slide()
 
+func stopCarrying():
+	currentItem = null
+	$heldItem/Sprite.texture = null
+	velocity = Vector2.ZERO
+	startWander()
 
 const CHANGEDIRECTIONDISTANCE = 150.0 
 #initialises states to idle
