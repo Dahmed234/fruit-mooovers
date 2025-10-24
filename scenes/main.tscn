@@ -88,14 +88,42 @@ navigation_layers = 4
 position = Vector2(0.75, 1.25)
 shape = SubResource("RectangleShape2D_tbgi4")
 
-[node name="Item" parent="." instance=ExtResource("6_tefeu")]
-position = Vector2(283, 248)
+[node name="small item" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(278, 248)
 value = 5
 followerValue = 10
 weight = 1.0
 
-[node name="Item2" parent="." instance=ExtResource("6_tefeu")]
+[node name="small item2" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(930, 386)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="small item3" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(955, 290)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="small item4" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(869, 144)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="big item" parent="." instance=ExtResource("6_tefeu")]
 position = Vector2(596, 191)
+value = 100
+weight = 5.0
+
+[node name="big item2" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(678, 451)
+value = 100
+weight = 5.0
+
+[node name="big item3" parent="." instance=ExtResource("6_tefeu")]
+position = Vector2(454, 468)
 value = 100
 weight = 5.0
 

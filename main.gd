@@ -18,6 +18,7 @@ func onCarryFinish(item,pos):
 	$Camera2D/Control/Label.changeScore(item.value)
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)
+	# Spawn splash text when the item is droped off
 	if item.value > 0:
 		var value = splashText.instantiate()
 		value.text = str(int(item.value)) + "pts!"
@@ -26,8 +27,9 @@ func onCarryFinish(item,pos):
 	if item.followerValue > 0:
 		var followers = splashText.instantiate()
 		followers.position = pos
-		followers.text = str(int(item.followerValue)) + "cows!"
-		followers.delay = 0.5
+		followers.text = str(int(item.followerValue)) + " cows!"
+		# Show cows text after a delay so that they don't cover eachother
+		followers.delay = 1.5
 		add_child(followers)
 	item.queue_free()
 	
