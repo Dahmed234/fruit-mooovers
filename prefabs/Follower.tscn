@@ -54,6 +54,5 @@ target_desired_distance = 44.48
 path_max_distance = 66.0
 navigation_layers = 7
 path_postprocessing = 1
-debug_enabled = true
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
