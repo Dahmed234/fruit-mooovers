@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=10 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/player.gd" id="1_glu7e"]
 [ext_resource type="Texture2D" uid="uid://ca3vm807yvnr4" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
@@ -21,9 +21,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-21.162271, -46.204296,
 sample_partition_type = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wuy1y"]
-radius = 322.90247
-
-[sub_resource type="Curve" id="Curve_1nynx"]
+radius = 184.3285
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -68,13 +66,8 @@ navigation_polygon = SubResource("NavigationPolygon_glu7e")
 navigation_layers = 2
 
 [node name="whistleBox" type="Area2D" parent="."]
+collision_mask = 4
 script = ExtResource("4_p3xyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="whistleBox"]
 shape = SubResource("CircleShape2D_wuy1y")
-
-[node name="Line2D" type="Line2D" parent="whistleBox"]
-points = PackedVector2Array(0, 0, -6.385, 0)
-closed = true
-width = 20.0
-width_curve = SubResource("Curve_1nynx")

@@ -38,6 +38,23 @@ enum State {
 	IDLE
 }
 
+func canBeThrown():
+	
+	match currentState:
+		State.FOLLOW: return true
+		State.IDLE: return true
+		State.WANDER: return true
+		State.INITIAL: return false
+		State.CARRYING: return false
+
+func onWhistle():
+	match currentState:
+		State.WANDER:
+			endWander()
+			startFollow()
+			
+
+
 # initialises a new follower with given parameters
 static func newFollower(pos,startingState: State):
 	var follower :Follower = scene.instantiate()
@@ -164,7 +181,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-const CHANGEDIRECTIONDISTANCE = 70.0 
+const CHANGEDIRECTIONDISTANCE = 150.0 
 #initialises states to idle
 func startIdle():
 	currentState = State.IDLE
@@ -179,6 +196,10 @@ func startFollow():
 	
 	
 
+func endWander():
+	direction= Vector2.ZERO
+	timer.stop()
+	
 
 #used for wander, picks random direction for character to wander to next
 func on_timeout() -> void:

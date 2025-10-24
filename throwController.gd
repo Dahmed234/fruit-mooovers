@@ -11,7 +11,9 @@ func _process(delta: float) -> void:
 	
 	#on mouse input pressed
 	if(Input.is_action_just_pressed("player_throw")):
-		var throwables :=self.get_overlapping_bodies() #get all pikmin within area
+		var throwables  =self.get_overlapping_bodies().filter(func(item): return item is Follower) #get all pikmin within area
+		
+		throwables= throwables.filter(func(item): return item.canBeThrown())
 		if(throwables.is_empty()):
 			return
 		var pikminToThrow :Node2D = throwables.pop_back()

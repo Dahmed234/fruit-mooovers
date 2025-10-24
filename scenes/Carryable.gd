@@ -9,7 +9,7 @@ var worth := 30
 var numSpawns := 3
 
 @export
-var itemData = ItemData.new(5,4)
+var itemData = ItemData.new(5,7)
 
 
 func getSpriteInfo() -> Sprite2D:

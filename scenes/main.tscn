@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/tile_map.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/main.gd" id="1_tbgi4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/item.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://2gbpgrryr0jk" path="res://ItemResource.gd" id="8_tipki"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
 vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
@@ -15,6 +16,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(28.5, -23, -25, -24, -2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
 size = Vector2(29.5, 29.5)
+
+[sub_resource type="Resource" id="Resource_85g3d"]
+script = ExtResource("8_tipki")
+metadata/_custom_type_script = "uid://2gbpgrryr0jk"
 
 [node name="Main" type="Node2D"]
 texture_filter = 1
@@ -73,6 +78,7 @@ shape = SubResource("RectangleShape2D_tbgi4")
 
 [node name="Item" parent="." instance=ExtResource("6_tefeu")]
 position = Vector2(108, 120)
+itemData = SubResource("Resource_85g3d")
 
 [connection signal="throwMade" from="Player/Throw Radius" to="." method="playerMakesThrow"]
 
