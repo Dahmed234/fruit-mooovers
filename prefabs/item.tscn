@@ -7,7 +7,6 @@
 radius = 55.081757
 
 [node name="Item" type="StaticBody2D"]
-scale = Vector2(0.25, 0.25)
 script = ExtResource("1_lopi8")
 
 [node name="Area2D" type="Area2D" parent="."]

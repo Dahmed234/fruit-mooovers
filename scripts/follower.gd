@@ -110,7 +110,11 @@ func startCarry(item : Carryable):
 	
 	item.onPickup(self)
 	
+	if currentItem.followersCarrying.size() > 1:
+		hide()
+	
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
+
 func stopCarrying():
 	if !(currentState == State.CARRYING):
 		return

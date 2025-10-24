@@ -6,7 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovt4c"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(0.25, 0.25)
 collision_layer = 2
 motion_mode = 1
 slide_on_ceiling = false

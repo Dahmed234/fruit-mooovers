@@ -60,7 +60,14 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 		in_area = true
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	#return out if any inputs are invalid
+	if !area_shape_index:	return
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
+	
+	if !other_shape_owner:	return
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
+	
+	if !other_shape_node or !other_shape_node.get_parent() or !other_shape_owner.get_parent().get_parent():	return
+	
 	if other_shape_node.get_parent().get_parent() == get_parent().target:
 		in_area = false

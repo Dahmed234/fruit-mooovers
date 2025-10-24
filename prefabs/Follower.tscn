@@ -10,7 +10,6 @@ radius = 204.07721
 radius = 6.5
 
 [node name="Follower" type="CharacterBody2D"]
-scale = Vector2(0.25, 0.25)
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jmfn7")

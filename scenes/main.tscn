@@ -26,7 +26,6 @@ position = Vector2(575, 329)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)
-zoom = Vector2(4, 4)
 
 [node name="Control" type="Control" parent="Camera2D"]
 layout_mode = 3
