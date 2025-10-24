@@ -168,9 +168,10 @@ func _physics_process(delta: float) -> void:
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
 				var local_velocity = 0.0
 				if currentItem.followersCarrying.size() >= currentItem.weight:
-					
-					local_velocity = max(1.0,currentItem.weight / currentItem.followersCarrying.size() / 2.0)
-				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity * 0.2
+					# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
+					# How many cows are used
+					local_velocity = 0.2 * min(2.0,currentItem.followersCarrying.size() / currentItem.weight / 2.0)
+				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
 		State.FOLLOW:
 			if navAgent.is_target_reached():
 				startIdle()
