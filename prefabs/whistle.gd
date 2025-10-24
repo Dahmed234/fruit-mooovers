@@ -1,26 +1,8 @@
-extends StaticBody2D
+extends Area2D
 
-class_name Carryable
-
-@export
-
-
-var worth := 30
-var numSpawns := 3
-
-@export
-var itemData = ItemData.new(5,4)
-
-
-func getSpriteInfo() -> Sprite2D:
-	return $Sprite2D
-
-func onPickup():
-	queue_free()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	pass # Replace with function body.
 
 

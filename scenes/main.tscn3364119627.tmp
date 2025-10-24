@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=9 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/tile_map.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scenes/Scoreholder.gd" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/item.tscn" id="6_tefeu"]
@@ -26,28 +25,9 @@ position = Vector2(575, 329)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)
 
-[node name="Control" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -575.0
-offset_top = -325.0
-offset_right = 573.0
-offset_bottom = 326.0
-
-[node name="Label" type="Label" parent="Camera2D/Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.135
-anchor_bottom = 0.163
-offset_right = 0.019989014
-offset_bottom = -0.11299896
-grow_horizontal = 2
-grow_vertical = 2
-text = "Score: "
-script = ExtResource("3_o6xl0")
-
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(544, 329)
+collision_layer = 2
 
 [node name="Follower" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(669, 333)
