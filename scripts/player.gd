@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 
+
+
 @export var speed: float
 func move(delta: float) -> void:
 	var direction: float

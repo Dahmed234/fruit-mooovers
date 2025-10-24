@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2t31yxm0wwmr"]
+
+[ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scenes/Carryable.gd" id="1_lopi8"]
+[ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="2_p364l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
+radius = 55.081757
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tefeu"]
+size = Vector2(32, 32)
+
+[node name="Item" type="StaticBody2D"]
+script = ExtResource("1_lopi8")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tbgi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_p364l")
+region_enabled = true
+region_rect = Rect2(656, 64, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_tefeu")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 21.65

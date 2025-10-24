@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcsn06k5woifq"]
+
+[ext_resource type="Script" uid="uid://bjddk8qpp0ufk" path="res://prefabs/follower.gd" id="1_jmfn7"]
+[ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmfn7"]
+
+[node name="Follower" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_jmfn7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_klxf7")
+region_enabled = true
+region_rect = Rect2(432, 112, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("CircleShape2D_jmfn7")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 34.58
+path_max_distance = 66.0
+navigation_layers = 3
+
+[connection signal="timeout" from="Timer" to="." method="on_timeout"]
