@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcsn06k5woifq"]
 
 [ext_resource type="Script" uid="uid://bjddk8qpp0ufk" path="res://scripts/follower.gd" id="1_jmfn7"]
-[ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
+[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmfn7"]
 radius = 204.07721
@@ -10,6 +10,7 @@ radius = 204.07721
 radius = 6.5
 
 [node name="Follower" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jmfn7")

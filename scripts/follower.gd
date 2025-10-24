@@ -52,8 +52,6 @@ func onWhistle():
 		State.WANDER:
 			endWander()
 			startFollow()
-			
-
 
 # initialises a new follower with given parameters
 static func newFollower(pos,startingState: State):
@@ -74,19 +72,13 @@ func _ready() -> void:
 	# idk why exactly but DO NOT TOUCH THESE OR CARRYING WILL BREAK
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	
 
-	
-	
-	
 	match currentState:
-		
-		
 		# decide what to do based on surroundings
 		State.INITIAL:
 			#test to see if items are nearby
 			# get all nearby items
-			
+
 			var nearbyLoot   = $viewRadius.get_overlapping_areas()
 			nearbyLoot = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
 			if(!nearbyLoot.is_empty()):
@@ -103,8 +95,6 @@ func _ready() -> void:
 		State.IDLE:
 			startIdle()
 
-	
-			
 func startCarry(item : Carryable):
 	
 	#setup sprite
@@ -121,8 +111,6 @@ func startCarry(item : Carryable):
 	item.onPickup(self)
 	
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
-	
-	pass
 
 func stopCarry():
 	if !(currentState == State.CARRYING):
@@ -137,23 +125,17 @@ func stopCarry():
 func actor_setup():
 	await get_tree().physics_frame
 
-
 func _physics_process(delta: float) -> void:
-	
-	
-	
 	match currentState:
-		
 		State.IDLE:
-			
 			# triggers if follower is close enough to an area on a specific layer
 			# uses specific collision layer to only detect player follower
 			if(!$viewRadius.has_overlapping_areas()) :
 				startFollow()
-		
+
 		State.WANDER:
 			velocity = velocity.slerp(0.4* currentspeed * direction, 0.1) 
-		
+
 		State.CARRYING:
 			if navAgent.is_target_reached():
 				var tmp = currentItem
@@ -169,21 +151,18 @@ func _physics_process(delta: float) -> void:
 				if currentItem.followersCarrying.size() >= currentItem.weight:
 					
 					local_velocity = max(1.0,currentItem.weight / currentItem.followersCarrying.size() / 2.0)
-				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
+				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity * 0.2
 		State.FOLLOW:
 			if navAgent.is_target_reached():
 				startIdle()
-			
-				pass
 			else:
 				var newGoal = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,false)
 				if(navAgent.target_position.distance_to(newGoal) > CHANGEDIRECTIONDISTANCE):
 						navAgent.target_position = newGoal
+				
 				var next_path_position :Vector2 = navAgent.get_next_path_position()
 				velocity = global_position.direction_to(next_path_position) * BASESPEED
-	# pick direction to move in
-	# move in it for specified time 
-	# pick new direction
+
 	move_and_slide()
 
 func stopCarrying():
@@ -204,8 +183,6 @@ func startFollow():
 	
 	#use 4 as layer number as it is value for home point
 	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
-	
-	
 
 func endWander():
 	direction= Vector2.ZERO
@@ -222,7 +199,6 @@ func on_timeout() -> void:
 	direction = direction.normalized()
 	
 	direction.lerp(oldDirection, randf())	
-	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)	
+	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
 		#start timer again
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
-	

@@ -26,8 +26,6 @@ func _ready() -> void:
 	
 	timer.wait_time = WAITTIME
 	timer.start()
-	print("object gyatt thrown")
-	pass # Replace with function body.
 
 
 static func new_throwable(currentLocation: Vector2, targetPoint: Vector2):

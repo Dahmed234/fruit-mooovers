@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/player.gd" id="1_glu7e"]
-[ext_resource type="Texture2D" uid="uid://ca3vm807yvnr4" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
+[ext_resource type="Texture2D" uid="uid://8uej1qakgh51" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
 [ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://scripts/throwController.gd" id="2_p3xyx"]
 [ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scripts/whistle.gd" id="4_p3xyx"]
 
@@ -25,6 +25,7 @@ radius = 184.3285
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
+scale = Vector2(0.25, 0.25)
 collision_layer = 2
 script = ExtResource("1_glu7e")
 speed = 300.0

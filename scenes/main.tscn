@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=11 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/tile_map.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/main.gd" id="1_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="3_sugp2"]
-[ext_resource type="Texture2D" uid="uid://be6f2g1w21gbw" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/item.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/Patrol path.tscn" id="8_85g3d"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
 vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
@@ -25,6 +26,7 @@ position = Vector2(575, 329)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)
+zoom = Vector2(4, 4)
 
 [node name="Control" type="Control" parent="Camera2D"]
 layout_mode = 3
@@ -72,16 +74,23 @@ position = Vector2(0.75, 1.25)
 shape = SubResource("RectangleShape2D_tbgi4")
 
 [node name="Item" parent="." instance=ExtResource("6_tefeu")]
-position = Vector2(108, 120)
+position = Vector2(283, 248)
 value = 5
 followerValue = 10
 weight = 1.0
 
 [node name="Item2" parent="." instance=ExtResource("6_tefeu")]
-position = Vector2(230, -18)
-scale = Vector2(1.5, 1.5)
+position = Vector2(596, 191)
 value = 100
 weight = 5.0
+
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_85g3d")]
+position = Vector2(234, 454)
+path_length = 5
+node_distance = 50.0
+is_loop = true
+enemy_count = 2
+target = NodePath("../Player")
 
 [connection signal="throwMade" from="Player/Throw Radius" to="." method="playerMakesThrow"]
 

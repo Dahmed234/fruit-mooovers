@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://chkwm03v4g410"]
+
+[ext_resource type="Script" uid="uid://cw0swlqwp3ofw" path="res://scripts/patrol_path.gd" id="1_6cvhe"]
+[ext_resource type="PackedScene" path="res://prefabs/patrol_path_node.tscn" id="2_6cvhe"]
+[ext_resource type="PackedScene" uid="uid://8y7gjhthiwsc" path="res://prefabs/Enemy.tscn" id="3_gk82p"]
+[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="3_pokmd"]
+
+[node name="Patrol path" type="Node2D"]
+script = ExtResource("1_6cvhe")
+path_node = ExtResource("2_6cvhe")
+enemy = ExtResource("3_gk82p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_pokmd")
