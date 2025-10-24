@@ -5,14 +5,17 @@
 [ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://scripts/throwController.gd" id="2_p3xyx"]
 [ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scripts/whistle.gd" id="4_p3xyx"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
+radius = 6.8761363
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_glu7e"]
 radius = 221.90314
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(14.75, 15.25)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glu7e"]
 size = Vector2(65.333336, 40.666668)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wuy1y"]
+radius = 184.3285
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_glu7e"]
 vertices = PackedVector2Array(-2.9375, -24.5625, -6.546875, -34.8125, 20.117188, -32.351563, 15.671875, -24.34375)
@@ -20,23 +23,15 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-21.162271, -46.204296, 36.328568, -40.913727, 21.514977, -14.284536, -10.052078, -14.63724)])
 sample_partition_type = 1
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wuy1y"]
-radius = 184.3285
-
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
-collision_layer = 2
 script = ExtResource("1_glu7e")
 speed = 300.0
 
-[node name="Throw Radius" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("2_p3xyx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Throw Radius"]
-position = Vector2(0, -16)
-shape = SubResource("CircleShape2D_glu7e")
+[node name="physics Collision2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_p3xyx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -44,30 +39,45 @@ texture = ExtResource("2_ay6yh")
 region_enabled = true
 region_rect = Rect2(384, 16, 16, 16)
 
-[node name="physics Collision" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
-scale = Vector2(4, 4)
-shape = SubResource("RectangleShape2D_jyhfs")
+[node name="Radii" type="CharacterBody2D" parent="."]
+collision_layer = 2
 
-[node name="visible pikmin" type="Area2D" parent="."]
+[node name="Throw Radius" type="Area2D" parent="Radii"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_p3xyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/Throw Radius"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_glu7e")
+
+[node name="visible pikmin" type="Area2D" parent="Radii"]
 position = Vector2(-136, -149)
 scale = Vector2(4.62638, 3.489611)
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="visible pikmin"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/visible pikmin"]
 position = Vector2(28.74818, 8.596945)
 shape = SubResource("RectangleShape2D_glu7e")
+
+[node name="whistleBox" type="Area2D" parent="Radii"]
+collision_mask = 4
+script = ExtResource("4_p3xyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/whistleBox"]
+shape = SubResource("CircleShape2D_wuy1y")
+
+[node name="Enemy Detection box" type="CharacterBody2D" parent="."]
+collision_layer = 128
+
+[node name="physics Collision" type="CollisionShape2D" parent="Enemy Detection box"]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_p3xyx")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-42.999996, 108)
 scale = Vector2(5.6704693, 5.6704693)
 navigation_polygon = SubResource("NavigationPolygon_glu7e")
 navigation_layers = 2
-
-[node name="whistleBox" type="Area2D" parent="."]
-collision_mask = 4
-script = ExtResource("4_p3xyx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="whistleBox"]
-shape = SubResource("CircleShape2D_wuy1y")

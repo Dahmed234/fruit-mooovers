@@ -1,5 +1,7 @@
 extends Node2D
 
+@export
+var thown: PackedScene
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,12 +28,20 @@ func spawnFollower(position, state :Follower.State):
 	newFollower.carryFinished.connect(onCarryFinish)
 	add_child(newFollower)
 	
+func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
+	
+	var newThrown :Throwable = 	thown.instantiate() 
+	newThrown.global_position = currentLocation
+	newThrown.direction = currentLocation.direction_to(targetPoint)
+	newThrown.speed =  (newThrown.global_position.distance_to(targetPoint)) / newThrown.WAITTIME
+	
+	return newThrown
 
-
-func playerMakesThrow(startPosition,mousePosition) -> void:
-	var throw = Throwable.new_throwable(startPosition,get_local_mouse_position())
+func onThrowMade(startPosition,mousePosition) ->void:
+	var throw = new_throwable(startPosition,get_local_mouse_position())
 	throw.objectFinishThrow.connect(onThrowFinish)
 	add_child(throw)
 
 func onThrowFinish(position :Vector2,state :Follower.State):
+	print("throw finish")
 	spawnFollower(position, state)

@@ -52,10 +52,12 @@ func update_light(delta: float) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_light(delta)
+	#print(in_area)
 
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
+	#print(other_shape_node,get_parent().target)
 	if other_shape_node.get_parent().get_parent() in get_parent().target:
 		in_area[other_shape_node.get_parent().get_parent()] = true
 
