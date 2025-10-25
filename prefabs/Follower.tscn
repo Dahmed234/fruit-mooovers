@@ -13,7 +13,6 @@ radius = 6.5
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_jmfn7")
-BASESPEED = 200
 label = NodePath("Label")
 
 [node name="viewRadius" type="Area2D" parent="."]
@@ -50,10 +49,7 @@ shape = SubResource("CircleShape2D_8j6l1")
 [node name="WanderTimer" type="Timer" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 11.19
-target_desired_distance = 44.48
 path_max_distance = 66.0
-navigation_layers = 7
 path_postprocessing = 1
 
 [node name="Label" type="Label" parent="."]
@@ -72,3 +68,4 @@ text = "0/0"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

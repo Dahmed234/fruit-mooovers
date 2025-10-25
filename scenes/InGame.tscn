@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
-[ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="8_a40rq"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
 
@@ -19,11 +18,13 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(28.5, -23, -25, -24, -2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
 size = Vector2(29.5, 29.5)
 
-[node name="In Game" type="Node2D"]
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
 thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
+goal = NodePath("goal")
+player = NodePath("Player")
 
 [node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
 position = Vector2(575, 329)
@@ -66,11 +67,6 @@ NodePath("../Player"): true
 position = Vector2(544, 329)
 collision_layer = 2
 speed = 8000.0
-
-[node name="Follower" parent="." instance=ExtResource("8_a40rq")]
-position = Vector2(669, 333)
-motion_mode = 1
-wall_min_slide_angle = 0.0
 
 [node name="goal" type="Sprite2D" parent="."]
 position = Vector2(779, 348)
@@ -131,4 +127,3 @@ weight = 5.0
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
 [editable path="Player"]
-[editable path="Follower"]

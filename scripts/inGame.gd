@@ -6,9 +6,13 @@ var thown: PackedScene
 @export 
 var splashText: PackedScene
 
+@export 
+var goal: Sprite2D
+@export
+var player: CharacterBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	spawnFollower($goal.position,Follower.State.INITIAL)
 	
 func _process(delta):
 	$Camera2D.position = $Player.position
@@ -34,7 +38,7 @@ func onCarryFinish(item,pos):
 		followers.delay = 1.5
 		add_child(followers)
 	item.queue_free()
-	
+
 
 func onCarryDrop(item :Carryable):
 	pass
@@ -43,6 +47,9 @@ func spawnFollower(position, state :Follower.State):
 	var newFollower = Follower.newFollower(position,Follower.State.INITIAL)
 	newFollower.carryDropped.connect(onCarryDrop)
 	newFollower.carryFinished.connect(onCarryFinish)
+	newFollower.goal = goal
+	newFollower.player = player
+	
 	add_child(newFollower)
 	
 func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:

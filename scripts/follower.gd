@@ -9,10 +9,13 @@ signal carryDropped(item: ItemData)
 var currentItem :StaticBody2D = null
 
 @export
-var BASESPEED = 100
+var BASESPEED = 20000
 
 @export
 var label: Label
+
+var goal: Sprite2D
+var player: CharacterBody2D 
 
 # variables that effect the followers wander state
 var currentspeed = BASESPEED
@@ -31,7 +34,7 @@ const enemy_weight := 0.2
 var currentState = State.FOLLOW
 
 @onready var timer := $WanderTimer
-@onready var navAgent := $NavigationAgent2D
+@onready var navigation_agent_2d := $NavigationAgent2D
 
 # possible states follower can be in
 enum State {
@@ -125,7 +128,9 @@ func startCarry(item : Carryable):
 	if currentItem.followersCarrying.size() > 1:
 		hide()
 	
-	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
+	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
+	# navigate to goal flag
+	navigation_agent_2d.target_position = goal.global_position
 
 func stopCarrying():
 	if !(currentState == State.CARRYING):
@@ -154,12 +159,12 @@ func _physics_process(delta: float) -> void:
 
 		State.WANDER:
 			label.hide()
-			velocity = velocity.slerp(0.4* currentspeed * direction, 0.1) 
+			velocity = velocity.slerp(0.4* delta * currentspeed * direction, 0.1) 
 
 		State.CARRYING:
 			label.show()
 			label.text = str(int(currentItem.followersCarrying.size())) + "/" + str(int(currentItem.weight))
-			if navAgent.is_target_reached():
+			if navigation_agent_2d.is_target_reached():
 				var tmp = currentItem
 				for cow in currentItem.followersCarrying.keys():
 					cow.stopCarrying()
@@ -167,27 +172,20 @@ func _physics_process(delta: float) -> void:
 				carryFinished.emit(tmp,position)
 
 			else:
-				var next_path_position :Vector2 = navAgent.get_next_path_position()
-				var local_velocity = 0.0
-				if currentItem.followersCarrying.size() >= currentItem.weight:
-					# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
-					# How many cows are used
-					local_velocity = 0.2 * min(2.0,currentItem.followersCarrying.size() / currentItem.weight / 2.0)
-				velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
-		State.FOLLOW:
-			if navAgent.is_target_reached():
-				startIdle()
-			else:
-				var newGoal = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,false)
-				if(navAgent.target_position.distance_to(newGoal) > CHANGEDIRECTIONDISTANCE):
-						navAgent.target_position = newGoal
+				#print("navigating to target at: " + str(navigation_agent_2d.target_position))
+				navigate_to_target(delta)
+				#var next_path_position := navAgent.get_next_path_position()
 				
-				var next_path_position :Vector2 = navAgent.get_next_path_position()
-				velocity = global_position.direction_to(next_path_position) * BASESPEED
+				#velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
+		State.FOLLOW:
+			navigation_agent_2d.target_position = player.global_position
+			navigate_to_target(delta)
+			#if navigation_agent_2d.is_target_reached():
+			#	startIdle()
+			#else:
+				
 
 	move_and_slide()
-
-
 
 const CHANGEDIRECTIONDISTANCE = 150.0 
 #initialises states to idle
@@ -198,9 +196,8 @@ func startIdle():
 #initialises state to follow
 func startFollow():
 	currentState = State.FOLLOW
-	
 	#use 4 as layer number as it is value for home point
-	navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
+	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
 
 func endWander():
 	direction= Vector2.ZERO
@@ -220,3 +217,43 @@ func on_timeout() -> void:
 	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
 		#start timer again
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
+
+# Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
+func navigate_to_target(delta: float) -> void:
+	var local_velocity: float
+	if currentItem == null:
+		local_velocity = 1.0 
+	else:
+		if currentItem.followersCarrying.size() >= currentItem.weight:
+			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
+			# How many cows are used
+			local_velocity = 0.2 * min(2.0,currentItem.followersCarrying.size() / currentItem.weight / 2.0)
+	# Store the current position of the enemy in [current_agent_position]
+	var current_agent_position = global_position
+	
+	# Get the next position along the path to the player
+	var next_path_position = navigation_agent_2d.get_next_path_position()
+	
+	#print(current_agent_position.direction_to(next_path_position),current_agent_position,next_path_position)
+	
+	# Get the vector moving towards the next path position
+	var new_velocity = local_velocity * BASESPEED * delta * current_agent_position.direction_to(next_path_position)
+	
+	
+	# Logic for when the enemy reaches the player (i.e. attack them)
+	if navigation_agent_2d.is_navigation_finished():
+		return
+	
+	
+	# Apply the velocity to the enemy
+	if navigation_agent_2d.avoidance_enabled:
+		navigation_agent_2d.set_velocity(new_velocity)
+	
+	# Else calculate a "safe" velocity and apply that
+	else:
+		_on_navigation_agent_2d_velocity_computed(new_velocity)
+	
+	
+		
+func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
