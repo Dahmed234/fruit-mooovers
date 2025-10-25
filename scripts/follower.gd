@@ -22,9 +22,11 @@ var SPEEDVARIANCE = 40
 var TIMERLENGTH =0.5
 var TIMERVARIANCE =0.1
 
+#
 var direction := Vector2.ONE
 
-var enemy_weight := 0.2
+# How detectible are followers to enemy units
+const enemy_weight := 0.2
 
 var currentState = State.FOLLOW
 
