@@ -58,10 +58,16 @@ func _physics_process(delta: float) -> void:
 
 func destroy():
 	tileMap.set_cell(tilePos,1)
-	navMap.notify_runtime_tile_data_update()
+	call_deferred("update_nav")
+	#update_nav()
 	
 	
 	for cow in followersCarrying.keys():
 		cow.stopCarrying()
 	
 	queue_free()
+
+func update_nav():
+	navMap.notify_runtime_tile_data_update()
+	var nav_map = navMap.get_navigation_map()
+	print("Tileset nav polygons:", NavigationServer2D.map_get_regions(nav_map))

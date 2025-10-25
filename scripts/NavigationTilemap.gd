@@ -5,9 +5,8 @@ extends TileMapLayer
 @onready var destructible_walls: TileMapLayer = $"../Destructible walls"
 @onready var high_walls: TileMapLayer = $"../High Walls"
 
-var to_update_nav := false
 
-@export var navPolygon: NavigationPolygon
+#@export var navPolygon: NavigationPolygon
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	# Check if any of the wall layers overlap with this tile
@@ -23,8 +22,7 @@ func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
 	if coords in destructible_walls.get_used_cells_by_id(1):
 		tile_data.set_navigation_polygon(0, null)
 	else:
-		tile_data.set_navigation_polygon(0, navPolygon)
-		to_update_nav = true
+		tile_data.set_navigation_polygon(0, tile_data.get_navigation_polygon(0))
 
 func _process(delta: float) -> void:
 	pass
