@@ -51,6 +51,9 @@ shape = SubResource("CircleShape2D_8j6l1")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_max_distance = 66.0
 path_postprocessing = 1
+avoidance_enabled = true
+avoidance_layers = 0
+debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
