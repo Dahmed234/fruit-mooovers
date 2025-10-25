@@ -1,5 +1,7 @@
 extends Label
 
+@export 
+var root: Node2D
 
 var score := 0
 # Amount of points needed per day to not lose
@@ -7,11 +9,13 @@ var quota := 100
 
 var day := 1
 
+var mainMenu: PackedScene
+
 # Represents ingame time in seconds
 var time : float
 
 # Day length in seconds
-var day_length := 30.0
+var day_length := 5.0
 	
 func changeScore(change :int):
 	score += change
@@ -44,8 +48,10 @@ func getTime() -> String:
 
 # Logic to go back to main menu, reset score etc
 func restartGame():
-	print("you lose!!!!!!!!!")
-	
+	mainMenu = load("res://scenes/Main menu.tscn")
+	get_tree().root.add_child(mainMenu.instantiate())
+	root.queue_free()
+
 # Function for how fast to increase quota, should have some kind of exponential scaling
 func increaseQuota():
 	quota += quota / 2
