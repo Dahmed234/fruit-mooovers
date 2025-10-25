@@ -40,7 +40,7 @@ region_enabled = true
 region_rect = Rect2(407, 16, 18, 17)
 
 [node name="Radii" type="CharacterBody2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 
 [node name="Throw Radius" type="Area2D" parent="Radii"]
 collision_layer = 0
