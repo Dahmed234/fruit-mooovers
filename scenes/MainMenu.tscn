@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgq5krj1oqkrl"]
 
-[ext_resource type="Script" uid="uid://cepamhbtl47le" path="res://scripts/main_menu.gd" id="1_g0udf"]
+[ext_resource type="Script" uid="uid://cepamhbtl47le" path="res://scripts/MainMenu.gd" id="1_g0udf"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_g0udf")
@@ -15,7 +15,7 @@ offset_top = -24.0
 offset_right = 16.0
 offset_bottom = 16.0
 
-[node name="Label" type="Label" parent="Camera2D/Control"]
+[node name="Main menu text" type="Label" parent="Camera2D/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -32,7 +32,7 @@ theme_override_font_sizes/font_size = 100
 text = "Main Menu"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="Camera2D/Control"]
+[node name="Start Game" type="Button" parent="Camera2D/Control"]
 layout_mode = 0
 offset_left = -260.0
 offset_top = 32.0
@@ -41,4 +41,4 @@ offset_bottom = 177.0
 theme_override_font_sizes/font_size = 100
 text = "Start Game"
 
-[connection signal="pressed" from="Camera2D/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Camera2D/Control/Start Game" to="." method="_onStartGame"]

@@ -14,7 +14,10 @@ func _process(delta):
 	$Camera2D.position = $Player.position
 	
 func onCarryFinish(item,pos):
-	$Camera2D/Control/Label.changeScore(item.value)
+	$Camera2D/Control/Label.score += item.value
+	$Camera2D/Control/Label.totalScore += item.value
+	$Camera2D/Control/Label.cowScore += item.followerValue
+	
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)
 	# Spawn splash text when the item is droped off

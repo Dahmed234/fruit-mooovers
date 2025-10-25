@@ -1,15 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
 
-[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/inGame.gd" id="1_vtbmc"]
-[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/Thrown_object.tscn" id="2_orrty"]
-[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/Splash text.tscn" id="3_uh1x0"]
-[ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/tile_map.tscn" id="4_whtva"]
-[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_aygb0"]
-[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/Patrol path.tscn" id="6_6vb8d"]
-[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_ecsu6"]
-[ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="8_8a5f0"]
-[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_6bi40"]
-[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/item.tscn" id="10_4ap2e"]
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
+[ext_resource type="PackedScene" uid="uid://dcsn06k5woifq" path="res://prefabs/Follower.tscn" id="8_a40rq"]
+[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
 vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
@@ -21,11 +21,11 @@ size = Vector2(29.5, 29.5)
 
 [node name="In Game" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_vtbmc")
-thown = ExtResource("2_orrty")
-splashText = ExtResource("3_uh1x0")
+script = ExtResource("1_27h4a")
+thown = ExtResource("2_vwfvy")
+splashText = ExtResource("3_s70h5")
 
-[node name="TileMap" parent="." instance=ExtResource("4_whtva")]
+[node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
 position = Vector2(575, 329)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -49,10 +49,10 @@ offset_bottom = -0.11299896
 grow_horizontal = 2
 grow_vertical = 2
 text = "Score: "
-script = ExtResource("5_aygb0")
+script = ExtResource("5_eryi0")
 root = NodePath("../../..")
 
-[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_6vb8d")]
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
 position = Vector2(234, 454)
 path_length = 5
 node_distance = 50.0
@@ -62,12 +62,12 @@ target = {
 NodePath("../Player"): true
 }
 
-[node name="Player" parent="." instance=ExtResource("7_ecsu6")]
+[node name="Player" parent="." instance=ExtResource("7_b6xl3")]
 position = Vector2(544, 329)
 collision_layer = 2
 speed = 8000.0
 
-[node name="Follower" parent="." instance=ExtResource("8_8a5f0")]
+[node name="Follower" parent="." instance=ExtResource("8_a40rq")]
 position = Vector2(669, 333)
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -75,7 +75,7 @@ wall_min_slide_angle = 0.0
 [node name="goal" type="Sprite2D" parent="."]
 position = Vector2(779, 348)
 scale = Vector2(2, 2)
-texture = ExtResource("9_6bi40")
+texture = ExtResource("9_islk6")
 region_enabled = true
 region_rect = Rect2(272, 128, 16, 16)
 
@@ -89,41 +89,41 @@ navigation_layers = 4
 position = Vector2(0.75, 1.25)
 shape = SubResource("RectangleShape2D_tbgi4")
 
-[node name="small item" parent="." instance=ExtResource("10_4ap2e")]
+[node name="small item" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(278, 248)
 value = 5
 followerValue = 10
 weight = 1.0
 
-[node name="small item2" parent="." instance=ExtResource("10_4ap2e")]
+[node name="small item2" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(930, 386)
 value = 5
 followerValue = 10
 weight = 1.0
 
-[node name="small item3" parent="." instance=ExtResource("10_4ap2e")]
+[node name="small item3" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(955, 290)
 value = 5
 followerValue = 10
 weight = 1.0
 
-[node name="small item4" parent="." instance=ExtResource("10_4ap2e")]
+[node name="small item4" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(869, 144)
 value = 5
 followerValue = 10
 weight = 1.0
 
-[node name="big item" parent="." instance=ExtResource("10_4ap2e")]
+[node name="big item" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(596, 191)
 value = 100
 weight = 5.0
 
-[node name="big item2" parent="." instance=ExtResource("10_4ap2e")]
+[node name="big item2" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(678, 451)
 value = 100
 weight = 5.0
 
-[node name="big item3" parent="." instance=ExtResource("10_4ap2e")]
+[node name="big item3" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(454, 468)
 value = 100
 weight = 5.0

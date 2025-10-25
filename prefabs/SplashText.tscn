@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b172ae4cqawdl"]
 
-[ext_resource type="Script" uid="uid://b0rjrtnfjffp5" path="res://scripts/splash_text.gd" id="1_qmq2n"]
+[ext_resource type="Script" uid="uid://b0rjrtnfjffp5" path="res://scripts/SplashText.gd" id="1_qmq2n"]
 
 [node name="Splash Text" type="Label"]
 anchors_preset = 8
