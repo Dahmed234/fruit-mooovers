@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
-[ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://prefabs/DestructableItem.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
@@ -125,12 +124,6 @@ weight = 5.0
 position = Vector2(454, 468)
 value = 100
 weight = 5.0
-
-[node name="Destructable Item" parent="." node_paths=PackedStringArray("tileMap", "navMap") instance=ExtResource("10_27h4a")]
-position = Vector2(236, 150)
-tilePos = Vector2i(-11, -6)
-tileMap = NodePath("../TileMap/Destructible walls")
-navMap = NodePath("../TileMap/Navigation")
 
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 

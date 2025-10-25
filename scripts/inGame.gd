@@ -10,9 +10,12 @@ var splashText: PackedScene
 var goal: Sprite2D
 @export
 var player: CharacterBody2D
+
+@export 
+var destructableWalls: TileMapLayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawnFollower($goal.position,Follower.State.INITIAL)
+	spawnFollower($goal.position,Follower.State.WANDER)
 	
 func _process(delta):
 	$Camera2D.position = $Player.position
@@ -49,6 +52,7 @@ func spawnFollower(position, state :Follower.State):
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal
 	newFollower.player = player
+	#newFollower.destructableWalls = destructableWalls
 	
 	add_child(newFollower)
 	

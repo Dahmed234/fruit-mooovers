@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b17ndhc5lvlg3"]
+[gd_scene load_steps=18 format=4 uid="uid://b17ndhc5lvlg3"]
 
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_fxorh"]
 [ext_resource type="TileSet" uid="uid://dx6rt5xlniow7" path="res://TileMap/tile_map.tres" id="1_iuou0"]
@@ -4347,10 +4347,6 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_2n14h")
 sources/1 = SubResource("TileSetAtlasSource_mcxtf")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_st1qi"]
-cell_size = 16.0
-border_size = 1.0
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lguv4"]
 texture = ExtResource("1_fxorh")
 1:0/0 = 0
@@ -5591,7 +5587,6 @@ texture = ExtResource("2_st1qi")
 48:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:3/0 = 0
 3:3/0 = 0
 4:3/0 = 0
@@ -8741,7 +8736,6 @@ tile_map_data = PackedByteArray("AAD1//r/AQABAAAAAAD1//v/AQABAAAAAAD1//z/AQABAAA
 tile_set = SubResource("TileSet_xsnmi")
 collision_enabled = false
 script = ExtResource("3_st1qi")
-navPolygon = SubResource("NavigationPolygon_st1qi")
 
 [node name="Low Walls" type="TileMapLayer" parent="."]
 texture_filter = 1

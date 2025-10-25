@@ -6,7 +6,8 @@ const scene :PackedScene = preload("res://prefabs/Follower.tscn")
 signal carryFinished(item :Carryable)
 signal carryDropped(item: ItemData)
 
-var currentItem :StaticBody2D = null
+var carryingItem :StaticBody2D = null
+
 
 @export
 var BASESPEED = 20000
@@ -42,7 +43,8 @@ enum State {
 	CARRYING,
 	WANDER,
 	FOLLOW,
-	IDLE
+	IDLE,
+	DESTROYING
 }
 
 func canBeThrown():
@@ -53,10 +55,13 @@ func canBeThrown():
 		State.WANDER: return true
 		State.INITIAL: return false
 		State.CARRYING: return false
+		State.DESTROYING: return false
 
 func onWhistle():
 	match currentState:
 		State.CARRYING:
+			stopCarrying()
+		State.DESTROYING:
 			stopCarrying()
 		State.WANDER:
 			endWander()
@@ -90,14 +95,28 @@ func _ready() -> void:
 			
 			#test to see if items are nearby
 			# get all nearby items
-
+			
+			# Was going to do logic for destroying tiles here, but decided to make a separate object for that
+				#var tile_data = destructableWalls.get_cell_tile_data(destructableWalls.local_to_map(get_global_mouse_position() )- Vector2i(25,15))
+				#print(destructableWalls.local_to_map(get_global_mouse_position())- Vector2i(25,15))
+				#print(tile_data)
+			
 			var nearbyLoot   = $viewRadius.get_overlapping_areas()
-			nearbyLoot = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
-			if(!nearbyLoot.is_empty()):
-				var obtainedItem :Carryable = nearbyLoot.pop_back().get_parent()
-				currentItem = obtainedItem
-				#currentItem.followersCarrying += 1
+			var nearbyCarryable
+			var nearbyDestroyable
+			nearbyCarryable = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
+			nearbyDestroyable = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
+			
+			if(!nearbyCarryable.is_empty()):
+				var obtainedItem :Carryable = nearbyCarryable.pop_back().get_parent()
+				carryingItem = obtainedItem
+				#carryingItem.followersCarrying += 1
 				startCarry(obtainedItem)
+			elif !nearbyDestroyable.is_empty(): 
+				var obtainedItem :Destroyable = nearbyDestroyable.pop_back().get_parent()
+				carryingItem = obtainedItem
+				#carryingItem.followersCarrying += 1
+				startDestroy(obtainedItem)
 			else:
 				startWander()
 		State.WANDER:
@@ -106,8 +125,10 @@ func _ready() -> void:
 			startFollow()
 		State.IDLE:
 			startIdle()
+		_:
+			startWander()
 
-func startCarry(item : Carryable):
+func startCarry(item : Carryable) -> void:
 	
 	#setup sprite
 	currentState = State.CARRYING
@@ -118,27 +139,37 @@ func startCarry(item : Carryable):
 	currentSprite.region_enabled = newSprite.region_enabled
 	currentSprite.transform = newSprite.transform
 	
-	currentItem = item
+	carryingItem = item
 	
 	# Ensure the follower snaps to the item so it doesn't move when picked up
 	global_position = item.global_position
 	
 	item.onPickup(self)
 	
-	if currentItem.followersCarrying.size() > 1:
+	if carryingItem.followersCarrying.size() > 1:
 		hide()
 	
 	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
 	# navigate to goal flag
 	navigation_agent_2d.target_position = goal.global_position
 
+func startDestroy(item: Destroyable) -> void:
+	currentState = State.DESTROYING
+	
+	# Ensure the follower snaps above the item so it doesn't move when destroying it
+	global_position = item.global_position - Vector2(0.0,16.0)
+	
+	item.onPickup(self)
+	
+	if item.followersCarrying.size() > 1:
+		hide()
+
+
 func stopCarrying():
-	if !(currentState == State.CARRYING):
-		return
 	$heldItem.hide()
 	velocity = Vector2.ZERO
-	currentItem.onDrop(self)
-	currentItem = null
+	carryingItem.onDrop(self)
+	carryingItem = null
 	show()
 	startWander()
 
@@ -163,20 +194,20 @@ func _physics_process(delta: float) -> void:
 
 		State.CARRYING:
 			label.show()
-			label.text = str(int(currentItem.followersCarrying.size())) + "/" + str(int(currentItem.weight))
+			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
 			if navigation_agent_2d.is_target_reached():
-				var tmp = currentItem
-				for cow in currentItem.followersCarrying.keys():
+				var tmp = carryingItem
+				for cow in carryingItem.followersCarrying.keys():
 					cow.stopCarrying()
 				
 				carryFinished.emit(tmp,position)
 
 			else:
-				#print("navigating to target at: " + str(navigation_agent_2d.target_position))
 				navigate_to_target(delta)
-				#var next_path_position := navAgent.get_next_path_position()
-				
-				#velocity = global_position.direction_to(next_path_position) * BASESPEED * local_velocity
+		State.DESTROYING:
+			label.show()
+			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
+			
 		State.FOLLOW:
 			navigation_agent_2d.target_position = player.global_position
 			navigate_to_target(delta)
@@ -221,13 +252,13 @@ func on_timeout() -> void:
 # Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func navigate_to_target(delta: float) -> void:
 	var local_velocity: float
-	if currentItem == null:
+	if carryingItem == null:
 		local_velocity = 1.0 
 	else:
-		if currentItem.followersCarrying.size() >= currentItem.weight:
+		if carryingItem.followersCarrying.size() >= carryingItem.weight:
 			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
 			# How many cows are used
-			local_velocity = 0.2 * min(2.0,currentItem.followersCarrying.size() / currentItem.weight / 2.0)
+			local_velocity = 0.2 * min(2.0,carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
 	# Store the current position of the enemy in [current_agent_position]
 	var current_agent_position = global_position
 	
