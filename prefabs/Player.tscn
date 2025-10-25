@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/Player.gd" id="1_glu7e"]
-[ext_resource type="Texture2D" uid="uid://8uej1qakgh51" path="res://assets/kenney_1-bit-pack/Tilesheet/colored_packed.png" id="2_ay6yh"]
 [ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://scripts/ThrowController.gd" id="2_p3xyx"]
+[ext_resource type="Texture2D" uid="uid://c46uv3a4y1ogs" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="2_wuy1y"]
 [ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scripts/Whistle.gd" id="4_p3xyx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
@@ -35,9 +35,9 @@ shape = SubResource("CircleShape2D_p3xyx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("2_ay6yh")
+texture = ExtResource("2_wuy1y")
 region_enabled = true
-region_rect = Rect2(384, 16, 16, 16)
+region_rect = Rect2(407, 16, 18, 17)
 
 [node name="Radii" type="CharacterBody2D" parent="."]
 collision_layer = 2
