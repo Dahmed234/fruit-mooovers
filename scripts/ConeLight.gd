@@ -33,15 +33,16 @@ func update_light(delta: float) -> void:
 			local_size = 1.0
 	match (get_parent().current_state):
 		State.PATROLLING,State.ALERT,State.IDLE:
-			# Set the light to have radius of [light_level] pixels
-	
-			# Where we want to be pointing
-			angle_delta = target_angle - rotation - PI/2
-			if angle_delta > -turn_speed * delta:
+			# Where we want to be pointing, get the angle from the current vector to the target vector
+			angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))
+
+			# Move towards this angle at a fixed speed
+			if angle_delta > 2 * -turn_speed * delta:
 				rotation += turn_speed * delta
-			elif angle_delta < turn_speed * delta:
+			elif angle_delta < 2 * turn_speed * delta:
 				rotation -= turn_speed * delta
-				
+			else:
+				rotation += angle_delta
 		State.CHASING:
 			look_at(get_parent().get_closest_unit().position)
 			rotation += PI/2

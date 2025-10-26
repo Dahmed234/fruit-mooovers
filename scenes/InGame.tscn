@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
-[ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scenes/navigation_region_2d.gd" id="5_27h4a"]
+[ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scripts/navigation_region_2d.gd" id="5_27h4a"]
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
@@ -66,11 +66,11 @@ script = ExtResource("5_eryi0")
 root = NodePath("../../..")
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
-position = Vector2(234, 454)
-path_length = 5
-node_distance = 50.0
-is_loop = true
-enemy_count = 2
+position = Vector2(952, -55)
+path_length = 3
+node_distance = 100.0
+enemy_count = 1
+path_angle = 0.785
 target = {
 NodePath("../Player"): true
 }
