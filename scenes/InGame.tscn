@@ -77,7 +77,6 @@ NodePath("../Player"): true
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
 position = Vector2(544, 329)
-collision_layer = 1
 speed = 8000.0
 
 [node name="CollisionShape2D" parent="Player/Radii/Throw Radius" index="0"]
