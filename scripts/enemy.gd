@@ -43,20 +43,19 @@ func _ready() -> void:
 	pass
 
 func get_best_target() -> CharacterBody2D:
-	var closest = null 
-	var bestScore = 1000000
+	var best = null 
+	var bestScore = 1000000.0
 	var tmpScore
-	const chaseTimeWeight = 0.5
+	# The penalty for leaving the vision cone, will make the enemy prefer to target recently seen targets over close ones
+	const chaseTimePenalty = 100
 	for target in (cone_light.targets):
-		if !target:
-			#cone_light.targets.erase(target)
-			continue
 		# Score is caluclated as distance to target * chase time factor, which is lower the more recently the target was visible
-		tmpScore = global_position.distance_to(target.global_position) * chaseTimeWeight * (1 - (cone_light.targets[target] / cone_light.chaseTime))
+		tmpScore = global_position.distance_to(target.global_position) + chaseTimePenalty * (1 - (cone_light.targets[target] / cone_light.chaseTime))
 		if tmpScore < bestScore:
 			bestScore = tmpScore
-			closest = target
-	return closest
+			best = target
+	print(best)
+	return best
 
 # Remove targets that haven't been seen in a while
 func update_available_targets(delta: float) -> void:
@@ -64,7 +63,8 @@ func update_available_targets(delta: float) -> void:
 		cone_light.targets[target] -= delta
 		if cone_light.targets[target] < 0:
 			cone_light.targets.erase(target)
-	
+
+# Update the alert level based on which agents are in the cone light
 func update_alert(delta: float) -> void:
 	if cone_light.targets.size() > 0:
 		
@@ -82,21 +82,10 @@ func update_alert(delta: float) -> void:
 	else:
 		current_state = State.PATROLLING
 
-#func get_closest_unit() -> CharacterBody2D:
-	#var closest = null
-	#var closest_distance := 1_000_000.0
-	#var tmp_distance
-	#for unit in target.keys():
-		#tmp_distance = global_position.distance_to(unit.global_position)
-		#if tmp_distance < closest_distance:
-			#closest = unit
-			#closest_distance = tmp_distance
-	#return closest
-
 # Update the navigation target position, throw an error if state is invalid
 func update_target(delta: float) -> void:
 	update_alert(delta)
-	
+	update_available_targets(delta)
 	idle_time += delta
 	
 	match current_state:

@@ -1,5 +1,8 @@
 extends Sprite2D
 
+@export 
+var alpha: float
+
 enum State {
 	PATROLLING  = 0,
 	ALERT 		= 1,
@@ -16,8 +19,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match (get_parent().get_parent().current_state):
 		State.ALERT: 
-			modulate = Color(1,1,0)
+			modulate = Color(1,1,0,alpha)
 		State.CHASING: 
-			modulate = Color(1,0,0)
+			modulate = Color(1,0,0,alpha)
 		_:
-			modulate = Color(0,1,0)
+			modulate = Color(0,1,0,alpha)

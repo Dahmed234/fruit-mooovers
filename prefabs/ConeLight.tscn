@@ -19,11 +19,12 @@ size = 2.0
 chaseTime = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0, 0.58500004)
+modulate = Color(1, 1, 0, 0.2784314)
 scale = Vector2(0.539, 0.5)
 texture = ExtResource("1_ii706")
 offset = Vector2(0, -128)
 script = ExtResource("3_4r6yf")
+alpha = 0.6
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 128
