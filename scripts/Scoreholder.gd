@@ -9,7 +9,7 @@ var gameOver: Node2D
 
 @export
 # Day length in seconds
-var day_length := 20.0
+var day_length := 100000.0
 
 @export
 # Amount of points needed per day to continue

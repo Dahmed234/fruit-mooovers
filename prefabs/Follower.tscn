@@ -49,9 +49,12 @@ shape = SubResource("CircleShape2D_8j6l1")
 [node name="WanderTimer" type="Timer" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_max_distance = 66.0
+path_max_distance = 10.0
 path_postprocessing = 1
 avoidance_enabled = true
+radius = 20.0
+time_horizon_agents = 2.0
+time_horizon_obstacles = 2.0
 avoidance_layers = 0
 debug_enabled = true
 
