@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://kvexn7i2mmmy"]
+[gd_scene load_steps=5 format=3 uid="uid://kvexn7i2mmmy"]
 
 [ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scripts/DestructableItem.gd" id="1_3hrdc"]
 [ext_resource type="Texture2D" uid="uid://cw3pnkas2thjx" path="res://assets/kenney_1-bit-pack/Tilesheet/colored.png" id="2_jr6qx"]
-[ext_resource type="PackedScene" uid="uid://diccdddr7oddb" path="res://prefabs/Wall.tscn" id="3_x0h6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
 radius = 55.081757
@@ -18,7 +17,6 @@ weight = 1.0
 label = NodePath("Label")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_jr6qx")
 region_enabled = true
 region_rect = Rect2(17, 0, 16, 16)
@@ -48,5 +46,3 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/0"
 horizontal_alignment = 1
-
-[node name="NavigationObstacle2D" parent="." instance=ExtResource("3_x0h6g")]

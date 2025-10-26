@@ -1,19 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=15 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scenes/navigation_region_2d.gd" id="5_27h4a"]
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_27h4a"]
-vertices = PackedVector2Array(1730.3281, 761.4375, -252.82031, 826.53125, 98.171875, -195.09375, 1410.7813, -211.89844)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-cell_size = 8.0
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
+vertices = PackedVector2Array(1202.9375, 562.09375, 117.96875, 571.89844, 586.5, 232.5, 1199.0469, -154.34375, 407.5, 232.5, 116.02344, -192.64063, 407.5, 77.5, 586.5, 77.5)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(6, 5, 3, 7), PackedInt32Array(7, 3, 2)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(106, -203, 1209, -164, 1213, 572, 108, 582)])
+parsed_geometry_type = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27h4a"]
+size = Vector2(159, 135)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
 vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
@@ -32,11 +37,19 @@ goal = NodePath("goal")
 player = NodePath("Player")
 destructableWalls = NodePath("TileMap/Destructible walls")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_27h4a")
-
 [node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
 position = Vector2(575, 329)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_e7fys")
+script = ExtResource("5_27h4a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
+position = Vector2(500, 150)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D"]
+position = Vector2(-3, 5)
+shape = SubResource("RectangleShape2D_27h4a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)
@@ -76,6 +89,12 @@ NodePath("../Player"): true
 position = Vector2(544, 329)
 collision_layer = 2
 speed = 8000.0
+
+[node name="CollisionShape2D" parent="Player/Radii/Throw Radius" index="0"]
+position = Vector2(5, 33)
+
+[node name="NavigationRegion2D" parent="Player" index="4"]
+position = Vector2(-34.999996, 118)
 
 [node name="goal" type="Sprite2D" parent="."]
 position = Vector2(779, 348)
@@ -133,6 +152,8 @@ position = Vector2(454, 468)
 value = 100
 weight = 5.0
 
+[connection signal="tile_update" from="TileMap/Navigation" to="NavigationRegion2D" method="_on_navigation_tile_update"]
+[connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
 [editable path="TileMap"]

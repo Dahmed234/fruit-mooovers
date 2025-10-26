@@ -46,6 +46,9 @@ func onCarryFinish(item,pos):
 func onCarryDrop(item :Carryable):
 	pass
 
+func add_wall(wall: StaticBody2D):
+	$"NavigationRegion2D".add_child(wall)
+
 func spawnFollower(position, state :Follower.State):
 	var newFollower = Follower.newFollower(position,Follower.State.INITIAL)
 	newFollower.carryDropped.connect(onCarryDrop)
@@ -54,7 +57,7 @@ func spawnFollower(position, state :Follower.State):
 	newFollower.player = player
 	#newFollower.destructableWalls = destructableWalls
 	
-	add_child(newFollower)
+	$"NavigationRegion2D".add_child(newFollower)
 	
 func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
 	

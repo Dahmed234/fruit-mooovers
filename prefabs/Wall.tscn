@@ -1,12 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://diccdddr7oddb"]
+[gd_scene load_steps=3 format=3 uid="uid://diccdddr7oddb"]
 
-[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="1_2na2i"]
+[ext_resource type="Texture2D" uid="uid://cw3pnkas2thjx" path="res://assets/kenney_1-bit-pack/Tilesheet/colored.png" id="2_5uey0"]
 
-[node name="Wall" type="NavigationObstacle2D"]
-vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2na2i"]
+size = Vector2(16, 16)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Wall" type="StaticBody2D"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_2na2i")
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2na2i")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_5uey0")
+region_enabled = true
+region_rect = Rect2(17, 0, 16, 16)
