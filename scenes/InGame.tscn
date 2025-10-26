@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=14 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -12,13 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
-vertices = PackedVector2Array(1202.9375, 562.09375, 117.96875, 571.89844, 586.5, 232.5, 1199.0469, -154.34375, 407.5, 232.5, 116.02344, -192.64063, 407.5, 77.5, 586.5, 77.5)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(6, 5, 3, 7), PackedInt32Array(7, 3, 2)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(106, -203, 1209, -164, 1213, 572, 108, 582)])
+vertices = PackedVector2Array(1829.1094, -437.21875, 1842.8828, 761.7969, -154.32031, 724.1719, -194.64844, -483.75)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-205, -494, 1839, -447, 1853, 772, -164, 734)])
 parsed_geometry_type = 1
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_27h4a"]
-size = Vector2(159, 135)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
 vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
@@ -43,13 +40,6 @@ position = Vector2(575, 329)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_e7fys")
 script = ExtResource("5_27h4a")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
-position = Vector2(500, 150)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D"]
-position = Vector2(-3, 5)
-shape = SubResource("RectangleShape2D_27h4a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)

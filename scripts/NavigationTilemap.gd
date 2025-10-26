@@ -27,6 +27,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 		n_wall.global_position = to_global(map_to_local(coords)) + Vector2(3,3)
 		n_wall.tilePos = coords
 		n_wall.tileMap = destructible_walls
+		n_wall.navMap = self
 		get_parent().get_parent().add_wall(n_wall)
 		is_changed = true
 		return true
