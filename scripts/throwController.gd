@@ -1,5 +1,5 @@
 extends Area2D
-signal throwMade(startPosition, mousePosition)
+signal throwMade(startPosition, mousePosition,follower)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,8 +17,8 @@ func _process(delta: float) -> void:
 		if(throwables.is_empty()):
 			return
 		var pikminToThrow :Node2D = throwables.pop_back()
-		pikminToThrow.queue_free()
-		throwMade.emit(global_position,get_viewport().get_mouse_position())
+		#pikminToThrow.startThrow()
+		throwMade.emit(global_position,get_viewport().get_mouse_position(),pikminToThrow)
 		
 		
 		

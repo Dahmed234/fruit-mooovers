@@ -48,7 +48,7 @@ func get_best_target() -> CharacterBody2D:
 	var tmpScore
 	const chaseTimeWeight = 0.5
 	for target in (cone_light.targets):
-		if !target: 
+		if !target:
 			#cone_light.targets.erase(target)
 			continue
 		# Score is caluclated as distance to target * chase time factor, which is lower the more recently the target was visible

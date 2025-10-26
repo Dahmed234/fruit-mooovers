@@ -31,6 +31,8 @@ var direction := Vector2.ONE
 
 # How detectible are followers to enemy units
 const enemy_weight := 0.2
+# The distance above rocks the followers sit when destroying
+const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
 
@@ -44,7 +46,8 @@ enum State {
 	WANDER,
 	FOLLOW,
 	IDLE,
-	DESTROYING
+	DESTROYING,
+	THROWN
 }
 
 func canBeThrown():
@@ -56,6 +59,7 @@ func canBeThrown():
 		State.INITIAL: return false
 		State.CARRYING: return false
 		State.DESTROYING: return false
+		State.THROWN: return false
 
 func onWhistle():
 	match currentState:
@@ -80,27 +84,21 @@ func startWander():
 	currentState = State.WANDER
 	on_timeout()
 
-func _ready() -> void:
-	$heldItem/Sprite.texture = null
-	label.hide()
-	
-	#need to wait for all physics components to load in
-	# idk why exactly but DO NOT TOUCH THESE OR CARRYING WILL BREAK
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+func startInitial():
+	currentState = State.INITIAL
+	initState()
 
+func startThrown():
+	currentState = State.THROWN
+
+# Run the initial logic for the given state
+func initState():
 	match currentState:
 		# decide what to do based on surroundings
 		State.INITIAL:
 			
 			#test to see if items are nearby
 			# get all nearby items
-			
-			# Was going to do logic for destroying tiles here, but decided to make a separate object for that
-				#var tile_data = destructableWalls.get_cell_tile_data(destructableWalls.local_to_map(get_global_mouse_position() )- Vector2i(25,15))
-				#print(destructableWalls.local_to_map(get_global_mouse_position())- Vector2i(25,15))
-				#print(tile_data)
-			
 			var nearbyLoot   = $viewRadius.get_overlapping_areas()
 			var nearbyCarryable
 			var nearbyDestroyable
@@ -128,8 +126,19 @@ func _ready() -> void:
 		_:
 			startWander()
 
-func startCarry(item : Carryable) -> void:
+func _ready() -> void:
+	$heldItem/Sprite.texture = null
+	label.hide()
 	
+	#need to wait for all physics components to load in
+	# idk why exactly but DO NOT TOUCH THESE OR CARRYING WILL BREAK
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+
+	initState()
+
+func startCarry(item : Carryable) -> void:
+	$heldItem.show()
 	#setup sprite
 	currentState = State.CARRYING
 	var currentSprite = $heldItem/Sprite
@@ -143,6 +152,7 @@ func startCarry(item : Carryable) -> void:
 	
 	# Ensure the follower snaps to the item so it doesn't move when picked up
 	global_position = item.global_position
+	label.position.y = 10.0
 	
 	item.onPickup(self)
 	
@@ -155,15 +165,16 @@ func startCarry(item : Carryable) -> void:
 
 func startDestroy(item: Destroyable) -> void:
 	currentState = State.DESTROYING
-	
 	# Ensure the follower snaps above the item so it doesn't move when destroying it
-	global_position = item.global_position - Vector2(0.0,16.0)
-	
+	global_position = item.global_position - Vector2(0.0,ITEM_HEIGHT)
+	label.position.y = 10.0 + ITEM_HEIGHT
 	item.onPickup(self)
 	
 	if item.followersCarrying.size() > 1:
 		hide()
 
+func startThrow():
+	pass
 
 func stopCarrying():
 	$heldItem.hide()

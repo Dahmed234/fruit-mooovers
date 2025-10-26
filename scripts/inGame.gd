@@ -68,10 +68,15 @@ func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
 	
 	return newThrown
 
-func onThrowMade(startPosition,mousePosition) ->void:
+func onThrowMade(startPosition,mousePosition,follower) ->void:
 	var throw = new_throwable(startPosition,get_local_mouse_position())
+	throw.follower = follower
+	follower.hide()
+	follower.startThrown()
 	throw.objectFinishThrow.connect(onThrowFinish)
 	add_child(throw)
 
-func onThrowFinish(position :Vector2,state :Follower.State):
-	spawnFollower(position, state)
+func onThrowFinish(position :Vector2,state :Follower.State, thrown):
+	thrown.follower.show()
+	thrown.follower.startInitial()
+	#spawnFollower(position, state)

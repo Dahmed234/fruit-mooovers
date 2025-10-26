@@ -3,7 +3,10 @@ class_name Throwable
 
 
 
-signal objectFinishThrow( pos, state :Follower.State)
+signal objectFinishThrow( pos, state :Follower.State, thrown)
+
+# Used to ensure the thrown follower updates to this position while hidden
+var follower: CharacterBody2D
 
 var speed :float
 var direction :Vector2
@@ -27,9 +30,6 @@ func _ready() -> void:
 	timer.start()
 
 
-	
-
-
 func quadratic(x):
 	return x * -(x - timer.wait_time)
 
@@ -39,9 +39,11 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	$Sprite2D.scale = baseScale * (1 +  60*quadratic(timer.wait_time - timer.time_left))
 	$Sprite2D.rotation = 5 * PI*(timer.wait_time - timer.time_left)
-
+	
+	follower.global_position = global_position
 	if (move_and_collide(velocity * delta)):
 		delete(Follower.State.FOLLOW)
+	
 
 
 func _on_timer_timeout() -> void:
@@ -51,6 +53,6 @@ func _on_timer_timeout() -> void:
 
 
 func delete(state :Follower.State):
-	objectFinishThrow.emit(global_position,state)
+	objectFinishThrow.emit(global_position,state,self)
 	queue_free()
 	
