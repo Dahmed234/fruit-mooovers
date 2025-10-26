@@ -12,7 +12,6 @@ var is_changed = false
 @export var destructableItem: PackedScene
 
 var first_time = true
-
 #@export var navPolygon: NavigationPolygon
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
@@ -22,14 +21,14 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 		if coords in layer.get_used_cells_by_id(1):
 			if first_time:
 				var n_wall = wall.instantiate()
-				n_wall.global_position = to_global(map_to_local(coords)) + Vector2(8,8)
+				n_wall.global_position = to_global(map_to_local(coords))
 				get_parent().get_parent().add_wall(n_wall)
 			is_changed = true
 			return true
 	if coords in destructible_walls.get_used_cells_by_id(1):
 		if first_time:
 			var n_wall = destructableItem.instantiate()
-			n_wall.global_position = to_global(map_to_local(coords)) + Vector2(3,3)
+			n_wall.global_position = to_global(map_to_local(coords))
 			n_wall.tilePos = coords
 			n_wall.tileMap = destructible_walls
 			n_wall.navMap = self

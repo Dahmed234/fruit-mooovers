@@ -53,8 +53,6 @@ path_max_distance = 10.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 20.0
-time_horizon_agents = 2.0
-time_horizon_obstacles = 2.0
 avoidance_layers = 0
 debug_enabled = true
 

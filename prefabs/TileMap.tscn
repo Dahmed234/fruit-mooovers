@@ -8753,7 +8753,6 @@ navigation_enabled = false
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD1//r/AQABAAMAAAD2//r/AQABAAMAAAD3//r/AQABAAMAAAD4//r/AQABAAMAAAD5//r/AQABAAMAAAA=")
 tile_set = SubResource("TileSet_mxvs2")
-collision_enabled = false
 navigation_enabled = false
 
 [node name="High Walls" type="TileMapLayer" parent="."]
