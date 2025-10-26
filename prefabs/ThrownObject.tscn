@@ -6,8 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovt4c"]
 
 [node name="Thrown Object" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_xnfhp")

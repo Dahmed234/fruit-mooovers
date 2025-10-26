@@ -54,7 +54,6 @@ func get_best_target() -> CharacterBody2D:
 		if tmpScore < bestScore:
 			bestScore = tmpScore
 			best = target
-	print(best)
 	return best
 
 # Remove targets that haven't been seen in a while
@@ -66,7 +65,8 @@ func update_available_targets(delta: float) -> void:
 
 # Update the alert level based on which agents are in the cone light
 func update_alert(delta: float) -> void:
-	if cone_light.targets.size() > 0:
+	# Use in_area here to only add alert when things are actively in the light
+	if cone_light.in_area.size() > 0:
 		
 		
 		alert_level = min(max_alert * 2, alert_level + 100 * delta)

@@ -22,6 +22,10 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 			if first_time:
 				var n_wall = wall.instantiate()
 				n_wall.global_position = to_global(map_to_local(coords))
+				
+				#Set the "throwables" collision layer to true if this is a high wall
+				if layer == high_walls:  n_wall.collision_layer += 2
+				
 				get_parent().get_parent().add_wall(n_wall)
 			is_changed = true
 			return true
