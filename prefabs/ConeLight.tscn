@@ -9,13 +9,14 @@ points = PackedVector2Array(0, 0, 100, -200, 0, -256, -100, -200)
 
 [node name="Cone light" type="CharacterBody2D"]
 collision_layer = 0
-collision_mask = 128
+collision_mask = 0
 script = ExtResource("2_0jmpm")
 flicker = 0.001
 pulse_rate = 1000.0
 pulse_amount = 0.05
 turn_speed = 1.0
 size = 2.0
+chaseTime = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 0.58500004)

@@ -25,6 +25,7 @@ sample_partition_type = 1
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
+collision_layer = 5
 script = ExtResource("1_glu7e")
 speed = 300.0
 
@@ -62,16 +63,18 @@ position = Vector2(28.74818, 8.596945)
 shape = SubResource("RectangleShape2D_glu7e")
 
 [node name="whistleBox" type="Area2D" parent="Radii"]
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_p3xyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/whistleBox"]
 shape = SubResource("CircleShape2D_wuy1y")
 
-[node name="Enemy Detection box" type="CharacterBody2D" parent="."]
+[node name="Enemy detection box" type="Area2D" parent="."]
 collision_layer = 128
+collision_mask = 128
 
-[node name="physics Collision" type="CollisionShape2D" parent="Enemy Detection box"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy detection box"]
 position = Vector2(-0.5, 0.5)
 scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_p3xyx")

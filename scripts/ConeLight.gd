@@ -5,10 +5,12 @@ extends CharacterBody2D
 @export var pulse_amount: float
 @export var turn_speed: float
 @export var size: float
+@export var chaseTime:float
 
 var local_size: float
 var target_angle := 0.0
 var in_area : Dictionary[CharacterBody2D,bool] = {}
+var targets : Dictionary[CharacterBody2D,float] = {}
 var angle_delta: float
 var clockwise
 var anticlockwise
@@ -53,24 +55,26 @@ func update_light(delta: float) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	update_light(delta)
-	#print(in_area)
-
+	
+	
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
-	#print(other_shape_node,get_parent().target)
-	if other_shape_node.get_parent().get_parent() in get_parent().target:
-		in_area[other_shape_node.get_parent().get_parent()] = true
+	
+	# Mark all targets in the area as elligable targets
+	targets[other_shape_node.get_parent().get_parent()] = chaseTime
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	#return out if any inputs are invalid
-	if !area_shape_index:	return
+	# Handles case of follower being thrown while in area
+	if !area:
+		return
+		
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	
-	if !other_shape_owner:	return
+	#if !other_shape_owner:	return
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
 	
-	if !other_shape_node or !other_shape_node.get_parent() or !other_shape_owner.get_parent().get_parent():	return
+	#if !other_shape_node or !other_shape_node.get_parent() or !other_shape_owner.get_parent().get_parent():	return
 	
-	if other_shape_node.get_parent().get_parent() in get_parent().target:
-		in_area[get_parent().target] = false
+	#if other_shape_node.get_parent().get_parent() in get_parent().target:
+	in_area.erase(other_shape_node.get_parent().get_parent())

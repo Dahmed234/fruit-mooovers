@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcsn06k5woifq"]
+[gd_scene load_steps=6 format=3 uid="uid://dcsn06k5woifq"]
 
 [ext_resource type="Script" uid="uid://bjddk8qpp0ufk" path="res://scripts/Follower.gd" id="1_jmfn7"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
@@ -8,6 +8,9 @@ radius = 204.07721
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8j6l1"]
 radius = 6.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3g3wk"]
+radius = 1.6298006
 
 [node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label")]
 collision_layer = 4
@@ -70,6 +73,15 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/0"
 horizontal_alignment = 1
+
+[node name="Enemy detection box" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy detection box"]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_3g3wk")
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
