@@ -9,7 +9,9 @@ extends CharacterBody2D
 
 var local_size: float
 var target_angle := 0.0
+# Used to perfrom updates each frame an agent is in the collision, rather than just onenter / onexit
 var in_area : Dictionary[CharacterBody2D,bool] = {}
+# A list of all agents that recently were in collision
 var targets : Dictionary[CharacterBody2D,float] = {}
 var angle_delta: float
 var clockwise
@@ -46,7 +48,7 @@ func update_light(delta: float) -> void:
 			else:
 				rotation += angle_delta
 		State.CHASING:
-			look_at(get_parent().get_closest_unit().position)
+			look_at(get_parent().get_best_target().position)
 			rotation += PI/2
 		_:
 			pass
@@ -56,13 +58,15 @@ func update_light(delta: float) -> void:
 func _process(delta: float) -> void:
 	update_light(delta)
 	
+	# Mark all targets in the area as elligable targets
+	for target in in_area.keys():
+		targets[target] = chaseTime
 	
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
-	
-	# Mark all targets in the area as elligable targets
-	targets[other_shape_node.get_parent().get_parent()] = chaseTime
+	#if other_shape_node.get_parent().get_parent() in get_parent().target:
+	in_area[other_shape_node.get_parent().get_parent()] = true
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	# Handles case of follower being thrown while in area

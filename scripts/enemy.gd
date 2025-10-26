@@ -10,7 +10,7 @@ extends CharacterBody2D
 const min_alert = 50.0
 const max_alert = 200.0
 
-var target: Dictionary[CharacterBody2D,bool]
+#var target: Dictionary[CharacterBody2D,bool]
 # Possible enemy states.
 enum State {
 	PATROLLING  = 0,
@@ -40,10 +40,34 @@ var alert_level := 0.0
 var at_patrol_target = true
 
 func _ready() -> void:
-	target = get_parent().target
+	pass
 
+func get_best_target() -> CharacterBody2D:
+	var closest = null 
+	var bestScore = 1000000
+	var tmpScore
+	const chaseTimeWeight = 0.5
+	for target in (cone_light.targets):
+		if !target: 
+			#cone_light.targets.erase(target)
+			continue
+		# Score is caluclated as distance to target * chase time factor, which is lower the more recently the target was visible
+		tmpScore = global_position.distance_to(target.global_position) * chaseTimeWeight * (1 - (cone_light.targets[target] / cone_light.chaseTime))
+		if tmpScore < bestScore:
+			bestScore = tmpScore
+			closest = target
+	return closest
+
+# Remove targets that haven't been seen in a while
+func update_available_targets(delta: float) -> void:
+	for target in (cone_light.targets):
+		cone_light.targets[target] -= delta
+		if cone_light.targets[target] < 0:
+			cone_light.targets.erase(target)
+	
 func update_alert(delta: float) -> void:
-	if cone_light.in_area.size() > 0:
+	if cone_light.targets.size() > 0:
+		
 		
 		alert_level = min(max_alert * 2, alert_level + 100 * delta)
 	else:
@@ -58,16 +82,16 @@ func update_alert(delta: float) -> void:
 	else:
 		current_state = State.PATROLLING
 
-func get_closest_unit() -> CharacterBody2D:
-	var closest = null
-	var closest_distance := 1_000_000.0
-	var tmp_distance
-	for unit in target.keys():
-		tmp_distance = global_position.distance_to(unit.global_position)
-		if tmp_distance < closest_distance:
-			closest = unit
-			closest_distance = tmp_distance
-	return closest
+#func get_closest_unit() -> CharacterBody2D:
+	#var closest = null
+	#var closest_distance := 1_000_000.0
+	#var tmp_distance
+	#for unit in target.keys():
+		#tmp_distance = global_position.distance_to(unit.global_position)
+		#if tmp_distance < closest_distance:
+			#closest = unit
+			#closest_distance = tmp_distance
+	#return closest
 
 # Update the navigation target position, throw an error if state is invalid
 func update_target(delta: float) -> void:
@@ -94,8 +118,12 @@ func update_target(delta: float) -> void:
 			local_speed = 0.5
 			
 			while idle_time >= (idle_delay / 8.0):
+				var best_target = get_best_target()
+				if !best_target:
+					current_state = State.IDLE 
+					return
 				# Get the closest unit (player or follower) to the enemy and wander towards it
-				navigation_agent_2d.target_position = get_closest_unit().position + Vector2((randf()-0.5)*idle_distance/8, (randf()-0.5)*idle_distance/8)
+				navigation_agent_2d.target_position = best_target.position + Vector2((randf()-0.5)*idle_distance/8, (randf()-0.5)*idle_distance/8)
 				# Point the cone light towards the target
 				cone_light.target_angle = (global_position - navigation_agent_2d.target_position).angle()
 				idle_time -= idle_delay
@@ -111,7 +139,11 @@ func update_target(delta: float) -> void:
 		# Chase the player
 		State.CHASING:
 			local_speed = 1.0
-			navigation_agent_2d.target_position = get_closest_unit().position
+			var best_target = get_best_target()
+			if !best_target:
+				current_state = State.IDLE 
+				return
+			navigation_agent_2d.target_position = best_target.position
 		
 		# If the state is invalid, throw an error
 		var other:
