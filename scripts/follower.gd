@@ -106,14 +106,14 @@ func initState():
 			nearbyDestroyable = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
 			
 			if(!nearbyCarryable.is_empty()):
+				#print("Start carrying") 
 				var obtainedItem :Carryable = nearbyCarryable.pop_back().get_parent()
 				carryingItem = obtainedItem
-				#carryingItem.followersCarrying += 1
 				startCarry(obtainedItem)
-			elif !nearbyDestroyable.is_empty(): 
+			elif !nearbyDestroyable.is_empty():
+				#print("Start destroying")
 				var obtainedItem :Destroyable = nearbyDestroyable.pop_back().get_parent()
 				carryingItem = obtainedItem
-				#carryingItem.followersCarrying += 1
 				startDestroy(obtainedItem)
 			else:
 				startWander()
@@ -218,6 +218,7 @@ func _physics_process(delta: float) -> void:
 		State.DESTROYING:
 			label.show()
 			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
+			global_position = carryingItem.global_position - Vector2(0.0,ITEM_HEIGHT)
 			
 		State.FOLLOW:
 			navigation_agent_2d.target_position = player.global_position
