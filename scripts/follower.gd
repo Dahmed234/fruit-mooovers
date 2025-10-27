@@ -63,6 +63,17 @@ func canBeThrown():
 		State.DESTROYING: return false
 		State.THROWN: return false
 
+func canBePushed():
+	
+	match currentState:
+		State.FOLLOW: return true
+		State.IDLE: return true
+		State.WANDER: return true
+		State.INITIAL: return true
+		State.CARRYING: return false
+		State.DESTROYING: return false
+		State.THROWN: return false
+
 func onWhistle():
 	match currentState:
 		State.CARRYING:
@@ -208,7 +219,8 @@ func actor_setup():
 	await get_tree().physics_frame
 
 func _physics_process(delta: float) -> void:
-	if global_position.distance_to(player.global_position) < playerDistance:
+	# Push cows out the way of the player if their state allows it
+	if canBePushed() && global_position.distance_to(player.global_position) < playerDistance:
 		global_position = player.global_position + playerDistance * player.global_position.direction_to(global_position)
 	match currentState:
 		State.IDLE:
