@@ -1,8 +1,6 @@
 extends CharacterBody2D
 class_name Throwable
 
-
-
 signal objectFinishThrow( pos, state :Follower.State, thrown)
 
 # Used to ensure the thrown follower updates to this position while hidden
@@ -10,7 +8,6 @@ var follower: CharacterBody2D
 
 var speed :float
 var direction :Vector2
-
 
 @onready
 var timer :Timer = $Timer

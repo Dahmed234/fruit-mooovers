@@ -15,7 +15,10 @@ radius = 1.6298006
 [node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label")]
 collision_layer = 4
 collision_mask = 17
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_jmfn7")
+playerDistance = 50.0
 label = NodePath("Label")
 
 [node name="viewRadius" type="Area2D" parent="."]
@@ -53,10 +56,8 @@ shape = SubResource("CircleShape2D_8j6l1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 1.0
+path_max_distance = 182.0
 avoidance_enabled = true
-radius = 20.0
-avoidance_layers = 0
-debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

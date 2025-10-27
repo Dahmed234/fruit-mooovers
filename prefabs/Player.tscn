@@ -84,6 +84,3 @@ position = Vector2(-42.999996, 108)
 scale = Vector2(5.6704693, 5.6704693)
 navigation_polygon = SubResource("NavigationPolygon_glu7e")
 navigation_layers = 2
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 30.8

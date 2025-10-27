@@ -8,6 +8,8 @@ signal carryDropped(item: ItemData)
 
 var carryingItem :StaticBody2D = null
 
+@export
+var playerDistance: float
 
 @export
 var BASESPEED = 20000
@@ -91,6 +93,14 @@ func startInitial():
 func startThrown():
 	currentState = State.THROWN
 
+func getClosest(objs):
+	var closest = null 
+	var closest_distance = 100000000 
+	for obj in objs:
+		if obj.global_position.distance_to(global_position) < closest_distance:
+			closest = obj
+			closest_distance = obj.global_position.distance_to(global_position)
+	return closest
 # Run the initial logic for the given state
 func initState():
 	match currentState:
@@ -107,12 +117,13 @@ func initState():
 			
 			if(!nearbyCarryable.is_empty()):
 				#print("Start carrying") 
-				var obtainedItem :Carryable = nearbyCarryable.pop_back().get_parent()
+				
+				var obtainedItem :Carryable = getClosest(nearbyCarryable).get_parent()#.pop_back().get_parent()
 				carryingItem = obtainedItem
 				startCarry(obtainedItem)
 			elif !nearbyDestroyable.is_empty():
 				#print("Start destroying")
-				var obtainedItem :Destroyable = nearbyDestroyable.pop_back().get_parent()
+				var obtainedItem :Destroyable = getClosest(nearbyDestroyable).get_parent()
 				carryingItem = obtainedItem
 				startDestroy(obtainedItem)
 			else:
@@ -148,6 +159,8 @@ func startCarry(item : Carryable) -> void:
 	currentSprite.region_enabled = newSprite.region_enabled
 	currentSprite.transform = newSprite.transform
 	
+	navigation_agent_2d.avoidance_mask = 0
+	
 	carryingItem = item
 	
 	# Ensure the follower snaps to the item so it doesn't move when picked up
@@ -170,6 +183,8 @@ func startDestroy(item: Destroyable) -> void:
 	label.position.y = 10.0 + ITEM_HEIGHT
 	item.onPickup(self)
 	
+	navigation_agent_2d.avoidance_mask = 0
+	
 	if item.followersCarrying.size() > 1:
 		hide()
 
@@ -181,6 +196,9 @@ func stopCarrying():
 	velocity = Vector2.ZERO
 	carryingItem.onDrop(self)
 	carryingItem = null
+	
+	navigation_agent_2d.avoidance_mask = 1
+	
 	show()
 	startWander()
 
@@ -190,6 +208,8 @@ func actor_setup():
 	await get_tree().physics_frame
 
 func _physics_process(delta: float) -> void:
+	if global_position.distance_to(player.global_position) < playerDistance:
+		global_position = player.global_position + playerDistance * player.global_position.direction_to(global_position)
 	match currentState:
 		State.IDLE:
 			label.hide()

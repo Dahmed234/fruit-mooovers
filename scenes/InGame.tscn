@@ -105,7 +105,7 @@ shape = SubResource("RectangleShape2D_tbgi4")
 [node name="small item" parent="." instance=ExtResource("10_iqf54")]
 position = Vector2(278, 248)
 value = 5
-followerValue = 10
+followerValue = 200
 weight = 1.0
 
 [node name="small item2" parent="." instance=ExtResource("10_iqf54")]
