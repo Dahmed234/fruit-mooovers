@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+# TODO: fix removing tile on destruction and maybe make minnumber of cows required to break wall?
+
 class_name Destroyable
 @export
 # The tilemap position of this tile

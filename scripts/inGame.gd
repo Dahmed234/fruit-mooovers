@@ -55,7 +55,6 @@ func spawnFollower(position, state :Follower.State):
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal
 	newFollower.player = player
-	#newFollower.destructableWalls = destructableWalls
 	
 	$"NavigationRegion2D".add_child(newFollower)
 	

@@ -106,7 +106,7 @@ func startThrown():
 
 func getClosest(objs):
 	var closest = null 
-	var closest_distance = 100000000 
+	var closest_distance = 100000000.0
 	for obj in objs:
 		if obj.global_position.distance_to(global_position) < closest_distance:
 			closest = obj
