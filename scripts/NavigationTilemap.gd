@@ -8,14 +8,46 @@ var is_changed = false
 @onready var low_walls: TileMapLayer = $"../Low Walls"
 @onready var destructible_walls: TileMapLayer = $"../Destructible walls"
 @onready var high_walls: TileMapLayer = $"../High Walls"
+
+# Load plant layers, spawn item spawners here
+@onready var small_plants: TileMapLayer = $"../Small Plants"
+@onready var medium_plants: TileMapLayer = $"../Medium Plants"
+@onready var big_plants: TileMapLayer = $"../Big Plants"
+
+# Objects to spawn in over tilemap
 @export var wall: PackedScene
 @export var destructableItem: PackedScene
+@export var plantSpawner: PackedScene
+
+const PLANT_STATS = {
+	small	= [100,2,1],
+	medium	= [500,5,5],
+	large	= [1000,10,20]
+}
+
+func makePlantSpawner(size: String,coords: Vector2i):
+	var n_spawner = plantSpawner.instantiate()
+	n_spawner.global_position = to_global(map_to_local(coords))
+	n_spawner.value = PLANT_STATS[size][0]
+	n_spawner.followerValue = PLANT_STATS[size][1]
+	n_spawner.weight = PLANT_STATS[size][2]
+	get_parent().get_parent().add_child(n_spawner)
 
 var first_time = true
 #@export var navPolygon: NavigationPolygon
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
-	
+	for layer in [small_plants,medium_plants,big_plants]:
+		if coords in layer.get_used_cells_by_id(1):
+			if first_time:
+				
+				
+				#Set the "throwables" collision layer to true if this is a high wall
+				match (layer):
+					small_plants: 	makePlantSpawner("small",coords)
+					medium_plants:	makePlantSpawner("medium",coords)
+					big_plants:		makePlantSpawner("large",coords)
+				
 	# Check if any of the wall layers overlap with this tile
 	for layer in [low_walls,high_walls]:
 		if coords in layer.get_used_cells_by_id(1):
@@ -39,6 +71,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 			get_parent().get_parent().add_wall(n_wall)
 		is_changed = true
 		return true
+	
 	return false
 
 func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:

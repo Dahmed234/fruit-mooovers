@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://b17ndhc5lvlg3"]
+[gd_scene load_steps=21 format=4 uid="uid://b17ndhc5lvlg3"]
 
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_fxorh"]
 [ext_resource type="TileSet" uid="uid://dx6rt5xlniow7" path="res://TileMap/tile_map.tres" id="1_iuou0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://j73yscnlrdfm" path="res://scripts/NavigationTilemap.gd" id="3_st1qi"]
 [ext_resource type="PackedScene" uid="uid://diccdddr7oddb" path="res://prefabs/Wall.tscn" id="4_2n14h"]
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://prefabs/DestructableItem.tscn" id="5_mcxtf"]
+[ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://prefabs/plant_spawner.tscn" id="7_xsnmi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_st1qi"]
 texture = ExtResource("2_st1qi")
@@ -8742,6 +8743,7 @@ navigation_enabled = false
 script = ExtResource("3_st1qi")
 wall = ExtResource("4_2n14h")
 destructableItem = ExtResource("5_mcxtf")
+plantSpawner = ExtResource("7_xsnmi")
 
 [node name="Low Walls" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -8759,4 +8761,22 @@ navigation_enabled = false
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD+//r/AQAEABIAAAD+//v/AQAEABIAAAD+//z/AQAEABIAAAD+//3/AQAEABIAAAD+//7/AQAEABIAAAD+////AQAEABIAAAD+/wAAAQAEABIAAAD+/wEAAQAEABIAAAD+/wIAAQAEABIAAAA=")
 tile_set = SubResource("TileSet_lguv4")
+navigation_enabled = false
+
+[node name="Small Plants" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAABAPb/AQANAAYAAAAFAAQAAQANAAYAAAA=")
+tile_set = SubResource("TileSet_mxvs2")
+navigation_enabled = false
+
+[node name="Medium Plants" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAPAAAAAQAOAAYAAAAPAP//AQAOAAYAAAAPAP7/AQAOAAYAAAAPAP3/AQAOAAYAAAA=")
+tile_set = SubResource("TileSet_mxvs2")
+navigation_enabled = false
+
+[node name="Big Plants" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAKAPn/AQAPAAYAAAABAAMAAQAPAAYAAAA=")
+tile_set = SubResource("TileSet_mxvs2")
 navigation_enabled = false
