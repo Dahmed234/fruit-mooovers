@@ -40,7 +40,6 @@ func onDrop(carrying: CharacterBody2D):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))
-	print("I am an item",value,weight,global_position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

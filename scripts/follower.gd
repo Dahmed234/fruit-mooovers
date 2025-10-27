@@ -58,6 +58,12 @@ enum State {
 	THROWN
 }
 
+# Is the follower in the player's throw radius?
+func inThrowRange():
+	if !player.throwRadius.throwables: return false
+	return self in player.throwRadius.throwables
+
+# Is the follower in a valid state to be thrown, or in the player's throw radius
 func canBeThrown():
 	
 	match currentState:
@@ -168,8 +174,7 @@ func _ready() -> void:
 func startCarry(item : Carryable) -> void:
 	$heldItem.show()
 	label.show()
-	if carryingItem.followersCarrying.size() > 1:
-		hide()
+	
 	#setup sprite
 	currentState = State.CARRYING
 	var currentSprite = $heldItem/Sprite
@@ -189,6 +194,8 @@ func startCarry(item : Carryable) -> void:
 	
 	item.onPickup(self)
 	
+	if item.followersCarrying.size() > 1:
+		hide()
 	
 	
 	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
@@ -233,6 +240,8 @@ func actor_setup():
 	await get_tree().physics_frame
 
 func _physics_process(delta: float) -> void:
+	modulate.a = 1
+	if canBeThrown(): modulate.a = 1.0 if inThrowRange() else 0.6
 	# Push cows out the way of the player if their state allows it
 	if canBePushed() && global_position.distance_to(player.global_position) < playerDistance:
 		global_position = player.global_position + playerDistance * player.global_position.direction_to(global_position)
@@ -266,7 +275,6 @@ func _physics_process(delta: float) -> void:
 			#if navigation_agent_2d.is_target_reached():
 			#	startIdle()
 			#else:
-				
 
 	move_and_slide()
 

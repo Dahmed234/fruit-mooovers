@@ -98,4 +98,6 @@ func _process(delta: float) -> void:
 	Time: " + getTime()
 
 func _ready():
-	get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom
+	#get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom
+	# Sort out dynamic UI placement to handle window size changing
+	initialWindowSize = get_viewport().get_visible_rect().size
