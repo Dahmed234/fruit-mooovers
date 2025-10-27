@@ -8,6 +8,8 @@ signal carryDropped(item: ItemData)
 
 var carryingItem :StaticBody2D = null
 
+
+# The bubble around the player that followers are pushed out of
 @export
 var playerDistance: float
 
@@ -16,6 +18,10 @@ var BASESPEED = 20000
 
 @export
 var label: Label
+
+# How far followers can wander from the player
+@export
+var wanderDistance: float
 
 var goal: Sprite2D
 var player: CharacterBody2D 
@@ -28,7 +34,7 @@ var SPEEDVARIANCE = 40
 var TIMERLENGTH =0.5
 var TIMERVARIANCE =0.1
 
-#
+# Direction of wandering
 var direction := Vector2.ONE
 
 # How detectible are followers to enemy units
@@ -94,14 +100,17 @@ static func newFollower(pos,startingState: State):
 	return follower
 
 func startWander():
+	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
 	currentState = State.WANDER
 	on_timeout()
 
 func startInitial():
 	currentState = State.INITIAL
+	show()
 	initState()
 
 func startThrown():
+	hide()
 	currentState = State.THROWN
 
 func getClosest(objs):
@@ -115,7 +124,7 @@ func getClosest(objs):
 # Run the initial logic for the given state
 func initState():
 	match currentState:
-		# decide what to do based on surroundings
+		# decide what to do based on surroundings when landing from a throw
 		State.INITIAL:
 			
 			#test to see if items are nearby
@@ -127,13 +136,10 @@ func initState():
 			nearbyDestroyable = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
 			
 			if(!nearbyCarryable.is_empty()):
-				#print("Start carrying") 
-				
 				var obtainedItem :Carryable = getClosest(nearbyCarryable).get_parent()#.pop_back().get_parent()
 				carryingItem = obtainedItem
 				startCarry(obtainedItem)
 			elif !nearbyDestroyable.is_empty():
-				#print("Start destroying")
 				var obtainedItem :Destroyable = getClosest(nearbyDestroyable).get_parent()
 				carryingItem = obtainedItem
 				startDestroy(obtainedItem)
@@ -161,6 +167,9 @@ func _ready() -> void:
 
 func startCarry(item : Carryable) -> void:
 	$heldItem.show()
+	label.show()
+	if carryingItem.followersCarrying.size() > 1:
+		hide()
 	#setup sprite
 	currentState = State.CARRYING
 	var currentSprite = $heldItem/Sprite
@@ -180,37 +189,42 @@ func startCarry(item : Carryable) -> void:
 	
 	item.onPickup(self)
 	
-	if carryingItem.followersCarrying.size() > 1:
-		hide()
+	
 	
 	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
 	# navigate to goal flag
 	navigation_agent_2d.target_position = goal.global_position
 
 func startDestroy(item: Destroyable) -> void:
+	# Show the label
+	label.show()
+	if item.followersCarrying.size() > 1:
+		hide()
+	
 	currentState = State.DESTROYING
 	# Ensure the follower snaps above the item so it doesn't move when destroying it
 	global_position = item.global_position - Vector2(0.0,ITEM_HEIGHT)
 	label.position.y = 10.0 + ITEM_HEIGHT
 	item.onPickup(self)
 	
+	# Disable collision with other followers
 	navigation_agent_2d.avoidance_mask = 0
 	
-	if item.followersCarrying.size() > 1:
-		hide()
+	
 
 func startThrow():
 	pass
 
 func stopCarrying():
+	show()
 	$heldItem.hide()
+	label.hide()
 	velocity = Vector2.ZERO
 	carryingItem.onDrop(self)
 	carryingItem = null
 	
 	navigation_agent_2d.avoidance_mask = 1
 	
-	show()
 	startWander()
 
 
@@ -224,19 +238,14 @@ func _physics_process(delta: float) -> void:
 		global_position = player.global_position + playerDistance * player.global_position.direction_to(global_position)
 	match currentState:
 		State.IDLE:
-			label.hide()
-			
 			# triggers if follower is close enough to an area on a specific layer
 			# uses specific collision layer to only detect player follower
 			if(!$viewRadius.has_overlapping_areas()) :
 				startFollow()
 
 		State.WANDER:
-			label.hide()
-			velocity = velocity.slerp(0.4* delta * currentspeed * direction, 0.1) 
-
+			velocity = 0.1* delta * currentspeed * direction#velocity.slerp(0.4* delta * currentspeed * direction, 0.1)
 		State.CARRYING:
-			label.show()
 			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
 			if navigation_agent_2d.is_target_reached():
 				var tmp = carryingItem
@@ -248,7 +257,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				navigate_to_target(delta)
 		State.DESTROYING:
-			label.show()
 			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
 			global_position = carryingItem.global_position - Vector2(0.0,ITEM_HEIGHT)
 			
@@ -275,12 +283,13 @@ func startFollow():
 	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
 
 func endWander():
-	direction= Vector2.ZERO
+	direction= Vector2.ONE
+	velocity = Vector2.ZERO
 	timer.stop()
-	
 
 #used for wander, picks random direction for character to wander to next
 func on_timeout() -> void:
+	direction = direction.normalized()
 	#pick a random direction
 	var oldDirection := Vector2(direction)
 	
@@ -288,7 +297,12 @@ func on_timeout() -> void:
 	direction.y = randf_range(-1,1)
 	direction = direction.normalized()
 	
-	direction.lerp(oldDirection, randf())	
+	direction.lerp(oldDirection, randf())
+	
+	# Set direction to point to the player if the follower is too far away
+	if global_position.distance_to(player.global_position) > wanderDistance: 
+		direction = global_position.direction_to(player.global_position)
+	
 	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
 		#start timer again
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
@@ -296,7 +310,7 @@ func on_timeout() -> void:
 # Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func navigate_to_target(delta: float) -> void:
 	var local_velocity: float
-	if carryingItem == null:
+	if !carryingItem:
 		local_velocity = 1.0 
 	else:
 		if carryingItem.followersCarrying.size() >= carryingItem.weight:
@@ -312,7 +326,7 @@ func navigate_to_target(delta: float) -> void:
 	#print(current_agent_position.direction_to(next_path_position),current_agent_position,next_path_position)
 	
 	# Get the vector moving towards the next path position
-	var new_velocity = local_velocity * BASESPEED * delta * current_agent_position.direction_to(next_path_position)
+	var new_velocity = local_velocity * currentspeed * delta * current_agent_position.direction_to(next_path_position)
 	
 	
 	# Logic for when the enemy reaches the player (i.e. attack them)

@@ -39,12 +39,15 @@ func _physics_process(delta: float) -> void:
 	
 	follower.global_position = global_position
 	if (move_and_collide(velocity * delta)):
-		delete(Follower.State.FOLLOW)
+		follower.startInitial()
+		queue_free()
+		#delete(Follower.State.FOLLOW)
 	
 
 
 func _on_timer_timeout() -> void:
-	delete(Follower.State.WANDER)
+	#delete(Follower.State.WANDER)
+	follower.startInitial()
 	queue_free()
 	pass # Replace with function body.
 

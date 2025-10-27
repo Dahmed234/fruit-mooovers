@@ -20,6 +20,7 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_jmfn7")
 playerDistance = 50.0
 label = NodePath("Label")
+wanderDistance = 500.0
 
 [node name="viewRadius" type="Area2D" parent="."]
 position = Vector2(-0.25, -0.25)

@@ -9,7 +9,7 @@ var gameOver: Node2D
 
 @export
 # Day length in seconds
-var day_length := 100000.0
+var day_length := 60.0
 
 @export
 # Amount of points needed per day to continue
@@ -24,6 +24,8 @@ var isAmPm: bool = true
 var score := 0
 var totalScore := 0
 var cowScore := 1
+
+var initialWindowSize: Vector2
 
 # The current day, updates every time 24 in game hours pass
 var day := 0
@@ -94,3 +96,6 @@ func _process(delta: float) -> void:
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
 	Day: " + str(day+1) + "
 	Time: " + getTime()
+
+func _ready():
+	get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom
