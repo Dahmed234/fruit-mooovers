@@ -264,7 +264,7 @@ func _physics_process(delta: float) -> void:
 				carryFinished.emit(tmp,position)
 		
 			else:
-				#navigation_agent_2d.target_position = goal.global_position
+				navigation_agent_2d.target_position = goal.global_position
 				navigate_to_target(delta)
 		State.DESTROYING:
 			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))

@@ -47,18 +47,8 @@ tile_map_data = PackedByteArray("AAD+//3/AAAAAAEAAAD///3/AAAAAAEAAAABAP3/AAAAAAE
 tile_set = ExtResource("1_iuou0")
 navigation_enabled = false
 
-[node name="Small Plants" type="TileMapLayer" parent="."]
+[node name="Plants" type="TileMapLayer" parent="."]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAACAP7/AAANAAYAAAAFAPv/AAANAAYAAAAGAPv/AAANAAYAAAA=")
-tile_set = ExtResource("1_iuou0")
-navigation_enabled = false
-
-[node name="Medium Plants" type="TileMapLayer" parent="."]
-texture_filter = 1
-tile_set = ExtResource("1_iuou0")
-navigation_enabled = false
-
-[node name="Big Plants" type="TileMapLayer" parent="."]
-texture_filter = 1
+tile_map_data = PackedByteArray("AAACAP7/AAANAAYAAAAFAPv/AAANAAYAAAAGAPv/AAANAAYAAAACAPr/AAAOAAYAAAABAPr/AAAPAAYAAAAAAPr/AAAQAAYAAAA=")
 tile_set = ExtResource("1_iuou0")
 navigation_enabled = false
