@@ -14,6 +14,7 @@
 vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-911, -942, 3160, -1161, 3140, 1322, -964, 1510)])
+sample_partition_type = 1
 parsed_geometry_type = 1
 
 [node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player", "destructableWalls")]
