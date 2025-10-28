@@ -325,6 +325,9 @@ func navigate_to_target(delta: float) -> void:
 			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
 			# How many cows are used
 			local_velocity = 0.2 * min(2.0,carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
+		else:
+			# Give visual indicator that item is too heavy
+			pass
 	# Store the current position of the enemy in [current_agent_position]
 	var current_agent_position = global_position
 	

@@ -50,9 +50,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if time > lifespan:
 		destroy()
-	else:
+	elif followersCarrying.size() >= weight:
 		time += delta * min(2.0,followersCarrying.size() / weight / 2.0)
-
+	else:
+		# do some animation to show nothing is happening
+		pass
 func destroy():
 	tileMap.set_cell(tilePos,1)
 	navMap.notify_runtime_tile_data_update()
