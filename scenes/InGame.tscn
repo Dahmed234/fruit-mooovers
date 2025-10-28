@@ -79,7 +79,7 @@ position = Vector2(544, 329)
 speed = 8000.0
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
-position = Vector2(702, 327)
+position = Vector2(697, 317)
 
 [connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
 [connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]

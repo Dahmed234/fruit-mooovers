@@ -26,8 +26,7 @@ const PLANT_STATS = {
 }
 
 func _ready() -> void:
-	notify_runtime_tile_data_update()
-
+	pass
 func makePlantSpawner(size: String,coords: Vector2i):
 	var n_spawner = plantSpawner.instantiate()
 	n_spawner.global_position = to_global(map_to_local(coords))
@@ -41,6 +40,7 @@ var first_time = true
 func tiledataUpdate(coords,id):
 	for layer in [small_plants,medium_plants,big_plants]:
 		if coords in layer.get_used_cells_by_id(id):
+			
 			if first_time:
 				
 				
@@ -64,12 +64,17 @@ func tiledataUpdate(coords,id):
 			is_changed = true
 			return true
 	if coords in destructible_walls.get_used_cells_by_id(id):
+		
 		if first_time:
+			# If this breaks, it means weight is undefined for the destructible_walls layer
+			var weight = destructible_walls.get_cell_tile_data(coords).get_custom_data("Weight")
+			if !weight: return false
 			var n_wall = destructableItem.instantiate()
 			n_wall.global_position = to_global(map_to_local(coords))
 			n_wall.tilePos = coords
 			n_wall.tileMap = destructible_walls
 			n_wall.navMap = self
+			n_wall.weight = weight
 			get_parent().get_parent().add_wall(n_wall)
 		is_changed = true
 		return true
@@ -78,7 +83,6 @@ func tiledataUpdate(coords,id):
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	tiledataUpdate(coords,0)
-	tiledataUpdate(coords,1)
 	
 	return false
 
