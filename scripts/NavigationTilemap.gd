@@ -29,7 +29,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 		if coords in layer.get_used_cells_by_id(0):
 			if first_time:
 				match layer:
-					[low_walls,high_walls]:
+					low_walls,high_walls:
 						var n_wall = wall.instantiate()
 						n_wall.global_position = to_global(map_to_local(coords))
 						

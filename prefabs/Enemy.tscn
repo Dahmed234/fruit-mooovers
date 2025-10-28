@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://8y7gjhthiwsc"]
 
 [ext_resource type="Script" uid="uid://dbej3dlanmprm" path="res://scripts/Enemy.gd" id="1_duu5m"]
-[ext_resource type="Texture2D" uid="uid://bejl2jhtyf7lx" path="res://assets/kenney_monochrome-pirates/Monochrome/Tiles/tile_0127.png" id="2_guto7"]
+[ext_resource type="Texture2D" uid="uid://cavic3xfatt3s" path="res://assets/UFO.png" id="2_duu5m"]
 [ext_resource type="PackedScene" uid="uid://cj02omnvywqlk" path="res://prefabs/CircleLight.tscn" id="3_2hac7"]
 [ext_resource type="PackedScene" uid="uid://1b0407sitqmb" path="res://prefabs/ConeLight.tscn" id="4_duu5m"]
 
@@ -17,7 +17,7 @@ cone_light = NodePath("Cone light")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_guto7")
+texture = ExtResource("2_duu5m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_kne1u")
