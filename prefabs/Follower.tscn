@@ -59,7 +59,6 @@ shape = SubResource("CircleShape2D_8j6l1")
 path_desired_distance = 1.0
 path_max_distance = 182.0
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

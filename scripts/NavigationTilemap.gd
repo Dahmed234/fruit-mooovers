@@ -25,6 +25,9 @@ const PLANT_STATS = {
 	large	= [1000,10,20]
 }
 
+func _ready() -> void:
+	notify_runtime_tile_data_update()
+
 func makePlantSpawner(size: String,coords: Vector2i):
 	var n_spawner = plantSpawner.instantiate()
 	n_spawner.global_position = to_global(map_to_local(coords))
@@ -34,11 +37,10 @@ func makePlantSpawner(size: String,coords: Vector2i):
 	get_parent().get_parent().add_child(n_spawner)
 
 var first_time = true
-#@export var navPolygon: NavigationPolygon
-# Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
-func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+
+func tiledataUpdate(coords,id):
 	for layer in [small_plants,medium_plants,big_plants]:
-		if coords in layer.get_used_cells_by_id(1):
+		if coords in layer.get_used_cells_by_id(id):
 			if first_time:
 				
 				
@@ -50,18 +52,18 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 				
 	# Check if any of the wall layers overlap with this tile
 	for layer in [low_walls,high_walls]:
-		if coords in layer.get_used_cells_by_id(1):
+		if coords in layer.get_used_cells_by_id(id):
 			if first_time:
 				var n_wall = wall.instantiate()
 				n_wall.global_position = to_global(map_to_local(coords))
 				
 				#Set the "throwables" collision layer to true if this is a high wall
-				if layer == high_walls:  n_wall.collision_layer += 2
+				if layer == high_walls:  n_wall.collision_layer += 2 
 				
 				get_parent().get_parent().add_wall(n_wall)
 			is_changed = true
 			return true
-	if coords in destructible_walls.get_used_cells_by_id(1):
+	if coords in destructible_walls.get_used_cells_by_id(id):
 		if first_time:
 			var n_wall = destructableItem.instantiate()
 			n_wall.global_position = to_global(map_to_local(coords))
@@ -71,6 +73,12 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 			get_parent().get_parent().add_wall(n_wall)
 		is_changed = true
 		return true
+
+#@export var navPolygon: NavigationPolygon
+# Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
+func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+	tiledataUpdate(coords,0)
+	tiledataUpdate(coords,1)
 	
 	return false
 
