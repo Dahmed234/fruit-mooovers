@@ -42,7 +42,7 @@ var at_patrol_target = true
 func _ready() -> void:
 	pass
 
-func destroy() -> void:
+func die() -> void:
 	hide()
 
 func get_best_target() -> CharacterBody2D:

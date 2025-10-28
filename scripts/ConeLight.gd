@@ -66,7 +66,10 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
 	
+	# Set the target as in the area and being chased
 	in_area[other_shape_node.get_parent().get_parent()] = true
+	other_shape_node.get_parent().get_parent().chasing[self] = true
+	
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	# Handles case of follower being thrown while in area

@@ -67,9 +67,8 @@ root = NodePath("../../..")
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
 position = Vector2(952, -55)
-scale = Vector2(1, 1)
 path_length = 3
-node_distance = 400.0
+node_distance = 100.0
 enemy_count = 1
 path_angle = 0.785
 target = {

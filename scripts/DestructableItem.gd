@@ -37,12 +37,10 @@ func getSpriteInfo() -> Sprite2D:
 
 func onPickup(carrying: CharacterBody2D):
 	followersCarrying[carrying] = true
-	hide()
 
 
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
-	show()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))
@@ -51,6 +49,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	label.text = str(int(followersCarrying.size())) + "/" + str(int(weight))
+	
 	if time > lifespan:
 		destroy()
 	elif followersCarrying.size() >= weight:
@@ -64,7 +64,7 @@ func destroy():
 	
 	# Logic for if is enemy / tile
 	if isEnemy:
-		get_parent().destroy()
+		get_parent().die()
 	else:
 		tileMap.set_cell(tilePos,1)
 		navMap.notify_runtime_tile_data_update()

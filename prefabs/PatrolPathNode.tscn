@@ -1,9 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://dubxgy63fric7"]
 
-[ext_resource type="Texture2D" uid="uid://d37hfxn8a53hw" path="res://icon.svg" id="1_x2ihc"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_1yjo1"]
 
 [node name="Patrol path node" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.115, 0.115)
-texture = ExtResource("1_x2ihc")
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_1yjo1")
+region_enabled = true
+region_rect = Rect2(352, 64, 16, 16)

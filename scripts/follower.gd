@@ -44,6 +44,11 @@ const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
 
+var chasing: Dictionary[CharacterBody2D,bool] = {}
+
+# When reaches 0, die
+@export var health : float
+
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d := $NavigationAgent2D
 
@@ -65,32 +70,23 @@ func inThrowRange():
 
 # Is the follower in a valid state to be thrown, or in the player's throw radius
 func canBeThrown():
-	
 	match currentState:
-		State.FOLLOW: return true
-		State.IDLE: return true
-		State.WANDER: return true
-		State.INITIAL: return false
-		State.CARRYING: return false
-		State.DESTROYING: return false
-		State.THROWN: return false
+		State.FOLLOW,State.IDLE,State.WANDER: 
+			return true
+		_: 
+			return false
 
 func canBePushed():
 	
 	match currentState:
-		State.FOLLOW: return true
-		State.IDLE: return true
-		State.WANDER: return true
-		State.INITIAL: return true
-		State.CARRYING: return false
-		State.DESTROYING: return false
-		State.THROWN: return false
+		State.FOLLOW,State.IDLE,State.WANDER,State.INITIAL:
+			return true
+		_: 
+			return false
 
 func onWhistle():
 	match currentState:
-		State.CARRYING:
-			stopCarrying()
-		State.DESTROYING:
+		State.CARRYING,State.DESTROYING:
 			stopCarrying()
 		State.WANDER:
 			endWander()
@@ -104,6 +100,23 @@ static func newFollower(pos,startingState: State):
 	follower.global_position = pos
 	# Add follower to the enemy target list
 	return follower
+
+func die() -> void:
+	match currentState:
+		State.DESTROYING,State.CARRYING:
+			stopCarrying()
+		_:
+			# any logic for othjer states?
+			pass
+	# remove this follower from list of enemies chasing it
+	for enemy in chasing:
+		if !chasing[enemy]: continue
+		enemy.conelight.targets.erase(self)
+		enemy.conelight.in_area.erase(self)
+		
+	print("follower died")
+	hide()
+	
 
 func startWander():
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
@@ -203,21 +216,18 @@ func startCarry(item : Carryable) -> void:
 	navigation_agent_2d.target_position = goal.global_position
 
 func startDestroy(item: Destroyable) -> void:
+	label.hide()
 	# Show the label
-	label.show()
 	if item.followersCarrying.size() > 1:
 		hide()
 	
 	currentState = State.DESTROYING
 	# Ensure the follower snaps above the item so it doesn't move when destroying it
 	global_position = item.global_position - Vector2(0.0,ITEM_HEIGHT)
-	label.position.y = 10.0 + ITEM_HEIGHT
 	item.onPickup(self)
 	
 	# Disable collision with other followers
 	navigation_agent_2d.avoidance_mask = 0
-	
-	
 
 func startThrow():
 	pass
@@ -240,6 +250,7 @@ func actor_setup():
 	await get_tree().physics_frame
 
 func _physics_process(delta: float) -> void:
+	if health <= 0: die()
 	modulate.a = 1
 	if canBeThrown(): modulate.a = 1.0 if inThrowRange() else 0.6
 	# Push cows out the way of the player if their state allows it
@@ -267,7 +278,6 @@ func _physics_process(delta: float) -> void:
 				navigation_agent_2d.target_position = goal.global_position
 				navigate_to_target(delta)
 		State.DESTROYING:
-			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
 			global_position = carryingItem.global_position - Vector2(0.0,ITEM_HEIGHT)
 			
 		State.FOLLOW:
