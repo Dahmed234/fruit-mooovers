@@ -37,7 +37,6 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						if layer == high_walls:  n_wall.collision_layer += 2 
 						
 						get_parent().get_parent().add_wall(n_wall)
-						is_changed = true
 						
 					plants:
 						var n_spawner = plantSpawner.instantiate()
@@ -62,7 +61,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_wall.navMap = self
 						n_wall.weight = weight
 						get_parent().get_parent().add_wall(n_wall)
-						is_changed = true
+	is_changed = true
 	
 	return false
 

@@ -10,6 +10,8 @@ var tilePos: Vector2i
 @export var tileMap: TileMapLayer# = $"Destructible walls"
 @export var navMap: TileMapLayer# = $Ground
 
+@export var isEnemy := false
+
 @export
 var lifespan := 5.0
 var time := 0.0
@@ -44,6 +46,7 @@ func onDrop(carrying: CharacterBody2D):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))
+	if isEnemy: $CollisionShape2D.disabled = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,12 +58,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		# do some animation to show nothing is happening
 		pass
-func destroy():
-	tileMap.set_cell(tilePos,1)
-	navMap.notify_runtime_tile_data_update()
 	
+
+func destroy():
+	
+	# Logic for if is enemy / tile
+	if isEnemy:
+		get_parent().destroy()
+	else:
+		tileMap.set_cell(tilePos,1)
+		navMap.notify_runtime_tile_data_update()
 	
 	for cow in followersCarrying.keys():
 		cow.stopCarrying()
+	
 	
 	queue_free()
