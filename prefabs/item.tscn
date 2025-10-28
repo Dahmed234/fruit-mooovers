@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="2_p364l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
-radius = 55.081757
+radius = 32.0
 
 [node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
 script = ExtResource("1_lopi8")

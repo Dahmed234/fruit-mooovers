@@ -6,11 +6,10 @@ class_name Destroyable
 @export
 # The tilemap position of this tile
 var tilePos: Vector2i
-# The tilemap layer we are looking at
-@export
-var tileMap: TileMapLayer
-@export
-var navMap: TileMapLayer
+# The tilemap layer we are looking at (destructable walls layer
+@export var tileMap: TileMapLayer# = $"Destructible walls"
+@export var navMap: TileMapLayer# = $Ground
+
 @export
 var lifespan := 5.0
 var time := 0.0
@@ -35,16 +34,12 @@ func getSpriteInfo() -> Sprite2D:
 	return $Sprite2D
 
 func onPickup(carrying: CharacterBody2D):
-	if followersCarrying.is_empty():
-		$CollisionShape2D.disabled = true
 	followersCarrying[carrying] = true
 	hide()
 
 
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
-	if followersCarrying.is_empty():
-		$CollisionShape2D.disabled = false
 	show()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scripts/DestructableItem.gd" id="1_3hrdc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
-radius = 55.081757
+radius = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hrdc"]
 size = Vector2(64, 64)
@@ -20,11 +20,9 @@ collision_layer = 17
 collision_mask = 17
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource("CircleShape2D_tbgi4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.25, 0.25)
 shape = SubResource("RectangleShape2D_3hrdc")
 
 [node name="Label" type="Label" parent="."]

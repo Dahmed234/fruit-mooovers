@@ -11,9 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
-vertices = PackedVector2Array(1829.1094, -437.21875, 1842.8828, 761.7969, -154.32031, 724.1719, -194.64844, -483.75)
+vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-205, -494, 1839, -447, 1853, 772, -164, 734)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-911, -942, 3160, -1161, 3140, 1322, -964, 1510)])
 parsed_geometry_type = 1
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
@@ -103,7 +103,9 @@ navigation_layers = 4
 position = Vector2(0.75, 1.25)
 shape = SubResource("RectangleShape2D_tbgi4")
 
+[connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
 [connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
+[editable path="TileMap"]
 [editable path="Player"]
