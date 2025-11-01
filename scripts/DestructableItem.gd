@@ -1,8 +1,13 @@
 extends StaticBody2D
 
-# TODO: fix removing tile on destruction and maybe make minnumber of cows required to break wall?
+
 
 class_name Destroyable
+
+# Used to get the follower that should be damaged when hit by enemy
+var main_follower = null
+
+
 @export
 # The tilemap position of this tile
 var tilePos: Vector2i
@@ -39,12 +44,16 @@ func onPickup(carrying: CharacterBody2D):
 	followersCarrying[carrying] = true
 
 
-func dropAll():
+func dropAll(dead):
 	for cow in followersCarrying:
 		cow.stopCarrying()
+		
+	followersCarrying.erase(dead)
 
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
+	main_follower = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))

@@ -49,6 +49,9 @@ var shoot_time := 0.0
 # Damage dealt per second of being hit by laser
 var damage := 50.0
 
+@export 
+var range := 50.0
+
 # How long the enemy has seen the player
 var alert_level := 0.0
 
@@ -179,10 +182,11 @@ func update_target(delta: float) -> void:
 			if !best_target:
 				current_state = State.IDLE 
 				return
-			
-			shoot(best_target,delta)
-			
-			navigation_agent_2d.target_position = best_target.position
+			if global_position.distance_to(best_target.global_position) < range:
+				shoot(best_target,delta)
+				local_speed = 0.0
+			else:
+				navigation_agent_2d.target_position = best_target.position
 		
 		# If the state is invalid, throw an error
 		var other:

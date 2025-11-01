@@ -110,7 +110,16 @@ static func newFollower(pos,startingState: State):
 	return follower
 
 func damage(enemy_damage,delta):
-	health -= delta * enemy_damage
+	match currentState:
+		State.CARRYING, State.DESTROYING:
+			# If the 1st follower to pick up the item is alive, send damage to them
+			if carryingItem.main_follower:
+				carryingItem.main_follower.health -= delta * enemy_damage
+			# Else take damage as normal
+			else:
+				health -= delta * enemy_damage
+		_:
+			health -= delta * enemy_damage
 
 func die() -> void:
 	match currentState:
@@ -129,6 +138,7 @@ func die() -> void:
 	
 
 func startWander():
+	show()
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
 	currentState = State.WANDER
 	on_timeout()
@@ -220,7 +230,8 @@ func startCarry(item : Carryable) -> void:
 	
 	if item.followersCarrying.size() > 1:
 		hide()
-	
+	else:
+		item.main_follower = self
 	
 	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
 	# navigate to goal flag
@@ -231,6 +242,8 @@ func startDestroy(item: Destroyable) -> void:
 	# Show the label
 	if item.followersCarrying.size() > 1:
 		hide()
+	else:
+		item.main_follower = self
 	
 	currentState = State.DESTROYING
 	# Ensure the follower snaps above the item so it doesn't move when destroying it
@@ -253,8 +266,6 @@ func stopCarrying():
 	velocity = Vector2.ZERO
 	carryingItem.onDrop(self)
 	carryingItem = null
-	
-	print("drop!")
 	
 	navigation_agent_2d.avoidance_mask = 1
 	

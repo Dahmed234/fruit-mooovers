@@ -16,6 +16,7 @@ speed = 50000.0
 light_level = 64.0
 cone_light = NodePath("Cone light")
 damage = 20.0
+range = 150.0
 
 [node name="Bar" parent="." instance=ExtResource("2_hgomy")]
 position = Vector2(0, -40)

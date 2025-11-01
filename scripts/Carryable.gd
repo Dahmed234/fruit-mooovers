@@ -19,6 +19,8 @@ var label: Label
 # List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
 var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
 
+var main_follower
+
 #var carrying: CharacterBody2D
 
 func getSpriteInfo() -> Sprite2D:
@@ -34,6 +36,7 @@ func onPickup(carrying: CharacterBody2D):
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
 	if followersCarrying.is_empty():
+		main_follower = null
 		$CollisionShape2D.disabled = false
 		show()
 
@@ -47,7 +50,7 @@ func _process(delta: float) -> void:
 		position = followersCarrying.keys()[0].position
 		
 func dropAll(dead):
-	
+	print(followersCarrying)
 	for cow in followersCarrying:
 		cow.stopCarrying()
 	
