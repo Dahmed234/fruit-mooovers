@@ -5,6 +5,7 @@ const scene :PackedScene = preload("res://prefabs/Follower.tscn")
 
 signal carryFinished(item :Carryable)
 signal carryDropped(item: ItemData)
+signal followerDies(follower)
 
 var carryingItem :StaticBody2D = null
 
@@ -43,6 +44,9 @@ const enemy_weight := 0.2
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
+
+# The object for throwing the cow
+var thrower: CharacterBody2D
 
 var chasing: Dictionary[CharacterBody2D,bool] = {}
 
@@ -108,16 +112,15 @@ func die() -> void:
 	match currentState:
 		State.DESTROYING,State.CARRYING:
 			stopCarrying()
+		State.THROWN:
+			stopThrow()
 		_:
-			# any logic for othjer states?
 			pass
 	# remove this follower from list of enemies chasing it
 	for cone_light in chasing:
 		if !chasing[cone_light]: continue
 		cone_light.clear_target(self)
 		
-	print("follower died")
-	hide()
 	queue_free()
 	
 
@@ -234,6 +237,9 @@ func startDestroy(item: Destroyable) -> void:
 
 func startThrow():
 	pass
+
+func stopThrow():
+	thrower.stopThrow()
 
 func stopCarrying():
 	show()

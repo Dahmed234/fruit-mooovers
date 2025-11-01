@@ -70,6 +70,7 @@ func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
 func onThrowMade(startPosition,mousePosition,follower) ->void:
 	var throw = new_throwable(startPosition,mousePosition)
 	throw.follower = follower
+	follower.thrower= throw
 	follower.hide()
 	follower.startThrown()
 	throw.objectFinishThrow.connect(onThrowFinish)

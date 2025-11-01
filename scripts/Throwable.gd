@@ -42,9 +42,11 @@ func _physics_process(delta: float) -> void:
 		follower.startInitial()
 		queue_free()
 		#delete(Follower.State.FOLLOW)
+
+
+func stopThrow():
+	queue_free()
 	
-
-
 func _on_timer_timeout() -> void:
 	#delete(Follower.State.WANDER)
 	follower.startInitial()

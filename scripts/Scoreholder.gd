@@ -94,7 +94,7 @@ func newDay() -> void:
 func _process(delta: float) -> void:
 	time += delta
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
-	Day: " + str(day+1) + "
+	Day: " + str(day+1) + "a
 	Time: " + getTime()
 
 func _ready():
