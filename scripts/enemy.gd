@@ -7,6 +7,9 @@ extends CharacterBody2D
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 
+var line
+var laser_colour = Color(1,0,0)
+
 const min_alert = 50.0
 const max_alert = 200.0
 
@@ -34,16 +37,52 @@ var idle_time		:= 0.0
 # The speed of movements, is slower when enemy is exploring vs when they're chasing
 var local_speed     := 0.5
 
+# shoot time increases until it reaches cooldown, if it is less than shoot length then display the shot
+var shoot_length := 0.1
+var shoot_cooldown := 0.3
+var shoot_time := 0.0
+# Damage dealt per second of being hit by laser
+var damage := 50.0
+
 # How long the enemy has seen the player
 var alert_level := 0.0
 
 var at_patrol_target = true
 
+
+
 func _ready() -> void:
-	pass
+	# Make a line object used to show laser shooting
+	line = Line2D.new()
+	#line.texture = load("res://assets/dotted line.png")
+	#line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	#line.texture_mode = Line2D.LINE_TEXTURE_TILE
+	#line.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	line.z_index = 1
+	line.width = 8
+	line.modulate = laser_colour
+	line.scale = Vector2.ONE / scale
+	var poolVectorArray : PackedVector2Array = []
+	poolVectorArray.append(Vector2.ZERO)
+	# 2nd point will be moved to point at player
+	poolVectorArray.append(Vector2.ZERO)
+	line.points = poolVectorArray
+	add_child(line)
 
 func die() -> void:
 	hide()
+
+func shoot(target,delta) -> void:
+	shoot_time += delta
+	if shoot_time < shoot_length:
+		line.show()
+		line.points[1] = target.global_position - global_position
+		
+		# Deal damage whenever laser is on the target
+		target.damage(damage,delta)
+	else:
+		line.hide()
+	while shoot_time > shoot_cooldown: shoot_time -= shoot_cooldown
 
 func get_best_target() -> CharacterBody2D:
 	var best = null 
@@ -135,6 +174,9 @@ func update_target(delta: float) -> void:
 			if !best_target:
 				current_state = State.IDLE 
 				return
+			
+			shoot(best_target,delta)
+			
 			navigation_agent_2d.target_position = best_target.position
 		
 		# If the state is invalid, throw an error

@@ -23,6 +23,10 @@ enum State {
 	IDLE 		= 3
 }
 
+func clear_target(target):
+	targets.erase(target)
+	in_area.erase(target)
+
 func mod(a: float, b: float) -> float:
 	var div = int(a/b)
 	var frac = a/b - div

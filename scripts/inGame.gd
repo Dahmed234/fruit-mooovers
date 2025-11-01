@@ -78,4 +78,3 @@ func onThrowMade(startPosition,mousePosition,follower) ->void:
 func onThrowFinish(position :Vector2,state :Follower.State, thrown):
 	thrown.follower.show()
 	thrown.follower.startInitial()
-	#spawnFollower(position, state)

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal playerDies
 
 
 var enemy_weight := 0.2
@@ -14,14 +15,17 @@ var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 @export var health : float
 
+func damage(enemy_damage,delta):
+	health -= delta * enemy_damage
+
 func die() -> void:
 	# remove this follower from list of enemies chasing it
-	for enemy in chasing:
-		if !chasing[enemy]: continue
-		enemy.conelight.targets.erase(self)
-		enemy.conelight.in_area.erase(self)
+	for cone_light in chasing:
+		if !chasing[cone_light]: continue
+		cone_light.clear_target(self)
 		
 	print("you die!")
+	playerDies.emit()
 
 func getThrowPosition():
 	return global_position.direction_to(get_global_mouse_position()) * min(global_position.distance_to(get_global_mouse_position()),throwDistance)

@@ -101,6 +101,9 @@ static func newFollower(pos,startingState: State):
 	# Add follower to the enemy target list
 	return follower
 
+func damage(enemy_damage,delta):
+	health -= delta * enemy_damage
+
 func die() -> void:
 	match currentState:
 		State.DESTROYING,State.CARRYING:
@@ -109,13 +112,13 @@ func die() -> void:
 			# any logic for othjer states?
 			pass
 	# remove this follower from list of enemies chasing it
-	for enemy in chasing:
-		if !chasing[enemy]: continue
-		enemy.conelight.targets.erase(self)
-		enemy.conelight.in_area.erase(self)
+	for cone_light in chasing:
+		if !chasing[cone_light]: continue
+		cone_light.clear_target(self)
 		
 	print("follower died")
 	hide()
+	queue_free()
 	
 
 func startWander():
