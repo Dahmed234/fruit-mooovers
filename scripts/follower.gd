@@ -50,6 +50,10 @@ var thrower: CharacterBody2D
 
 var chasing: Dictionary[CharacterBody2D,bool] = {}
 
+var max_health
+@onready var bar: Node2D = $Bar
+
+
 # When reaches 0, die
 @export var health : float
 
@@ -180,6 +184,7 @@ func initState():
 			startWander()
 
 func _ready() -> void:
+	max_health = health
 	$heldItem/Sprite.texture = null
 	label.hide()
 	
@@ -259,6 +264,7 @@ func actor_setup():
 	await get_tree().physics_frame
 
 func _physics_process(delta: float) -> void:
+	bar.fullness = health / max_health
 	if health <= 0: die()
 	modulate.a = 1
 	if canBeThrown(): modulate.a = 1.0 if inThrowRange() else 0.6

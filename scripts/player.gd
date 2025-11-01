@@ -14,6 +14,11 @@ var enemy_weight := 0.2
 var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 @export var health : float
+var max_health
+@onready var bar: Node2D = $Bar
+
+func _ready():
+	max_health = health
 
 func damage(enemy_damage,delta):
 	health -= delta * enemy_damage
@@ -45,6 +50,7 @@ func move(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	bar.fullness = health / max_health
 	if health <= 0: die()
 	move(delta)
 	
