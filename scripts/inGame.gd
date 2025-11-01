@@ -50,7 +50,7 @@ func add_wall(wall: StaticBody2D):
 	$"NavigationRegion2D".add_child(wall)
 
 func spawnFollower(position, state :Follower.State):
-	var newFollower = Follower.newFollower(position,Follower.State.INITIAL)
+	var newFollower = Follower.newFollower(position,Follower.State.WANDER)
 	newFollower.carryDropped.connect(onCarryDrop)
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal

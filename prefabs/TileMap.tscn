@@ -37,7 +37,7 @@ navigation_enabled = false
 
 [node name="Destructible walls" type="TileMapLayer" parent="."]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAAAP3/AAAGAAIAAAA=")
+tile_map_data = PackedByteArray("AAAAAP3/AAAGAAIAAAACAPj/AAAGAAIAAAAJAPr/AAAGAAIAAAAJAPv/AAAGAAIAAAA=")
 tile_set = ExtResource("1_iuou0")
 navigation_enabled = false
 
@@ -49,6 +49,6 @@ navigation_enabled = false
 
 [node name="Plants" type="TileMapLayer" parent="."]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAACAP7/AAANAAYAAAAFAPv/AAANAAYAAAAGAPv/AAANAAYAAAACAPr/AAAOAAYAAAABAPr/AAAPAAYAAAAAAPr/AAAQAAYAAAA=")
+tile_map_data = PackedByteArray("AAACAP7/AAANAAYAAAAFAPv/AAANAAYAAAAGAPv/AAANAAYAAAACAPr/AAAOAAYAAAABAPr/AAAPAAYAAAAAAPr/AAAQAAYAAAACAP//AAANAAYAAAACAAAAAAANAAYAAAABAPX/AAANAAYAAAAAAPX/AAANAAYAAAAJAP//AAAPAAYAAAAIAP//AAAPAAYAAAAHAAAAAAAPAAYAAAA=")
 tile_set = ExtResource("1_iuou0")
 navigation_enabled = false

@@ -115,7 +115,7 @@ func damage(enemy_damage,delta):
 func die() -> void:
 	match currentState:
 		State.DESTROYING,State.CARRYING:
-			stopCarrying()
+			carryingItem.dropAll(self)
 		State.THROWN:
 			stopThrow()
 		_:
@@ -254,6 +254,8 @@ func stopCarrying():
 	carryingItem.onDrop(self)
 	carryingItem = null
 	
+	print("drop!")
+	
 	navigation_agent_2d.avoidance_mask = 1
 	
 	startWander()
@@ -338,7 +340,7 @@ func on_timeout() -> void:
 		direction = global_position.direction_to(player.global_position)
 	
 	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
-		#start timer again
+	#start timer again
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
 
 # Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc

@@ -40,9 +40,12 @@ var idle_time		:= 0.0
 var local_speed     := 0.5
 
 # shoot time increases until it reaches cooldown, if it is less than shoot length then display the shot
+@export
 var shoot_length := 0.1
+@export
 var shoot_cooldown := 0.3
 var shoot_time := 0.0
+@export
 # Damage dealt per second of being hit by laser
 var damage := 50.0
 

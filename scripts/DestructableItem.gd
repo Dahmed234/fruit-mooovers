@@ -39,6 +39,10 @@ func onPickup(carrying: CharacterBody2D):
 	followersCarrying[carrying] = true
 
 
+func dropAll():
+	for cow in followersCarrying:
+		cow.stopCarrying()
+
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
 # Called when the node enters the scene tree for the first time.
