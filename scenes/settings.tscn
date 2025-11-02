@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://xrtvxf74yob8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_36l1p"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 0.5882353)
+position = Vector2(-3.8146973e-06, -9.536743e-07)
+scale = Vector2(255.99997, 303.99997)
+texture = SubResource("CanvasTexture_36l1p")
+
+[node name="Paused" type="Label" parent="."]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -144.0
+offset_right = 112.0
+offset_bottom = -56.0
+theme_override_font_sizes/font_size = 60
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 0
+offset_left = -120.0
+offset_top = -56.0
+offset_right = 120.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 60
+text = "Resume
+"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = -72.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 60
+text = "Quit
+"

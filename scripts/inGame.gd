@@ -16,6 +16,8 @@ var zoom_strength := 0.1
 
 @export 
 var destructableWalls: TileMapLayer
+
+var isPaused := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawnFollower($goal.position,Follower.State.WANDER)
@@ -31,6 +33,8 @@ func _process(delta):
 	$Camera2D.position = $Player.position
 	
 	cameraScrolling()
+	
+	if Input.is_action_just_pressed("pause"): isPaused = !isPaused
 
 func onCarryFinish(item,pos):
 	$UI/Control/Label.score += item.value
@@ -91,3 +95,10 @@ func onThrowMade(startPosition,mousePosition,follower) ->void:
 func onThrowFinish(position :Vector2,state :Follower.State, thrown):
 	thrown.follower.show()
 	thrown.follower.startInitial()
+
+
+func _onResume() -> void:
+	isPaused = false
+
+func _onQuit() -> void:
+	get_tree().quit()
