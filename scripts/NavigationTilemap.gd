@@ -45,10 +45,12 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						var value = plants.get_cell_tile_data(coords).get_custom_data("Value")
 						var followerValue = plants.get_cell_tile_data(coords).get_custom_data("Follower Value")
 						var weight = plants.get_cell_tile_data(coords).get_custom_data("Weight")
-						if !value || !followerValue || !weight: return false
+						var sprite = plants.get_cell_tile_data(coords).get_custom_data("Sprite")
+						if !value || !followerValue || !weight || !sprite: return false
 						n_spawner.value = value
 						n_spawner.followerValue = followerValue
 						n_spawner.weight = weight
+						n_spawner.sprite = sprite
 						root.add_child(n_spawner)
 					destructible_walls:
 						# If this breaks, it means weight is undefined for the destructible_walls layer

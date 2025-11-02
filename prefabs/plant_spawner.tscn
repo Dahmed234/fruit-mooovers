@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://doqc1gqfip2ts"]
+[gd_scene load_steps=4 format=3 uid="uid://doqc1gqfip2ts"]
 
 [ext_resource type="Script" uid="uid://coplwe87hs5m5" path="res://scripts/PlantSpawner.gd" id="1_0ep07"]
-[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="2_hlg0l"]
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/item.tscn" id="2_hlg0l"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="3_4o2sc"]
 
 [node name="Plant Spawner" type="Node2D"]
 script = ExtResource("1_0ep07")
 item = ExtResource("2_hlg0l")
+atlas = ExtResource("3_4o2sc")
