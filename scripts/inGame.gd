@@ -12,18 +12,30 @@ var goal: Sprite2D
 var player: CharacterBody2D
 
 @export 
+var zoom_strength := 0.1
+
+@export 
 var destructableWalls: TileMapLayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawnFollower($goal.position,Follower.State.WANDER)
 	
+func cameraScrolling():
+	var zoom = float(Input.is_action_just_released("camera_zoom_in")) - float(Input.is_action_just_released("camera_zoom_out"))
+	$Camera2D.zoom *= Vector2.ONE + Vector2.ONE * zoom * zoom_strength
+	
+	$Camera2D.zoom.x = clamp($Camera2D.zoom.x,0.5,3.0)
+	$Camera2D.zoom.y = clamp($Camera2D.zoom.y,0.5,3.0)
+	
 func _process(delta):
 	$Camera2D.position = $Player.position
 	
+	cameraScrolling()
+
 func onCarryFinish(item,pos):
-	$Camera2D/Control/Label.score += item.value
-	$Camera2D/Control/Label.totalScore += item.value
-	$Camera2D/Control/Label.cowScore += item.followerValue
+	$UI/Control/Label.score += item.value
+	$UI/Control/Label.totalScore += item.value
+	$UI/Control/Label.cowScore += item.followerValue
 	
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)

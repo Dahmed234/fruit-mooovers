@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
 [ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scripts/navigation_region_2d.gd" id="5_27h4a"]
-[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://prefabs/UI.tscn" id="10_s70h5"]
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
@@ -37,34 +37,6 @@ script = ExtResource("5_27h4a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(575, 325)
-zoom = Vector2(0.75, 0.75)
-
-[node name="Control" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -956.0
-offset_top = -543.0
-offset_right = 1277.0
-offset_bottom = 708.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Camera2D/Control" node_paths=PackedStringArray("root")]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.135
-anchor_bottom = 0.163
-offset_right = 0.019989014
-offset_bottom = -0.11299896
-grow_horizontal = 2
-grow_vertical = 2
-text = "Score: "
-script = ExtResource("5_eryi0")
-root = NodePath("../../..")
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
 position = Vector2(952, -55)
@@ -90,9 +62,10 @@ offset_top = 458.0
 offset_right = 567.0
 offset_bottom = 498.0
 
+[node name="UI" parent="." instance=ExtResource("10_s70h5")]
+
 [connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
 [connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
-[connection signal="playerDies" from="Player" to="Camera2D/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
 [editable path="TileMap"]
