@@ -3,6 +3,10 @@ signal throwMade(startPosition, mousePosition,follower)
 
 @export
 var throwCooldown := 0.25
+@export
+var throwMinCooldown := 0.05
+# Increment each throw to make next throw faster
+var throwCombo := 0
 var time := 0.0
 @onready var player: CharacterBody2D = $"../.."
 
@@ -25,11 +29,13 @@ func shouldThrow(delta) -> bool:
 	if(Input.is_action_just_pressed("player_throw")): return true
 	if(Input.is_action_pressed("player_throw")):
 		time += delta
-		if time > throwCooldown:
-			time -= throwCooldown
+		if time > max(throwMinCooldown,throwCooldown - 0.01 * throwCombo):
+			time -= max(throwMinCooldown,throwCooldown - 0.01 * throwCombo)
+			throwCombo += 1
 			return true
 		return false
 	else:
+		throwCombo = 0
 		time = 0
 		return false
 # Called every frame. 'delta' is the elapsed time since the previous frame.

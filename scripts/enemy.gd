@@ -78,6 +78,9 @@ func _ready() -> void:
 	line.hide()
 
 func die() -> void:
+	for cow in cone_light.targets.keys():
+		cow.chasing.erase(cone_light)
+	get_parent().enemy_alive_count -= 1
 	queue_free()
 
 func shoot(target,delta) -> void:
@@ -109,6 +112,7 @@ func update_available_targets(delta: float) -> void:
 	for target in (cone_light.targets):
 		cone_light.targets[target] -= delta
 		if cone_light.targets[target] < 0:
+			target.chasing.erase(cone_light)
 			cone_light.targets.erase(target)
 
 # Update the alert level based on which agents are in the cone light

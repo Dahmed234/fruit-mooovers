@@ -31,11 +31,11 @@ offset_bottom = 168.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
-position = Vector2(952, -55)
+position = Vector2(760, -188)
 scale = Vector2(1, 1)
-path_length = 3
+path_length = 5
 node_distance = 400.0
-enemy_count = 1
+enemy_count = 2.0
 path_angle = 0.785
 target = {
 NodePath("../Player"): true
@@ -62,6 +62,7 @@ layout_mode = 0
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path" method="newDay"]
 [connection signal="pressed" from="UI/Control/Settings/Resume" to="." method="_onResume"]
 [connection signal="pressed" from="UI/Control/Settings/Quit" to="." method="_onQuit"]
 

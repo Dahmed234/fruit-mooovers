@@ -131,6 +131,7 @@ func die() -> void:
 			pass
 	# remove this follower from list of enemies chasing it
 	for cone_light in chasing:
+		if !cone_light: continue
 		if !chasing[cone_light]: continue
 		cone_light.clear_target(self)
 		
