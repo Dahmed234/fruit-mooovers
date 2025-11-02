@@ -11,5 +11,7 @@ var emptyColour := Color(1,0,0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if fullness == 1.0: hide()
+	else: show()
 	value.modulate = fullColour * fullness + emptyColour * (1-fullness)
 	value_root.scale.x = clamp(fullness,0.0,1.0)
