@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://0csr631jnhqr"]
+
+[ext_resource type="Script" uid="uid://drra8b724mxeb" path="res://scripts/GameOver.gd" id="1_vlb8f"]
+
+[node name="Game Over" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_vlb8f")
+label = NodePath("Camera2D/Control/Stats")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="Stats" type="Label" parent="Camera2D/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -295.0
+offset_right = 269.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Game over
+Score: 0
+Cows: 0"
+horizontal_alignment = 1
+
+[node name="Try Again" type="Button" parent="Camera2D/Control"]
+layout_mode = 0
+offset_left = -260.0
+offset_right = 293.0
+offset_bottom = 145.0
+theme_override_font_sizes/font_size = 100
+text = "Try again?"
+
+[node name="Quit" type="Button" parent="Camera2D/Control"]
+layout_mode = 0
+offset_left = -260.0
+offset_top = 177.0
+offset_right = 293.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+
+[connection signal="pressed" from="Camera2D/Control/Try Again" to="." method="_onTryAgain"]
+[connection signal="pressed" from="Camera2D/Control/Quit" to="." method="_onQuit"]

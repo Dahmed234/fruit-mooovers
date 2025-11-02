@@ -1,0 +1,131 @@
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
+
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
+[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="9_islk6"]
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://prefabs/Item.tscn" id="10_iqf54"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tefeu"]
+vertices = PackedVector2Array(19.03125, -13.171875, 20.9375, 20.773438, -14.59375, 21.71875, -14.8984375, -13.796875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(28.5, -23, -25, -24, -24.5, 32, 31.5, 30.5)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
+size = Vector2(29.5, 29.5)
+
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player", "destructableWalls")]
+texture_filter = 1
+script = ExtResource("1_27h4a")
+thown = ExtResource("2_vwfvy")
+splashText = ExtResource("3_s70h5")
+goal = NodePath("goal")
+player = NodePath("Player")
+destructableWalls = NodePath("TileMap/Destructible walls")
+
+[node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
+position = Vector2(575, 329)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 573.0
+offset_bottom = 326.0
+
+[node name="Label" type="Label" parent="Camera2D/Control" node_paths=PackedStringArray("root")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.135
+anchor_bottom = 0.163
+offset_right = 0.019989014
+offset_bottom = -0.11299896
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: "
+script = ExtResource("5_eryi0")
+root = NodePath("../../..")
+
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(234, 454)
+path_length = 5
+node_distance = 50.0
+is_loop = true
+enemy_count = 2
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Player" parent="." instance=ExtResource("7_b6xl3")]
+position = Vector2(544, 329)
+collision_layer = 2
+speed = 8000.0
+
+[node name="goal" type="Sprite2D" parent="."]
+position = Vector2(779, 348)
+scale = Vector2(2, 2)
+texture = ExtResource("9_islk6")
+region_enabled = true
+region_rect = Rect2(272, 128, 16, 16)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="goal"]
+navigation_polygon = SubResource("NavigationPolygon_tefeu")
+navigation_layers = 4
+
+[node name="Area2D" type="Area2D" parent="goal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="goal/Area2D"]
+position = Vector2(0.75, 1.25)
+shape = SubResource("RectangleShape2D_tbgi4")
+
+[node name="small item" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(278, 248)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="small item2" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(930, 386)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="small item3" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(955, 290)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="small item4" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(869, 144)
+value = 5
+followerValue = 10
+weight = 1.0
+
+[node name="big item" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(596, 191)
+value = 100
+weight = 5.0
+
+[node name="big item2" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(678, 451)
+value = 100
+weight = 5.0
+
+[node name="big item3" parent="." instance=ExtResource("10_iqf54")]
+position = Vector2(454, 468)
+value = 100
+weight = 5.0
+
+[connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+
+[editable path="TileMap"]
+[editable path="Player"]

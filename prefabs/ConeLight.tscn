@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://1b0407sitqmb"]
+
+[ext_resource type="Texture2D" uid="uid://ckb42jr0si37p" path="res://assets/lights/Light texture transparent cone.png" id="1_ii706"]
+[ext_resource type="Script" uid="uid://320esswnfvx8" path="res://scripts/ConeLight.gd" id="2_0jmpm"]
+[ext_resource type="Script" uid="uid://b8onf438xirjs" path="res://scripts/ConeSprite.gd" id="3_4r6yf"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ii706"]
+points = PackedVector2Array(0, 0, 100, -200, 0, -256, -100, -200)
+
+[node name="Cone light" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_0jmpm")
+flicker = 0.001
+pulse_rate = 1000.0
+pulse_amount = 0.05
+turn_speed = 1.0
+size = 2.0
+chaseTime = 5.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 0.2784314)
+scale = Vector2(0.539, 0.5)
+texture = ExtResource("1_ii706")
+offset = Vector2(0, -128)
+script = ExtResource("3_4r6yf")
+alpha = 0.6
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.539, 0.5)
+shape = SubResource("ConvexPolygonShape2D_ii706")
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_shape_exited" from="Area2D" to="." method="_on_area_2d_area_shape_exited"]

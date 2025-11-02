@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmkn1mud67i5y"]
+
+[ext_resource type="Texture2D" uid="uid://dpb11aguxuraq" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/mouse_right_outline.png" id="1_a4pwt"]
+[ext_resource type="Texture2D" uid="uid://cp0swm2sux3c3" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/mouse_left_outline.png" id="1_jqt3m"]
+[ext_resource type="Texture2D" uid="uid://bso6qetofcxfp" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/keyboard_w_outline.png" id="3_qvsfi"]
+[ext_resource type="Texture2D" uid="uid://dmvuw776xqi7r" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/keyboard_a_outline.png" id="4_hbwxf"]
+[ext_resource type="Texture2D" uid="uid://ctna62sdxuhol" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/keyboard_s_outline.png" id="5_01adb"]
+[ext_resource type="Texture2D" uid="uid://b0xl07i4bo6yv" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/keyboard_d_outline.png" id="6_33olk"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_a4pwt"]
+
+[node name="Help" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25, 0.25)
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.33333334, 0.33333334, 0.33333334, 1)
+position = Vector2(483.99994, 311.75)
+scale = Vector2(1168, 624.5)
+texture = SubResource("CanvasTexture_a4pwt")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 72
+text = ": Throw cows at objects.
+: Whistle at cows to follow you.
+      : Move"
+
+[node name="Right Mouse" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-48, 160)
+scale = Vector2(2, 2)
+texture = ExtResource("1_a4pwt")
+
+[node name="Left Mouse" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-48, 56)
+scale = Vector2(2, 2)
+texture = ExtResource("1_jqt3m")
+
+[node name="W" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(64, 264)
+scale = Vector2(2, 2)
+texture = ExtResource("3_qvsfi")
+
+[node name="A" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-48, 376)
+scale = Vector2(2, 2)
+texture = ExtResource("4_hbwxf")
+
+[node name="S" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(64, 376)
+scale = Vector2(2, 2)
+texture = ExtResource("5_01adb")
+
+[node name="D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(176, 376)
+scale = Vector2(2, 2)
+texture = ExtResource("6_33olk")

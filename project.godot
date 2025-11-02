@@ -11,13 +11,24 @@ config_version=5
 [application]
 
 config/name="prototype_2"
-run/main_scene="uid://eb0mqkobwsnn"
+run/main_scene="uid://cgq5krj1oqkrl"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=720
 
 [dotnet]
 
 project/assembly_name="prototype_2"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/tomhb/OneDrive/Pictures/Documents/prototype-2/out.avi"
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [input]
 
@@ -61,8 +72,8 @@ player_whistle={
 
 2d_physics/layer_1="terrain"
 2d_navigation/layer_1="terrain"
+2d_physics/layer_2="throwables"
 2d_navigation/layer_2="player"
-2d_physics/layer_3="throwables"
+2d_physics/layer_3="player + followers"
 2d_navigation/layer_3="goal"
-2d_physics/layer_4="player"
-2d_physics/layer_5="pickups"
+2d_physics/layer_4="pickups"

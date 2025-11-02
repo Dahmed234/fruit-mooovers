@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5s1pf53yirhm"]
+
+[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_g48mw"]
+
+[node name="goal" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_g48mw")
+region_enabled = true
+region_rect = Rect2(272, 128, 16, 16)

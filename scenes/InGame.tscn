@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
+
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/inGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scripts/navigation_region_2d.gd" id="5_27h4a"]
+[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="5_eryi0"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
+[ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
+vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-911, -942, 3160, -1161, 3140, 1322, -964, 1510)])
+sample_partition_type = 1
+parsed_geometry_type = 1
+
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player", "destructableWalls")]
+texture_filter = 1
+script = ExtResource("1_27h4a")
+thown = ExtResource("2_vwfvy")
+splashText = ExtResource("3_s70h5")
+goal = NodePath("goal")
+player = NodePath("Player")
+destructableWalls = NodePath("TileMap/Destructible walls")
+
+[node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
+position = Vector2(575, 329)
+scale = Vector2(4, 4)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_e7fys")
+script = ExtResource("5_27h4a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
+zoom = Vector2(0.75, 0.75)
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -956.0
+offset_top = -543.0
+offset_right = 1277.0
+offset_bottom = 708.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Camera2D/Control" node_paths=PackedStringArray("root")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.135
+anchor_bottom = 0.163
+offset_right = 0.019989014
+offset_bottom = -0.11299896
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: "
+script = ExtResource("5_eryi0")
+root = NodePath("../../..")
+
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(952, -55)
+scale = Vector2(1, 1)
+path_length = 3
+node_distance = 400.0
+enemy_count = 1
+path_angle = 0.785
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Player" parent="." instance=ExtResource("7_b6xl3")]
+position = Vector2(544, 329)
+speed = 8000.0
+
+[node name="goal" parent="." instance=ExtResource("10_27h4a")]
+position = Vector2(697, 317)
+
+[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
+offset_left = 527.0
+offset_top = 458.0
+offset_right = 567.0
+offset_bottom = 498.0
+
+[connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
+[connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
+[connection signal="playerDies" from="Player" to="Camera2D/Control/Label" method="_on_player_player_dies"]
+[connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+
+[editable path="TileMap"]
+[editable path="Player"]

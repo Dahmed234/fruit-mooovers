@@ -1,29 +1,57 @@
 extends CharacterBody2D
 
+signal playerDies
 
 
+var enemy_weight := 0.2
 
 @export var speed: float
+# The distance that a cow can be thrown from the player
+@export var throwDistance: float
+# The cows currently in the throwing radius, i.e. that can be thrown by clicking
+@onready var throwRadius: Area2D = $"Radii/Throw Radius"
+
+var chasing: Dictionary[CharacterBody2D,bool] = {}
+
+@export var health : float
+var max_health
+@onready var bar: Node2D = $Bar
+
+func _ready():
+	max_health = health
+
+func damage(enemy_damage,delta):
+	health -= delta * enemy_damage
+
+func die() -> void:
+	# remove this follower from list of enemies chasing it
+	for cone_light in chasing:
+		if !chasing[cone_light]: continue
+		cone_light.clear_target(self)
+		
+	playerDies.emit()
+
+func getThrowPosition():
+	return global_position.direction_to(get_global_mouse_position()) * min(global_position.distance_to(get_global_mouse_position()),throwDistance)
+
+var direction: Vector2
+
 func move(delta: float) -> void:
-	var direction: float
+	direction = Vector2.ZERO
 	# Apply left / right movement
-	direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * speed 
-	# Move towards 0 velocity with no input
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed )
+	direction.x = Input.get_axis("player_move_left", "player_move_right");
+	direction.y = Input.get_axis("player_move_up", "player_move_down");
+	
+	#added normalisation to fix buf that happens when player inputs diagonal to move faster
+	direction = direction.normalized();
 		
 	# Apply up / down movement
-	direction = Input.get_axis("ui_up", "ui_down")
-	if direction:
-		velocity.y = direction * speed
-	# Move towards 0 velocity with no input
-	else:
-		velocity.y = move_toward(velocity.x, 0, speed)
+	velocity = direction * speed * delta
 
 
 func _physics_process(delta: float) -> void:
+	bar.fullness = health / max_health
+	if health <= 0: die()
 	move(delta)
-
+	
 	move_and_slide()
