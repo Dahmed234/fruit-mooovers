@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
 vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
@@ -82,6 +83,12 @@ speed = 8000.0
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
 position = Vector2(697, 317)
+
+[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
+offset_left = 527.0
+offset_top = 458.0
+offset_right = 567.0
+offset_bottom = 498.0
 
 [connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
 [connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]

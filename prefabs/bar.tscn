@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0oriyclogl46"]
 
-[ext_resource type="Script" uid="uid://ropst8gl33df" path="res://prefabs/bar.gd" id="1_cpkpc"]
+[ext_resource type="Script" uid="uid://ropst8gl33df" path="res://scripts/bar.gd" id="1_cpkpc"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1nynx"]
 
