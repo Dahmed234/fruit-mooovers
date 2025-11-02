@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export var cone_light: CharacterBody2D
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-@onready var bar: Node2D = $Bar
 @onready var destructable_item: Destroyable = $"Destructable Item"
 
 var line
@@ -216,7 +215,7 @@ func navigate_to_target(delta: float) -> void:
 		_on_navigation_agent_2d_velocity_computed(new_velocity)
 
 func _physics_process(delta: float) -> void:
-	bar.fullness = (destructable_item.lifespan - destructable_item.time) / destructable_item.lifespan
+	
 	# Update where the enemy is targeting based on its state
 	update_target(delta)
 

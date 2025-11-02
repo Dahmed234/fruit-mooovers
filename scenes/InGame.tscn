@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
-[ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
-[ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scripts/navigation_region_2d.gd" id="5_27h4a"]
+[ext_resource type="PackedScene" uid="uid://c3vt5n5ryojtw" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
@@ -13,29 +12,15 @@
 [ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://scripts/ui.gd" id="11_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/settings.tscn" id="12_s70h5"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
-vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-911, -942, 3160, -1161, 3140, 1322, -964, 1510)])
-sample_partition_type = 1
-parsed_geometry_type = 1
-
-[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player", "destructableWalls")]
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
 thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
 player = NodePath("Player")
-destructableWalls = NodePath("TileMap/Destructible walls")
 
-[node name="TileMap" parent="." instance=ExtResource("4_vw0bo")]
-position = Vector2(575, 329)
-scale = Vector2(4, 4)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_e7fys")
-script = ExtResource("5_27h4a")
+[node name="NavigationRegion2D" parent="." instance=ExtResource("4_vw0bo")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -51,17 +36,16 @@ NodePath("../Player"): true
 }
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
-position = Vector2(544, 329)
 speed = 8000.0
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
-position = Vector2(697, 317)
+position = Vector2(76.63, 0)
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
-offset_left = 527.0
-offset_top = 458.0
-offset_right = 567.0
-offset_bottom = 498.0
+offset_left = -39.0
+offset_top = 128.0
+offset_right = 1.0
+offset_bottom = 168.0
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
 script = ExtResource("11_vwfvy")
@@ -73,16 +57,14 @@ offset_right = 1273.0
 offset_bottom = 711.0
 
 [node name="Settings" parent="UI/Control" index="1" instance=ExtResource("12_s70h5")]
+visible = false
 layout_mode = 0
 
-[connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
-[connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 [connection signal="pressed" from="UI/Control/Settings/Resume" to="." method="_onResume"]
 [connection signal="pressed" from="UI/Control/Settings/Quit" to="." method="_onQuit"]
 
-[editable path="TileMap"]
 [editable path="Player"]
 [editable path="UI"]
 [editable path="UI/Control/Settings"]

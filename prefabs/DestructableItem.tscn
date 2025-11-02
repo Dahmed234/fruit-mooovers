@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://kvexn7i2mmmy"]
+[gd_scene load_steps=5 format=3 uid="uid://kvexn7i2mmmy"]
 
 [ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scripts/DestructableItem.gd" id="1_3hrdc"]
+[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://prefabs/bar.tscn" id="2_jr6qx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
 radius = 32.0
@@ -39,3 +40,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/0"
 horizontal_alignment = 1
+
+[node name="Bar" parent="." instance=ExtResource("2_jr6qx")]
+position = Vector2(0, -40)

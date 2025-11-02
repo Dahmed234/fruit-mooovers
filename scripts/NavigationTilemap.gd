@@ -4,10 +4,11 @@ signal tile_update
 
 var is_changed = false
 
+@onready var root: Node2D = $"../.."
+
 # Load in the wall layers, these need to be marked as un-navigatable
 @onready var low_walls: TileMapLayer = $"../Low Walls"
 @onready var destructible_walls: TileMapLayer = $"../Destructible walls"
-@onready var high_walls: TileMapLayer = $"../High Walls"
 # Load plant layer, spawn item spawners here
 @onready var plants: TileMapLayer = $"../Plants"
 
@@ -25,18 +26,18 @@ var first_time = true
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	# Check if any of the wall layers overlap with this tile
-	for layer in [low_walls,high_walls,destructible_walls,plants]:
+	for layer in [low_walls,destructible_walls,plants]:
 		if coords in layer.get_used_cells_by_id(0):
 			if first_time:
 				match layer:
-					low_walls,high_walls:
-						var n_wall = wall.instantiate()
-						n_wall.global_position = to_global(map_to_local(coords))
+					#low_walls,high_walls:
+						#var n_wall = wall.instantiate()
+						#n_wall.global_position = to_global(map_to_local(coords))
 						
 						#Set the "throwables" collision layer to true if this is a high wall
-						if layer == high_walls:  n_wall.collision_layer += 2 
+						#if layer == high_walls:  n_wall.collision_layer += 2 
 						
-						get_parent().get_parent().add_wall(n_wall)
+						#get_parent().get_parent().add_wall(n_wall)
 						
 					plants:
 						var n_spawner = plantSpawner.instantiate()
@@ -48,7 +49,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_spawner.value = value
 						n_spawner.followerValue = followerValue
 						n_spawner.weight = weight
-						get_parent().get_parent().add_child(n_spawner)
+						root.add_child(n_spawner)
 					destructible_walls:
 						# If this breaks, it means weight is undefined for the destructible_walls layer
 						var weight = destructible_walls.get_cell_tile_data(coords).get_custom_data("Weight")
@@ -59,7 +60,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_wall.tileMap = destructible_walls
 						n_wall.navMap = self
 						n_wall.weight = weight
-						get_parent().get_parent().add_wall(n_wall)
+						root.add_wall(n_wall)
 	is_changed = true
 	
 	return false

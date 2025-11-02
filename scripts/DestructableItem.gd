@@ -37,6 +37,9 @@ var label: Label
 # List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
 var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
 
+@onready var bar: Node2D = $Bar
+
+
 func getSpriteInfo() -> Sprite2D:
 	return $Sprite2D
 
@@ -57,11 +60,19 @@ func onDrop(carrying: CharacterBody2D):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))
-	if isEnemy: $CollisionShape2D.disabled = true
+	
+	if isEnemy: 
+		$CollisionShape2D.disabled = true
+	else:
+		bar.fullColour = Color(0.5,0.5,0.5)
+		bar.emptyColour = Color(0.5,0.5,0.5)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
+	bar.fullness = (lifespan - time) / lifespan
+	
 	label.text = str(int(followersCarrying.size())) + "/" + str(int(weight))
 	
 	if time > lifespan:
