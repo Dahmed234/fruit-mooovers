@@ -15,6 +15,8 @@ script = ExtResource("1_duu5m")
 speed = 50000.0
 light_level = 64.0
 cone_light = NodePath("Cone light")
+shoot_length = null
+shoot_cooldown = null
 damage = 20.0
 range = 150.0
 

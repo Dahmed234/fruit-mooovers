@@ -1,9 +1,5 @@
 extends Label
 
-@export
-# The root node for the in-game state, gets deleted after the  game-over scene is loaded
-var root: Node2D
-
 # The game-over scene, is loaded right before switching scenes because of weirdness that was caused by loaded at ready time
 var gameOver: Node2D
 
@@ -74,7 +70,8 @@ func restartGame():
 	Score: " + str(totalScore) + "
 	Total cows: " + str(cowScore)
 	get_tree().root.add_child(gameOver)
-	root.queue_free()
+	# ../../.. is the current root, which we free and replace with the gameOver scene root
+	$"../../..".queue_free()
 
 # Function for how fast to increase quota, should have some kind of exponential scaling
 func increaseQuota():
@@ -94,7 +91,7 @@ func newDay() -> void:
 func _process(delta: float) -> void:
 	time += delta
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
-	Day: " + str(day+1) + "a
+	Day: " + str(day+1) + "
 	Time: " + getTime()
 
 func _ready():

@@ -76,6 +76,7 @@ func _ready() -> void:
 	poolVectorArray.append(Vector2.ZERO)
 	line.points = poolVectorArray
 	add_child(line)
+	line.hide()
 
 func die() -> void:
 	queue_free()
@@ -88,8 +89,6 @@ func shoot(target,delta) -> void:
 		
 		# Deal damage whenever laser is on the target
 		target.damage(damage,delta)
-	else:
-		line.hide()
 	while shoot_time > shoot_cooldown: shoot_time -= shoot_cooldown
 
 func get_best_target() -> CharacterBody2D:
@@ -136,6 +135,7 @@ func update_alert(delta: float) -> void:
 func update_target(delta: float) -> void:
 	update_alert(delta)
 	update_available_targets(delta)
+	line.hide()
 	idle_time += delta
 	
 	match current_state:

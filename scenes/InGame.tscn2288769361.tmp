@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://prefabs/UI.tscn" id="10_s70h5"]
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
-[ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://prefabs/ui.gd" id="11_vwfvy"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_e7fys"]
 vertices = PackedVector2Array(3130.0703, 1312.4375, -953.7578, 1499.5234, -901.2031, -932.5, 3149.9063, -1150.4297)
@@ -37,6 +36,7 @@ navigation_polygon = SubResource("NavigationPolygon_e7fys")
 script = ExtResource("5_27h4a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 325)
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
 position = Vector2(952, -55)
@@ -63,19 +63,10 @@ offset_right = 567.0
 offset_bottom = 498.0
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
-script = ExtResource("11_vwfvy")
-
-[node name="Control" parent="UI" index="0"]
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 1273.0
-offset_bottom = 711.0
 
 [connection signal="tile_update" from="TileMap/Ground" to="NavigationRegion2D" method="_on_tile_update"]
 [connection signal="bake_finished" from="NavigationRegion2D" to="NavigationRegion2D" method="_on_baking_done"]
-[connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
 [editable path="TileMap"]
 [editable path="Player"]
-[editable path="UI"]

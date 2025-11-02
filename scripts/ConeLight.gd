@@ -52,8 +52,9 @@ func update_light(delta: float) -> void:
 			else:
 				rotation += angle_delta
 		State.CHASING:
-			look_at(get_parent().get_best_target().position)
-			rotation += PI/2
+			if get_parent().get_best_target():
+				look_at(get_parent().get_best_target().position)
+				rotation += PI/2
 		_:
 			pass
 	scale = (local_size * size + (randf() * flicker) + (pulse_amount * sin(Time.get_ticks_msec() / pulse_rate))) * Vector2(get_parent().light_level / 256,get_parent().light_level / 256)

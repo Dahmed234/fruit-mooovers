@@ -48,7 +48,6 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_spawner.value = value
 						n_spawner.followerValue = followerValue
 						n_spawner.weight = weight
-						print(value,followerValue,weight)
 						get_parent().get_parent().add_child(n_spawner)
 					destructible_walls:
 						# If this breaks, it means weight is undefined for the destructible_walls layer
