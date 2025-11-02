@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://eb0mqkobwsnn"]
 
-[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
 [ext_resource type="PackedScene" uid="uid://b17ndhc5lvlg3" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]

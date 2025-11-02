@@ -45,7 +45,7 @@ func onPickup(carrying: CharacterBody2D):
 
 
 func dropAll(dead):
-	for cow in followersCarrying:
+	for cow in followersCarrying.keys():
 		cow.stopCarrying()
 		
 	followersCarrying.erase(dead)

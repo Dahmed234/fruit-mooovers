@@ -3,6 +3,7 @@ extends Sprite2D
 @export 
 var alpha: float
 
+
 enum State {
 	PATROLLING  = 0,
 	ALERT 		= 1,

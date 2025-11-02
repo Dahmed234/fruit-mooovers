@@ -50,8 +50,7 @@ func _process(delta: float) -> void:
 		position = followersCarrying.keys()[0].position
 		
 func dropAll(dead):
-	print(followersCarrying)
-	for cow in followersCarrying:
+	for cow in followersCarrying.keys():
 		cow.stopCarrying()
 	
 	followersCarrying.erase(dead)
