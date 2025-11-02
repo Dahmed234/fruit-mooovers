@@ -3,6 +3,8 @@ extends Node2D
 @export
 var item: PackedScene
 
+@onready var label: Label = $"../UI/Control/Label"
+
 var sprites : Dictionary[String,Vector2] = {
 	"apple" : Vector2(528,288),
 	"pear" : Vector2(544,288),
@@ -20,9 +22,10 @@ var currentItem
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
-	spawn()
+	spawn(0)
+	label.respawnObjects.connect(spawn)
 
-func spawn():
+func spawn(day):
 	if !currentItem:
 		var nItem = item.instantiate()
 		currentItem = nItem

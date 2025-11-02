@@ -22,6 +22,12 @@ player = NodePath("Player")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_vw0bo")]
 
+[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
+offset_left = -39.0
+offset_top = 128.0
+offset_right = 1.0
+offset_bottom = 168.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
@@ -40,12 +46,6 @@ speed = 8000.0
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
 position = Vector2(76.63, 0)
-
-[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
-offset_left = -39.0
-offset_top = 128.0
-offset_right = 1.0
-offset_bottom = 168.0
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
 script = ExtResource("11_vwfvy")

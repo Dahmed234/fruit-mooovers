@@ -2234,6 +2234,7 @@ tile_set = ExtResource("1_iuou0")
 navigation_enabled = false
 
 [node name="Plants" type="TileMapLayer" parent="."]
+modulate = Color(0, 0.6, 0, 1)
 texture_filter = 1
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAACAP7/AAANAAYAAAAFAPv/AAANAAYAAAAGAPv/AAANAAYAAAACAPr/AAAOAAYAAAABAPr/AAAPAAYAAAAAAPr/AAAQAAYAAAACAP//AAANAAYAAAACAAAAAAANAAYAAAABAPX/AAANAAYAAAAAAPX/AAANAAYAAAAJAP//AAAPAAYAAAAIAP//AAAPAAYAAAAHAAAAAAAPAAYAAAA=")

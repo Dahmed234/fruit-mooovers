@@ -1,5 +1,6 @@
 extends Label
 
+signal respawnObjects(day)
 # The game-over scene, is loaded right before switching scenes because of weirdness that was caused by loaded at ready time
 var gameOver: Node2D
 
@@ -85,6 +86,7 @@ func newDay() -> void:
 	else:
 		score -= quota
 		increaseQuota()
+		respawnObjects.emit(day)
 		print("met quota")
 
 # Update the score, quota, day and time
