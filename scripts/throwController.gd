@@ -1,6 +1,9 @@
 extends Area2D
 signal throwMade(startPosition, mousePosition,follower)
 
+@export
+var throwCooldown := 0.25
+var time := 0.0
 @onready var player: CharacterBody2D = $"../.."
 
 var throwables
@@ -18,15 +21,24 @@ func getClosest(objs):
 			closest_distance = obj.global_position.distance_to(global_position)
 	return closest
 
+func shouldThrow(delta) -> bool:
+	if(Input.is_action_just_pressed("player_throw")): return true
+	if(Input.is_action_pressed("player_throw")):
+		time += delta
+		if time > throwCooldown:
+			time -= throwCooldown
+			return true
+		return false
+	else:
+		time = 0
+		return false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	throwables  = self.get_overlapping_bodies().filter(func(item): return item is Follower) #get all pikmin within area
 		
 	throwables= throwables.filter(func(item): return item.canBeThrown())
 	#on mouse input pressed
-	if(Input.is_action_just_pressed("player_throw")):
-		
-		
+	if shouldThrow(delta):
 		if(throwables.is_empty()):
 			return
 		var pikminToThrow :Node2D = getClosest(throwables)
