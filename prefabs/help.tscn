@@ -10,6 +10,7 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_a4pwt"]
 
 [node name="Help" type="Control"]
+modulate = Color(1, 1, 1, 0.76862746)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -18,8 +19,8 @@ scale = Vector2(0.25, 0.25)
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.33333334, 0.33333334, 0.33333334, 1)
-position = Vector2(483.99994, 359.74997)
-scale = Vector2(1168, 720.5)
+position = Vector2(483.99994, 557.75)
+scale = Vector2(1168, 1116.5)
 texture = SubResource("CanvasTexture_a4pwt")
 
 [node name="Label" type="Label" parent="."]
@@ -33,7 +34,11 @@ follow you
             : Move
 
   Throw cows to steal food and 
-attack objects"
+attack objects
+  Meet the daily point quota or
+get fired!
+  Avoid aliens; approach at 
+your own risk"
 
 [node name="Right Mouse" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -39,24 +39,29 @@ func update_light(delta: float) -> void:
 			local_size = 1.8
 		_:
 			local_size = 1.0
+	#Get the target angle if a target exists, overwriting whatever angle was there 
 	match (get_parent().current_state):
-		State.PATROLLING,State.ALERT,State.IDLE:
-			# Where we want to be pointing, get the angle from the current vector to the target vector
-			angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))
-
-			# Move towards this angle at a fixed speed
-			if angle_delta > 2 * -turn_speed * delta:
-				rotation += turn_speed * delta
-			elif angle_delta < 2 * turn_speed * delta:
-				rotation -= turn_speed * delta
-			else:
-				rotation += angle_delta
 		State.CHASING:
 			if get_parent().get_best_target():
+				var tmp = rotation
 				look_at(get_parent().get_best_target().position)
 				rotation += PI/2
+				target_angle = rotation
+				rotation = tmp
 		_:
 			pass
+		
+	# Where we want to be pointing, get the angle from the current vector to the target vector
+	angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))
+
+	# Move towards this angle at a fixed speed
+	if angle_delta > 2 * -turn_speed * delta:
+		rotation += turn_speed * delta
+	elif angle_delta < 2 * turn_speed * delta:
+		rotation -= turn_speed * delta
+	else:
+		rotation += angle_delta
+
 	scale = (local_size * size + (randf() * flicker) + (pulse_amount * sin(Time.get_ticks_msec() / pulse_rate))) * Vector2(get_parent().light_level / 256,get_parent().light_level / 256)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
