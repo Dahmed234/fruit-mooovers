@@ -7,7 +7,7 @@ var is_changed = false
 @onready var root: Node2D = $"../.."
 
 # Load in the wall layers, these need to be marked as un-navigatable
-@onready var low_walls: TileMapLayer = $"../Low Walls"
+@onready var low_walls: TileMapLayer = $"../Walls"
 @onready var destructible_walls: TileMapLayer = $"../Destructible walls"
 # Load plant layer, spawn item spawners here
 @onready var plants: TileMapLayer = $"../Plants"

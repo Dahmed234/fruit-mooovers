@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/Player.gd" id="1_glu7e"]
-[ext_resource type="Script" uid="uid://c5ropkpqiwmu0" path="res://scripts/ThrowController.gd" id="2_p3xyx"]
+[ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scripts/ThrowController.gd" id="2_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c46uv3a4y1ogs" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="2_wuy1y"]
 [ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scripts/Whistle.gd" id="4_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c6x4ey8dxp7dc" path="res://assets/lights/Light texture transparent.png" id="5_wuy1y"]

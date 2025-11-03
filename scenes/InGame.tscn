@@ -31,11 +31,32 @@ offset_bottom = 168.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
-position = Vector2(760, -188)
+position = Vector2(700, -257)
 scale = Vector2(1, 1)
 path_length = 5
 node_distance = 400.0
 enemy_count = 2.0
+path_angle = 0.785
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Patrol path2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(-607, -611)
+scale = Vector2(1, 1)
+path_length = 2
+node_distance = 1300.0
+enemy_count = 1.0
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Patrol path3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(1149, -346)
+scale = Vector2(1, 1)
+path_length = 3
+node_distance = 400.0
+enemy_count = 3.0
 path_angle = 0.785
 target = {
 NodePath("../Player"): true

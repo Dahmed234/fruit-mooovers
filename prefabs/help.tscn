@@ -18,8 +18,8 @@ scale = Vector2(0.25, 0.25)
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.33333334, 0.33333334, 0.33333334, 1)
-position = Vector2(483.99994, 311.75)
-scale = Vector2(1168, 624.5)
+position = Vector2(483.99994, 359.74997)
+scale = Vector2(1168, 720.5)
 texture = SubResource("CanvasTexture_a4pwt")
 
 [node name="Label" type="Label" parent="."]
@@ -28,8 +28,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 72
 text = ": Throw cows at objects.
-: Whistle at cows to follow you.
-      : Move"
+: Tell nearby cows to stop and 
+follow you
+            : Move
+
+  Throw cows to steal food and 
+attack objects"
 
 [node name="Right Mouse" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -45,24 +49,24 @@ texture = ExtResource("1_jqt3m")
 
 [node name="W" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(64, 264)
+position = Vector2(64, 356)
 scale = Vector2(2, 2)
 texture = ExtResource("3_qvsfi")
 
 [node name="A" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-48, 376)
+position = Vector2(-48, 468)
 scale = Vector2(2, 2)
 texture = ExtResource("4_hbwxf")
 
 [node name="S" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(64, 376)
+position = Vector2(64, 468)
 scale = Vector2(2, 2)
 texture = ExtResource("5_01adb")
 
 [node name="D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(176, 376)
+position = Vector2(176, 468)
 scale = Vector2(2, 2)
 texture = ExtResource("6_33olk")
