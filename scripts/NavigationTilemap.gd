@@ -46,7 +46,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						var followerValue = plants.get_cell_tile_data(coords).get_custom_data("Follower Value")
 						var weight = plants.get_cell_tile_data(coords).get_custom_data("Weight")
 						var sprite = plants.get_cell_tile_data(coords).get_custom_data("Sprite")
-						if !value || !followerValue || !weight || !sprite: return false
+						
 						n_spawner.value = value
 						n_spawner.followerValue = followerValue
 						n_spawner.weight = weight

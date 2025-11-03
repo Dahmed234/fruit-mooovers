@@ -122,7 +122,7 @@ func update_alert(delta: float) -> void:
 		for cow in cone_light.in_area:
 			alert_level = min(max_alert * 2, alert_level + cow.enemy_weight * delta)
 	else:
-		alert_level = max(0,alert_level - 10 * delta)
+		alert_level = max(0,alert_level - 50 * delta)
 		
 	if alert_level >= max_alert:
 		current_state = State.CHASING
@@ -142,7 +142,7 @@ func update_target(delta: float) -> void:
 	
 	match current_state:
 		State.PATROLLING:
-			local_speed = 0.7
+			local_speed = 0.9
 			# Calculate angle between patrol points
 			cone_light.target_angle = (get_parent().path[(patrol_target-1)%get_parent().path_length].position - get_parent().path[patrol_target].position).angle()
 			if !at_patrol_target:

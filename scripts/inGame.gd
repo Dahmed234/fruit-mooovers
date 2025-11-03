@@ -11,6 +11,8 @@ var goal: Sprite2D
 @export
 var player: CharacterBody2D
 
+@onready var label: Label = $UI/Control/Label
+
 @export 
 var zoom_strength := 0.1
 
@@ -20,7 +22,8 @@ var destructableWalls: TileMapLayer
 var isPaused := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawnFollower($goal.position,Follower.State.WANDER)
+	for i in range(3):
+		spawnFollower($goal.position + Vector2(randf(),randf()),Follower.State.WANDER)
 	
 func cameraScrolling():
 	var zoom = float(Input.is_action_just_released("camera_zoom_in")) - float(Input.is_action_just_released("camera_zoom_out"))
@@ -37,9 +40,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("pause"): isPaused = !isPaused
 
 func onCarryFinish(item,pos):
-	$UI/Control/Label.score += item.value
-	$UI/Control/Label.totalScore += item.value
-	$UI/Control/Label.cowScore += item.followerValue
+	label.score += item.value
+	label.totalScore += item.value
 	
 	for i in item.followerValue:
 		spawnFollower($goal.position,Follower.State.INITIAL)
@@ -66,6 +68,7 @@ func add_wall(wall: StaticBody2D):
 	$"NavigationRegion2D".add_child(wall)
 
 func spawnFollower(position, state :Follower.State):
+	label.cowScore += 1
 	var newFollower = Follower.newFollower(position,Follower.State.WANDER)
 	newFollower.carryDropped.connect(onCarryDrop)
 	newFollower.carryFinished.connect(onCarryFinish)

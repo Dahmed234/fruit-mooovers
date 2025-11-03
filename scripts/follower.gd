@@ -170,21 +170,42 @@ func initState():
 			#test to see if items are nearby
 			# get all nearby items
 			var nearbyLoot   = $viewRadius.get_overlapping_areas()
-			var nearbyCarryable
+			var nearbyCarryable: Array
 			var nearbyDestroyable
+			var closest
 			nearbyCarryable = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
 			nearbyDestroyable = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
 			
+			# Check all carriables to see if one has capacity
 			if(!nearbyCarryable.is_empty()):
-				var obtainedItem :Carryable = getClosest(nearbyCarryable).get_parent()#.pop_back().get_parent()
-				carryingItem = obtainedItem
-				startCarry(obtainedItem)
-			elif !nearbyDestroyable.is_empty():
-				var obtainedItem :Destroyable = getClosest(nearbyDestroyable).get_parent()
-				carryingItem = obtainedItem
-				startDestroy(obtainedItem)
-			else:
-				startWander()
+				var found = false
+				while !found and nearbyCarryable:
+					closest = getClosest(nearbyCarryable)
+					if closest.get_parent().hasCapacity(): 
+						found = true
+					else:
+						nearbyCarryable.erase(closest)
+				if found:
+					var obtainedItem :Carryable = closest.get_parent()
+					carryingItem = obtainedItem
+					startCarry(obtainedItem)
+					return
+			# Check all destroyables to see if one has capacity
+			if !nearbyDestroyable.is_empty():
+				var found = false
+				while !found and nearbyDestroyable:
+					closest = getClosest(nearbyDestroyable)
+					if closest.get_parent().hasCapacity(): 
+						found = true
+					else:
+						nearbyDestroyable.erase(closest)
+				if found:
+					var obtainedItem :Destroyable = getClosest(nearbyDestroyable).get_parent()
+					carryingItem = obtainedItem
+					startDestroy(obtainedItem)
+					return
+			# If none exist, wander instead
+			startWander()
 		State.WANDER:
 			startWander()
 		State.FOLLOW:
@@ -364,7 +385,7 @@ func navigate_to_target(delta: float) -> void:
 		if carryingItem.followersCarrying.size() >= carryingItem.weight:
 			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
 			# How many cows are used
-			local_velocity = 0.2 * min(2.0,carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
+			local_velocity = 0.4 * min(2.0,carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
 		else:
 			# Give visual indicator that item is too heavy
 			pass

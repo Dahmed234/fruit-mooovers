@@ -40,6 +40,9 @@ func onDrop(carrying: CharacterBody2D):
 		$CollisionShape2D.disabled = false
 		show()
 
+func hasCapacity() -> bool:
+	return followersCarrying.size() < weight*2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = "0/" + str(int(weight))

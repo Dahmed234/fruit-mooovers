@@ -18,7 +18,7 @@ var value: float
 var followerValue: float
 var weight: float
 var sprite: String
-var currentItem
+var currentItem = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:

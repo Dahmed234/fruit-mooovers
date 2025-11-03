@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=13 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/InGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c3vt5n5ryojtw" path="res://prefabs/TileMap.tscn" id="4_vw0bo"]
 [ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
+[ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scripts/throwController.gd" id="8_s70h5"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://prefabs/UI.tscn" id="10_s70h5"]
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
@@ -31,10 +32,10 @@ offset_bottom = 168.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
-position = Vector2(700, -257)
+position = Vector2(599, -160)
 scale = Vector2(1, 1)
 path_length = 5
-node_distance = 400.0
+node_distance = 250.0
 enemy_count = 2.0
 path_angle = 0.785
 target = {
@@ -64,6 +65,9 @@ NodePath("../Player"): true
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
 speed = 8000.0
+
+[node name="Throw Radius" parent="Player/Radii" index="0"]
+script = ExtResource("8_s70h5")
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
 position = Vector2(76.63, 0)

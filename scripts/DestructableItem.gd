@@ -88,6 +88,9 @@ func _physics_process(delta: float) -> void:
 		pass
 	
 
+func hasCapacity() -> bool:
+	return followersCarrying.size() < weight*2
+
 func destroy():
 	
 	# Logic for if is enemy / tile

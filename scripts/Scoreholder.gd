@@ -17,10 +17,12 @@ var quota := 100
 # Chooses the format for displaying the ingame time
 var isAmPm: bool = true
 
+@onready var cow_label: Label = $CowLabel
+
 # Initial score, total score is the same as score but doesn't go down with quota
 var score := 0
 var totalScore := 0
-var cowScore := 1
+var cowScore := 0
 
 var initialWindowSize: Vector2
 
@@ -76,7 +78,7 @@ func restartGame():
 
 # Function for how fast to increase quota, should have some kind of exponential scaling
 func increaseQuota():
-	quota += quota / 2
+	quota *= 1.5
 
 # Check if the player met quota by the end of the day
 func newDay() -> void:
@@ -96,6 +98,7 @@ func _process(delta: float) -> void:
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
 	Day: " + str(day+1) + "
 	Time: " + getTime()
+	cow_label.text = "x " + str(cowScore)
 
 func _ready():
 	#get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom

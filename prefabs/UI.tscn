@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwcpcthxmi484"]
+[gd_scene load_steps=3 format=3 uid="uid://bwcpcthxmi484"]
 
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="1_dj8aq"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_inpio"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -19,6 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Control"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.135
@@ -27,5 +29,26 @@ offset_right = 52.0
 offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Score: "
+theme_override_font_sizes/font_size = 20
+text = "Score: 
+Day:
+Time"
 script = ExtResource("1_dj8aq")
+
+[node name="CowLabel" type="Label" parent="Control/Label"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 34.0
+offset_top = 88.0
+offset_right = 74.0
+offset_bottom = 116.0
+theme_override_font_sizes/font_size = 20
+text = "x 0"
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Label"]
+texture_filter = 1
+position = Vector2(17, 97)
+scale = Vector2(2, 2)
+texture = ExtResource("1_inpio")
+region_enabled = true
+region_rect = Rect2(432, 111, 16, 16)
