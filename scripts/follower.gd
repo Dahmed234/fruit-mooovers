@@ -39,7 +39,7 @@ var TIMERVARIANCE =0.1
 var direction := Vector2.ONE
 
 # How detectible are followers to enemy units
-const enemy_weight := 0.2
+const enemy_weight := 20
 # The distance above rocks the followers sit when destroying
 const ITEM_HEIGHT = 20.0
 

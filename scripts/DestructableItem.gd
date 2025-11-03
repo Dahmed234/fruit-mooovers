@@ -79,6 +79,10 @@ func _physics_process(delta: float) -> void:
 		destroy()
 	elif followersCarrying.size() >= weight:
 		time += delta * min(2.0,followersCarrying.size() / weight / 2.0)
+		# Set enemy to agro as soon as you start destroying it
+		if isEnemy:
+			get_parent().alert_level = get_parent().max_alert * 2
+			get_parent().update_alert(delta)
 	else:
 		# do some animation to show nothing is happening
 		pass
