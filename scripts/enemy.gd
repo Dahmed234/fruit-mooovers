@@ -110,10 +110,11 @@ func get_best_target() -> CharacterBody2D:
 # Remove targets that haven't been seen in a while
 func update_available_targets(delta: float) -> void:
 	for target in (cone_light.targets):
-		cone_light.targets[target] -= delta
-		if cone_light.targets[target] < 0:
-			target.chasing.erase(cone_light)
-			cone_light.targets.erase(target)
+		if target:
+			cone_light.targets[target] -= delta
+			if cone_light.targets[target] < 0:
+				target.chasing.erase(cone_light)
+				cone_light.targets.erase(target)
 
 # Update the alert level based on which agents are in the cone light
 func update_alert(delta: float) -> void:

@@ -79,5 +79,5 @@ func spawn(count):
 
 # Spawn more enmies as days increase, respawning dead enemies
 func newDay(day):
-	print("it is day: ",day)
-	spawn(1.4 ** (day) * enemy_count - enemy_alive_count)
+	# spawn a maximum of 2 enemies per node, replacing all dead enemies
+	spawn(min(path_length * 2 - enemy_alive_count,(1.4 ** (day) * enemy_count) - enemy_alive_count))

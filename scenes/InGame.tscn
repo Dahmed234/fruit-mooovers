@@ -63,6 +63,16 @@ target = {
 NodePath("../Player"): true
 }
 
+[node name="Patrol path4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(669, -414)
+scale = Vector2(1, 1)
+path_length = 2
+node_distance = 400.0
+enemy_count = 0.2
+target = {
+NodePath("../Player"): true
+}
+
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
 speed = 8000.0
 
@@ -88,6 +98,8 @@ layout_mode = 0
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 [connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path" method="newDay"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path2" method="newDay"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path3" method="newDay"]
 [connection signal="pressed" from="UI/Control/Settings/Resume" to="." method="_onResume"]
 [connection signal="pressed" from="UI/Control/Settings/Quit" to="." method="_onQuit"]
 

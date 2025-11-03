@@ -6,7 +6,7 @@ var gameOver: Node2D
 
 @export
 # Day length in seconds
-var day_length := 120.0
+var day_length: float
 
 @export
 # Amount of points needed per day to continue
@@ -83,7 +83,7 @@ func increaseQuota():
 # Check if the player met quota by the end of the day
 func newDay() -> void:
 	# If the score is too low, the player has lost and should go back to the main menu
-	if false:#score < quota: 
+	if score < quota: 
 		restartGame()
 	# If quota is met, deduct those points and increase the quota
 	else:

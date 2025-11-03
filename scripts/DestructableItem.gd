@@ -62,7 +62,7 @@ func onDrop(carrying: CharacterBody2D):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	root = get_node('/root').get_child(1)
+	root = get_node("/root/In Game")
 	label.text = "0/" + str(int(weight))
 	carryFinished.connect(root.onCarryFinish)
 	if isEnemy: 
