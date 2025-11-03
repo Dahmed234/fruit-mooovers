@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="prototype_2"
+config/name="Fruit Mooovers"
+config/version="1.0"
 run/main_scene="uid://cgq5krj1oqkrl"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"

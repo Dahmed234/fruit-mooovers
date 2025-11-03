@@ -45,7 +45,7 @@ func update_light(delta: float) -> void:
 			if get_parent().get_best_target():
 				var tmp = rotation
 				look_at(get_parent().get_best_target().position)
-				rotation += PI/2
+				rotation += PI
 				target_angle = rotation
 				rotation = tmp
 		_:
