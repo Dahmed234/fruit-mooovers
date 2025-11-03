@@ -36,7 +36,7 @@ position = Vector2(599, -160)
 scale = Vector2(1, 1)
 path_length = 5
 node_distance = 250.0
-enemy_count = 2.0
+enemy_count = 1.5
 path_angle = 0.785
 target = {
 NodePath("../Player"): true
@@ -57,7 +57,7 @@ position = Vector2(1149, -346)
 scale = Vector2(1, 1)
 path_length = 3
 node_distance = 400.0
-enemy_count = 3.0
+enemy_count = 2.0
 path_angle = 0.785
 target = {
 NodePath("../Player"): true

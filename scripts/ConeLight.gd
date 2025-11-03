@@ -60,12 +60,20 @@ func update_light(delta: float) -> void:
 	scale = (local_size * size + (randf() * flicker) + (pulse_amount * sin(Time.get_ticks_msec() / pulse_rate))) * Vector2(get_parent().light_level / 256,get_parent().light_level / 256)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	update_light(delta)
+	var space_state = get_world_2d().direct_space_state
+	
 	
 	# Mark all targets in the area as elligable targets
 	for target in in_area.keys():
-		targets[target] = chaseTime
+		# Check that the target isn't blocked by a wall, so cast a ray on the terrain layer (1)
+		var query = PhysicsRayQueryParameters2D.create(global_position,target.global_position ,1, [self])
+		var result = space_state.intersect_ray(query)
+		# Remove the player from in_area if the ray to them is blocked, might cause issues with moving round tight corners and becoming invisible?
+		if result: in_area.erase(target)
+		else: targets[target] = chaseTime
+		
 	
 func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)

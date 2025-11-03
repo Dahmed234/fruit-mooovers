@@ -74,6 +74,8 @@ func spawnFollower(position, state :Follower.State):
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal
 	newFollower.player = player
+	var greyness = 1 - randf() * 0.2
+	newFollower.modulate = Color(greyness,greyness,greyness)
 	
 	$"NavigationRegion2D".add_child(newFollower)
 	

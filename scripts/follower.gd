@@ -39,7 +39,7 @@ var TIMERVARIANCE =0.1
 var direction := Vector2.ONE
 
 # How detectible are followers to enemy units
-const enemy_weight := 20
+const enemy_weight := 0.2
 # The distance above rocks the followers sit when destroying
 const ITEM_HEIGHT = 20.0
 
@@ -59,6 +59,7 @@ var max_health
 
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d := $NavigationAgent2D
+@onready var scoreholder: Label = $"../../UI/Control/Label"
 
 # possible states follower can be in
 enum State {
@@ -121,6 +122,7 @@ func damage(enemy_damage,delta):
 		_:
 			health -= delta * enemy_damage
 
+
 func die() -> void:
 	match currentState:
 		State.DESTROYING,State.CARRYING:
@@ -134,7 +136,9 @@ func die() -> void:
 		if !cone_light: continue
 		if !chasing[cone_light]: continue
 		cone_light.clear_target(self)
-		
+	
+	scoreholder.cowScore -= 1
+	
 	queue_free()
 	
 
@@ -229,6 +233,7 @@ func _ready() -> void:
 
 func startCarry(item : Carryable) -> void:
 	$heldItem.show()
+	$heldItem.modulate = Color(1,1,1)
 	label.show()
 	
 	#setup sprite
