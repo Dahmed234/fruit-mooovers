@@ -4,6 +4,8 @@ extends StaticBody2D
 
 class_name Destroyable
 
+signal carryFinished(item :Destroyable)
+
 # Used to get the follower that should be damaged when hit by enemy
 var main_follower = null
 
@@ -36,6 +38,7 @@ var weight: float
 var label: Label
 # List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
 var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
+var root
 
 @onready var bar: Node2D = $Bar
 
@@ -59,8 +62,9 @@ func onDrop(carrying: CharacterBody2D):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	root = get_node('/root').get_child(1)
 	label.text = "0/" + str(int(weight))
-	
+	carryFinished.connect(root.onCarryFinish)
 	if isEnemy: 
 		$CollisionShape2D.disabled = true
 	else:
@@ -92,7 +96,7 @@ func hasCapacity() -> bool:
 	return followersCarrying.size() < weight*2
 
 func destroy():
-	
+	carryFinished.emit(self,position)
 	# Logic for if is enemy / tile
 	if isEnemy:
 		get_parent().die()

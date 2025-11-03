@@ -319,7 +319,8 @@ func _physics_process(delta: float) -> void:
 				startFollow()
 
 		State.WANDER:
-			velocity = 0.1* delta * currentspeed * direction#velocity.slerp(0.4* delta * currentspeed * direction, 0.1)
+			navigate_to_target(delta)
+			#velocity = 0.1* delta * currentspeed * direction#velocity.slerp(0.4* delta * currentspeed * direction, 0.1)
 		State.CARRYING:
 			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
 			if navigation_agent_2d.is_target_reached():
@@ -378,6 +379,9 @@ func on_timeout() -> void:
 		direction = global_position.direction_to(player.global_position)
 	
 	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
+	
+	navigation_agent_2d.target_position = global_position + direction * currentspeed * TIMERLENGTH / 2
+	
 	#start timer again
 	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
 
@@ -385,7 +389,11 @@ func on_timeout() -> void:
 func navigate_to_target(delta: float) -> void:
 	var local_velocity: float
 	if !carryingItem:
-		local_velocity = 1.0 
+		match currentState:
+			State.WANDER:
+				local_velocity = 0.5
+			_:
+				local_velocity = 1.0 
 	else:
 		if carryingItem.followersCarrying.size() >= carryingItem.weight:
 			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 

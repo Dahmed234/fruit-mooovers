@@ -90,7 +90,6 @@ func newDay() -> void:
 		score -= quota
 		increaseQuota()
 		respawnObjects.emit(day)
-		print("met quota")
 
 # Update the score, quota, day and time
 func _process(delta: float) -> void:

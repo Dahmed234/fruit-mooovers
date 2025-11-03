@@ -54,6 +54,8 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						root.add_child(n_spawner)
 					destructible_walls:
 						# If this breaks, it means weight is undefined for the destructible_walls layer
+						var value = destructible_walls.get_cell_tile_data(coords).get_custom_data("Value")
+						var followerValue = destructible_walls.get_cell_tile_data(coords).get_custom_data("Follower Value")
 						var weight = destructible_walls.get_cell_tile_data(coords).get_custom_data("Weight")
 						if !weight: return false
 						var n_wall = destructableItem.instantiate()
@@ -61,6 +63,8 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_wall.tilePos = coords
 						n_wall.tileMap = destructible_walls
 						n_wall.navMap = self
+						n_wall.value = value
+						n_wall.followerValue = followerValue
 						n_wall.weight = weight
 						root.add_wall(n_wall)
 	is_changed = true
