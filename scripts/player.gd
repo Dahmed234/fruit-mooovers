@@ -46,7 +46,7 @@ func move(delta: float) -> void:
 	direction = direction.normalized();
 		
 	# Apply up / down movement
-	velocity = direction * speed * delta
+	velocity = direction * speed 
 
 
 func _physics_process(delta: float) -> void:
