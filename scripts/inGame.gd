@@ -65,7 +65,7 @@ func onCarryDrop(item :Carryable):
 	pass
 
 func add_wall(wall: StaticBody2D):
-	$"NavigationRegion2D".add_child(wall)
+	$"NavigationRegion2D2".add_child(wall)
 
 func spawnFollower(position, state :Follower.State):
 	label.cowScore += 1
@@ -77,7 +77,7 @@ func spawnFollower(position, state :Follower.State):
 	var greyness = 1 - randf() * 0.2
 	newFollower.modulate = Color(greyness,greyness,greyness)
 	
-	$"NavigationRegion2D".add_child(newFollower)
+	$"NavigationRegion2D2".add_child(newFollower)
 	
 func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
 	

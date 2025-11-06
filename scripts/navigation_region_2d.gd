@@ -7,7 +7,8 @@ func rebake():
 	pass
 	
 func _ready() -> void:
-	#navMap.notify_runtime_tile_data_update()
+	
+	navMap.notify_runtime_tile_data_update()
 	pass
 
 

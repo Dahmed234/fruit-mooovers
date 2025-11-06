@@ -14,6 +14,9 @@ var followerValue: int
 @export 
 var weight: float
 
+@export var itemData :ItemData
+
+
 @export
 var label: Label
 # List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
