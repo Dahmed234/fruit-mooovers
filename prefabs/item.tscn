@@ -8,6 +8,8 @@ radius = 19.026299
 
 [node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
 script = ExtResource("1_lopi8")
+followerValue = 20
+weight = 1.0
 label = NodePath("Label")
 
 [node name="Area2D" type="Area2D" parent="."]

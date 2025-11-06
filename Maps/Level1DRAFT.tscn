@@ -2238,25 +2238,19 @@ tile_set = ExtResource("2_5kvdj")
 navigation_enabled = false
 
 [node name="Plant Spawner" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(-373, -247)
+position = Vector2(-67, -343)
 
 [node name="Plant Spawner2" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(666, -734)
+position = Vector2(340, -438)
 
 [node name="Plant Spawner3" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(-215, -1019)
+position = Vector2(180, -864)
 
 [node name="Plant Spawner4" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(769, -1405)
+position = Vector2(792, -314)
 
 [node name="Plant Spawner5" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(-285, 147)
-
-[node name="Plant Spawner6" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(633, -302)
-
-[node name="Plant Spawner7" parent="." instance=ExtResource("6_tksou")]
-position = Vector2(280, -487)
+position = Vector2(-559, -579)
 
 [connection signal="bake_finished" from="." to="." method="_on_baking_done"]
 [connection signal="tile_update" from="Ground" to="." method="_on_tile_update"]

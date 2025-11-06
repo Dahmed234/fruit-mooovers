@@ -103,6 +103,12 @@ func _ready():
 	#get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom
 	# Sort out dynamic UI placement to handle window size changing
 	initialWindowSize = get_viewport().get_visible_rect().size
+	
+	
+	## connects all fruit spawners to this nodes respawn objects signal
+	get_tree().get_nodes_in_group("fruitSpawners").map(func(spawner):
+			respawnObjects.connect(spawner.spawn)
+	)
 
 
 func _on_player_player_dies() -> void:

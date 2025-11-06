@@ -23,16 +23,19 @@ var currentItem = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
 	spawn(0)
-	label.respawnObjects.connect(spawn)
+	
+	## this is bad and defeats the purpose of signals :/ 
+	## bro should NOT know  abt the label thats labels job
+	#label.respawnObjects.connect(spawn)
 
 func spawn(day):
 	if !currentItem:
 		var nItem = item.instantiate()
 		currentItem = nItem
-		nItem.value = value
-		nItem.followerValue = followerValue
-		nItem.weight = weight
+		#nItem.value = value
+		#nItem.followerValue = followerValue
+		#nItem.weight = weight
 		nItem.global_position = global_position
 		# Set the position on the sprite sheet to the correct sprite, or default to "apple"
 		nItem.find_child("Sprite2D").region_rect.position = sprites[sprite if sprite else "apple"] 
-		get_parent().add_child(nItem)
+		get_parent().add_child.call_deferred(nItem)
