@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwcpcthxmi484"]
+
+[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scenes/ui/Scoreholder.gd" id="1_dj8aq"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_inpio"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -360.0
+offset_right = 1693.0
+offset_bottom = 891.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.135
+anchor_bottom = 0.163
+offset_right = 52.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Score: 
+Day:
+Time"
+script = ExtResource("1_dj8aq")
+day_length = 80.0
+
+[node name="CowLabel" type="Label" parent="Control/Label"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 34.0
+offset_top = 88.0
+offset_right = 74.0
+offset_bottom = 116.0
+theme_override_font_sizes/font_size = 20
+text = "x 0"
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Label"]
+texture_filter = 1
+position = Vector2(17, 97)
+scale = Vector2(2, 2)
+texture = ExtResource("1_inpio")
+region_enabled = true
+region_rect = Rect2(432, 111, 16, 16)

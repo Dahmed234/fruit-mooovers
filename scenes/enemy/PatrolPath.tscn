@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://chkwm03v4g410"]
+
+[ext_resource type="Script" uid="uid://cw0swlqwp3ofw" path="res://scenes/enemy/PatrolPath.gd" id="1_6cvhe"]
+[ext_resource type="PackedScene" uid="uid://dubxgy63fric7" path="res://scenes/enemy/PatrolPathNode.tscn" id="2_6cvhe"]
+[ext_resource type="PackedScene" uid="uid://8y7gjhthiwsc" path="res://scenes/enemy/Enemy.tscn" id="3_gk82p"]
+
+[node name="Patrol path" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_6cvhe")
+path_node = ExtResource("2_6cvhe")
+enemy = ExtResource("3_gk82p")

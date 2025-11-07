@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://kvexn7i2mmmy"]
+
+[ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scenes/items/DestructableItem.gd" id="1_3hrdc"]
+[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="2_jr6qx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hrdc"]
+size = Vector2(64, 64)
+
+[node name="Destructable Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_3hrdc")
+weight = 1.0
+label = NodePath("Label")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tbgi4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3hrdc")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/0"
+horizontal_alignment = 1
+
+[node name="Bar" parent="." instance=ExtResource("2_jr6qx")]
+position = Vector2(0, -40)

@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://ca8kwae33nfxd"]
+
+[ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
+[ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
+[ext_resource type="Texture2D" uid="uid://c46uv3a4y1ogs" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="2_wuy1y"]
+[ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scenes/player/whistle.gd" id="4_p3xyx"]
+[ext_resource type="Texture2D" uid="uid://c6x4ey8dxp7dc" path="res://assets/lights/Light texture transparent.png" id="5_wuy1y"]
+[ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scenes/ui/throw_marker.gd" id="6_1nynx"]
+[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="7_64pgi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
+radius = 6.8761363
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glu7e"]
+radius = 221.90314
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glu7e"]
+size = Vector2(65.333336, 40.666668)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wuy1y"]
+radius = 150.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_glu7e"]
+vertices = PackedVector2Array(-2.9375, -24.5625, -6.546875, -34.8125, 20.117188, -32.351563, 15.671875, -24.34375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-21.162271, -46.204296, 36.328568, -40.913727, 21.514977, -14.284536, -10.052078, -14.63724)])
+sample_partition_type = 1
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 4
+script = ExtResource("1_glu7e")
+speed = 300.0
+throwDistance = 500.0
+health = 20.0
+
+[node name="physics Collision2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_p3xyx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_wuy1y")
+region_enabled = true
+region_rect = Rect2(407, 16, 18, 17)
+
+[node name="Radii" type="CharacterBody2D" parent="."]
+collision_layer = 0
+
+[node name="Throw Radius" type="Area2D" parent="Radii"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_p3xyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/Throw Radius"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_glu7e")
+
+[node name="visible pikmin" type="Area2D" parent="Radii"]
+position = Vector2(-136, -149)
+scale = Vector2(4.62638, 3.489611)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/visible pikmin"]
+position = Vector2(28.74818, 8.596945)
+shape = SubResource("RectangleShape2D_glu7e")
+
+[node name="whistleBox" type="Area2D" parent="Radii"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_p3xyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/whistleBox"]
+shape = SubResource("CircleShape2D_wuy1y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Radii/whistleBox/CollisionShape2D"]
+modulate = Color(1, 1, 1, 0.39215687)
+scale = Vector2(1.37, 1.37)
+texture = ExtResource("5_wuy1y")
+
+[node name="Enemy detection box" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy detection box"]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_p3xyx")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-42.999996, 108)
+scale = Vector2(5.6704693, 5.6704693)
+navigation_polygon = SubResource("NavigationPolygon_glu7e")
+navigation_layers = 2
+
+[node name="Sprite throw marker" type="Sprite2D" parent="."]
+z_index = 2
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_wuy1y")
+region_enabled = true
+region_rect = Rect2(646, 339, 16, 17)
+script = ExtResource("6_1nynx")
+
+[node name="Bar" parent="." instance=ExtResource("7_64pgi")]
+position = Vector2(0, -35)

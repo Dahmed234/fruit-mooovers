@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
+
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://scenes/ui/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="PackedScene" uid="uid://c3vt5n5ryojtw" path="res://scenes/maps/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://scenes/enemy/PatrolPath.tscn" id="6_ctulv"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
+[ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
+[ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://scenes/ui/ui.gd" id="11_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
+
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
+texture_filter = 1
+script = ExtResource("1_27h4a")
+thown = ExtResource("2_vwfvy")
+splashText = ExtResource("3_s70h5")
+goal = NodePath("goal")
+player = NodePath("Player")
+
+[node name="NavigationRegion2D" parent="." instance=ExtResource("4_vw0bo")]
+
+[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
+offset_left = -39.0
+offset_top = 128.0
+offset_right = 1.0
+offset_bottom = 168.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Patrol path" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(599, -160)
+scale = Vector2(1, 1)
+path_length = 5
+node_distance = 250.0
+enemy_count = 1.5
+path_angle = 0.785
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Patrol path2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(-607, -611)
+scale = Vector2(1, 1)
+path_length = 2
+node_distance = 1300.0
+enemy_count = 1.0
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Patrol path3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(1149, -346)
+scale = Vector2(1, 1)
+path_length = 3
+node_distance = 400.0
+enemy_count = 2.0
+path_angle = 0.785
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Patrol path4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_ctulv")]
+position = Vector2(669, -414)
+scale = Vector2(1, 1)
+path_length = 2
+node_distance = 400.0
+enemy_count = 0.2
+target = {
+NodePath("../Player"): true
+}
+
+[node name="Player" parent="." instance=ExtResource("7_b6xl3")]
+
+[node name="goal" parent="." instance=ExtResource("10_27h4a")]
+position = Vector2(76.63, 0)
+
+[node name="UI" parent="." instance=ExtResource("10_s70h5")]
+script = ExtResource("11_vwfvy")
+
+[node name="Control" parent="UI" index="0"]
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 1273.0
+offset_bottom = 711.0
+
+[node name="Settings" parent="UI/Control" index="1" instance=ExtResource("12_s70h5")]
+visible = false
+layout_mode = 0
+
+[connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
+[connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path" method="newDay"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path2" method="newDay"]
+[connection signal="respawnObjects" from="UI/Control/Label" to="Patrol path3" method="newDay"]
+[connection signal="pressed" from="UI/Control/Settings/Resume" to="." method="_onResume"]
+[connection signal="pressed" from="UI/Control/Settings/Quit" to="." method="_onQuit"]
+
+[editable path="Player"]
+[editable path="UI"]
+[editable path="UI/Control/Settings"]
