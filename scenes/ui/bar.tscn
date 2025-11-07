@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0oriyclogl46"]
 
-[ext_resource type="Script" uid="uid://ropst8gl33df" path="res://scripts/bar.gd" id="1_cpkpc"]
+[ext_resource type="Script" uid="uid://ropst8gl33df" path="res://scenes/ui/bar.gd" id="1_gr2fh"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_1nynx"]
 
 [node name="Bar" type="Node2D"]
-script = ExtResource("1_cpkpc")
+script = ExtResource("1_gr2fh")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)

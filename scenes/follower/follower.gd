@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 class_name Follower
-const scene :PackedScene = preload("res://prefabs/Follower.tscn")
+const scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
 
 signal carryFinished(item :Carryable)
 signal carryDropped(item: ItemData)

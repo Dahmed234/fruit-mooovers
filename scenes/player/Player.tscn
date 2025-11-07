@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://ca8kwae33nfxd"]
 
-[ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scripts/Player.gd" id="1_glu7e"]
-[ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scripts/ThrowController.gd" id="2_p3xyx"]
+[ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
+[ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c46uv3a4y1ogs" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="2_wuy1y"]
-[ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scripts/Whistle.gd" id="4_p3xyx"]
+[ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scenes/player/whistle.gd" id="4_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c6x4ey8dxp7dc" path="res://assets/lights/Light texture transparent.png" id="5_wuy1y"]
-[ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scripts/throw_marker.gd" id="6_1nynx"]
-[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://prefabs/bar.tscn" id="7_64pgi"]
+[ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scenes/ui/throw_marker.gd" id="6_1nynx"]
+[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="7_64pgi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
 radius = 6.8761363

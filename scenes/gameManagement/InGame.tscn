@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://eb0mqkobwsnn"]
 
-[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scripts/inGame.gd" id="1_27h4a"]
-[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://prefabs/ThrownObject.tscn" id="2_vwfvy"]
-[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://prefabs/SplashText.tscn" id="3_s70h5"]
-[ext_resource type="PackedScene" uid="uid://5i0c13y6xquo" path="res://Maps/Level1DRAFT.tscn" id="4_vwfvy"]
-[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://prefabs/PatrolPath.tscn" id="6_ctulv"]
-[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://prefabs/Player.tscn" id="7_b6xl3"]
-[ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://prefabs/Goal.tscn" id="10_27h4a"]
-[ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://prefabs/UI.tscn" id="10_s70h5"]
-[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://prefabs/help.tscn" id="10_vwfvy"]
-[ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://scripts/ui.gd" id="11_vwfvy"]
-[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/settings.tscn" id="12_s70h5"]
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://scenes/ui/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="PackedScene" uid="uid://c3vt5n5ryojtw" path="res://scenes/maps/TileMap.tscn" id="4_vw0bo"]
+[ext_resource type="PackedScene" uid="uid://chkwm03v4g410" path="res://scenes/enemy/PatrolPath.tscn" id="6_ctulv"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
+[ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
+[ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://scenes/ui/ui.gd" id="11_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
 
 [node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
@@ -20,7 +20,7 @@ splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
 player = NodePath("Player")
 
-[node name="NavigationRegion2D2" parent="." instance=ExtResource("4_vwfvy")]
+[node name="NavigationRegion2D" parent="." instance=ExtResource("4_vw0bo")]
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -39.0
@@ -73,7 +73,6 @@ NodePath("../Player"): true
 }
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
-speed = 400.0
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
 position = Vector2(76.63, 0)

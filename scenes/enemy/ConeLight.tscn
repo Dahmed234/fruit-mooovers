@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://1b0407sitqmb"]
 
 [ext_resource type="Texture2D" uid="uid://ckb42jr0si37p" path="res://assets/lights/Light texture transparent cone.png" id="1_ii706"]
-[ext_resource type="Script" uid="uid://320esswnfvx8" path="res://scripts/ConeLight.gd" id="2_0jmpm"]
-[ext_resource type="Script" uid="uid://b8onf438xirjs" path="res://scripts/ConeSprite.gd" id="3_4r6yf"]
+[ext_resource type="Script" uid="uid://320esswnfvx8" path="res://scenes/enemy/ConeLight.gd" id="2_0jmpm"]
+[ext_resource type="Script" uid="uid://b8onf438xirjs" path="res://scenes/enemy/ConeSprite.gd" id="3_4r6yf"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ii706"]
 points = PackedVector2Array(20, -40, 100, -200, 0, -256, -100, -200, -20, -40, -40, 0, 0, 40, 40, 0)

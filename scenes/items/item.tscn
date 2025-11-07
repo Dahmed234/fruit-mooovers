@@ -1,15 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2t31yxm0wwmr"]
 
-[ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scripts/Carryable.gd" id="1_lopi8"]
-[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_lopi8"]
+[ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scenes/items/Carryable.gd" id="1_jgeia"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_fat2f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
 radius = 19.026299
 
 [node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
-script = ExtResource("1_lopi8")
-followerValue = 20
-weight = 1.0
+script = ExtResource("1_jgeia")
 label = NodePath("Label")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -22,7 +20,7 @@ shape = SubResource("CircleShape2D_tbgi4")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(3, 3)
-texture = ExtResource("2_lopi8")
+texture = ExtResource("2_fat2f")
 region_enabled = true
 region_rect = Rect2(528, 288, 15, 16)
 

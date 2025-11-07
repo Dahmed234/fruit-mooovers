@@ -68,7 +68,7 @@ func getTime() -> String:
 
 # Logic to go back to main menu, reset score etc
 func restartGame():
-	gameOver = load("res://scenes/GameOver.tscn").instantiate()
+	gameOver = load("res://scenes/gameManagement/GameOver.tscn").instantiate()
 	gameOver.label.text = "Game Over
 	Score: " + str(totalScore) + "
 	Total cows: " + str(cowScore)

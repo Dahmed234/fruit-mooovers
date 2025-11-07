@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 
 
 func _onTryAgain() -> void:
-	mainMenu = load("res://scenes/MainMenu.tscn").instantiate()
+	mainMenu = load("res://scenes/gameManagement/MainMenu.tscn").instantiate()
 	get_tree().root.add_child(mainMenu)
 	queue_free()
 

@@ -51,6 +51,8 @@ func move(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	bar.fullness = health / max_health
+	
+	
 	if health <= 0: die()
 	move(delta)
 	

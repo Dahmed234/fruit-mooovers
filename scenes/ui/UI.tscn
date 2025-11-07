@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwcpcthxmi484"]
 
-[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scripts/Scoreholder.gd" id="1_dj8aq"]
+[ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scenes/ui/Scoreholder.gd" id="1_dj8aq"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_inpio"]
 
 [node name="UI" type="CanvasLayer"]
