@@ -51,7 +51,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if followersCarrying.size() > 0:
 		position = followersCarrying.keys()[0].position
-		
+
 func dropAll(dead):
 	for cow in followersCarrying.keys():
 		cow.stopCarrying()
