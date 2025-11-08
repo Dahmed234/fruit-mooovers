@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
 [ext_resource type="Script" uid="uid://bey0d3rbrvjdy" path="res://scenes/ui/ui.gd" id="11_vwfvy"]
-[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
+[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings old.tscn" id="12_s70h5"]
 
 [node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
