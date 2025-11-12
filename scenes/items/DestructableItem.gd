@@ -62,9 +62,12 @@ func onDrop(carrying: CharacterBody2D):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	root = get_node("/root/In Game")
+	
+	#root = get_node("/root/In Game")
+	#carryFinished.connect(root.onCarryFinish)
+	
 	label.text = "0/" + str(int(weight))
-	carryFinished.connect(root.onCarryFinish)
+	
 	if isEnemy: 
 		$CollisionShape2D.disabled = true
 	else:
@@ -106,6 +109,7 @@ func destroy():
 	
 	for cow in followersCarrying.keys():
 		cow.stopCarrying()
+	
 	
 	
 	queue_free()
