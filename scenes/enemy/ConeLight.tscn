@@ -14,7 +14,7 @@ script = ExtResource("2_0jmpm")
 flicker = 0.001
 pulse_rate = 1000.0
 pulse_amount = 0.05
-turn_speed = 1.0
+turn_speed = 40.0
 size = 2.0
 chaseTime = 5.0
 

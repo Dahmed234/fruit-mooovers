@@ -1,8 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://doqc1gqfip2ts"]
+[gd_scene load_steps=4 format=3 uid="uid://doqc1gqfip2ts"]
 
 [ext_resource type="Script" uid="uid://coplwe87hs5m5" path="res://scenes/enemy/PlantSpawner.gd" id="1_0ep07"]
-[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/item.tscn" id="2_hlg0l"]
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="2_hlg0l"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="3_00xlj"]
 
 [node name="Plant Spawner" type="Node2D" groups=["fruitSpawners"]]
 script = ExtResource("1_0ep07")
 item = ExtResource("2_hlg0l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_00xlj")
+region_enabled = true
+region_rect = Rect2(624, 160, 16, 16)
