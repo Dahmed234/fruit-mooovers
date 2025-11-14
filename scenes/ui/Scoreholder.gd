@@ -97,6 +97,9 @@ func _process(delta: float) -> void:
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
 	Day: " + str(day+1) + "
 	Time: " + getTime()
+	
+	$ProgressBar.max_value = quota
+	$ProgressBar.value = score
 	cow_label.text = "x " + str(cowScore)
 
 func _ready():

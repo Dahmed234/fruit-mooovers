@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwcpcthxmi484"]
+[gd_scene load_steps=8 format=3 uid="uid://bwcpcthxmi484"]
 
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scenes/ui/Scoreholder.gd" id="1_dj8aq"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_inpio"]
+
+[sub_resource type="Theme" id="Theme_m01cm"]
+
+[sub_resource type="Gradient" id="Gradient_m01cm"]
+colors = PackedColorArray(0.39476156, 0.48033333, 0.5763772, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nnfdp"]
+gradient = SubResource("Gradient_m01cm")
+fill_from = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_s64wo"]
+colors = PackedColorArray(0.9825066, 0, 0.38566417, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dqg8s"]
+gradient = SubResource("Gradient_s64wo")
+fill_from = Vector2(0.4920635, 0.375)
+fill_to = Vector2(0, 1)
 
 [node name="UI" type="CanvasLayer"]
 
@@ -30,11 +47,20 @@ offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
-text = "Score: 
+text = "Score: 0/0
 Day:
 Time"
 script = ExtResource("1_dj8aq")
 day_length = 80.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/Label"]
+layout_mode = 0
+offset_left = 199.0
+offset_right = 386.0
+offset_bottom = 27.0
+theme = SubResource("Theme_m01cm")
+value = 3.0
+rounded = true
 
 [node name="CowLabel" type="Label" parent="Control/Label"]
 texture_filter = 1
@@ -53,3 +79,16 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_inpio")
 region_enabled = true
 region_rect = Rect2(432, 111, 16, 16)
+
+[node name="ProgressBar2" type="TextureProgressBar" parent="Control/Label"]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 59.0
+offset_right = 386.0
+offset_bottom = 86.0
+theme = SubResource("Theme_m01cm")
+value = 50.0
+rounded = true
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_nnfdp")
+texture_progress = SubResource("GradientTexture2D_dqg8s")

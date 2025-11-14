@@ -21,6 +21,7 @@ var currentItem = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
+	$Sprite2D.hide()
 	spawn(0)
 	
 	## this is bad and defeats the purpose of signals :/ 

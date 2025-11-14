@@ -2,13 +2,26 @@ extends NavigationRegion2D
 @onready var navMap: TileMapLayer = $"Ground"
 
 
+
+@export
+var cachedMap :NavigationMeshSourceGeometryData2D
 func rebake():
 	bake_navigation_polygon(true)
 	pass
 	
 func _ready() -> void:
+	get_tree().get_nodes_in_group("destroyableWall").map(func(i) :
+			i.requestDestroy.connect(_on_object_destroyed))
+
+	#navMap.notify_runtime_tile_data_update()
+	pass
+
+
+func _on_object_destroyed(wall :Node2D):
+	wall.queue_free()
 	
-	navMap.notify_runtime_tile_data_update()
+	await get_tree().physics_frame
+	rebake()
 	pass
 
 
