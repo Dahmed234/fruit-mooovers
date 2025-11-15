@@ -18,15 +18,6 @@ var current_health := max_health
 func getSpriteInfo() -> Sprite2D:
 	return $Sprite2D
 
-func onPickup(carrying: CharacterBody2D):
-	followersCarrying[carrying] = true
-
-
-func dropAll(dead):
-	for cow in followersCarrying.keys():
-		cow.stopCarrying()
-		
-	followersCarrying.erase(dead)
 
 func onDrop(carrying: CharacterBody2D):
 	followersCarrying.erase(carrying)
@@ -59,8 +50,7 @@ func hasCapacity() -> bool:
 
 func destroy():
 	
-	for cow in followersCarrying.keys():
-		cow.stopCarrying()
+	dropAll()
 		
 	# request parent to destroy it : may need to update parent
 	requestDestroy.emit(self)

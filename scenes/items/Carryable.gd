@@ -14,29 +14,11 @@ func _process(delta: float) -> void:
 
 func _on_first_follower_added() -> void:
 	# Disable collisions and hide the item when picked up
+	hide()
 	var shape := $CollisionShape2D
 	if shape:
 		shape.disabled = true
-@export var itemData :ItemData
 
-
-@export
-var label: Label
-# List of all carrying cows, stores in a set so O(1) time to add / remove carrying followers
-var followersCarrying: Dictionary[CharacterBody2D,bool] = {}
-
-var main_follower
-
-#var carrying: CharacterBody2D
-
-func getSpriteInfo() -> Sprite2D:
-	return $Sprite2D
-
-func onPickup(carrying: CharacterBody2D):
-	if followersCarrying.is_empty():
-		$CollisionShape2D.disabled = true
-	followersCarrying[carrying] = true
-	hide()
 
 
 func _on_no_followers_left() -> void:
