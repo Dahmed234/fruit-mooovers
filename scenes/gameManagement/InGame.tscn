@@ -122,16 +122,16 @@ position = Vector2(64, -257)
 position = Vector2(260, -41)
 
 [node name="Plant Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-478, 86)
+position = Vector2(-501, 10)
 
 [node name="Plant Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-282, 415)
+position = Vector2(-371, 323)
 
 [node name="Plant Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(10, 440)
+position = Vector2(-177, 161)
 
 [node name="Plant Spawner7" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(369, 314)
+position = Vector2(378, -101)
 
 [node name="Plant Spawner12" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1220, -990)
@@ -146,7 +146,25 @@ position = Vector2(-1167, -997)
 position = Vector2(562, 188)
 
 [node name="Plant Spawner8" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-517, 315)
+position = Vector2(-539, 234)
+
+[node name="Apple Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(603, -228)
+
+[node name="Apple Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(-452, -162)
+
+[node name="Apple Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(329, -418)
+
+[node name="Apple Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(292, -217)
+
+[node name="Apple Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(-213, -40)
+
+[node name="Apple Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(109, -458)
 
 [node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
 position = Vector2(-1430, 1591)

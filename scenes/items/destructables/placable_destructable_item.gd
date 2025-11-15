@@ -10,6 +10,8 @@ signal requestDestroy(obj :Node2D)
 
 @export
 var max_health := 5.0
+
+@onready
 var current_health := max_health
 
 
