@@ -32,8 +32,8 @@ var currentspeed = BASESPEED
 var SPEEDVARIANCE = 40
 
 # how long character moves in a direction for before wandering
-var TIMERLENGTH =0.5
-var TIMERVARIANCE =0.1
+var TIMERLENGTH = 0.5
+var TIMERVARIANCE = 0.1
 
 # Direction of wandering
 var direction := Vector2.ONE
@@ -72,51 +72,60 @@ enum State {
 	THROWN
 }
 
+
+# Called when this follower becomes the new main carrier of an item
+func on_become_main_follower(item) -> void:
+	if carryingItem == item and (currentState == State.CARRYING or currentState == State.DESTROYING):
+		show()
+
+
 # Is the follower in the player's throw radius?
 func inThrowRange():
-	if !player.throwRadius.throwables: return false
+	if !player.throwRadius.throwables:
+		return false
 	return self in player.throwRadius.throwables
+
 
 # Is the follower in a valid state to be thrown, or in the player's throw radius
 func canBeThrown():
 	match currentState:
-		State.FOLLOW,State.IDLE,State.WANDER: 
+		State.FOLLOW, State.IDLE, State.WANDER:
 			return true
-		_: 
+		_:
 			return false
 
+
 func canBePushed():
-	
 	match currentState:
-		State.FOLLOW,State.IDLE,State.WANDER,State.INITIAL:
+		State.FOLLOW, State.IDLE, State.WANDER, State.INITIAL:
 			return true
-		_: 
+		_:
 			return false
+
 
 func onWhistle():
 	match currentState:
-		State.CARRYING,State.DESTROYING:
+		State.CARRYING, State.DESTROYING:
 			stopCarrying()
 		State.WANDER:
 			endWander()
 			startFollow()
 
+
 # initialises a new follower with given parameters
-static func newFollower(pos,startingState: State):
+static func newFollower(pos, startingState: State):
 	var follower :Follower = scene.instantiate()
-	
 	follower.currentState = startingState
 	follower.global_position = pos
-	# Add follower to the enemy target list
 	return follower
 
-func damage(enemy_damage,delta):
+
+func damage(enemy_damage, delta):
 	match currentState:
 		State.CARRYING, State.DESTROYING:
-			# If the 1st follower to pick up the item is alive, send damage to them
-			if carryingItem.main_follower:
+			# If the main follower for the carried item is alive, send damage to them
+			if carryingItem and carryingItem.main_follower:
 				carryingItem.main_follower.health -= delta * enemy_damage
-			# Else take damage as normal
 			else:
 				health -= delta * enemy_damage
 		_:
@@ -124,17 +133,23 @@ func damage(enemy_damage,delta):
 
 
 func die() -> void:
-	match currentState:
-		State.DESTROYING,State.CARRYING:
-			carryingItem.dropAll(self)
-		State.THROWN:
-			stopThrow()
-		_:
-			pass
+	# If we are carrying/destroying something, only WE drop it;
+	# other followers continue carrying. The item will promote the next main follower.
+	if carryingItem:
+		var item = carryingItem
+		carryingItem = null
+		if item.has_method("onDrop"):
+			item.onDrop(self)
+
+	if currentState == State.THROWN:
+		stopThrow()
+
 	# remove this follower from list of enemies chasing it
 	for cone_light in chasing.keys():
-		if !cone_light: continue
-		if !chasing[cone_light]: continue
+		if !cone_light:
+			continue
+		if !chasing[cone_light]:
+			continue
 		cone_light.clear_target(self)
 	
 	scoreholder.cowScore -= 1
@@ -144,18 +159,21 @@ func die() -> void:
 
 func startWander():
 	show()
-	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
+	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1, 1))
 	currentState = State.WANDER
 	on_timeout()
+
 
 func startInitial():
 	currentState = State.INITIAL
 	show()
 	initState()
 
+
 func startThrown():
 	hide()
 	currentState = State.THROWN
+
 
 func getClosest(objs):
 	var closest = null 
@@ -165,23 +183,20 @@ func getClosest(objs):
 			closest = obj
 			closest_distance = obj.global_position.distance_to(global_position)
 	return closest
+
+
 # Run the initial logic for the given state
 func initState():
 	match currentState:
 		# decide what to do based on surroundings when landing from a throw
 		State.INITIAL:
-			
-			#test to see if items are nearby
-			# get all nearby items
-			var nearbyLoot   = $viewRadius.get_overlapping_areas()
-			var nearbyCarryable: Array
-			var nearbyDestroyable
+			var nearbyLoot = $viewRadius.get_overlapping_areas()
+			var nearbyCarryable: Array = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
+			var nearbyDestroyable: Array = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
 			var closest
-			nearbyCarryable = nearbyLoot.filter(func(item): return item.get_parent() is Carryable)
-			nearbyDestroyable = nearbyLoot.filter(func(item): return item.get_parent() is Destroyable)
-			
+
 			# Check all carriables to see if one has capacity
-			if(!nearbyCarryable.is_empty()):
+			if !nearbyCarryable.is_empty():
 				var found = false
 				while !found and nearbyCarryable:
 					closest = getClosest(nearbyCarryable)
@@ -194,22 +209,25 @@ func initState():
 					carryingItem = obtainedItem
 					startCarry(obtainedItem)
 					return
+
 			# Check all destroyables to see if one has capacity
 			if !nearbyDestroyable.is_empty():
-				var found = false
-				while !found and nearbyDestroyable:
+				var found_destroy = false
+				while !found_destroy and nearbyDestroyable:
 					closest = getClosest(nearbyDestroyable)
 					if closest.get_parent().hasCapacity(): 
-						found = true
+						found_destroy = true
 					else:
 						nearbyDestroyable.erase(closest)
-				if found:
-					var obtainedItem :Destroyable = getClosest(nearbyDestroyable).get_parent()
-					carryingItem = obtainedItem
-					startDestroy(obtainedItem)
+				if found_destroy:
+					var obtainedDestroy :Destroyable = getClosest(nearbyDestroyable).get_parent()
+					carryingItem = obtainedDestroy
+					startDestroy(obtainedDestroy)
 					return
+
 			# If none exist, wander instead
 			startWander()
+
 		State.WANDER:
 			startWander()
 		State.FOLLOW:
@@ -219,25 +237,27 @@ func initState():
 		_:
 			startWander()
 
+
 func _ready() -> void:
 	max_health = health
 	$heldItem/Sprite.texture = null
 	label.hide()
 	
-	#need to wait for all physics components to load in
-	# idk why exactly but DO NOT TOUCH THESE OR CARRYING WILL BREAK
+	# need to wait for all physics components to load in
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 
 	initState()
 
-func startCarry(item : Carryable) -> void:
+
+func startCarry(item :Carryable) -> void:
 	$heldItem.show()
-	$heldItem.modulate = Color(1,1,1)
+	$heldItem.modulate = Color(1, 1, 1)
 	label.show()
 	
-	#setup sprite
 	currentState = State.CARRYING
+
+	# setup sprite
 	var currentSprite = $heldItem/Sprite
 	var newSprite = item.getSpriteInfo()
 	currentSprite.texture = newSprite.texture
@@ -254,45 +274,56 @@ func startCarry(item : Carryable) -> void:
 	label.position.y = 10.0
 	
 	item.onPickup(self)
-	
-	if item.followersCarrying.size() > 1:
+
+	# Only the main follower should be visible while carrying
+	if item.main_follower != self:
 		hide()
 	else:
-		item.main_follower = self
+		show()
 	
-	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,4,true)
 	# navigate to goal flag
 	navigation_agent_2d.target_position = goal.global_position
 
+
 func startDestroy(item: Destroyable) -> void:
 	label.hide()
-	# Show the label
-	if item.followersCarrying.size() > 1:
+
+	# Set main follower / follower list via item itself
+	item.onPickup(self)
+
+	# Only main follower visible while destroying
+	if item.main_follower != self:
 		hide()
 	else:
-		item.main_follower = self
+		show()
 	
 	currentState = State.DESTROYING
 	# Ensure the follower snaps above the item so it doesn't move when destroying it
-	global_position = item.global_position - Vector2(0.0,ITEM_HEIGHT)
-	item.onPickup(self)
+	global_position = item.global_position - Vector2(0.0, ITEM_HEIGHT)
 	
 	# Disable collision with other followers
 	navigation_agent_2d.avoidance_mask = 0
 
+
 func startThrow():
 	pass
 
+
 func stopThrow():
 	thrower.stopThrow()
+
 
 func stopCarrying():
 	show()
 	$heldItem.hide()
 	label.hide()
 	velocity = Vector2.ZERO
-	carryingItem.onDrop(self)
-	carryingItem = null
+
+	if carryingItem:
+		var item = carryingItem
+		carryingItem = null
+		if item.has_method("onDrop"):
+			item.onDrop(self)
 	
 	navigation_agent_2d.avoidance_mask = 1
 	
@@ -303,73 +334,81 @@ func stopCarrying():
 func actor_setup():
 	await get_tree().physics_frame
 
+
 func _physics_process(delta: float) -> void:
 	bar.fullness = health / max_health
-	if health <= 0: die()
-	modulate.a = 1
-	if canBeThrown(): modulate.a = 1.0 if inThrowRange() else 0.6
+	if health <= 0:
+		die()
+
+	modulate.a = 1.0
+	if canBeThrown():
+		modulate.a = 1.0 if inThrowRange() else 0.6
+
 	# Push cows out the way of the player if their state allows it
-	if canBePushed() && global_position.distance_to(player.global_position) < playerDistance:
+	if canBePushed() and global_position.distance_to(player.global_position) < playerDistance:
 		global_position = player.global_position + playerDistance * player.global_position.direction_to(global_position)
+
 	match currentState:
 		State.IDLE:
-			# triggers if follower is close enough to an area on a specific layer
-			# uses specific collision layer to only detect player follower
-			if(!$viewRadius.has_overlapping_areas()) :
+			if !$viewRadius.has_overlapping_areas():
 				startFollow()
 
 		State.WANDER:
 			navigate_to_target(delta)
-			#velocity = 0.1* delta * currentspeed * direction#velocity.slerp(0.4* delta * currentspeed * direction, 0.1)
+
 		State.CARRYING:
-			label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
-			if navigation_agent_2d.is_target_reached():
-				var tmp = carryingItem
-				for cow in carryingItem.followersCarrying.keys():
-					cow.stopCarrying()
-				
-				carryFinished.emit(tmp,position)
-		
-			else:
-				navigation_agent_2d.target_position = goal.global_position
-				navigate_to_target(delta)
+			if carryingItem:
+				label.text = str(int(carryingItem.followersCarrying.size())) + "/" + str(int(carryingItem.weight))
+
+				if navigation_agent_2d.is_target_reached():
+					var tmp = carryingItem
+					# Make all followers drop this item when the destination is reached
+					if tmp and tmp.has_method("dropAll"):
+						tmp.dropAll()
+					carryFinished.emit(tmp, position)
+				else:
+					navigation_agent_2d.target_position = goal.global_position
+					navigate_to_target(delta)
+
 		State.DESTROYING:
-			global_position = carryingItem.global_position - Vector2(0.0,ITEM_HEIGHT)
-			
+			if carryingItem:
+				global_position = carryingItem.global_position - Vector2(0.0, ITEM_HEIGHT)
+
 		State.FOLLOW:
 			navigation_agent_2d.target_position = player.global_position
 			navigate_to_target(delta)
-			#if navigation_agent_2d.is_target_reached():
-			#	startIdle()
-			#else:
 
 	move_and_slide()
 
+
 const CHANGEDIRECTIONDISTANCE = 150.0 
-#initialises states to idle
+
+
+# initialises states to idle
 func startIdle():
 	currentState = State.IDLE
 	velocity = Vector2.ZERO
 
-#initialises state to follow
+
+# initialises state to follow
 func startFollow():
 	currentState = State.FOLLOW
-	#use 4 as layer number as it is value for home point
-	#navAgent.target_position = NavigationServer2D.map_get_random_point(get_world_2d().navigation_map,2,true)
+
 
 func endWander():
-	direction= Vector2.ONE
+	direction = Vector2.ONE
 	velocity = Vector2.ZERO
 	timer.stop()
 
-#used for wander, picks random direction for character to wander to next
+
+# used for wander, picks random direction for character to wander to next
 func on_timeout() -> void:
 	direction = direction.normalized()
-	#pick a random direction
+	# pick a random direction
 	var oldDirection := Vector2(direction)
 	
-	direction.x = randf_range(-1,1)
-	direction.y = randf_range(-1,1)
+	direction.x = randf_range(-1, 1)
+	direction.y = randf_range(-1, 1)
 	direction = direction.normalized()
 	
 	direction.lerp(oldDirection, randf())
@@ -378,16 +417,18 @@ func on_timeout() -> void:
 	if global_position.distance_to(player.global_position) > wanderDistance: 
 		direction = global_position.direction_to(player.global_position)
 	
-	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1,1)
+	currentspeed = BASESPEED + SPEEDVARIANCE * randf_range(-1, 1)
 	
 	navigation_agent_2d.target_position = global_position + direction * currentspeed * TIMERLENGTH / 2
 	
-	#start timer again
-	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1,1))
+	# start timer again
+	timer.start(TIMERLENGTH + TIMERVARIANCE * randf_range(-1, 1))
 
-# Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
+
+# Basic navigation code
 func navigate_to_target(delta: float) -> void:
 	var local_velocity: float
+
 	if !carryingItem:
 		match currentState:
 			State.WANDER:
@@ -396,38 +437,24 @@ func navigate_to_target(delta: float) -> void:
 				local_velocity = 1.0 
 	else:
 		if carryingItem.followersCarrying.size() >= carryingItem.weight:
-			# Set the speed that the object will be moved,this will be between 10% and 40% of regular speed depending on 
-			# How many cows are used
-			local_velocity = 0.4 * min(2.0,carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
+			# Speed while carrying
+			local_velocity = 0.4 * min(2.0, carryingItem.followersCarrying.size() / carryingItem.weight / 2.0)
 		else:
-			# Give visual indicator that item is too heavy
-			pass
-	# Store the current position of the enemy in [current_agent_position]
+			# Give visual indicator that item is too heavy (if you want)
+			local_velocity = 0.0
+
 	var current_agent_position = global_position
-	
-	# Get the next position along the path to the player
 	var next_path_position = navigation_agent_2d.get_next_path_position()
-	
-	#print(current_agent_position.direction_to(next_path_position),current_agent_position,next_path_position)
-	
-	# Get the vector moving towards the next path position
 	var new_velocity = local_velocity * currentspeed * delta * current_agent_position.direction_to(next_path_position)
 	
-	
-	# Logic for when the enemy reaches the player (i.e. attack them)
 	if navigation_agent_2d.is_navigation_finished():
 		return
 	
-	
-	# Apply the velocity to the enemy
 	if navigation_agent_2d.avoidance_enabled:
 		navigation_agent_2d.set_velocity(new_velocity)
-	
-	# Else calculate a "safe" velocity and apply that
 	else:
 		_on_navigation_agent_2d_velocity_computed(new_velocity)
 	
 	
-		
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity

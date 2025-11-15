@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://kvexn7i2mmmy"]
 
-[ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scenes/items/DestructableItem.gd" id="1_3hrdc"]
+[ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scenes/items/Destructable.gd" id="1_3hrdc"]
 [ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="2_jr6qx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
