@@ -3,8 +3,6 @@ extends Node2D
 @export
 var item: PackedScene
 
-@onready var label: Label = $"../UI/Control/Label"
-
 var sprites : Dictionary[String,Vector2] = {
 	"apple" : Vector2(528,288),
 	"pear" : Vector2(544,288),
@@ -12,6 +10,7 @@ var sprites : Dictionary[String,Vector2] = {
 	"fish" : Vector2(528,272),
 	"meat" : Vector2(528,256)
 }
+
 
 
 var value: float
@@ -22,17 +21,21 @@ var currentItem = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
+	$Sprite2D.hide()
 	spawn(0)
-	label.respawnObjects.connect(spawn)
+	
+	## this is bad and defeats the purpose of signals :/ 
+	## bro should NOT know  abt the label thats labels job
+	#label.respawnObjects.connect(spawn)
 
 func spawn(day):
 	if !currentItem:
 		var nItem = item.instantiate()
 		currentItem = nItem
-		nItem.value = value
-		nItem.followerValue = followerValue
-		nItem.weight = weight
+		#nItem.value = value
+		#nItem.followerValue = followerValue
+		#nItem.weight = weight
 		nItem.global_position = global_position
 		# Set the position on the sprite sheet to the correct sprite, or default to "apple"
-		nItem.find_child("Sprite2D").region_rect.position = sprites[sprite if sprite else "apple"] 
-		get_parent().add_child(nItem)
+		# Item.find_child("Sprite2D").region_rect.position = sprites[sprite if sprite else "apple"] 
+		get_parent().add_child.call_deferred(nItem)

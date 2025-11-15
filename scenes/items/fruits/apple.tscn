@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4vmf1bx5jtnk"]
+
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_5ty7o"]
+
+[node name="Item" instance=ExtResource("1_5ty7o")]
+value = 5
+followerValue = 2
+
+[node name="Sprite2D" parent="." index="1"]
+region_rect = Rect2(528, 288, 16, 16)

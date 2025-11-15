@@ -136,7 +136,7 @@ func update_alert(delta: float) -> void:
 		current_state = State.PATROLLING
 
 # Update the navigation target position, throw an error if state is invalid
-func update_target(delta: float) -> void:
+func _update_target(delta: float) -> void:
 	update_alert(delta)
 	update_available_targets(delta)
 	line.hide()
@@ -205,7 +205,7 @@ func navigate_to_target(delta: float) -> void:
 	var next_path_position = navigation_agent_2d.get_next_path_position()
 	
 	# Get the vector moving towards the next path position
-	var new_velocity = local_speed * speed * delta * current_agent_position.direction_to(next_path_position)
+	var new_velocity = local_speed * speed  * current_agent_position.direction_to(next_path_position)
 	
 	# Logic for when the enemy reaches the player (i.e. attack them)
 	if navigation_agent_2d.is_navigation_finished():
@@ -222,7 +222,7 @@ func navigate_to_target(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	# Update where the enemy is targeting based on its state
-	update_target(delta)
+	_update_target(delta)
 
 	# Move towards the target, avoiding obsticals
 	navigate_to_target(delta)

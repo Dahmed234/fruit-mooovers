@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://xgdjf4ckqdf3"]
+
+[ext_resource type="PackedScene" uid="uid://8y7gjhthiwsc" path="res://scenes/enemy/Enemy.tscn" id="1_h25i5"]
+[ext_resource type="Script" uid="uid://buou4tvnmxtho" path="res://scenes/enemy/pathUsingEnemy.gd" id="2_1v4ek"]
+[ext_resource type="Script" uid="uid://chdu3d1i8di5" path="res://scenes/enemy/PathPositionTracker.gd" id="3_tv8jx"]
+[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="4_4hwa7"]
+
+[node name="EnemyPath" type="Path2D"]
+position = Vector2(65, 21)
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("pathPoint") instance=ExtResource("1_h25i5")]
+position = Vector2(-207, -23)
+script = ExtResource("2_1v4ek")
+pathPoint = NodePath("../PathFollow2D")
+DIST_THRESHOLD = 10.0
+shoot_length = null
+shoot_cooldown = null
+
+[node name="Cone light" parent="Enemy" index="2"]
+rotation = -6.2831855
+
+[node name="NavigationAgent2D" parent="Enemy" index="3"]
+debug_enabled = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(1, -1)
+rotation = -0.075470395
+loop = false
+script = ExtResource("3_tv8jx")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
+visible = false
+texture = ExtResource("4_4hwa7")
+
+[editable path="Enemy"]
+[editable path="Enemy/Cone light"]
+[editable path="Enemy/Destructable Item"]
