@@ -113,10 +113,10 @@ curve = SubResource("Curve2D_1vlao")
 [node name="Node2D" type="Node2D" parent="Fruits"]
 
 [node name="Plant Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-182, -218)
+position = Vector2(-1352, -201)
 
 [node name="Plant Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(64, -257)
+position = Vector2(241, -497)
 
 [node name="Plant Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(260, -41)
@@ -131,7 +131,7 @@ position = Vector2(-371, 323)
 position = Vector2(-177, 161)
 
 [node name="Plant Spawner7" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(378, -101)
+position = Vector2(478, 1)
 
 [node name="Plant Spawner12" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1220, -990)
@@ -143,7 +143,7 @@ position = Vector2(-1204, -1093)
 position = Vector2(-1167, -997)
 
 [node name="Plant Spawner9" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(562, 188)
+position = Vector2(547, -98)
 
 [node name="Plant Spawner8" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-539, 234)
@@ -152,19 +152,19 @@ position = Vector2(-539, 234)
 position = Vector2(603, -228)
 
 [node name="Apple Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-452, -162)
+position = Vector2(242, -612)
 
 [node name="Apple Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(329, -418)
+position = Vector2(417, -672)
 
 [node name="Apple Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(292, -217)
+position = Vector2(366, -514)
 
 [node name="Apple Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-213, -40)
 
 [node name="Apple Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(109, -458)
+position = Vector2(126, -607)
 
 [node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
 position = Vector2(-1430, 1591)

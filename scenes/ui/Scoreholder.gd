@@ -98,6 +98,10 @@ func _process(delta: float) -> void:
 	Day: " + str(day+1) + "
 	Time: " + getTime()
 	
+	
+	$ProgressBar2.max_value = 24 * 60
+	$ProgressBar2.value = int(time/day_length * 24 * 60) - 24 * 60 * day % (24*60) 
+	
 	$ProgressBar.max_value = quota
 	$ProgressBar.value = score
 	cow_label.text = "x " + str(cowScore)
