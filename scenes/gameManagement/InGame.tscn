@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=21 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -12,12 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://xgdjf4ckqdf3" path="res://scenes/enemy/ModifiedPatrolPath.tscn" id="12_8wgn8"]
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
 [ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
+[ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/plant_spawner.tscn" id="12_v6clt"]
+[ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
 
 [sub_resource type="Curve2D" id="Curve2D_q3n58"]
 _data = {
-"points": PackedVector2Array(-45.210243, -157.45636, 45.210243, 157.45636, -70, 237, -161.1979, 147.47893, 161.1979, -147.47893, 222, 173, 177.72302, 143.4256, -177.72302, -143.4256, 427, -158, 0, 0, 0, 0, -70, 237)
+"points": PackedVector2Array(-179.87738, -214.5187, 179.87738, 214.5187, -115, 333, -177.17535, 133.78397, 177.17535, -133.78397, 397, 399, 184.57051, 170.81552, -184.57051, -170.81552, 442, -139, 182.5995, -162.05707, -182.5995, 162.05707, -39, -94, 0, 0, 0, 0, -115, 333)
 }
-point_count = 4
+point_count = 5
 
 [sub_resource type="Curve2D" id="Curve2D_8wgn8"]
 _data = {
@@ -34,7 +36,7 @@ point_count = 6
 [sub_resource type="Curve2D" id="Curve2D_v6clt"]
 bake_interval = 2.0
 _data = {
-"points": PackedVector2Array(-292.24667, 33.82787, 292.24667, -33.82787, -406, -216, -589.37195, -33.417995, 589.37195, 33.417995, 727, -61, -221.4156, -104.19557, 221.4156, 104.19557, 2966, 0, 255.87749, -164.35803, -255.87749, 164.35803, 2084, 1768, 0, 0, 0, 0, 1035, 2140, 273.99283, 4.8927293, -273.99283, -4.8927293, 626, 2403, 146.78188, 68.49821, -146.78188, -68.49821, 147, 2473, 0, 0, 0, 0, -195, 2163, -414.9989, 261.4493, 414.9989, -261.4493, -406, -216)
+"points": PackedVector2Array(-292.24667, 33.82787, 292.24667, -33.82787, -406, -216, -589.37195, -33.417995, 589.37195, 33.417995, 727, -61, -221.4156, -104.19557, 221.4156, 104.19557, 2966, 0, 255.87749, -164.35803, -255.87749, 164.35803, 2327, 1071, 0, 0, 0, 0, 2153, 959, 273.99283, 4.8927293, -273.99283, -4.8927293, 1477, 919, 146.78188, 68.49821, -146.78188, -68.49821, 895, 902, 0, 0, 0, 0, 156, 951, -414.9989, 261.4493, 414.9989, -261.4493, -406, -216)
 }
 point_count = 9
 
@@ -61,19 +63,21 @@ player = NodePath("Player")
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
-offset_left = -39.0
-offset_top = 128.0
-offset_right = 1.0
-offset_bottom = 168.0
+offset_left = -766.0
+offset_top = 1148.0
+offset_right = -726.0
+offset_bottom = 1188.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
+position = Vector2(-153, 1052)
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
-position = Vector2(76.63, 0)
+position = Vector2(57, 1020)
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
+visible = false
 script = ExtResource("11_vwfvy")
 
 [node name="Control" parent="UI" index="0"]
@@ -89,11 +93,11 @@ layout_mode = 0
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="EnemyPath2" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(1715, -566)
+position = Vector2(-1822, -156)
 curve = SubResource("Curve2D_q3n58")
 
 [node name="Path2D" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(694, -516)
+position = Vector2(-110, 115)
 curve = SubResource("Curve2D_8wgn8")
 
 [node name="EnemyPath" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -108,30 +112,33 @@ curve = SubResource("Curve2D_v6clt")
 position = Vector2(-1723, 1226)
 curve = SubResource("Curve2D_1vlao")
 
+[node name="EnemyPath5" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
+position = Vector2(-1420, 1693)
+curve = SubResource("Curve2D_ctmcs")
+
 [node name="Fruits" type="Node2D" parent="."]
 
 [node name="Node2D" type="Node2D" parent="Fruits"]
 
-[node name="Plant Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-1352, -201)
+[node name="Plant Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_v6clt")]
+position = Vector2(738, 511)
+item = ExtResource("13_1vlao")
 
-[node name="Plant Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(241, -497)
+[node name="Plant Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
+position = Vector2(-1629, 5)
+item = ExtResource("13_1vlao")
 
 [node name="Plant Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(260, -41)
 
 [node name="Plant Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-501, 10)
+position = Vector2(-368, 866)
 
 [node name="Plant Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-371, 323)
+position = Vector2(-95, 735)
 
 [node name="Plant Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-177, 161)
-
-[node name="Plant Spawner7" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(478, 1)
+position = Vector2(92, 553)
 
 [node name="Plant Spawner12" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1220, -990)
@@ -142,33 +149,11 @@ position = Vector2(-1204, -1093)
 [node name="Plant Spawner10" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1167, -997)
 
-[node name="Plant Spawner9" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(547, -98)
-
 [node name="Plant Spawner8" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-539, 234)
-
-[node name="Apple Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(603, -228)
-
-[node name="Apple Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(242, -612)
-
-[node name="Apple Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(417, -672)
-
-[node name="Apple Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(366, -514)
+position = Vector2(-95, 909)
 
 [node name="Apple Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-213, -40)
-
-[node name="Apple Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(126, -607)
-
-[node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
-position = Vector2(-1430, 1591)
-curve = SubResource("Curve2D_ctmcs")
+position = Vector2(-283, 1065)
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
