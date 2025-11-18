@@ -80,7 +80,7 @@ func _ready() -> void:
 func die() -> void:
 	for cow in cone_light.targets.keys():
 		cow.chasing.erase(cone_light)
-	get_parent().enemy_alive_count -= 1
+	#get_parent().enemy_alive_count -= 1
 	queue_free()
 
 func shoot(target,delta) -> void:
