@@ -1,15 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://damapp5d6nnb2"]
+[gd_scene load_steps=5 format=3 uid="uid://damapp5d6nnb2"]
 
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://scenes/items/DestructableItem.tscn" id="1_abqq1"]
 [ext_resource type="Script" uid="uid://m8hmy5kyiy3y" path="res://scenes/items/destructables/placable_destructable_item.gd" id="2_ai5qa"]
 [ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="3_2uiyy"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_a28m7"]
+font_size = 32
+
 [node name="Destructable Item" groups=["destroyableWall"] instance=ExtResource("1_abqq1")]
 script = ExtResource("2_ai5qa")
 max_health = 5.0
+minimum_followers = 0
 weight = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(1, 1.9999962)
-scale = Vector2(0.421875, 0.4921875)
+scale = Vector2(0.45, 0.45)
 texture = ExtResource("3_2uiyy")
+
+[node name="Label" parent="." index="3"]
+offset_top = -6.0
+offset_bottom = 39.0
+text = "0"
+label_settings = SubResource("LabelSettings_a28m7")

@@ -23,7 +23,7 @@ var isPaused := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(3):
-		spawnFollower($goal.position + Vector2(randf(),randf()),Follower.State.WANDER)
+		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
 	
 func cameraScrolling():
 	var zoom = float(Input.is_action_just_released("camera_zoom_in")) - float(Input.is_action_just_released("camera_zoom_out"))
