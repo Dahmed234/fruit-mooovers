@@ -10,7 +10,7 @@ func _init(_follower):
 func start(item: Carryable) -> void:
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var label: Label = follower.label
-	var held_item = follower.get_node("heldItem")
+	var held_item = follower.get_node("Sprite2D/heldItem")
 
 	held_item.show()
 	held_item.modulate = Color(1, 1, 1)
@@ -24,7 +24,7 @@ func start(item: Carryable) -> void:
 	current_sprite.texture = new_sprite.texture
 	current_sprite.region_rect = new_sprite.region_rect
 	current_sprite.region_enabled = new_sprite.region_enabled
-	current_sprite.transform = new_sprite.transform
+	current_sprite.global_scale = new_sprite.global_scale
 
 	navigation_agent_2d.avoidance_mask = 0
 
@@ -69,7 +69,7 @@ func physics_update(delta: float) -> void:
 
 func stop() -> void:
 	var navigation_agent_2d = follower.navigation_agent_2d
-	var held_item = follower.get_node("heldItem")
+	var held_item = follower.get_node("Sprite2D/heldItem")
 	var label: Label = follower.label
 
 	follower.show()

@@ -45,8 +45,7 @@ avoidance_mask = 2
 
 [node name="Destructable Item" parent="." instance=ExtResource("5_hgomy")]
 isEnemy = true
-value = 250
-followerValue = 3
+followerValue = 1
 weight = 5.0
 
 [node name="Label" parent="Destructable Item" index="2"]

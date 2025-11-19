@@ -215,7 +215,7 @@ func initState():
 
 func _ready() -> void:
 	max_health = health
-	$heldItem/Sprite.texture = null
+	$Sprite2D/heldItem/Sprite.texture = null
 	label.hide()
 	
 	# create behaviours
@@ -262,6 +262,9 @@ func actor_setup():
 
 func _physics_process(delta: float) -> void:
 	bar.fullness = health / max_health
+	
+	$Sprite2D.flip_h = velocity.x < 0
+	
 	if health <= 0:
 		die()
 

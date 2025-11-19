@@ -1,7 +1,7 @@
 extends RefCounted
 class_name FollowerDestroy
 
-var follower
+var follower :Follower
 
 func _init(_follower):
 	follower = _follower

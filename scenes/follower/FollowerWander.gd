@@ -1,7 +1,7 @@
 extends RefCounted
 class_name FollowerWander
 
-var follower
+var follower :Follower
 
 func _init(_follower):
 	follower = _follower
@@ -13,7 +13,7 @@ func start() -> void:
 		follower.TIMERLENGTH + follower.TIMERVARIANCE * randf_range(-1, 1)
 	)
 	follower.currentState = follower.State.WANDER
-	on_timeout()
+	on_timeout() 
 
 
 func end() -> void:

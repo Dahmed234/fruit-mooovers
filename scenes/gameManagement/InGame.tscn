@@ -29,9 +29,9 @@ point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_fg4jm"]
 _data = {
-"points": PackedVector2Array(-60.020496, -276.09427, 60.020496, 276.09427, 770, -147, 75.45434, 39.44204, -75.45434, -39.44204, 515, 147, 139.02464, -207.49945, -139.02464, 207.49945, 256, 323, -336.1491, -242.77437, 336.1491, 242.77437, -93, 581, 0, 0, 0, 0, -78, 18, 0, 0, 0, 0, -143, -140)
+"points": PackedVector2Array(-60.020496, -276.09427, 60.020496, 276.09427, 1864, -117, 80.019325, -99.79008, -80.019325, 99.79008, 1158, 306, 0, 0, 0, 0, 919, 502, 139.02464, -207.49945, -139.02464, 207.49945, 585, 612, 107.398834, 12.417603, -107.398834, -12.417603, -140, 822, 267.0518, 123.25467, -267.0518, -123.25467, -1373, 666, -45.649876, 127.81966, 45.649876, -127.81966, -1243, 280, 0, 0, 0, 0, -1200, -141, 0, 0, 0, 0, -1113, -231, 0, 0, 0, 0, -831, -280, 0, 0, 0, 0, 787, -310, 0, 0, 0, 0, 1864, -117)
 }
-point_count = 6
+point_count = 12
 
 [sub_resource type="Curve2D" id="Curve2D_v6clt"]
 bake_interval = 2.0
@@ -77,7 +77,6 @@ position = Vector2(-153, 1052)
 position = Vector2(57, 1020)
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
-visible = false
 script = ExtResource("11_vwfvy")
 
 [node name="Control" parent="UI" index="0"]
@@ -86,8 +85,10 @@ offset_top = -540.0
 offset_right = 1273.0
 offset_bottom = 711.0
 
+[node name="Label" parent="UI/Control" index="0"]
+day_length = 240.0
+
 [node name="Settings" parent="UI/Control" index="1" instance=ExtResource("12_s70h5")]
-visible = false
 layout_mode = 0
 
 [node name="Enemy Paths" type="Node2D" parent="."]
@@ -101,7 +102,7 @@ position = Vector2(-110, 115)
 curve = SubResource("Curve2D_8wgn8")
 
 [node name="EnemyPath" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1103, -1360)
+position = Vector2(-1060, -184)
 curve = SubResource("Curve2D_fg4jm")
 
 [node name="EnemyPath3" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
