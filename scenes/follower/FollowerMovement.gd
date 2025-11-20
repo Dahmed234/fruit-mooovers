@@ -28,7 +28,8 @@ func navigate_to_target(delta: float) -> void:
 			# Speed while carrying
 			local_velocity = 0.4 * min(
 				2.0,
-				carrying_item.followersCarrying.size() / carrying_item.weight / 2.0
+				carrying_item.followersCarrying.size() / carrying_item.weight / 1.3
+				
 			)
 		else:
 			# Too heavy -> don't move
@@ -38,7 +39,6 @@ func navigate_to_target(delta: float) -> void:
 	var next_path_position = navigation_agent_2d.get_next_path_position()
 	var new_velocity = local_velocity \
 		* follower.currentspeed \
-		* delta \
 		* current_agent_position.direction_to(next_path_position)
 
 	if navigation_agent_2d.avoidance_enabled:

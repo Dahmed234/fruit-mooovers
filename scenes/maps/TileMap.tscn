@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://diccdddr7oddb" path="res://scenes/maps/Wall.tscn" id="4_2n14h"]
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://scenes/items/DestructableItem.tscn" id="5_mcxtf"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="6_mcxtf"]
-[ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/plant_spawner.tscn" id="7_xsnmi"]
+[ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="7_xsnmi"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xsnmi"]
 vertices = PackedVector2Array(828, -444, 828, 380, 324, 380, 324, 60, 260, 60, 260, -196, -700, -444, -132, -196, -700, 380, -132, 132, -4, 380, -4, 132, 252, 380, 68, 380, 68, 132, 252, 132, 1468, -764, 1468, 380, 964, 380, 964, -388, 900, -764, 900, -388, 188, 60, -60, 60, -60, -124, 188, -124, 764, -516, -700, -516, -700, -1148, 764, -1148, 1674.9688, -1568.9688, 1659.0234, 635.0625, 1540, 452, 1540, -836, -1157.8984, 683.9219, -772, 452, -1106.0938, -1551.0234, -772, -1220, 900, -1220, 900, -836)

@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6gpvi"]
-radius = 64.0
+radius = 105.11898
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bihxw"]
 size = Vector2(128, 128)
 
 [node name="Destructable Item" instance=ExtResource("1_6gpvi")]
+collision_layer = 7
 
 [node name="Sprite2D" parent="." index="0"]
 texture_filter = 1
@@ -20,9 +21,7 @@ region_enabled = true
 region_rect = Rect2(288, 96, 16, 16)
 
 [node name="CollisionShape2D2" parent="Area2D" index="0"]
-visible = false
 shape = SubResource("CircleShape2D_6gpvi")
 
 [node name="CollisionShape2D" parent="." index="2"]
-visible = false
 shape = SubResource("RectangleShape2D_bihxw")

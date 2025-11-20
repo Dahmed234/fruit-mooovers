@@ -12,7 +12,7 @@ height = 12.0
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("cone_light")]
 collision_layer = 0
 script = ExtResource("1_duu5m")
-speed = 100.0
+speed = 170.0
 light_level = 64.0
 cone_light = NodePath("Cone light")
 damage = 20.0
