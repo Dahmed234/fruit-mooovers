@@ -78,6 +78,7 @@ goal = NodePath("goal")
 player = NodePath("Player")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
+position = Vector2(-4, -151)
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -1475.0
@@ -94,7 +95,6 @@ position = Vector2(-153, 1052)
 position = Vector2(57, 1020)
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
-script = ExtResource("11_vwfvy")
 
 [node name="Control" parent="UI" index="0"]
 anchors_preset = 0
@@ -109,21 +109,16 @@ offset_bottom = 1251.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" parent="UI/Control" index="0"]
-day_length = 240.0
-
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(-1060, -184.85294)
 scale = Vector2(1, 0.9981417)
 
 [node name="CollisionShape2D" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(465, 1435.5205)
-num_coins = 15
+position = Vector2(456.5, 1355.1213)
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1734, 1514.6676)
+position = Vector2(1697, 1381.4205)
 shape = SubResource("RectangleShape2D_1vlao")
-num_coins = 20
 
 [node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
 position = Vector2(2127, 2469.442)
@@ -132,7 +127,7 @@ shape = SubResource("RectangleShape2D_ctmcs")
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="EnemyPath6" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1117, 719)
+position = Vector2(-1122, 582)
 curve = SubResource("Curve2D_cfroa")
 
 [node name="EnemyPath2" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -144,8 +139,8 @@ position = Vector2(-360, -65)
 curve = SubResource("Curve2D_8wgn8")
 
 [node name="EnemyPath" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1060.1838, -127.50161)
-scale = Vector2(0.9998754, 0.9139401)
+position = Vector2(-1060, -184.85294)
+scale = Vector2(1, 0.9981417)
 curve = SubResource("Curve2D_fg4jm")
 
 [node name="EnemyPath3" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -212,7 +207,7 @@ position = Vector2(834, -345)
 position = Vector2(852, -262)
 
 [node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
-position = Vector2(-353, 1973)
+position = Vector2(-313, 1822)
 curve = SubResource("Curve2D_qfp24")
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]

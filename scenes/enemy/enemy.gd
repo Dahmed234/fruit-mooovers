@@ -20,7 +20,8 @@ enum State {
 	PATROLLING  = 0,
 	ALERT 		= 1,
 	CHASING		= 2,
-	IDLE 		= 3
+	IDLE 		= 3,
+	ATTACKING  	= 4
 }
 
 # Current enemy state

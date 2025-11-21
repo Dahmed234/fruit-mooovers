@@ -11,9 +11,7 @@ var pathPoint :PathFollow2D
 @export var DIST_THRESHOLD :float
 var direction:int = 1
 
-
 var path :Curve2D
-
 
 func _ready():
 	global_position = pathPoint.global_position
@@ -69,10 +67,15 @@ func _update_target(delta: float) -> void:
 				current_state = State.IDLE 
 				return
 			if global_position.distance_to(best_target.global_position) < range:
-				shoot(best_target,delta)
-				local_speed = 0.0
+				current_state = State.ATTACKING
+				#shoot(best_target,delta)
+				#local_speed = 0.0
 			else:
 				navigation_agent_2d.target_position = best_target.position
+		State.ATTACKING:
+			var best_target = get_best_target()
+			if global_position.distance_to(best_target.global_position) > range * 2:
+				current_state = State.CHASING
 		# If the state is invalid, throw an error
 		var other:
 			assert(false,"unexpected enemy state: " + State.keys()[other])

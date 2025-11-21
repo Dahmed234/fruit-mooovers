@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_bo1ix"]
 
 [node name="Game Over" instance=ExtResource("1_bo1ix")]
-ui_scale = 120
 
 [node name="Label" type="Label" parent="VBoxContainer" index="0"]
 layout_mode = 2
