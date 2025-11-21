@@ -54,7 +54,7 @@ func physics_update(delta: float) -> void:
 	var label: Label = follower.label
 
 	label.text = str(int(item.followersCarrying.size())) \
-		+ "/" + str(int(item.weight))
+		+ "/" + str(int(item.minimum_followers))
 
 	if navigation_agent_2d.is_target_reached():
 		var tmp = item

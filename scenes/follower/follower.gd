@@ -24,7 +24,7 @@ var TIMERVARIANCE = 0.1
 
 var direction := Vector2.ONE
 
-const enemy_weight := 0.2
+const enemy_minimum_followers := 0.2
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW

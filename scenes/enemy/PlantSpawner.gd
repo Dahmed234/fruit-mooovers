@@ -15,7 +15,7 @@ var sprites : Dictionary[String,Vector2] = {
 
 var value: float
 var followerValue: float
-var weight: float
+var minimum_followers: float
 var sprite: String
 var currentItem = null
 
@@ -34,7 +34,7 @@ func spawn(day):
 		currentItem = nItem
 		#nItem.value = value
 		#nItem.followerValue = followerValue
-		#nItem.weight = weight
+		#nItem.minimum_followers = minimum_followers
 		nItem.global_position = global_position
 		# Set the position on the sprite sheet to the correct sprite, or default to "apple"
 		# Item.find_child("Sprite2D").region_rect.position = sprites[sprite if sprite else "apple"] 
