@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export 
 var label: Label
@@ -15,11 +15,15 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _onTryAgain() -> void:
+func set_message(message: String):
+	print(message)
+
+
+func _on_restart_pressed() -> void:
 	mainMenu = load("res://scenes/gameManagement/MainMenu.tscn").instantiate()
 	get_tree().root.add_child(mainMenu)
 	queue_free()
 
 
-func _onQuit() -> void:
+func _on_quit_pressed() -> void:
 	get_tree().quit()

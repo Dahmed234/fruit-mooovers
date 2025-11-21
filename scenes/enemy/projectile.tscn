@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1352s7d3laj7"]
+
+[ext_resource type="Texture2D" uid="uid://ddbecr7tflndk" path="res://assets/kenney_input-prompts_1 (1).4/Generic/Default/generic_button_circle_fill.png" id="1_gopfk"]
+[ext_resource type="Script" uid="uid://cyfbsfg3v8p46" path="res://scenes/enemy/projectile.gd" id="1_r7k8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7k8t"]
+radius = 16.03122
+
+[node name="Projectile" type="CharacterBody2D"]
+script = ExtResource("1_r7k8t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gopfk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_r7k8t")
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]

@@ -69,9 +69,9 @@ func getTime() -> String:
 # Logic to go back to main menu, reset score etc
 func restartGame():
 	gameOver = load("res://scenes/gameManagement/GameOver.tscn").instantiate()
-	gameOver.label.text = "Game Over
+	gameOver.set_message("Game Over
 	Score: " + str(totalScore) + "
-	Total cows: " + str(cowScore)
+	Total cows: " + str(cowScore))
 	get_tree().root.add_child(gameOver)
 	# ../../.. is the current root, which we free and replace with the gameOver scene root
 	$"../../..".queue_free()

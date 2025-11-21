@@ -19,11 +19,18 @@ var zoom_strength := 0.1
 @export 
 var destructableWalls: TileMapLayer
 
+const BARRAGE = preload("uid://cmp1nm61nk2sj")
+
 var isPaused := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in range(3):
 		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
+	
+	# Scuffed solution, shouldn't need to do this in script
+	for path in $"Enemy Paths".get_children():
+		var enemy = path.get_child(0)
+		enemy.attack_patterns.append(BARRAGE)
 
 func cameraScrolling():
 	var zoom = float(Input.is_action_just_released("camera_zoom_in")) - float(Input.is_action_just_released("camera_zoom_out"))
