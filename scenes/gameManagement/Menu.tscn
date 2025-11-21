@@ -12,8 +12,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ll0fc")
-ui_scale = 150
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -36,3 +34,4 @@ offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("1_ll0fc")

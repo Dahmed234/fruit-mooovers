@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpuvspw58i87v"]
+[gd_scene load_steps=2 format=3 uid="uid://cpuvspw58i87v"]
 
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_xtqgn"]
-[ext_resource type="Script" uid="uid://chxn70m4yoex1" path="res://scenes/gameManagement/main_menu.gd" id="2_xtqgn"]
 
 [node name="Main Menu" instance=ExtResource("1_xtqgn")]
-script = ExtResource("2_xtqgn")
 
 [node name="VBoxContainer" parent="." index="1"]
-ui_scale = 72
+ui_scale = null
 
 [node name="Main Menu" type="Label" parent="VBoxContainer" index="0"]
 layout_mode = 2
@@ -17,5 +15,3 @@ horizontal_alignment = 1
 [node name="Start Game" type="Button" parent="VBoxContainer" index="1"]
 layout_mode = 2
 text = "Start Game"
-
-[connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_start_game"]

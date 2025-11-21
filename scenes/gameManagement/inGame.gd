@@ -24,7 +24,7 @@ var isPaused := false
 func _ready() -> void:
 	for i in range(3):
 		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
-	
+
 func cameraScrolling():
 	var zoom = float(Input.is_action_just_released("camera_zoom_in")) - float(Input.is_action_just_released("camera_zoom_out"))
 	$Camera2D.zoom *= Vector2.ONE + Vector2.ONE * zoom * zoom_strength
