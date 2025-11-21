@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvybpltglhtsl"]
+
+[ext_resource type="Script" uid="uid://d0i506usr1jhk" path="res://scenes/gameManagement/Menu.gd" id="1_ll0fc"]
+[ext_resource type="Texture2D" uid="uid://840ka5o8vlaa" path="res://assets/kenney_monochrome-rpg/Dot Matrix/Tiles/tile_0025.png" id="2_mn81k"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_mn81k")
+region_enabled = true
+region_rect = Rect2(0, 0, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -83.0
+offset_right = 48.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_ll0fc")

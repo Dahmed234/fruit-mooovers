@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7kfq2vt74skm"]
+
+[ext_resource type="PackedScene" uid="uid://cpuvspw58i87v" path="res://scenes/gameManagement/MainMenu.tscn" id="1_3wbg6"]
+[ext_resource type="Script" path="res://scenes/gameManagement/SceneState.gd" id="1_x04me"]
+[ext_resource type="PackedScene" uid="uid://eb0mqkobwsnn" path="res://scenes/gameManagement/InGame.tscn" id="3_mkw56"]
+[ext_resource type="PackedScene" uid="uid://kpu882lv5xud" path="res://scenes/gameManagement/GameOver.tscn" id="4_2buts"]
+[ext_resource type="PackedScene" uid="uid://iirnlrmeohsh" path="res://scenes/gameManagement/Settings.tscn" id="5_habhn"]
+
+[node name="Scene State" type="Node2D"]
+script = ExtResource("1_x04me")
+main_menu = ExtResource("1_3wbg6")
+in_game = ExtResource("3_mkw56")
+game_over = ExtResource("4_2buts")
+settings = ExtResource("5_habhn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
