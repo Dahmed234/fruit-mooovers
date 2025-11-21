@@ -97,12 +97,25 @@ func _process(delta: float) -> void:
 	text = "Score: "  +  str(score) + " / " + str(quota) + "
 	Day: " + str(day+1) + "
 	Time: " + getTime()
+	
+	
+	$ProgressBar2.max_value = 24 * 60
+	$ProgressBar2.value = int(time/day_length * 24 * 60) - 24 * 60 * day % (24*60) 
+	
+	$ProgressBar.max_value = quota
+	$ProgressBar.value = score
 	cow_label.text = "x " + str(cowScore)
 
 func _ready():
 	#get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom
 	# Sort out dynamic UI placement to handle window size changing
 	initialWindowSize = get_viewport().get_visible_rect().size
+	
+	
+	## connects all fruit spawners to this nodes respawn objects signal
+	get_tree().get_nodes_in_group("fruitSpawners").map(func(spawner):
+			respawnObjects.connect(spawner.spawn)
+	)
 
 
 func _on_player_player_dies() -> void:

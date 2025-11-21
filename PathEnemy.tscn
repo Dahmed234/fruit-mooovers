@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://duws8qrfmixic"]
+
+[ext_resource type="PackedScene" uid="uid://8y7gjhthiwsc" path="res://scenes/enemy/Enemy.tscn" id="1_cnflt"]
+[ext_resource type="Script" uid="uid://buou4tvnmxtho" path="res://scenes/enemy/pathUsingEnemy.gd" id="2_cnflt"]
+
+[node name="PathFollow2D" type="PathFollow2D"]
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("pathPoint") instance=ExtResource("1_cnflt")]
+script = ExtResource("2_cnflt")
+pathPoint = NodePath("..")
+speed = null
+light_level = null
+shoot_length = null
+shoot_cooldown = null
+damage = null
+range = null

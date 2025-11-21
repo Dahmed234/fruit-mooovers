@@ -31,6 +31,8 @@ var angle
 var node_enemies: float = 0.0
 var line
 var poolVectorArray : PackedVector2Array
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	enemy_alive_count = 0

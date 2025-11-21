@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var size: float
 @export var chaseTime:float
 
+
 var local_size: float
 var target_angle := 0.0
 # Used to perfrom updates each frame an agent is in the collision, rather than just onenter / onexit
@@ -54,7 +55,17 @@ func update_light(delta: float) -> void:
 	# Where we want to be pointing, get the angle from the current vector to the target vector
 	angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))
 
+	
+	#if( fposmod(rotation - angle_delta, TAU) > PI):
+		#print("true")
+		#rotation = rotation + (angle_delta - TAU) * delta
+	#else:
+		#print("false")
+	#global_rotation = lerp_angle(global_rotation,angle_delta, delta)
 	# Move towards this angle at a fixed speed
+	
+	
+	
 	if angle_delta > 2 * -turn_speed * delta:
 		rotation += turn_speed * delta
 	elif angle_delta < 2 * turn_speed * delta:

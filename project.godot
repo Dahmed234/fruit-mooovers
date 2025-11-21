@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -32,6 +31,11 @@ project/assembly_name="prototype_2"
 movie_writer/movie_file="C:/Users/tomhb/OneDrive/Pictures/Documents/prototype-2/out.avi"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[global_group]
+
+fruitSpawners="spawns fruit when called."
+destroyableWall=""
 
 [input]
 
