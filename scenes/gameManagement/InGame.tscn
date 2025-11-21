@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://xgdjf4ckqdf3" path="res://scenes/enemy/ModifiedPatrolPath.tscn" id="12_8wgn8"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
-[ext_resource type="PackedScene" uid="uid://xrtvxf74yob8" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
+[ext_resource type="PackedScene" uid="uid://iirnlrmeohsh" path="res://scenes/gameManagement/settings.tscn" id="12_s70h5"]
 [ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="12_v6clt"]
 [ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
 
@@ -111,6 +111,13 @@ day_length = 240.0
 
 [node name="Settings" parent="UI/Control" index="1" instance=ExtResource("12_s70h5")]
 layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(-1060, -184.85294)
@@ -215,8 +222,6 @@ curve = SubResource("Curve2D_qfp24")
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
-[connection signal="pressed" from="UI/Control/Settings/Resume" to="." method="_onResume"]
-[connection signal="pressed" from="UI/Control/Settings/Quit" to="." method="_onQuit"]
 
 [editable path="Player"]
 [editable path="UI"]

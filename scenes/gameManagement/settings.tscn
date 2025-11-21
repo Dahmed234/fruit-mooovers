@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://d17einikdthxb"]
+[gd_scene load_steps=3 format=3 uid="uid://iirnlrmeohsh"]
 
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_77dpn"]
+[ext_resource type="Script" uid="uid://dwpatjcixe48u" path="res://scenes/gameManagement/settings.gd" id="2_diy1p"]
 
 [node name="Settings" instance=ExtResource("1_77dpn")]
+process_mode = 2
+z_index = 10
+script = ExtResource("2_diy1p")
+
+[node name="VBoxContainer" parent="." index="1"]
+ui_scale = 50
 
 [node name="Settings" type="Label" parent="VBoxContainer" index="0"]
 layout_mode = 2
@@ -16,3 +23,6 @@ text = "Resume"
 [node name="Quit" type="Button" parent="VBoxContainer" index="2"]
 layout_mode = 2
 text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Resume Game" to="." method="_on_resume"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit"]
