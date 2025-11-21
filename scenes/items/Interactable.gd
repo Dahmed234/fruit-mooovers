@@ -7,7 +7,8 @@ signal carry_stopped(follower: CharacterBody2D)
 
 @export var value: int
 @export var followerValue: int
-@export var weight: float = 1.0
+@export var minimum_followers: int = 1;
+@export var maximum_followers: int = 1;
 @export var label: Label
 
 # Followers currently carrying this item.
@@ -26,7 +27,7 @@ func getSpriteInfo() -> Sprite2D:
 
 
 func hasCapacity() -> bool:
-	return followersCarrying.size() < int(weight * 2.0)
+	return maximum_followers < 0 || followersCarrying.size() < maximum_followers
 
 
 func onPickup(follower: CharacterBody2D) -> void:
@@ -94,5 +95,5 @@ func _on_main_follower_changed(new_main: CharacterBody2D) -> void:
 
 
 func _update_label() -> void:
-	if label and weight > 0.0:
-		label.text = "%d/%d" % [followersCarrying.size(), int(weight)]
+	if label and minimum_followers > 0.0:
+		label.text = "%d/%d" % [followersCarrying.size(), minimum_followers]

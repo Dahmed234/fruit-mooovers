@@ -25,10 +25,10 @@ var value :int
 var followerValue :int
 
 @export 
-var weight :int
+var minimum_followers :int
 
-#func _init(p_value = 0, p_followerValue = 0,p_weight = 0):
+#func _init(p_value = 0, p_followerValue = 0,p_minimum_followers = 0):
 	#value =p_value
 	#followerValue = p_followerValue
-	#weight = p_weight
+	#minimum_followers = p_minimum_followers
 	#followersCarrying = 0.0

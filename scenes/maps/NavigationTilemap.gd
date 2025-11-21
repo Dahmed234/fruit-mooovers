@@ -44,22 +44,22 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_spawner.global_position = to_global(map_to_local(coords))
 						var value = plants.get_cell_tile_data(coords).get_custom_data("Value")
 						var followerValue = plants.get_cell_tile_data(coords).get_custom_data("Follower Value")
-						var weight = plants.get_cell_tile_data(coords).get_custom_data("Weight")
+						var minimum_followers = plants.get_cell_tile_data(coords).get_custom_data("minimum_followers")
 						var sprite = plants.get_cell_tile_data(coords).get_custom_data("Sprite")
 						
 						n_spawner.value = value
 						n_spawner.followerValue = followerValue
-						n_spawner.weight = weight
+						n_spawner.minimum_followers = minimum_followers
 						n_spawner.sprite = sprite
 						root.add_child(n_spawner)
 						
 						
 					destructible_walls:
-						# If this breaks, it means weight is undefined for the destructible_walls layer
+						# If this breaks, it means minimum_followers is undefined for the destructible_walls layer
 						var value = destructible_walls.get_cell_tile_data(coords).get_custom_data("Value")
 						var followerValue = destructible_walls.get_cell_tile_data(coords).get_custom_data("Follower Value")
-						var weight = destructible_walls.get_cell_tile_data(coords).get_custom_data("Weight")
-						if !weight: return false
+						var minimum_followers = destructible_walls.get_cell_tile_data(coords).get_custom_data("minimum_followers")
+						if !minimum_followers: return false
 						var n_wall = destructableItem.instantiate()
 						n_wall.global_position = to_global(map_to_local(coords))
 						n_wall.tilePos = coords
@@ -67,7 +67,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 						n_wall.navMap = self
 						n_wall.value = value
 						n_wall.followerValue = followerValue
-						n_wall.weight = weight
+						n_wall.minimum_followers = minimum_followers
 						root.add_wall(n_wall)
 	is_changed = true
 	

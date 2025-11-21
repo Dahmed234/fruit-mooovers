@@ -121,8 +121,8 @@ func update_alert(delta: float) -> void:
 	# Use in_area here to only add alert when things are actively in the light
 	if cone_light.in_area.size() > 0:
 		for cow in cone_light.in_area:
-			# Factor in distance and the weight of the agent into how much it increases alertness
-			alert_level = min(max_alert * 2, alert_level + max(0,(range - global_position.distance_to(cow.global_position)) * cow.enemy_weight * delta))
+			# Factor in distance and the minimum_followers of the agent into how much it increases alertness
+			alert_level = min(max_alert * 2, alert_level + max(0,(range - global_position.distance_to(cow.global_position)) * cow.enemy_minimum_followers * delta))
 	else:
 		alert_level = max(0,alert_level - 50 * delta)
 		
