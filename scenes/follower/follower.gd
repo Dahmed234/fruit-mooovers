@@ -37,7 +37,7 @@ var max_health
 @export var health : float
 
 @onready var timer := $WanderTimer
-@onready var navigation_agent_2d := $NavigationAgent2D
+@onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
 @onready var scoreholder: Label = $"../../UI/Control/Label"
 
 # --- NEW: behaviour objects ---
