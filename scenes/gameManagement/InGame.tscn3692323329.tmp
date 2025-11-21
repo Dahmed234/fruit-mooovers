@@ -42,7 +42,7 @@ point_count = 6
 
 [sub_resource type="Curve2D" id="Curve2D_fg4jm"]
 _data = {
-"points": PackedVector2Array(-60.020496, -276.09427, 60.020496, 276.09427, 1515.3726, -78.23093, 80.019325, -99.79008, -80.019325, 99.79008, 1280, 107, 0, 0, 0, 0, 1022, 225, 0, 0, 0, 0, 904, 300, 139.02464, -207.49945, -139.02464, 207.49945, 356.2282, 396.63605, 107.398834, 12.417603, -107.398834, -12.417603, -138, 646, 278.09906, -92.16713, -278.09906, 92.16713, -1373, 666, -45.649876, 127.81966, 45.649876, -127.81966, -1243, 280, 0, 0, 0, 0, -1200, -141, 0, 0, 0, 0, -1113, -231, 0, 0, 0, 0, -831, -280, 0, 0, 0, 0, 808, -459, 0, 0, 0, 0, 1133, -424, 0, 0, 0, 0, 1412, -200.5197, 0, 0, 0, 0, 1516, -79.29442)
+"points": PackedVector2Array(-60.020496, -276.09427, 60.020496, 276.09427, 1516, -79.29442, 80.019325, -99.79008, -80.019325, 99.79008, 1280, 107, 0, 0, 0, 0, 1022, 225, 0, 0, 0, 0, 904, 300, 139.02464, -207.49945, -139.02464, 207.49945, 369, 417.62903, 107.398834, 12.417603, -107.398834, -12.417603, -138, 646, 278.09906, -92.16713, -278.09906, 92.16713, -1373, 666, -45.649876, 127.81966, 45.649876, -127.81966, -1243, 280, 0, 0, 0, 0, -1200, -141, 0, 0, 0, 0, -1113, -231, 0, 0, 0, 0, -831, -280, 0, 0, 0, 0, 808, -459, 0, 0, 0, 0, 1133, -424, 0, 0, 0, 0, 1412, -200.5197, 0, 0, 0, 0, 1516, -79.29442)
 }
 point_count = 15
 
@@ -80,6 +80,7 @@ goal = NodePath("goal")
 player = NodePath("Player")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
+position = Vector2(-4, -151)
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -1475.0
@@ -96,6 +97,7 @@ position = Vector2(-153, 1052)
 position = Vector2(57, 1020)
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
+visible = false
 script = ExtResource("11_vwfvy")
 
 [node name="Control" parent="UI" index="0"]
@@ -115,13 +117,11 @@ position = Vector2(-1060, -184.85294)
 scale = Vector2(1, 0.9981417)
 
 [node name="CollisionShape2D" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(465, 1435.5205)
-num_coins = 15
+position = Vector2(456.5, 1355.1213)
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1734, 1514.6676)
+position = Vector2(1697, 1381.4205)
 shape = SubResource("RectangleShape2D_1vlao")
-num_coins = 20
 
 [node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
 position = Vector2(2127, 2469.442)
@@ -130,7 +130,7 @@ shape = SubResource("RectangleShape2D_ctmcs")
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="EnemyPath6" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1117, 719)
+position = Vector2(-1122, 582)
 curve = SubResource("Curve2D_cfroa")
 
 [node name="EnemyPath2" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -142,8 +142,8 @@ position = Vector2(-360, -65)
 curve = SubResource("Curve2D_8wgn8")
 
 [node name="EnemyPath" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1060.1838, -127.50161)
-scale = Vector2(0.9998754, 0.9139401)
+position = Vector2(-1060, -184.85294)
+scale = Vector2(1, 0.9981417)
 curve = SubResource("Curve2D_fg4jm")
 
 [node name="EnemyPath3" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -210,7 +210,7 @@ position = Vector2(834, -345)
 position = Vector2(852, -262)
 
 [node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
-position = Vector2(-353, 1973)
+position = Vector2(-313, 1822)
 curve = SubResource("Curve2D_qfp24")
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]

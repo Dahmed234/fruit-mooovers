@@ -24,7 +24,7 @@ var TIMERVARIANCE = 0.1
 
 var direction := Vector2.ONE
 
-const enemy_weight := 0.2
+const enemy_minimum_followers := 0.2
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
@@ -37,7 +37,7 @@ var max_health
 @export var health : float
 
 @onready var timer := $WanderTimer
-@onready var navigation_agent_2d := $NavigationAgent2D
+@onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
 @onready var scoreholder: Label = $"../../UI/Control/Label"
 
 # --- NEW: behaviour objects ---

@@ -24,11 +24,11 @@ func navigate_to_target(delta: float) -> void:
 			_:
 				local_velocity = 1.0
 	else:
-		if carrying_item.followersCarrying.size() >= carrying_item.weight:
+		if carrying_item.followersCarrying.size() >= carrying_item.minimum_followers:
 			# Speed while carrying
 			local_velocity = 0.4 * min(
 				2.0,
-				carrying_item.followersCarrying.size() / carrying_item.weight / 1.3
+				carrying_item.followersCarrying.size() / carrying_item.minimum_followers / 1.3
 				
 			)
 		else:
