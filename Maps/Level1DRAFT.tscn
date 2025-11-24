@@ -2251,12 +2251,10 @@ metadata/_edit_lock_ = true
 
 [node name="Destructable Item" parent="." instance=ExtResource("8_5kvdj")]
 position = Vector2(-999, -454)
-minimum_followers = 1
 maximum_followers = -1
 
 [node name="Destructable Item2" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(-2690, 514)
-max_health = 300.0
 minimum_followers = 5
 maximum_followers = -1
 
@@ -2284,7 +2282,6 @@ maximum_followers = -1
 
 [node name="Destructable Item6" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(-831, -642)
-max_health = 100.0
 minimum_followers = 35
 maximum_followers = -1
 
@@ -2298,22 +2295,18 @@ offset_bottom = 38.0
 
 [node name="Destructable Item7" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(-2617, -1411)
-minimum_followers = 1
 maximum_followers = -1
 
 [node name="Destructable Item8" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(1108, 508)
-minimum_followers = 1
 maximum_followers = -1
 
 [node name="Destructable Item9" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(-862, 1852)
-minimum_followers = 1
 maximum_followers = -1
 
 [node name="Destructable Item10" parent="." instance=ExtResource("9_p4ke7")]
 position = Vector2(1800, 1404)
-minimum_followers = 1
 maximum_followers = -1
 
 [connection signal="bake_finished" from="." to="." method="_on_baking_done"]

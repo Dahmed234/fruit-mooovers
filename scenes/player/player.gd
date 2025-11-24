@@ -15,7 +15,9 @@ var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 @export var health : float
 var max_health
-@onready var bar: Node2D = $Bar
+@onready var bar: Node2D = $Sprite2D/Bar
+
+var is_moving = true
 
 func _ready():
 	max_health = health
@@ -41,10 +43,14 @@ func move(delta: float) -> void:
 	# Apply left / right movement
 	direction.x = Input.get_axis("player_move_left", "player_move_right");
 	direction.y = Input.get_axis("player_move_up", "player_move_down");
-	
+
+	if(direction ==Vector2.ZERO):
+		$AnimationTree.is_moving = false
+	else:
+		$AnimationTree.is_moving = true
 	#added normalisation to fix buf that happens when player inputs diagonal to move faster
 	direction = direction.normalized();
-		
+	
 	# Apply up / down movement
 	velocity = direction * speed 
 

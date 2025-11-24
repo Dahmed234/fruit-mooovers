@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://c6x4ey8dxp7dc" path="res://assets/lights/Light texture transparent.png" id="5_wuy1y"]
 [ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scenes/ui/throw_marker.gd" id="6_1nynx"]
 [ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="7_64pgi"]
-[ext_resource type="Script" uid="uid://bvahw0aufjgr" path="res://scenes/player/animation_tree.gd" id="8_v42im"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
 radius = 6.8761363
@@ -27,6 +26,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 outlines = Array[PackedVector2Array]([PackedVector2Array(-21.162271, -46.204296, 36.328568, -40.913727, 21.514977, -14.284536, -10.052078, -14.63724)])
 sample_partition_type = 1
 
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_npwbq"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v42im"]
 animation = &"RESET"
 
@@ -34,74 +35,30 @@ animation = &"RESET"
 animation = &"new_animation"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7oing"]
-xfade_time = 0.5
+reset = false
+switch_mode = 2
 advance_mode = 2
-advance_expression = "is_moving == true"
+advance_expression = "is_moving == true
+"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5stf6"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_npwbq"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_180ig"]
-xfade_time = 0.2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v42im"]
 advance_mode = 2
 advance_expression = "is_moving == false"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_20koh"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5stf6"]
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_npwbq")
+states/BlendSpace1D/position = Vector2(721.6, -4.600006)
+states/End/position = Vector2(865.6, 88.09088)
 states/RESET/node = SubResource("AnimationNodeAnimation_v42im")
-states/RESET/position = Vector2(336, 92.4)
+states/RESET/position = Vector2(460, 80.99999)
+states/Start/position = Vector2(280.8, 88.143105)
 states/new_animation/node = SubResource("AnimationNodeAnimation_pn6s4")
-states/new_animation/position = Vector2(520, 72.399994)
-transitions = ["RESET", "new_animation", SubResource("AnimationNodeStateMachineTransition_7oing"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_5stf6"), "new_animation", "RESET", SubResource("AnimationNodeStateMachineTransition_180ig")]
-
-[sub_resource type="Animation" id="Animation_v42im"]
-length = 0.23333667
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("Sprite2D:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.23333667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(4, 4), Vector2(4.485, 4.485)]
-}
+states/new_animation/position = Vector2(663.2, 100.1616)
+transitions = ["RESET", "new_animation", SubResource("AnimationNodeStateMachineTransition_7oing"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_npwbq"), "new_animation", "RESET", SubResource("AnimationNodeStateMachineTransition_v42im")]
+graph_offset = Vector2(224, -49)
 
 [sub_resource type="Animation" id="Animation_npwbq"]
 resource_name = "new_animation"
@@ -142,6 +99,43 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1350608, 0.26666668, 0.4, 0.53333336)
 }
 
+[sub_resource type="Animation" id="Animation_v42im"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-30, -0.13333501, 0, 0.13333501, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pn6s4"]
 _data = {
 &"RESET": SubResource("Animation_v42im"),
@@ -162,6 +156,7 @@ scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_p3xyx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
 scale = Vector2(4, 4)
 texture = ExtResource("2_wuy1y")
 flip_h = true
@@ -232,9 +227,9 @@ region_rect = Rect2(646, 339, 16, 17)
 script = ExtResource("6_1nynx")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_20koh")
+tree_root = SubResource("AnimationNodeStateMachine_5stf6")
 anim_player = NodePath("../AnimationPlayer")
-script = ExtResource("8_v42im")
+parameters/BlendSpace1D/blend_position = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

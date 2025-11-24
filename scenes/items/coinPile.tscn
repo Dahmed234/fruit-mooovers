@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_w7awe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lh6x8"]
-size = Vector2(448.5, 360.16937)
+size = Vector2(405.125, 335.5847)
 
 [node name="CoinPile" type="CollisionShape2D"]
 position = Vector2(0, 0.5)
