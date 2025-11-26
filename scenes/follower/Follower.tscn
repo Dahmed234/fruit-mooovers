@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcsn06k5woifq"]
+[gd_scene load_steps=16 format=3 uid="uid://dcsn06k5woifq"]
 
-[ext_resource type="Script" uid="uid://c0vlc2qhc75os" path="res://scenes/follower/follower.gd" id="1_jmfn7"]
+[ext_resource type="Script" uid="uid://gbt4mm2ghxhl" path="res://scenes/follower/follower.gd" id="1_jmfn7"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
 [ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="3_8j6l1"]
 
@@ -44,15 +44,15 @@ tracks/2/path = NodePath("Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.7853982, -0.2, 0, 0.2, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0),
 "times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_gpyn0"]
 resource_name = "walk"
-length = 0.23333667
-loop_mode = 2
+length = 0.46667004
+loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,9 +60,9 @@ tracks/0/path = NodePath("Sprite2D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-8.5, -0.20095214, -30.142822, 0.1, 1.7233777, 4.318307, -0.06666666, 0.20236492, 0.06666668, -7.3756065),
-"times": PackedFloat32Array(0, 0.23333333)
+"handle_modes": PackedInt32Array(0, 0, 2),
+"points": PackedFloat32Array(-8.5, -0.20095214, -30.142822, 0.1, 1.7233777, 4.318307, -0.06666666, -7.655207, 0.033333346, -4.48969, -7.9862537, -0.099999994, -0.98922443, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333, 0.46666667)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -71,9 +71,9 @@ tracks/1/path = NodePath("Sprite2D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(2, 0, 0),
-"points": PackedFloat32Array(0, 0, 0, 0.016666668, -3.2500002, -12.828402, -0.054033026, 2.3520534, 0.045945406, -2, -2.999999, -0.016666668, -2.7500002, 0, 0),
-"times": PackedFloat32Array(0, 0.1, 0.23333333)
+"handle_modes": PackedInt32Array(0, 0, 1, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.016666668, -3.2500002, -12.828402, -0.054033026, 2.3520534, 0.045945406, -2, 0.02646184, 0, 0, 0, 0, 0.521074, -0.03333333, -28.786423, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.23333333, 0.46666667)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -82,9 +82,9 @@ tracks/2/path = NodePath("Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 2),
-"points": PackedFloat32Array(-0.34660664, -0.2, 0, 0.06666667, -0.25215748, 0.4098658, -0.03333333, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.23333333)
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(-0.34660664, -0.2, 0, 0.06666667, -0.25215748, 0.40896666, -0.07777778, 0, 0.07777778, 0, -0.36877543, -0.13333333, -0.02430445, 0, 0),
+"times": PackedFloat32Array(0, 0.23333333, 0.46666667)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odk4b"]
@@ -92,6 +92,34 @@ _data = {
 &"RESET": SubResource("Animation_56twi"),
 &"walk": SubResource("Animation_gpyn0")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpyn0"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_56twi"]
+animation = &"walk"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_odk4b"]
+xfade_time = 0.5
+advance_mode = 2
+advance_expression = "is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x6um6"]
+xfade_time = 0.5
+advance_mode = 2
+advance_expression = "!is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gpyn0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bcchq"]
+states/RESET/node = SubResource("AnimationNodeAnimation_gpyn0")
+states/RESET/position = Vector2(304.8, 54.8)
+states/Start/position = Vector2(64.8, 28.8)
+states/walk/node = SubResource("AnimationNodeAnimation_56twi")
+states/walk/position = Vector2(524, 69.2)
+transitions = ["RESET", "walk", SubResource("AnimationNodeStateMachineTransition_odk4b"), "walk", "RESET", SubResource("AnimationNodeStateMachineTransition_x6um6"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_gpyn0")]
 
 [node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label")]
 collision_layer = 4
@@ -117,7 +145,6 @@ shape = SubResource("CircleShape2D_jmfn7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-rotation = -0.7853982
 scale = Vector2(2, 2)
 texture = ExtResource("1_klxf7")
 region_enabled = true
@@ -180,7 +207,11 @@ position = Vector2(0, -50)
 libraries = {
 &"": SubResource("AnimationLibrary_odk4b")
 }
-autoplay = "walk"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_bcchq")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
