@@ -1,20 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://kpu882lv5xud"]
+[gd_scene load_steps=3 format=3 uid="uid://kpu882lv5xud"]
 
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_bo1ix"]
+[ext_resource type="Script" uid="uid://drra8b724mxeb" path="res://scenes/gameManagement/GameOver.gd" id="2_3vs54"]
 
 [node name="Game Over" instance=ExtResource("1_bo1ix")]
-ui_scale = 120
+script = ExtResource("2_3vs54")
 
 [node name="Label" type="Label" parent="VBoxContainer" index="0"]
 layout_mode = 2
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer" index="1"]
+[node name="Score" type="Label" parent="VBoxContainer" index="1"]
 layout_mode = 2
 text = "Score:"
 
-[node name="Label3" type="Label" parent="VBoxContainer" index="2"]
+[node name="Cow Score" type="Label" parent="VBoxContainer" index="2"]
 layout_mode = 2
 text = "Cows:"
 
@@ -25,3 +26,6 @@ text = "Restart"
 [node name="Quit" type="Button" parent="VBoxContainer" index="4"]
 layout_mode = 2
 text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

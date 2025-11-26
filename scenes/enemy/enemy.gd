@@ -20,7 +20,8 @@ enum State {
 	PATROLLING  = 0,
 	ALERT 		= 1,
 	CHASING		= 2,
-	IDLE 		= 3
+	IDLE 		= 3,
+	ATTACKING  	= 4
 }
 
 # Current enemy state
@@ -127,7 +128,9 @@ func update_alert(delta: float) -> void:
 		alert_level = max(0,alert_level - 50 * delta)
 		
 	if alert_level >= max_alert:
-		current_state = State.CHASING
+		# Only start chasing if enemy isnt attackinga
+		if current_state != State.ATTACKING:
+			current_state = State.CHASING
 	elif alert_level >= min_alert:
 		current_state = State.ALERT
 	elif alert_level >= min_alert / 2:

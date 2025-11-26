@@ -1,6 +1,6 @@
 extends Control
 
-const in_game = preload("uid://eb0mqkobwsnn")
+var in_game
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -8,4 +8,7 @@ func _process(delta: float) -> void:
 
 
 func _start_game() -> void:
-	get_tree().change_scene_to_packed(in_game)
+	in_game = load("res://scenes/gameManagement/InGame.tscn").instantiate()
+	#get_tree().change_scene_to_packed(in_game)
+	get_tree().root.add_child(in_game)
+	queue_free()
