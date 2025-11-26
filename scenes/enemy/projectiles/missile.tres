@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://leyi7x50o6s2"]
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://leyi7x50o6s2"]
 
+[ext_resource type="Resource" uid="uid://c87qjlg2i3tak" path="res://scenes/enemy/attacks/shrapnel.tres" id="1_krtwl"]
 [ext_resource type="Script" uid="uid://deu61gciq467g" path="res://scenes/enemy/projectile_resource.gd" id="1_x4k1d"]
 [ext_resource type="Texture2D" uid="uid://bualhijhddyw1" path="res://assets/kenney_monochrome-pirates/Default/Tiles/tile_0048.png" id="2_x4k1d"]
 
@@ -11,4 +12,5 @@ sprite = ExtResource("2_x4k1d")
 size = 5.0
 life_time = 2.0
 projectile_type = 1
+expiration_attack = ExtResource("1_krtwl")
 metadata/_custom_type_script = "uid://deu61gciq467g"

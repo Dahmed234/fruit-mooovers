@@ -27,8 +27,6 @@ func _ready():
 func _next_attack_pattern():
 	attack_pattern_index = (attack_pattern_index + 1) % len(attack_patterns)
 	
-	print("changed pattern to ",attack_pattern_index," from ",attack_patterns)
-	
 	attack_time = 0.0
 	attack_count = 0
 
@@ -92,7 +90,7 @@ func _update_target(delta: float) -> void:
 		State.ATTACKING:
 			
 			if !attack_patterns: 
-				assert(false,"no patterns :(")
+				assert(false,"Enemy has no attack patterns but wants to attack, no patterns :(")
 			var pattern: AttackPattern = attack_patterns[attack_pattern_index]
 			attack_time += delta
 			
@@ -115,7 +113,7 @@ func _update_target(delta: float) -> void:
 				
 				if global_position.distance_to(best_target.global_position) > range * 2:
 					current_state = State.CHASING
-			# else do the windup animation (indicate that the enmy will shoot soon)ssssssssssss
+			# else do the windup animation (indicate that the enmy will shoot soon)
 			else:
 				pass
 		# If the state is invalid, throw an error

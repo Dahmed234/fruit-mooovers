@@ -20,3 +20,5 @@ enum ProjType {
 @export var life_time: float
 
 @export var projectile_type: ProjType
+
+@export var expiration_attack: AttackPattern
