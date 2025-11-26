@@ -39,7 +39,7 @@ text = "Score: 0/0
 Day:
 Time"
 script = ExtResource("1_dj8aq")
-day_length = 20.0
+day_length = 160.0
 
 [node name="ProgressBar" type="ProgressBar" parent="Control/Label"]
 layout_mode = 0

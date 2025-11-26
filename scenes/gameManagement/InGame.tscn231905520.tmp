@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=24 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
-[ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="11_v6clt"]
 [ext_resource type="PackedScene" uid="uid://xgdjf4ckqdf3" path="res://scenes/enemy/ModifiedPatrolPath.tscn" id="12_8wgn8"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
@@ -77,10 +76,8 @@ thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
 player = NodePath("Player")
-zoom_strength = null
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
-position = Vector2(-4, -151)
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -1475.0
@@ -96,21 +93,6 @@ position = Vector2(-153, 1052)
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
 position = Vector2(57, 1020)
 
-[node name="UI" parent="." instance=ExtResource("10_s70h5")]
-
-[node name="Control" parent="UI" index="0"]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 2233.0
-offset_bottom = 1251.0
-grow_horizontal = 1
-grow_vertical = 1
-
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(-1060, -184.85294)
 scale = Vector2(1, 0.9981417)
@@ -120,7 +102,7 @@ position = Vector2(465, 1435.5205)
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1697, 1381.4205)
+position = Vector2(1734, 1514.6676)
 shape = SubResource("RectangleShape2D_1vlao")
 num_coins = 7
 
@@ -131,29 +113,20 @@ shape = SubResource("RectangleShape2D_ctmcs")
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="EnemyPath6" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1122, 582)
+position = Vector2(-1117, 719)
 curve = SubResource("Curve2D_cfroa")
-
-[node name="Enemy" parent="Enemy Paths/EnemyPath6" index="0"]
-attack_patterns = Array[ExtResource("11_v6clt")]([])
-shoot_length = 0.1
-shoot_cooldown = 0.3
-
-[node name="PathFollow2D" parent="Enemy Paths/EnemyPath6" index="1"]
-position = Vector2(-80, -18)
-rotation = 0.0
 
 [node name="EnemyPath2" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
 position = Vector2(-1822, -156)
 curve = SubResource("Curve2D_q3n58")
 
 [node name="Path2D" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(115, 993)
+position = Vector2(-360, -65)
 curve = SubResource("Curve2D_8wgn8")
 
 [node name="EnemyPath" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-1060, -184.85294)
-scale = Vector2(1, 0.9981417)
+position = Vector2(-1060.1838, -127.50161)
+scale = Vector2(0.9998754, 0.9139401)
 curve = SubResource("Curve2D_fg4jm")
 
 [node name="EnemyPath3" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
@@ -168,9 +141,8 @@ curve = SubResource("Curve2D_1vlao")
 position = Vector2(-1420, 1693)
 curve = SubResource("Curve2D_ctmcs")
 
-[node name="EnemyPath7" parent="Enemy Paths" instance=ExtResource("12_8wgn8")]
-position = Vector2(-313, 1822)
-curve = SubResource("Curve2D_qfp24")
+[node name="CoinPile" parent="Enemy Paths" instance=ExtResource("12_ctmcs")]
+position = Vector2(-1719, 2111)
 
 [node name="Fruits" type="Node2D" parent="."]
 
@@ -223,12 +195,12 @@ position = Vector2(834, -345)
 [node name="Apple Spawner4" parent="Fruits" instance=ExtResource("12_fg4jm")]
 position = Vector2(852, -262)
 
-[connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
+[node name="EnemyPath" parent="." instance=ExtResource("12_8wgn8")]
+position = Vector2(-353, 1973)
+curve = SubResource("Curve2D_qfp24")
+
+[node name="UI" parent="." instance=ExtResource("10_s70h5")]
+
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 
 [editable path="Player"]
-[editable path="UI"]
-[editable path="Enemy Paths/EnemyPath6"]
-[editable path="Enemy Paths/EnemyPath6/Enemy"]
-[editable path="Enemy Paths/EnemyPath6/Enemy/Cone light"]
-[editable path="Enemy Paths/EnemyPath6/Enemy/Destructable Item"]

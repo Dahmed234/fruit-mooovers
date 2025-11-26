@@ -8,7 +8,7 @@ signal carryDropped(item: ItemData)
 signal followerDies(follower)
 
 var carryingItem :StaticBody2D = null
-
+var is_moving = false
 @export var playerDistance: float
 @export var BASESPEED = 20000
 @export var label: Label
@@ -294,6 +294,9 @@ func _physics_process(delta: float) -> void:
 		State.FOLLOW:
 			navigation_agent_2d.target_position = player.global_position
 			movement.navigate_to_target(delta)
+
+	
+	is_moving = velocity.length() > 40.0
 
 	move_and_slide()
 

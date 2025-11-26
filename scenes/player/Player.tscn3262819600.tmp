@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=27 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
 [ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
@@ -20,34 +20,7 @@ radius = 221.90314
 size = Vector2(65.333336, 40.666668)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wuy1y"]
-radius = 5.0
-
-[sub_resource type="Animation" id="Animation_7oing"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:shape:radius")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [5.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Line2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
+radius = 25.0
 
 [sub_resource type="Animation" id="Animation_pn6s4"]
 resource_name = "grow_whistle"
@@ -55,25 +28,28 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CollisionShape2D:shape:radius")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
+"times": PackedFloat32Array(0, 0.50660414),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [25.0, 193.12]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Line2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_7oing"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [Color(0.7482, 0.86, 0.8357767, 0.8)]
+"values": []
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7oing"]
@@ -81,43 +57,6 @@ _data = {
 &"RESET": SubResource("Animation_7oing"),
 &"grow_whistle": SubResource("Animation_pn6s4")
 }
-
-[sub_resource type="Gradient" id="Gradient_pn6s4"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.52522254)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7oing"]
-gradient = SubResource("Gradient_pn6s4")
-width = 4
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oing"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5stf6"]
-animation = &"grow_whistle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_20koh"]
-xfade_time = 0.07
-advance_mode = 2
-advance_expression = "isWhistling"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ov1oi"]
-xfade_time = 0.1
-priority = 2
-advance_mode = 2
-advance_expression = "!isWhistling"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pn6s4"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pn6s4"]
-states/RESET/node = SubResource("AnimationNodeAnimation_7oing")
-states/RESET/position = Vector2(344, 77.2)
-states/Start/position = Vector2(185.6, 85.6)
-states/grow_whistle/node = SubResource("AnimationNodeAnimation_5stf6")
-states/grow_whistle/position = Vector2(546.4, 110)
-transitions = ["RESET", "grow_whistle", SubResource("AnimationNodeStateMachineTransition_20koh"), "grow_whistle", "RESET", SubResource("AnimationNodeStateMachineTransition_ov1oi"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_pn6s4")]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_glu7e"]
 vertices = PackedVector2Array(-2.9375, -24.5625, -6.546875, -34.8125, 20.117188, -32.351563, 15.671875, -24.34375)
@@ -152,22 +91,24 @@ states/new_animation/position = Vector2(520, 72.399994)
 transitions = ["RESET", "new_animation", SubResource("AnimationNodeStateMachineTransition_7oing"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_5stf6"), "new_animation", "RESET", SubResource("AnimationNodeStateMachineTransition_180ig")]
 
 [sub_resource type="Animation" id="Animation_v42im"]
-loop_mode = 1
-tracks/0/type = "bezier"
+length = 0.23333667
+loop_mode = 2
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/path = NodePath("Sprite2D:flip_h")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/path = NodePath("Sprite2D:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -175,17 +116,28 @@ tracks/1/keys = {
 "points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 2
+tracks/2/path = NodePath("Sprite2D:position:y")
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.13333501, 0, 0.13333501, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.23333667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(4, 4)]
+"values": [Vector2(4, 4), Vector2(4.485, 4.485)]
 }
 
 [sub_resource type="Animation" id="Animation_npwbq"]
@@ -227,25 +179,9 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1350608, 0.26666668, 0.4, 0.53333336)
 }
 
-[sub_resource type="Animation" id="Animation_5stf6"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.94),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(4, 4), Vector2(4, 4)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pn6s4"]
 _data = {
 &"RESET": SubResource("Animation_v42im"),
-&"idle": SubResource("Animation_5stf6"),
 &"new_animation": SubResource("Animation_npwbq")
 }
 
@@ -265,6 +201,7 @@ shape = SubResource("CircleShape2D_p3xyx")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("2_wuy1y")
+flip_h = true
 region_enabled = true
 region_rect = Rect2(407, 16, 18, 17)
 
@@ -304,7 +241,6 @@ shape = SubResource("CircleShape2D_wuy1y")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Radii/whistleBox/CollisionShape2D"]
 modulate = Color(1, 1, 1, 0.39215687)
-position = Vector2(-3.8146973e-06, -2.861023e-06)
 scale = Vector2(1.37, 1.37)
 texture = ExtResource("5_wuy1y")
 
@@ -314,22 +250,9 @@ libraries = {
 }
 
 [node name="Line2D" type="Line2D" parent="Radii/whistleBox"]
-modulate = Color(1, 1, 1, 0)
-texture_repeat = 2
-points = PackedVector2Array(0, 0, 126.945, 0)
 closed = true
-width = 5.0
-texture = SubResource("GradientTexture1D_7oing")
-texture_mode = 1
-antialiased = true
 script = ExtResource("7_pn6s4")
 shape = SubResource("CircleShape2D_wuy1y")
-resolution = 1024
-
-[node name="AnimationTree" type="AnimationTree" parent="Radii/whistleBox"]
-tree_root = SubResource("AnimationNodeStateMachine_pn6s4")
-advance_expression_base_node = NodePath("..")
-anim_player = NodePath("../whistleAnim")
 
 [node name="Enemy detection box" type="Area2D" parent="."]
 collision_layer = 128
