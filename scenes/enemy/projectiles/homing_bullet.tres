@@ -10,5 +10,5 @@ speed = 300.0
 sprite = ExtResource("2_6lynt")
 size = 5.0
 homing_factor = 0.2
-life_time = 0.5
+life_time = 1.0
 metadata/_custom_type_script = "uid://deu61gciq467g"

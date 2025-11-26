@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Enemy
 
 @export var speed: float
 @export var light_level: float 

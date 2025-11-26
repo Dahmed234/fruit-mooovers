@@ -17,12 +17,6 @@ var targets : Dictionary[CharacterBody2D,float] = {}
 var angle_delta: float
 var clockwise
 var anticlockwise
-enum State {
-	PATROLLING  = 0,
-	ALERT 		= 1,
-	CHASING		= 2,
-	IDLE 		= 3
-}
 
 func clear_target(target):
 	targets.erase(target)
@@ -33,16 +27,19 @@ func mod(a: float, b: float) -> float:
 	var frac = a/b - div
 	return frac * b
 func update_light(delta: float) -> void:
+	show()
 	match (get_parent().current_state):
-		State.IDLE:
+		Enemy.State.IDLE:
 			local_size = 1.1
-		State.ALERT,State.CHASING:
+		Enemy.State.ALERT,Enemy.State.CHASING:
 			local_size = 1.8
+		Enemy.State.ATTACKING:
+			hide()
 		_:
 			local_size = 1.0
 	#Get the target angle if a target exists, overwriting whatever angle was there 
 	match (get_parent().current_state):
-		State.CHASING:
+		Enemy.State.CHASING:
 			if get_parent().get_best_target():
 				var tmp = rotation
 				look_at(get_parent().get_best_target().position)

@@ -1,13 +1,13 @@
 extends "res://scenes/enemy/enemy.gd"
 
+const PROJECTILE = preload("uid://1352s7d3laj7")
+
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 @export
 var pathPoint :PathFollow2D 
-
-const PROJECTILE = preload("uid://1352s7d3laj7")
 
 @export var DIST_THRESHOLD :float
 
@@ -22,33 +22,20 @@ var path :Curve2D
 func _ready():
 	global_position = pathPoint.global_position
 	path = get_parent().curve
-	
 	super()
 
 func _next_attack_pattern():
-	print("changed pattern")
 	attack_pattern_index = (attack_pattern_index + 1) % len(attack_patterns)
+	
+	print("changed pattern to ",attack_pattern_index," from ",attack_patterns)
 	
 	attack_time = 0.0
 	attack_count = 0
 
 func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	attack_count += 1
-	var n_projectile = PROJECTILE.instantiate()
 
-	n_projectile.proj = pattern.projectile_type
-	
-	# Get the direction to the target
-	n_projectile.direction = global_position.direction_to(target.global_position)
-	# Apply random spread
-	n_projectile.direction = Vector2.from_angle(
-		randf_range(-pattern.projectile_spread/2,pattern.projectile_spread/2) +
-		n_projectile.direction.angle()
-	)
-	
-	n_projectile.homing_target = target
-	
-	add_child(n_projectile)
+	add_child(Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target))
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)
@@ -103,22 +90,34 @@ func _update_target(delta: float) -> void:
 				navigation_agent_2d.target_position = best_target.position
 
 		State.ATTACKING:
+			
 			if !attack_patterns: 
 				assert(false,"no patterns :(")
 			var pattern: AttackPattern = attack_patterns[attack_pattern_index]
 			attack_time += delta
 			
-			if (attack_time > pattern.attack_time):
+			# Move to next attack if all 3 phases done
+			if (attack_time > pattern.windup + pattern.attack_time + pattern.cooldown):
 				_next_attack_pattern()
 			
-			else:
+			# try to shoot if the windup is done
+			elif (attack_time > pattern.windup):
+				
 				var best_target = get_best_target()
 				if !best_target: return
-				while (attack_count < pattern.projectile_count * (attack_time / pattern.attack_time)):
+				
+				while (attack_count < 
+					pattern.projectile_count * 
+					((attack_time - pattern.windup) / 
+					pattern.attack_time
+				)):
 					_shoot(best_target,pattern)
+				
 				if global_position.distance_to(best_target.global_position) > range * 2:
 					current_state = State.CHASING
-			
+			# else do the windup animation (indicate that the enmy will shoot soon)ssssssssssss
+			else:
+				pass
 		# If the state is invalid, throw an error
 		var other:
 			assert(false,"unexpected enemy state: " + State.keys()[other])

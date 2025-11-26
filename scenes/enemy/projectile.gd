@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Projectile
+
 
 ## Damage dealt to target
 var damage: float
@@ -9,22 +11,34 @@ var homing_factor: float
 ## The object that is being homed towards
 var homing_target: CharacterBody2D
 
-var proj: ProjectileResource
+var projectile_data: ProjectileResource
 
 var direction: Vector2
 
 var line = Line2D
 
 var life_time: float
+var init_life_time: float
+var projectile_type: ProjectileResource.ProjType
+
+var expiration_attack: AttackPattern
 
 func _ready():
-	speed =  proj.speed
-	$Sprite2D.texture = proj.sprite
-	homing_factor = proj.homing_factor
-	life_time = proj.life_time
+	speed =  projectile_data.speed
+	$Sprite2D.texture = projectile_data.sprite
+	homing_factor = projectile_data.homing_factor
+	life_time = projectile_data.life_time
+	projectile_type = projectile_data.projectile_type
 
-
-
+# handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
+func update(delta: float) -> void:
+	match(projectile_type):
+		ProjectileResource.ProjType.MISSILE:
+			if life_time < 3*init_life_time/4:
+				homing_factor = 5.0
+				speed *= 3
+		_:
+			pass
 func _physics_process(delta: float) -> void:
 	if life_time < 0:
 		die()
@@ -51,3 +65,18 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 
 func die():
 	queue_free()
+
+static func launch(n_projectile: CharacterBody2D,pattern: AttackPattern, source: Vector2, target_pos: Vector2,target: CharacterBody2D):
+
+	n_projectile.projectile_data = pattern.projectile_data
+	# Get the direction to the target
+	n_projectile.direction = source.direction_to(target_pos)
+	# Apply random spread
+	n_projectile.direction = Vector2.from_angle(
+		randf_range(-pattern.projectile_spread/2,pattern.projectile_spread/2) +
+		n_projectile.direction.angle()
+	)
+	
+	n_projectile.homing_target = target
+	
+	return n_projectile

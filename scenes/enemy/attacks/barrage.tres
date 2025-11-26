@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AttackPattern" load_steps=4 format=3 uid="uid://cmp1nm61nk2sj"]
 
-[ext_resource type="Resource" uid="uid://bvou1agsdakvw" path="res://scenes/enemy/projectiles/homing_bullet.tres" id="1_j4xr6"]
+[ext_resource type="Resource" uid="uid://bkfnhlp6epdjk" path="res://scenes/enemy/projectiles/bullet.tres" id="1_j4xr6"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="1_x5erf"]
 
 [sub_resource type="Curve2D" id="Curve2D_j4xr6"]
@@ -13,7 +13,9 @@ point_count = 2
 script = ExtResource("1_x5erf")
 movement = SubResource("Curve2D_j4xr6")
 attack_time = 3.0
-projectile_type = ExtResource("1_j4xr6")
+windup = 0.5
+cooldown = 0.5
+projectile_data = ExtResource("1_j4xr6")
 projectile_count = 35
 projectile_spread = 1.571
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"

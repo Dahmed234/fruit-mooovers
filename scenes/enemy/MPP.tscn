@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://lt11oexmku5s"]
+
+[ext_resource type="PackedScene" uid="uid://duws8qrfmixic" path="res://scenes/enemy/PathEnemy.tscn" id="1_xa2t5"]
+[ext_resource type="Script" path="res://scenes/enemy/patrol_path.gd" id="2_7ff5p"]
+[ext_resource type="Script" uid="uid://chdu3d1i8di5" path="res://scenes/enemy/PathPositionTracker.gd" id="3_q5ea3"]
+[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="4_77xt6"]
+
+[sub_resource type="Gradient" id="Gradient_yvq77"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.55016184, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.97, 0.97, 0.97, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_68p3r"]
+gradient = SubResource("Gradient_yvq77")
+width = 4
+
+[node name="Enemy Path" instance=ExtResource("1_xa2t5")]
+curve = null
+script = ExtResource("2_7ff5p")
+
+[node name="Enemy" parent="." index="0" node_paths=PackedStringArray("pathPoint")]
+pathPoint = NodePath("../PathFollow2D")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." index="1"]
+position = Vector2(3, -10)
+rotation = 0.4636476
+loop = false
+script = ExtResource("3_q5ea3")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D" index="0"]
+visible = false
+texture = ExtResource("4_77xt6")
+
+[node name="Line2D" type="Line2D" parent="." index="2"]
+modulate = Color(0.32830003, 0.67, 0.39664, 0.72156864)
+z_index = -1
+texture_repeat = 2
+width = 5.0
+texture = SubResource("GradientTexture1D_68p3r")
+texture_mode = 1

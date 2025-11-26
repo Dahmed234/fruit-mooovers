@@ -1,6 +1,11 @@
 class_name ProjectileResource
 extends Resource
 
+enum ProjType {
+	REGULAR,
+	MISSILE,
+}
+
 ## Damage dealt to target
 @export var damage: float
 ## Damage dealt to target
@@ -13,3 +18,5 @@ extends Resource
 @export var homing_factor: float
 ## How hany seconds until the projectile expires
 @export var life_time: float
+
+@export var projectile_type: ProjType
