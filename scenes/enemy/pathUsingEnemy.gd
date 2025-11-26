@@ -42,13 +42,12 @@ func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 #@export var sprite: Texture2D
 ### Radius of collision box
 #@export var size: float
-	n_projectile.damage = pattern.projectile_type.damage
-	n_projectile.speed =  pattern.projectile_type.speed
-	n_projectile.set_sprite(pattern.projectile_type.sprite)
-	n_projectile.source = global_position
-	n_projectile.destination = target.global_position
+	n_projectile.proj = pattern.projectile_type
+	
+	n_projectile.direction = global_position.direction_to(target.global_position)
+	n_projectile.homing_target = target
+	
 	add_child(n_projectile)
-	print("shoot!")
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)

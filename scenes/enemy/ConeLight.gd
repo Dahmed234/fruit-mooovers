@@ -99,8 +99,7 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 	if other_shape_node.get_parent().get_parent():
 		in_area[other_shape_node.get_parent().get_parent()] = true
 		other_shape_node.get_parent().get_parent().chasing[self] = true
-		
-	
+
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	# Handles case of follower being thrown while in area
