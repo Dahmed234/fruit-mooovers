@@ -11,3 +11,5 @@ extends Resource
 @export var size: float
 ## How aggressivelty the projectile homes (in degree radians / second)
 @export var homing_factor: float
+## How hany seconds until the projectile expires
+@export var life_time: float

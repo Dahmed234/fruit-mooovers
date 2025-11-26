@@ -35,16 +35,17 @@ func _next_attack_pattern():
 func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	attack_count += 1
 	var n_projectile = PROJECTILE.instantiate()
-	#@export var damage: float
-### Damage dealt to target
-#@export var speed: float
-### Sprite to render
-#@export var sprite: Texture2D
-### Radius of collision box
-#@export var size: float
+
 	n_projectile.proj = pattern.projectile_type
 	
+	# Get the direction to the target
 	n_projectile.direction = global_position.direction_to(target.global_position)
+	# Apply random spread
+	n_projectile.direction = Vector2.from_angle(
+		randf_range(-pattern.projectile_spread/2,pattern.projectile_spread/2) +
+		n_projectile.direction.angle()
+	)
+	
 	n_projectile.homing_target = target
 	
 	add_child(n_projectile)

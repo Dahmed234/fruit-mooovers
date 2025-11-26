@@ -11,4 +11,4 @@ extends Resource
 ## How many projectiles the enemy should use
 @export var projectile_count: int
 ## How spread projectiles should be
-@export var projectile_spread: int
+@export var projectile_spread: float
