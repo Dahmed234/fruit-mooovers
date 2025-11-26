@@ -101,16 +101,16 @@ func _update_target(delta: float) -> void:
 				_next_attack_pattern()
 			
 			# try to shoot if the windup is done
-			elif (attack_time > pattern.windup):
+			elif (attack_time > pattern.windup and attack_time <  pattern.windup + pattern.attack_time):
 				
 				var best_target = get_best_target()
 				if !best_target: return
 				
-				while (attack_count < 
-					pattern.projectile_count * 
+				while (pattern.projectile_count *
 					((attack_time - pattern.windup) / 
-					pattern.attack_time
-				)):
+					pattern.attack_time) > attack_count
+				):
+
 					_shoot(best_target,pattern)
 				
 				if global_position.distance_to(best_target.global_position) > range * 2:
