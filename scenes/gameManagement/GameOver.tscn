@@ -11,11 +11,11 @@ layout_mode = 2
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer" index="1"]
+[node name="Score" type="Label" parent="VBoxContainer" index="1"]
 layout_mode = 2
 text = "Score:"
 
-[node name="Label3" type="Label" parent="VBoxContainer" index="2"]
+[node name="Cow Score" type="Label" parent="VBoxContainer" index="2"]
 layout_mode = 2
 text = "Cows:"
 
