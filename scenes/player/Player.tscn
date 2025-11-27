@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
 [ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c46uv3a4y1ogs" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent.png" id="2_wuy1y"]
+[ext_resource type="PackedScene" uid="uid://cfp1kmchhvpv" path="res://scenes/ui/health_bar.tscn" id="3_pn6s4"]
 [ext_resource type="Script" uid="uid://vo65g72yyrot" path="res://scenes/player/whistle.gd" id="4_p3xyx"]
 [ext_resource type="Texture2D" uid="uid://c6x4ey8dxp7dc" path="res://assets/lights/Light texture transparent.png" id="5_wuy1y"]
 [ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scenes/ui/throw_marker.gd" id="6_1nynx"]
-[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="7_64pgi"]
-[ext_resource type="Script" uid="uid://cebac1r02ercw" path="res://scenes/player/whistle_outline.gd" id="7_pn6s4"]
-[ext_resource type="Script" uid="uid://bvahw0aufjgr" path="res://scenes/player/animation_tree.gd" id="8_v42im"]
+[ext_resource type="Script" path="res://scenes/player/whistle_outline.gd" id="7_pn6s4"]
+[ext_resource type="Script" path="res://scenes/player/animation_tree.gd" id="8_v42im"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
 radius = 6.8761363
@@ -188,6 +188,21 @@ tracks/2/keys = {
 "values": [Vector2(4, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_5stf6"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.94),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(4, 4)]
+}
+
 [sub_resource type="Animation" id="Animation_npwbq"]
 resource_name = "new_animation"
 length = 0.5333367
@@ -227,21 +242,6 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1350608, 0.26666668, 0.4, 0.53333336)
 }
 
-[sub_resource type="Animation" id="Animation_5stf6"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.94),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(4, 4), Vector2(4, 4)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pn6s4"]
 _data = {
 &"RESET": SubResource("Animation_v42im"),
@@ -249,13 +249,13 @@ _data = {
 &"new_animation": SubResource("Animation_npwbq")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 texture_filter = 1
 collision_layer = 4
 script = ExtResource("1_glu7e")
 speed = 300.0
 throwDistance = 500.0
-health = 20.0
+health = 1000.0
 
 [node name="physics Collision2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
@@ -268,9 +268,7 @@ texture = ExtResource("2_wuy1y")
 region_enabled = true
 region_rect = Rect2(407, 16, 18, 17)
 
-[node name="Bar" parent="Sprite2D" instance=ExtResource("7_64pgi")]
-position = Vector2(0, -8.75)
-scale = Vector2(0.25, 0.25)
+[node name="Health" parent="Sprite2D" instance=ExtResource("3_pn6s4")]
 
 [node name="Radii" type="CharacterBody2D" parent="."]
 collision_layer = 0

@@ -33,7 +33,7 @@ func _next_attack_pattern():
 func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	attack_count += 1
 
-	add_child(Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target))
+	owner.add_child(Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target))
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)
