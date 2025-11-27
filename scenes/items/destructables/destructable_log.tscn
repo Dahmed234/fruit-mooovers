@@ -1,13 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://tnrfudnvtjta"]
+[gd_scene load_steps=10 format=3 uid="uid://tnrfudnvtjta"]
 
 [ext_resource type="PackedScene" uid="uid://damapp5d6nnb2" path="res://scenes/items/destructables/placableDestructableItem.tscn" id="1_6gpvi"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
+[ext_resource type="Texture2D" uid="uid://b25f8mp5q7igg" path="res://assets/kenney_particle-pack/PNG (Transparent)/dirt_01.png" id="3_k5tax"]
+[ext_resource type="Script" uid="uid://csxr1fqc0q501" path="res://scenes/items/destructables/particles.gd" id="4_fsvl5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6gpvi"]
 radius = 105.11898
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bihxw"]
 size = Vector2(128, 128)
+
+[sub_resource type="Curve" id="Curve_33bj3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j1eha"]
+curve = SubResource("Curve_33bj3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k85ee"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(40, 5, 1)
+direction = Vector3(10, -1, 0)
+spread = 60.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -98, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+alpha_curve = SubResource("CurveTexture_j1eha")
 
 [node name="Destructable Item" instance=ExtResource("1_6gpvi")]
 collision_layer = 7
@@ -25,3 +46,15 @@ shape = SubResource("CircleShape2D_6gpvi")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("RectangleShape2D_bihxw")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="5"]
+position = Vector2(-6, 61)
+amount = 16
+texture = ExtResource("3_k5tax")
+explosiveness = 0.25
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_k85ee")
+script = ExtResource("4_fsvl5")
+
+[connection signal="carry_started" from="." to="GPUParticles2D" method="_on_destructable_item_carry_started"]
+[connection signal="carry_stopped" from="." to="GPUParticles2D" method="_on_destructable_item_carry_stopped"]
