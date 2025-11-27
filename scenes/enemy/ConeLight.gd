@@ -17,12 +17,6 @@ var targets : Dictionary[CharacterBody2D,float] = {}
 var angle_delta: float
 var clockwise
 var anticlockwise
-enum State {
-	PATROLLING  = 0,
-	ALERT 		= 1,
-	CHASING		= 2,
-	IDLE 		= 3
-}
 
 func clear_target(target):
 	targets.erase(target)
@@ -33,16 +27,19 @@ func mod(a: float, b: float) -> float:
 	var frac = a/b - div
 	return frac * b
 func update_light(delta: float) -> void:
+	show()
 	match (get_parent().current_state):
-		State.IDLE:
+		Enemy.State.IDLE:
 			local_size = 1.1
-		State.ALERT,State.CHASING:
+		Enemy.State.ALERT,Enemy.State.CHASING:
 			local_size = 1.8
+		Enemy.State.ATTACKING:
+			hide()
 		_:
 			local_size = 1.0
 	#Get the target angle if a target exists, overwriting whatever angle was there 
 	match (get_parent().current_state):
-		State.CHASING:
+		Enemy.State.CHASING:
 			if get_parent().get_best_target():
 				var tmp = rotation
 				look_at(get_parent().get_best_target().position)
@@ -99,8 +96,7 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 	if other_shape_node.get_parent().get_parent():
 		in_area[other_shape_node.get_parent().get_parent()] = true
 		other_shape_node.get_parent().get_parent().chasing[self] = true
-		
-	
+
 
 func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	# Handles case of follower being thrown while in area

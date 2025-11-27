@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://duws8qrfmixic"]
+
+[ext_resource type="PackedScene" uid="uid://8y7gjhthiwsc" path="res://scenes/enemy/Enemy.tscn" id="1_u7kdk"]
+[ext_resource type="Script" uid="uid://buou4tvnmxtho" path="res://scenes/enemy/pathUsingEnemy.gd" id="2_mer1q"]
+[ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="3_ds1xm"]
+[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="4_ig063"]
+[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="5_c8v0p"]
+
+[sub_resource type="Curve2D" id="Curve2D_u7kdk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3, -10, 0, 0, 0, 0, 117, 47, 0, 0, 0, 0, -43, 151, 0, 0, 0, 0, -152, 77, 0, 0, 0, 0, 3, -10)
+}
+point_count = 5
+
+[node name="Path" type="Path2D"]
+curve = SubResource("Curve2D_u7kdk")
+
+[node name="Enemy" parent="." instance=ExtResource("1_u7kdk")]
+script = ExtResource("2_mer1q")
+DIST_THRESHOLD = 100.0
+attack_patterns = Array[ExtResource("3_ds1xm")]([ExtResource("4_ig063"), ExtResource("5_c8v0p")])
+damage = 50.0
+range = 200.0
