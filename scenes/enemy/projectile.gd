@@ -3,6 +3,7 @@ class_name Projectile
 
 const PROJECTILE = preload("uid://1352s7d3laj7")
 
+var pierced: Dictionary
 ## Damage dealt to target
 var damage: float
 ## Damage dealt to target
@@ -11,6 +12,8 @@ var speed: float
 var homing_factor: float
 ## The object that is being homed towards
 var homing_target: CharacterBody2D
+
+var pierce_left: int
 
 var projectile_data: ProjectileResource
 
@@ -35,6 +38,7 @@ func _ready():
 	init_life_time = life_time
 	projectile_type = projectile_data.projectile_type
 	expiration_attack = projectile_data.expiration_attack
+	pierce_left = projectile_data.pierce
 	global_position = source
 
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
@@ -82,20 +86,33 @@ static func launch(n_projectile: Projectile,pattern: AttackPattern, source: Vect
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") and !pierced.get(body,false):
 		body.damage(damage)
-	die()
+		pierced[body] = true
+		pierce_left -= 1
+	if pierce_left <= 0:
+		die()
 
 func die():
 	# Shoot new projectiles from final position when the projectile expires
 	if expiration_attack:
 		for i in range(expiration_attack.projectile_count):
-			get_parent().owner.add_child(launch(
-				PROJECTILE.instantiate(),
-				expiration_attack,
-				global_position,
-				Vector2.RIGHT,homing_target
-			))
+			if is_instance_valid(homing_target):
+				get_parent().owner.add_child(launch(
+					PROJECTILE.instantiate(),
+					expiration_attack,
+					global_position,
+					Vector2.RIGHT,
+					homing_target
+				))
+			else:
+				get_parent().owner.add_child(launch(
+					PROJECTILE.instantiate(),
+					expiration_attack,
+					global_position,
+					Vector2.RIGHT,
+					null
+				))
 		
 	# delete this projectile
 	queue_free()

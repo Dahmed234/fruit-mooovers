@@ -8,3 +8,4 @@ func _process(_delta: float) -> void:
 	if value == max_value: hide()
 	else: show()
 	modulate = fullColour * (value / max_value) + emptyColour * (1-(value / max_value))
+	rotation = - get_parent().rotation
