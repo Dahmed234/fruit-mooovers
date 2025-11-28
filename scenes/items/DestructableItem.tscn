@@ -1,10 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://kvexn7i2mmmy"]
+[gd_scene load_steps=8 format=3 uid="uid://kvexn7i2mmmy"]
 
 [ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scenes/items/Destructable.gd" id="1_3hrdc"]
 [ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="2_jr6qx"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dihw8"]
+size = Vector2(64, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hwu3"]
+size = Vector2(13, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vt1gv"]
+size = Vector2(63, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4w8j"]
+size = Vector2(13, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hrdc"]
 size = Vector2(64, 64)
@@ -19,11 +28,25 @@ label = NodePath("Label")
 collision_layer = 17
 collision_mask = 17
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_tbgi4")
+[node name="North" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_dihw8")
+
+[node name="East" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(39, -1)
+shape = SubResource("RectangleShape2D_4hwu3")
+
+[node name="South" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 35)
+shape = SubResource("RectangleShape2D_vt1gv")
+
+[node name="West" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-39, 0)
+shape = SubResource("RectangleShape2D_i4w8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3hrdc")
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -41,4 +64,5 @@ text = "0/0"
 horizontal_alignment = 1
 
 [node name="Bar" parent="." instance=ExtResource("2_jr6qx")]
+visible = false
 position = Vector2(0, -40)

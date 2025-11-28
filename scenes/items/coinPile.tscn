@@ -1,14 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbvli5wds5jss"]
+[gd_scene load_steps=3 format=3 uid="uid://bbvli5wds5jss"]
 
 [ext_resource type="Script" uid="uid://b3saofist47n3" path="res://scenes/items/coin_pile.gd" id="1_euap0"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_w7awe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh6x8"]
-size = Vector2(405.125, 335.5847)
-
 [node name="CoinPile" type="CollisionShape2D"]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_lh6x8")
 script = ExtResource("1_euap0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

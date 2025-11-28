@@ -151,16 +151,18 @@ region_enabled = true
 region_rect = Rect2(432, 112, 16, 16)
 
 [node name="heldItem" type="Node2D" parent="Sprite2D"]
-position = Vector2(1.7148998, -4.7831287)
+position = Vector2(2.5, -5.5)
 rotation = 0.11716485
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite" type="Sprite2D" parent="Sprite2D/heldItem"]
 texture_filter = 1
-position = Vector2(0, -12.06)
+position = Vector2(1.5077715, -17.731564)
 texture = ExtResource("1_klxf7")
 region_enabled = true
 region_rect = Rect2(512, 160, 16, 16)
+
+[node name="head" type="Node2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
@@ -174,7 +176,6 @@ path_desired_distance = 5.0
 target_desired_distance = 30.0
 avoidance_enabled = true
 max_speed = 500.0
-debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

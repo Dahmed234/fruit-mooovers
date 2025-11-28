@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=18 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
 [ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="12_v6clt"]
 [ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
+size = Vector2(508, 179.3338)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vlao"]
 size = Vector2(564, 356.6623)
@@ -72,7 +75,8 @@ position = Vector2(-1060, -184.85294)
 scale = Vector2(1, 0.9981417)
 
 [node name="CollisionShape2D" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(465, 1435.5205)
+position = Vector2(463, 1447.0425)
+shape = SubResource("RectangleShape2D_fg4jm")
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]

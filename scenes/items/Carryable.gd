@@ -5,6 +5,8 @@ class_name Carryable
 func _ready() -> void:
 	super._ready()
 
+@onready
+var bottom :Node2D = $bottom
 
 func _process(delta: float) -> void:
 	# If at least one follower is carrying, follow the main follower

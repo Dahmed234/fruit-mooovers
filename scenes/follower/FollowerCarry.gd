@@ -25,6 +25,7 @@ func start(item: Carryable) -> void:
 	current_sprite.region_rect = new_sprite.region_rect
 	current_sprite.region_enabled = new_sprite.region_enabled
 	current_sprite.global_scale = new_sprite.global_scale
+	current_sprite.position= held_item.position - item.bottom.position
 
 	navigation_agent_2d.avoidance_mask = 0
 
