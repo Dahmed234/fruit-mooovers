@@ -56,6 +56,13 @@ func physics_update(delta: float) -> void:
 
 	label.text = str(int(item.followersCarrying.size())) \
 		+ "/" + str(int(item.minimum_followers))
+	
+	if(item.followersCarrying.size() < item.minimum_followers):
+		label.modulate = Color.ORANGE
+	elif  (item.followersCarrying.size() >= item.maximum_followers):
+		label.modulate = Color.AQUA
+	else:
+		label.modulate = Color.GREEN
 
 	if navigation_agent_2d.is_target_reached():
 		var tmp = item

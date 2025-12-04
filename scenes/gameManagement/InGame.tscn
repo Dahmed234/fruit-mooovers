@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=19 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -21,7 +21,10 @@ size = Vector2(508, 179.3338)
 size = Vector2(564, 356.6623)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmcs"]
-size = Vector2(687, 345.6421)
+size = Vector2(915.5, 573.5657)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6clt"]
+size = Vector2(539.5, 293.28503)
 
 [sub_resource type="Curve2D" id="Curve2D_v6clt"]
 _data = {
@@ -39,7 +42,6 @@ player = NodePath("Player")
 zoom_strength = null
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
-position = Vector2(-4, -151)
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -1475.0
@@ -75,23 +77,27 @@ position = Vector2(-1060, -184.85294)
 scale = Vector2(1, 0.9981417)
 
 [node name="CollisionShape2D" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(463, 1447.0425)
+position = Vector2(461, 1611.8483)
 shape = SubResource("RectangleShape2D_fg4jm")
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1697, 1381.4205)
+position = Vector2(1751, 1416.4851)
 shape = SubResource("RectangleShape2D_1vlao")
 num_coins = 7
 
 [node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(2127, 2469.442)
+position = Vector2(2108, 2365.2483)
 shape = SubResource("RectangleShape2D_ctmcs")
+
+[node name="CoinPile3" parent="coins" instance=ExtResource("12_ctmcs")]
+position = Vector2(-540, 2250.0342)
+shape = SubResource("RectangleShape2D_v6clt")
 
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="Enemy Path" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
-position = Vector2(0, 409)
+position = Vector2(-9, 667)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Fruits" type="Node2D" parent="."]

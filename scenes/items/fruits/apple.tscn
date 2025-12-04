@@ -27,3 +27,9 @@ region_rect = Rect2(528, 288, 16, 16)
 
 [node name="bottom" parent="." index="4"]
 position = Vector2(0, 48)
+
+[node name="GPUParticles2D" parent="." index="5"]
+modulate = Color(0.8885455, 0.5467842, 0.5872863, 1)
+position = Vector2(0, 15.000002)
+scale = Vector2(1.5923293, 1.1888309)
+amount = 14
