@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2t31yxm0wwmr"]
+[gd_scene load_steps=10 format=3 uid="uid://c2t31yxm0wwmr"]
 
 [ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scenes/items/Carryable.gd" id="1_jgeia"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_ss8l4"]
@@ -8,14 +8,21 @@
 radius = 47.67599
 
 [sub_resource type="Curve" id="Curve_eg650"]
-_data = [Vector2(0, 0.07404566), 0.0, 0.0, 0, 0, Vector2(0.7566225, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0007686615), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.07404566), 0.0, 0.0, 0, 0, Vector2(0.47162163, 0.6303068), 0.0, 0.0, 0, 0, Vector2(1, 0.0007686615), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_xvgg5"]
 curve = SubResource("Curve_eg650")
 
+[sub_resource type="Curve" id="Curve_bxj46"]
+_data = [Vector2(0.17972973, 0), 0.0, 0.0, 0, 0, Vector2(0.47972977, 0.38736546), 0.0, 0.0, 0, 0, Vector2(0.7554054, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_eg650"]
+curve = SubResource("Curve_bxj46")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_06w3s"]
-lifetime_randomness = 0.35
+lifetime_randomness = 0.1
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 25.24
@@ -29,14 +36,16 @@ linear_accel_max = 1.4299977
 radial_accel_min = -2.2351742e-06
 radial_accel_max = 6.299998
 scale_min = 0.02
-scale_max = 0.06
-color = Color(0.99, 0.89100003, 0, 0.8862745)
+scale_max = 0.14999999
+color = Color(0.99, 0.97416, 0.83160007, 0.8862745)
 alpha_curve = SubResource("CurveTexture_xvgg5")
+emission_curve = SubResource("CurveTexture_eg650")
 hue_variation_min = -0.09000002
 hue_variation_max = 0.039999977
 
-[node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
+[node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label") groups=["Carryable"]]
 script = ExtResource("1_jgeia")
+fruitName = "???"
 label = NodePath("Label")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -76,6 +85,7 @@ position = Vector2(0, 17)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 scale = Vector2(1.8643138, 1.9391376)
+amount = 20
 texture = ExtResource("3_bxj46")
 visibility_rect = Rect2(-98.86, -100, 200, 200)
 process_material = SubResource("ParticleProcessMaterial_06w3s")

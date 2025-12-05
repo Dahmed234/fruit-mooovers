@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwcpcthxmi484"]
+[gd_scene load_steps=10 format=3 uid="uid://bwcpcthxmi484"]
 
 [ext_resource type="Script" uid="uid://bd80wkpeqyg46" path="res://scenes/ui/Scoreholder.gd" id="1_dj8aq"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="1_inpio"]
 [ext_resource type="Texture2D" uid="uid://m0nma3o5ph5a" path="res://assets/clock.png" id="3_nnfdp"]
 [ext_resource type="Texture2D" uid="uid://dgsvqpmyeykxv" path="res://assets/clock background.png" id="3_s64wo"]
 [ext_resource type="Texture2D" uid="uid://cynwu0kdyooxi" path="res://assets/clock body.png" id="4_dqg8s"]
+[ext_resource type="Texture2D" uid="uid://bf8s7tsyc6c5c" path="res://assets/coin.png" id="6_j3nm3"]
+[ext_resource type="Script" uid="uid://cp2jg1n76cp0m" path="res://scenes/ui/itemTooltip.gd" id="6_p6rkd"]
+[ext_resource type="Texture2D" uid="uid://ex4c4p0o8gtd" path="res://assets/cow.png" id="7_p6rkd"]
 
 [sub_resource type="Theme" id="Theme_m01cm"]
 
@@ -12,17 +15,9 @@
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -540.0
-offset_top = -360.0
-offset_right = 1693.0
-offset_bottom = 891.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="Label" type="Label" parent="Control"]
 texture_filter = 1
@@ -88,3 +83,48 @@ texture_over = ExtResource("4_dqg8s")
 texture_progress = ExtResource("3_nnfdp")
 texture_progress_offset = Vector2(3, 5)
 tint_under = Color(1, 1, 1, 0.6)
+
+[node name="Panel" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 108.0
+offset_right = 741.0
+offset_bottom = 148.0
+size_flags_horizontal = 3
+script = ExtResource("6_p6rkd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]
+layout_mode = 2
+alignment = 1
+
+[node name="coinIcon" type="TextureRect" parent="Control/Panel/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_j3nm3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="coinAmountLabel" type="Label" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+text = "x44"
+
+[node name="VSeparator" type="VSeparator" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="fruitName" type="Label" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Mddddddddd"
+
+[node name="VSeparator2" type="VSeparator" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="cowAmountLabel" type="Label" parent="Control/Panel/HBoxContainer"]
+layout_mode = 2
+text = "x44"
+
+[node name="cowIcon" type="TextureRect" parent="Control/Panel/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_p6rkd")
+expand_mode = 2
+stretch_mode = 4

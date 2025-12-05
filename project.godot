@@ -38,6 +38,7 @@ version_control/autoload_on_startup=true
 
 fruitSpawners="spawns fruit when called."
 destroyableWall=""
+Carryable=""
 
 [input]
 
