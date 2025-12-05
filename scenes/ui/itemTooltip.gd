@@ -6,6 +6,7 @@ var currentItem :Carryable = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_modulate(Color(1,1,1,0))
 	pass # Replace with function body.
 
 
@@ -17,9 +18,10 @@ func _process(delta: float) -> void:
 	currentItem = overlappingCarryables.pop_back()
 	
 	if currentItem == null:
-		hide()
+		set_modulate(lerp(get_modulate(), Color(1,1,1,0), 0.2))
 		return
 	
+	set_modulate(lerp(get_modulate(), Color(1,1,1,1), 0.2))
 	show()
 	$HBoxContainer/coinIcon.visible = currentItem.value > 0
 	$HBoxContainer/coinAmountLabel.visible = currentItem.value > 0
