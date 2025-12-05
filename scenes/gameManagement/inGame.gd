@@ -21,6 +21,33 @@ var destructableWalls: TileMapLayer
 
 var isPaused := false
 # Called when the node enters the scene tree for the first time.
+
+@onready
+var mooSoundPlayer : AudioStreamPlayer = $MooSoundPlayer
+
+var timeSinceLastMoo : float = 0
+
+@export
+var minTimeBetweenMoos : float = 0
+
+@export
+var maxTimeBetweenMoos : float = 0
+
+@onready
+var timeBetweenMoos : float = randf_range(minTimeBetweenMoos, maxTimeBetweenMoos)
+
+@export
+var throwMooMinPitch : float = 0;
+
+@export
+var throwMooMaxPitch : float = 0;
+
+@export
+var idleMooMinPitch : float = 0;
+
+@export
+var idleMooMaxPitch : float = 0;
+
 func _ready() -> void:
 	for i in range(3):
 		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
@@ -38,6 +65,15 @@ func _process(delta):
 	cameraScrolling()
 	
 	if Input.is_action_just_pressed("pause"): isPaused = !isPaused
+	
+	if (!mooSoundPlayer.playing):
+		if (timeSinceLastMoo >= timeBetweenMoos):
+			mooSoundPlayer.pitch_scale = randf_range(idleMooMinPitch, idleMooMaxPitch);
+			mooSoundPlayer.play();
+			timeSinceLastMoo = 0;
+			timeBetweenMoos = randf_range(minTimeBetweenMoos, maxTimeBetweenMoos);
+		else:
+			timeSinceLastMoo += delta;
 
 func onCarryFinish(item,pos):
 	label.score += item.value
@@ -96,6 +132,11 @@ func onThrowMade(startPosition,mousePosition,follower) ->void:
 	follower.startThrown()
 	throw.objectFinishThrow.connect(onThrowFinish)
 	add_child(throw)
+	
+	#play moo sfx
+	timeSinceLastMoo = 0.0
+	mooSoundPlayer.pitch_scale = randf_range(throwMooMinPitch, throwMooMaxPitch)
+	mooSoundPlayer.play()
 
 func onThrowFinish(position :Vector2,state :Follower.State, thrown):
 	thrown.follower.show()
