@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
 [ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="12_v6clt"]
 [ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
-[ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
+[ext_resource type="AudioStream" uid="uid://dhxbdw0sfgtlb" path="res://sounds/sound effects/MOO SFX.wav" id="14_v6clt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
 size = Vector2(508, 179.3338)
@@ -40,12 +40,6 @@ thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
 player = NodePath("Player")
-minTimeBetweenMoos = 5.0
-maxTimeBetweenMoos = 20.0
-throwMooMinPitch = 1.5
-throwMooMaxPitch = 1.25
-idleMooMinPitch = 0.75
-idleMooMaxPitch = 1.0
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
 
