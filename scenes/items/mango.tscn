@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1kwqy54sq4wa"]
+
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_c42ht"]
+[ext_resource type="Texture2D" uid="uid://v6fg04sxd6e" path="res://assets/stockImages/Mangos.png" id="2_lduqi"]
+
+[node name="Item" instance=ExtResource("1_c42ht")]
+fruitName = "Mango"
+value = 70
+followerValue = 7
+minimum_followers = 15
+maximum_followers = 25
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.104271, 1.104271)
+texture = ExtResource("2_lduqi")
+region_enabled = false
+
+[node name="bottom" parent="." index="4"]
+position = Vector2(1, 114.00001)
+scale = Vector2(2.4894874, 8.790012)
+
+[node name="GPUParticles2D" parent="." index="5"]
+modulate = Color(1, 0.47333336, 0.20999998, 1)
+position = Vector2(-2.9999998, 4)
+scale = Vector2(6.0604343, 5.6218214)
+amount = 75
