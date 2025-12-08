@@ -1,5 +1,7 @@
 extends Node2D
 
+const INITIAL_FOLLOWERS: int = 50
+
 @export
 var thown: PackedScene
 
@@ -49,7 +51,7 @@ var idleMooMinPitch : float = 0;
 var idleMooMaxPitch : float = 0;
 
 func _ready() -> void:
-	for i in range(3):
+	for i in range(INITIAL_FOLLOWERS):
 		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
 	
 func cameraScrolling():

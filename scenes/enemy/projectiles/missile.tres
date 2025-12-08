@@ -13,4 +13,5 @@ size = 5.0
 life_time = 2.0
 projectile_type = 1
 expiration_attack = ExtResource("1_krtwl")
+pierce = 1
 metadata/_custom_type_script = "uid://deu61gciq467g"

@@ -22,3 +22,5 @@ enum ProjType {
 @export var projectile_type: ProjType
 
 @export var expiration_attack: AttackPattern
+
+@export var pierce: int

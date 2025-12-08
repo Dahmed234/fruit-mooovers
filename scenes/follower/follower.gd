@@ -33,8 +33,8 @@ var thrower: CharacterBody2D
 var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 var max_health
-@onready var bar: Node2D = $Bar
 @export var health : float
+@onready var health_bar: TextureProgressBar = $Sprite2D/Health
 
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
@@ -101,15 +101,15 @@ static func newFollower(pos, startingState: State):
 	return follower
 
 
-func damage(enemy_damage, delta):
+func damage(enemy_damage):
 	match currentState:
 		State.CARRYING, State.DESTROYING:
 			if carryingItem and carryingItem.main_follower:
-				carryingItem.main_follower.health -= delta * enemy_damage
+				carryingItem.main_follower.health -= enemy_damage
 			else:
-				health -= delta * enemy_damage
+				health -= enemy_damage
 		_:
-			health -= delta * enemy_damage
+			health -= enemy_damage
 
 
 func die() -> void:
@@ -215,6 +215,7 @@ func initState():
 
 func _ready() -> void:
 	max_health = health
+	health_bar.max_value = max_health
 	$Sprite2D/heldItem/Sprite.texture = null
 	label.hide()
 	
@@ -261,7 +262,7 @@ func actor_setup():
 
 
 func _physics_process(delta: float) -> void:
-	bar.fullness = health / max_health
+	health_bar.value = health
 	
 	$Sprite2D.flip_h = velocity.x < 0
 	

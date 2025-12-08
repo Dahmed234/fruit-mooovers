@@ -12,6 +12,7 @@ var enemy_minimum_followers := 0.4
 @onready var throwRadius: Area2D = $"Radii/Throw Radius"
 
 var chasing: Dictionary[CharacterBody2D,bool] = {}
+@onready var health_bar: TextureProgressBar = $Sprite2D/Health
 
 @export var health : float
 var max_health
@@ -21,9 +22,10 @@ var is_moving = true
 
 func _ready():
 	max_health = health
+	health_bar.max_value = max_health
 
-func damage(enemy_damage,delta):
-	health -= delta * enemy_damage
+func damage(enemy_damage):
+	health -= enemy_damage
 
 func die() -> void:
 	# remove this follower from list of enemies chasing it
@@ -56,7 +58,7 @@ func move(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	bar.fullness = health / max_health
+	health_bar.value = health
 	
 	
 	if health <= 0: die()
