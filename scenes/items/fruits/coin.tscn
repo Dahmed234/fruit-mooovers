@@ -4,7 +4,6 @@
 
 [node name="Item" instance=ExtResource("1_d5gmh")]
 value = 2
-weight = 0.5
 
 [node name="Sprite2D" parent="." index="1"]
 region_rect = Rect2(352, 64, 16, 16)

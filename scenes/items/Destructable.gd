@@ -12,12 +12,35 @@ var time := 0.0
 
 signal requestDestroy(obj :Node2D)
 
+
+@export
+var north = true
+
+@export
+var east = true
+
+@export
+var south =true 
+
+@export
+var west = true 
+
 func _ready() -> void:
 	super._ready()
+	$Area2D/North.disabled = !north
+	$Area2D/East.disabled = !east
+	$Area2D/South.disabled = !south
+	$Area2D/West.disabled = !west
+	
 
 	if isEnemy:
 		$CollisionShape2D.disabled = true
 	else:
+			
+		$Area2D/East/EdenySprite.visible = !east
+		$Area2D/North/NdenySprite.visible = !north
+		$Area2D/West/WdenySprite.visible =!west
+		$Area2D/South/SdenySprite.visible = !south
 		bar.fullColour = Color(0.5, 0.5, 0.5)
 		bar.emptyColour = Color(0.5, 0.5, 0.5)
 

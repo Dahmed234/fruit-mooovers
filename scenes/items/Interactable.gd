@@ -2,8 +2,8 @@ extends StaticBody2D
 
 class_name Interactable
 
-signal carry_started(follower: CharacterBody2D)
-signal carry_stopped(follower: CharacterBody2D)
+signal carry_started(follower: CharacterBody2D, num_followers: int, min_followers: int, max_followers: int)
+signal carry_stopped(follower: CharacterBody2D, num_followers: int, min_followers: int, max_followers: int)
 
 @export var value: int
 @export var followerValue: int
@@ -42,7 +42,7 @@ func onPickup(follower: CharacterBody2D) -> void:
 		_on_first_follower_added()
 
 	_update_label()
-	carry_started.emit(follower)
+	carry_started.emit(follower, followersCarrying.size(), minimum_followers, maximum_followers);
 
 
 func onDrop(follower: CharacterBody2D) -> void:
@@ -61,7 +61,7 @@ func onDrop(follower: CharacterBody2D) -> void:
 		_on_main_follower_changed(main_follower)
 
 	_update_label()
-	carry_stopped.emit(follower)
+	carry_stopped.emit(follower, followersCarrying.size(), minimum_followers, maximum_followers);
 
 
 # Drop all followers (used when finishing carrying / destroying)

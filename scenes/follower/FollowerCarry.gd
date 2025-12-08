@@ -25,6 +25,7 @@ func start(item: Carryable) -> void:
 	current_sprite.region_rect = new_sprite.region_rect
 	current_sprite.region_enabled = new_sprite.region_enabled
 	current_sprite.global_scale = new_sprite.global_scale
+	current_sprite.position= held_item.position - item.bottom.position
 
 	navigation_agent_2d.avoidance_mask = 0
 
@@ -55,6 +56,13 @@ func physics_update(delta: float) -> void:
 
 	label.text = str(int(item.followersCarrying.size())) \
 		+ "/" + str(int(item.minimum_followers))
+	
+	if(item.followersCarrying.size() < item.minimum_followers):
+		label.modulate = Color.ORANGE
+	elif  (item.followersCarrying.size() >= item.maximum_followers):
+		label.modulate = Color.AQUA
+	else:
+		label.modulate = Color.GREEN
 
 	if navigation_agent_2d.is_target_reached():
 		var tmp = item

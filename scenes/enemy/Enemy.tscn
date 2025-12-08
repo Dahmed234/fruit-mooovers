@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://8y7gjhthiwsc"]
+[gd_scene load_steps=7 format=3 uid="uid://8y7gjhthiwsc"]
 
 [ext_resource type="Script" uid="uid://dbej3dlanmprm" path="res://scenes/enemy/enemy.gd" id="1_duu5m"]
 [ext_resource type="Texture2D" uid="uid://cavic3xfatt3s" path="res://assets/UFO.png" id="2_duu5m"]
@@ -8,6 +8,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kne1u"]
 radius = 4.0
 height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s6wwv"]
+radius = 40.04997
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("cone_light")]
 collision_layer = 0
@@ -45,7 +48,26 @@ avoidance_mask = 2
 
 [node name="Destructable Item" parent="." instance=ExtResource("5_hgomy")]
 isEnemy = true
+north = false
+east = false
+south = false
+west = false
 followerValue = 1
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Destructable Item/Area2D" index="0"]
+shape = SubResource("CircleShape2D_s6wwv")
+
+[node name="North" parent="Destructable Item/Area2D" index="1"]
+disabled = true
+
+[node name="East" parent="Destructable Item/Area2D" index="2"]
+disabled = true
+
+[node name="South" parent="Destructable Item/Area2D" index="3"]
+disabled = true
+
+[node name="West" parent="Destructable Item/Area2D" index="4"]
+disabled = true
 
 [node name="Label" parent="Destructable Item" index="2"]
 offset_top = 22.0

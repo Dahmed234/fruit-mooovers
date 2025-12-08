@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://damapp5d6nnb2"]
 
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://scenes/items/DestructableItem.tscn" id="1_abqq1"]
-[ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="3_2uiyy"]
+[ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_ffqfc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a28m7"]
 font_size = 32
@@ -11,10 +11,55 @@ font_size = 32
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(1, 1.9999962)
 scale = Vector2(0.45, 0.45)
-texture = ExtResource("3_2uiyy")
+
+[node name="Area2D" parent="." index="1"]
+metadata/_edit_lock_ = true
+
+[node name="NdenySprite" type="Sprite2D" parent="Area2D/North" index="0"]
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("2_ffqfc")
+region_enabled = true
+region_rect = Rect2(592, 336, 16, 16)
+
+[node name="East" parent="Area2D" index="1"]
+position = Vector2(45, 0)
+
+[node name="EdenySprite" type="Sprite2D" parent="Area2D/East" index="0"]
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = -1
+texture_filter = 1
+position = Vector2(-1, 0)
+texture = ExtResource("2_ffqfc")
+region_enabled = true
+region_rect = Rect2(592, 336, 16, 16)
+
+[node name="SdenySprite" type="Sprite2D" parent="Area2D/South" index="0"]
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = -1
+texture_filter = 1
+position = Vector2(0.5, 0)
+texture = ExtResource("2_ffqfc")
+region_enabled = true
+region_rect = Rect2(592, 336, 16, 16)
+
+[node name="West" parent="Area2D" index="3"]
+position = Vector2(-42, 0)
+
+[node name="WdenySprite" type="Sprite2D" parent="Area2D/West" index="0"]
+modulate = Color(1, 1, 1, 0.78431374)
+z_index = -1
+texture_filter = 1
+position = Vector2(-1, 1)
+texture = ExtResource("2_ffqfc")
+region_enabled = true
+region_rect = Rect2(592, 336, 16, 16)
 
 [node name="Label" parent="." index="3"]
-offset_top = -6.0
-offset_bottom = 39.0
+offset_top = -23.0
+offset_bottom = 22.0
 text = "0"
 label_settings = SubResource("LabelSettings_a28m7")
+metadata/_edit_lock_ = true

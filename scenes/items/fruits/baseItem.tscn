@@ -1,21 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2t31yxm0wwmr"]
+[gd_scene load_steps=10 format=3 uid="uid://c2t31yxm0wwmr"]
 
 [ext_resource type="Script" uid="uid://bx4tpsaonacc7" path="res://scenes/items/Carryable.gd" id="1_jgeia"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_ss8l4"]
+[ext_resource type="Texture2D" uid="uid://j22ct6j7suf8" path="res://assets/kenney_particle-pack/PNG (Transparent)/star_07.png" id="3_bxj46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbgi4"]
-radius = 47.67599
+radius = 154.30165
 
-[node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label")]
+[sub_resource type="Curve" id="Curve_eg650"]
+_data = [Vector2(0, 0.07404566), 0.0, 0.0, 0, 0, Vector2(0.47162163, 0.6303068), 0.0, 0.0, 0, 0, Vector2(1, 0.0007686615), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xvgg5"]
+curve = SubResource("Curve_eg650")
+
+[sub_resource type="Curve" id="Curve_bxj46"]
+_data = [Vector2(0.17972973, 0), 0.0, 0.0, 0, 0, Vector2(0.47972977, 0.38736546), 0.0, 0.0, 0, 0, Vector2(0.7554054, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_eg650"]
+curve = SubResource("Curve_bxj46")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_06w3s"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.24
+angle_min = 1.0728835e-05
+angle_max = 74.30001
+spread = 180.0
+initial_velocity_max = 8.599999
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.0100021
+linear_accel_max = 1.4299977
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 6.299998
+scale_min = 0.02
+scale_max = 0.14999999
+color = Color(0.99, 0.97416, 0.83160007, 0.8862745)
+alpha_curve = SubResource("CurveTexture_xvgg5")
+emission_curve = SubResource("CurveTexture_eg650")
+hue_variation_min = -0.09000002
+hue_variation_max = 0.039999977
+
+[node name="Item" type="StaticBody2D" node_paths=PackedStringArray("label") groups=["Carryable"]]
 script = ExtResource("1_jgeia")
+fruitName = "???"
 label = NodePath("Label")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 17
-collision_mask = 17
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_tbgi4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -23,6 +54,13 @@ scale = Vector2(3, 3)
 texture = ExtResource("2_ss8l4")
 region_enabled = true
 region_rect = Rect2(592, 208, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tbgi4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -41,3 +79,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/0"
 horizontal_alignment = 1
+
+[node name="bottom" type="Node2D" parent="."]
+position = Vector2(0, 17)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(1.8643138, 1.9391376)
+amount = 20
+texture = ExtResource("3_bxj46")
+visibility_rect = Rect2(-98.86, -100, 200, 200)
+process_material = SubResource("ParticleProcessMaterial_06w3s")

@@ -1,3 +1,5 @@
+
+
 extends Node2D
 
 @export
@@ -21,6 +23,8 @@ var currentItem = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
+	
+
 	$Sprite2D.hide()
 	spawn(0)
 	

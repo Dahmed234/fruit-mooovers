@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4vmf1bx5jtnk"]
+[gd_scene load_steps=5 format=3 uid="uid://c4vmf1bx5jtnk"]
 
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_5ty7o"]
+[ext_resource type="Shader" uid="uid://2khuiuc7aut8" path="res://shaders/asset-library-2D-outline-shader-4-b41ecb704f260c3f04b35b19837ace0f89cb092d/outline.gdshader" id="2_1s7gc"]
+[ext_resource type="Texture2D" uid="uid://dsaj2k08we133" path="res://assets/stockImages/cherry.png" id="2_3vu7c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swx1g"]
+shader = ExtResource("2_1s7gc")
+shader_parameter/color = Color(0.97115093, 0.97115093, 0.97115093, 0.7411765)
+shader_parameter/width = 7.8310003719725
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [node name="Item" instance=ExtResource("1_5ty7o")]
 value = 5
@@ -8,4 +19,16 @@ followerValue = 1
 maximum_followers = 2
 
 [node name="Sprite2D" parent="." index="1"]
+material = SubResource("ShaderMaterial_swx1g")
+scale = Vector2(0.30899003, 0.30899003)
+texture = ExtResource("2_3vu7c")
+region_enabled = false
 region_rect = Rect2(528, 288, 16, 16)
+
+[node name="bottom" parent="." index="4"]
+position = Vector2(0, 48)
+
+[node name="GPUParticles2D" parent="." index="5"]
+position = Vector2(0, 15.000002)
+scale = Vector2(2.454813, 2.0715592)
+amount = 30

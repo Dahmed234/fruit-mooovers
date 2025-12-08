@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcsn06k5woifq"]
+[gd_scene load_steps=19 format=3 uid="uid://dcsn06k5woifq"]
 
 [ext_resource type="Script" uid="uid://gbt4mm2ghxhl" path="res://scenes/follower/follower.gd" id="1_jmfn7"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
@@ -48,6 +48,67 @@ tracks/2/keys = {
 "points": PackedFloat32Array(0, -0.2, 0, 0.2, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_odk4b"]
+resource_name = "spawn"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.0055555566, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-78.5232, -0.2495342, -2.3852856, 0.13333334, -8.603035, 2.0903625, -0.27984273, -8.125097, 0.04444444, 0, -0.14004247, -0.08683345, -5.0980916, 0, 0),
+"times": PackedFloat32Array(0, 0.46666667, 0.73333335)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.265732]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, 32), Vector2(2, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_gpyn0"]
 resource_name = "walk"
@@ -90,11 +151,15 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odk4b"]
 _data = {
 &"RESET": SubResource("Animation_56twi"),
+&"spawn": SubResource("Animation_odk4b"),
 &"walk": SubResource("Animation_gpyn0")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpyn0"]
 animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_odk4b"]
+animation = &"spawn"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_56twi"]
 animation = &"walk"
@@ -110,16 +175,25 @@ xfade_time = 0.5
 advance_mode = 2
 advance_expression = "!is_moving"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gpyn0"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bcchq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7t6oc"]
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bcchq"]
+states/End/position = Vector2(728, 69.088)
 states/RESET/node = SubResource("AnimationNodeAnimation_gpyn0")
 states/RESET/position = Vector2(304.8, 54.8)
-states/Start/position = Vector2(64.8, 28.8)
+states/Start/position = Vector2(65.600006, 28)
+states/spawn/node = SubResource("AnimationNodeAnimation_odk4b")
+states/spawn/position = Vector2(167.4, 8.799999)
 states/walk/node = SubResource("AnimationNodeAnimation_56twi")
 states/walk/position = Vector2(524, 69.2)
-transitions = ["RESET", "walk", SubResource("AnimationNodeStateMachineTransition_odk4b"), "walk", "RESET", SubResource("AnimationNodeStateMachineTransition_x6um6"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_gpyn0")]
+transitions = ["RESET", "walk", SubResource("AnimationNodeStateMachineTransition_odk4b"), "walk", "RESET", SubResource("AnimationNodeStateMachineTransition_x6um6"), "spawn", "RESET", SubResource("AnimationNodeStateMachineTransition_bcchq"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_7t6oc")]
+graph_offset = Vector2(13, -34)
 
 [node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label") groups=["Player"]]
 collision_layer = 4
@@ -157,16 +231,18 @@ offset_right = 5.552163
 offset_bottom = -19.70154
 
 [node name="heldItem" type="Node2D" parent="Sprite2D"]
-position = Vector2(1.7148998, -4.7831287)
+position = Vector2(2.5, -5.5)
 rotation = 0.11716485
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite" type="Sprite2D" parent="Sprite2D/heldItem"]
 texture_filter = 1
-position = Vector2(0, -12.06)
+position = Vector2(1.5077715, -17.731564)
 texture = ExtResource("1_klxf7")
 region_enabled = true
 region_rect = Rect2(512, 160, 16, 16)
+
+[node name="head" type="Node2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
@@ -180,7 +256,6 @@ path_desired_distance = 5.0
 target_desired_distance = 30.0
 avoidance_enabled = true
 max_speed = 500.0
-debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

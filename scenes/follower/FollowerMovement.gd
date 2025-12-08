@@ -26,11 +26,14 @@ func navigate_to_target(delta: float) -> void:
 	else:
 		if carrying_item.followersCarrying.size() >= carrying_item.minimum_followers:
 			# Speed while carrying
-			local_velocity = 0.4 * min(
-				2.0,
-				carrying_item.followersCarrying.size() / carrying_item.minimum_followers / 1.3
-				
-			)
+			if(carrying_item.followersCarrying.size() >= carrying_item.maximum_followers):
+				local_velocity = 0.81
+			else:
+				local_velocity = 0.4 * min(
+					2.0,
+					carrying_item.followersCarrying.size() / carrying_item.minimum_followers / 1.3
+					
+				)
 		else:
 			# Too heavy -> don't move
 			local_velocity = 0.0
