@@ -4,8 +4,8 @@ class_name Follower
 const scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
 
 signal carryFinished(item :Carryable)
-signal carryDropped(item: ItemData)
-signal followerDies(follower)
+#signal carryDropped(item: ItemData)
+#signal followerDies(follower)
 
 var carryingItem :StaticBody2D = null
 var is_moving = false

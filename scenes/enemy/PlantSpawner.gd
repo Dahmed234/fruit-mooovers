@@ -32,7 +32,7 @@ func _ready() -> void:
 	## bro should NOT know  abt the label thats labels job
 	#label.respawnObjects.connect(spawn)
 
-func spawn(day):
+func spawn(_day):
 	if !currentItem:
 		var nItem = item.instantiate()
 		currentItem = nItem
