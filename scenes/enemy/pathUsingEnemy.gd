@@ -81,7 +81,7 @@ func _update_target(delta: float) -> void:
 			if !best_target:
 				current_state = State.IDLE 
 				return
-			if global_position.distance_to(best_target.global_position) < range:
+			if global_position.distance_to(best_target.global_position) < attack_range:
 				current_state = State.ATTACKING
 				_update_target(delta)
 			else:
@@ -111,7 +111,7 @@ func _update_target(delta: float) -> void:
 
 					_shoot(best_target,pattern)
 				
-				if global_position.distance_to(best_target.global_position) > range * 2:
+				if global_position.distance_to(best_target.global_position) > attack_range * 2:
 					current_state = State.CHASING
 			# else do the windup animation (indicate that the enmy will shoot soon)
 			else:

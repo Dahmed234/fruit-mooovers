@@ -16,7 +16,7 @@ var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 @export var health : float
 var max_health
-@onready var bar: Node2D = $Sprite2D/Bar
+@onready var bar: TextureProgressBar = $Sprite2D/Health
 
 var is_moving = true
 
@@ -40,7 +40,7 @@ func getThrowPosition():
 
 var direction: Vector2
 
-func move(delta: float) -> void:
+func move(_delta: float) -> void:
 	direction = Vector2.ZERO
 	# Apply left / right movement
 	direction.x = Input.get_axis("player_move_left", "player_move_right");

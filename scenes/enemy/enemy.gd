@@ -50,7 +50,7 @@ var shoot_time := 0.0
 var damage := 50.0
 
 @export 
-var range := 50.0
+var attack_range := 50.0
 
 # How long the enemy has seen the player
 var alert_level := 0.0
@@ -123,7 +123,7 @@ func update_alert(delta: float) -> void:
 	if cone_light.in_area.size() > 0:
 		for cow in cone_light.in_area:
 			# Factor in distance and the minimum_followers of the agent into how much it increases alertness
-			alert_level = min(max_alert * 2, alert_level + max(0,(range - global_position.distance_to(cow.global_position)) * cow.enemy_minimum_followers * delta))
+			alert_level = min(max_alert * 2, alert_level + max(0,(attack_range - global_position.distance_to(cow.global_position)) * cow.enemy_minimum_followers * delta))
 	else:
 		alert_level = max(0,alert_level - 50 * delta)
 		
@@ -189,7 +189,7 @@ func _update_target(delta: float) -> void:
 			if !best_target:
 				current_state = State.IDLE 
 				return
-			if global_position.distance_to(best_target.global_position) < range:
+			if global_position.distance_to(best_target.global_position) < attack_range:
 				shoot(best_target,delta)
 				local_speed = 0.0
 			else:
@@ -200,7 +200,7 @@ func _update_target(delta: float) -> void:
 			assert(false,"unexpected enemy state: " + State.keys()[other])
 
 # Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
-func navigate_to_target(delta: float) -> void:
+func navigate_to_target(_delta: float) -> void:
 	# Store the current position of the enemy in [current_agent_position]
 	var current_agent_position = global_position
 	

@@ -42,7 +42,7 @@ func _ready():
 	global_position = source
 
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	match(projectile_type):
 		ProjectileResource.ProjType.MISSILE:
 			if life_time < 0.75 * init_life_time:
@@ -67,18 +67,18 @@ func _physics_process(delta: float) -> void:
 
 
 
-static func launch(n_projectile: Projectile,pattern: AttackPattern, source: Vector2, target_pos: Vector2,target: CharacterBody2D):
+static func launch(n_projectile: Projectile,pattern: AttackPattern, n_source: Vector2, target_pos: Vector2,target: CharacterBody2D):
 
 	n_projectile.projectile_data = pattern.projectile_data
 	# Get the direction to the target
-	n_projectile.direction = source.direction_to(target_pos)
+	n_projectile.direction = n_source.direction_to(target_pos)
 	# Apply random spread
 	n_projectile.direction = Vector2.from_angle(
 		randf_range(-pattern.projectile_spread/2,pattern.projectile_spread/2) +
 		n_projectile.direction.angle()
 	)
 	
-	n_projectile.source = source
+	n_projectile.source = n_source
 	
 	n_projectile.homing_target = target
 	
@@ -98,21 +98,18 @@ func die():
 	if expiration_attack:
 		for i in range(expiration_attack.projectile_count):
 			if is_instance_valid(homing_target):
-				get_parent().owner.add_child(launch(
-					PROJECTILE.instantiate(),
-					expiration_attack,
-					global_position,
-					Vector2.RIGHT,
-					homing_target
-				))
+				call_deferred("launch_death_projectile",homing_target)
 			else:
-				get_parent().owner.add_child(launch(
-					PROJECTILE.instantiate(),
-					expiration_attack,
-					global_position,
-					Vector2.RIGHT,
-					null
-				))
+				call_deferred("launch_death_projectile",null)
 		
 	# delete this projectile
-	queue_free()
+	call_deferred("queue_free")
+
+func launch_death_projectile(n_homing_target):
+	get_parent().owner.add_child(launch(
+		PROJECTILE.instantiate(),
+		expiration_attack,
+		global_position,
+		Vector2.RIGHT,
+		n_homing_target
+	))
