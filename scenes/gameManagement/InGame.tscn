@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://scenes/ui/SplashText.tscn" id="3_s70h5"]
-[ext_resource type="PackedScene" uid="uid://5i0c13y6xquo" path="res://Maps/Level1DRAFT.tscn" id="4_q3n58"]
+[ext_resource type="PackedScene" uid="uid://c7vyvj7w3tuhu" path="res://Maps/Level1DRAFT2.tscn" id="4_v6clt"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
@@ -19,7 +19,7 @@
 size = Vector2(508, 179.3338)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vlao"]
-size = Vector2(564, 356.6623)
+size = Vector2(282, 90.16748)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmcs"]
 size = Vector2(915.5, 573.5657)
@@ -47,7 +47,7 @@ throwMooMaxPitch = 1.25
 idleMooMinPitch = 0.75
 idleMooMaxPitch = 1.0
 
-[node name="NavigationRegion2D" parent="." instance=ExtResource("4_q3n58")]
+[node name="NavigationRegion2D" parent="." instance=ExtResource("4_v6clt")]
 
 [node name="Help" parent="." instance=ExtResource("10_vwfvy")]
 offset_left = -1475.0
@@ -58,10 +58,15 @@ offset_bottom = -62.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
-position = Vector2(-153, 1052)
+position = Vector2(598, 1283)
+metadata/_edit_group_ = true
+
+[node name="Sprite throw marker" parent="Player" index="5"]
+position = Vector2(753, 135)
 
 [node name="goal" parent="." instance=ExtResource("10_27h4a")]
-position = Vector2(57, 1020)
+position = Vector2(204.00002, 1094.0001)
+scale = Vector2(3.9375, 3.9375)
 
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
 
@@ -79,7 +84,7 @@ shape = SubResource("RectangleShape2D_fg4jm")
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1751, 1416.4851)
+position = Vector2(1882, 1673.9636)
 shape = SubResource("RectangleShape2D_1vlao")
 num_coins = 7
 
@@ -113,13 +118,13 @@ item = ExtResource("13_1vlao")
 position = Vector2(260, -41)
 
 [node name="Plant Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-368, 866)
+position = Vector2(688, 1004)
 
 [node name="Plant Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-95, 735)
+position = Vector2(193, 1004)
 
 [node name="Plant Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(92, 553)
+position = Vector2(461, 1002)
 
 [node name="Plant Spawner12" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1220, -990)
@@ -131,10 +136,10 @@ position = Vector2(-1204, -1093)
 position = Vector2(-1167, -997)
 
 [node name="Plant Spawner8" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-95, 909)
+position = Vector2(576, 997)
 
 [node name="Apple Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-283, 1065)
+position = Vector2(331, 1008)
 
 [node name="Apple Spawner" parent="Fruits" instance=ExtResource("12_fg4jm")]
 position = Vector2(714, -384)
