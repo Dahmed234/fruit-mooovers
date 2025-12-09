@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ex4c4p0o8gtd" path="res://assets/cow.png" id="1_2j67w"]
 [ext_resource type="Script" uid="uid://blwlc5xygeq7e" path="res://scenes/gameManagement/animated_follower.gd" id="1_ccdma"]
-[ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/apple.tscn" id="2_ccdma"]
+[ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="2_ccdma"]
 
 [sub_resource type="Animation" id="Animation_a0t3k"]
 resource_name = "new_animation"

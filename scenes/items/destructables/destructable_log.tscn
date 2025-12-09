@@ -1,10 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://tnrfudnvtjta"]
+[gd_scene load_steps=16 format=3 uid="uid://tnrfudnvtjta"]
 
 [ext_resource type="PackedScene" uid="uid://damapp5d6nnb2" path="res://scenes/items/destructables/placableDestructableItem.tscn" id="1_6gpvi"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
 [ext_resource type="Texture2D" uid="uid://b25f8mp5q7igg" path="res://assets/kenney_particle-pack/PNG (Transparent)/dirt_01.png" id="3_k5tax"]
 [ext_resource type="Script" uid="uid://csxr1fqc0q501" path="res://scenes/items/destructables/particles.gd" id="4_fsvl5"]
 [ext_resource type="Script" path="res://scenes/items/destructables/while_destroying_particle_2.gd" id="5_fsvl5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsvl5"]
+size = Vector2(129, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33bj3"]
+size = Vector2(23.875, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k85ee"]
+size = Vector2(126, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1eha"]
+size = Vector2(20, 122)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bihxw"]
 size = Vector2(128, 128)
@@ -51,16 +63,20 @@ region_enabled = true
 region_rect = Rect2(288, 96, 16, 16)
 
 [node name="North" parent="Area2D" index="0"]
-position = Vector2(0.5, -81)
+position = Vector2(-0.5, -73)
+shape = SubResource("RectangleShape2D_fsvl5")
 
 [node name="East" parent="Area2D" index="1"]
-position = Vector2(82.25, -0.5)
+position = Vector2(74.9375, -1.5)
+shape = SubResource("RectangleShape2D_33bj3")
 
 [node name="South" parent="Area2D" index="2"]
-position = Vector2(-0.5, 79.5)
+position = Vector2(-1, 76.9375)
+shape = SubResource("RectangleShape2D_k85ee")
 
 [node name="West" parent="Area2D" index="3"]
-position = Vector2(-82.375, -3)
+position = Vector2(-76.4375, 1)
+shape = SubResource("RectangleShape2D_j1eha")
 
 [node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("RectangleShape2D_bihxw")
