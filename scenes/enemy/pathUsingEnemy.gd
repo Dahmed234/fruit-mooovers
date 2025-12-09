@@ -45,6 +45,7 @@ func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	match (pattern.projectile_data.projectile_type):
 		ProjectileResource.ProjType.BEAM:
 			n_proj.beam_sweep_angle = pattern.projectile_spread
+			n_proj.beam_emiitter = self
 
 	owner.add_child(n_proj)
 

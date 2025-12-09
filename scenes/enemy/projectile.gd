@@ -1,7 +1,7 @@
 extends Area2D
 class_name Projectile
 
-
+const BEAM_MAX_RANGE = 10_000
 const PROJECTILE = preload("uid://1352s7d3laj7")
 
 ## NOTE projectile sprites should be 64x64 or the hitbox will be the wrong size
@@ -35,8 +35,10 @@ var size: float
 var expiration_attack: AttackPattern
 
 var source: Vector2
-
+## Store the enemy shooting the beam so that it moves with the enemy
+var beam_emiitter: CharacterBody2D
 var beam_sweep_angle
+var beam_visual: Line2D
 
 func _ready():
 	speed =  projectile_data.speed
@@ -51,6 +53,7 @@ func _ready():
 	global_position = source
 	size = projectile_data.size
 	scale = Vector2(size,size)
+	sprite_2d.region_rect.size = Vector2(64,64)
 	# Fix sprites pointing 90
 	sprite_2d.rotation = PI/2
 	
@@ -59,8 +62,28 @@ func _ready():
 		ProjectileResource.ProjType.EXPLOSION:
 			scale = Vector2.ZERO
 		ProjectileResource.ProjType.BEAM:
+			sprite_2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+
+			sprite_2d.rotation += PI
 			# Point in the initil sweep angle
 			rotation = global_position.direction_to(homing_target.global_position).angle() - beam_sweep_angle / 2
+			#sprite_2d.texture_mode = Line2D.LINE_TEXTURE_TILE
+
+func get_beam_length():
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(
+		global_position,
+		global_position + Vector2.from_angle(rotation) * BEAM_MAX_RANGE,
+		1, [self]
+	)
+	query.collide_with_areas = false
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	if result:
+		return result.position.distance_to(global_position)
+	else:
+		return BEAM_MAX_RANGE
+			
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
 func update(delta: float) -> void:
 	match(projectile_type):
@@ -81,6 +104,15 @@ func update(delta: float) -> void:
 		ProjectileResource.ProjType.BEAM:
 			#var time = (init_life_time - life_time) / (init_life_time * 0.5)
 			rotation += delta * beam_sweep_angle / init_life_time
+			
+			var beam_length = get_beam_length()
+			
+			sprite_2d.region_rect.size.y = beam_length
+			sprite_2d.offset = Vector2(0,beam_length/2)
+			
+			global_position = beam_emiitter.global_position
+			
+				
 		_:
 			pass
 func _physics_process(delta: float) -> void:
