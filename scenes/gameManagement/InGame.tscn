@@ -105,6 +105,10 @@ curve = SubResource("Curve2D_v6clt")
 position = Vector2(738, 511)
 item = ExtResource("13_1vlao")
 
+[node name="Plant Spawner7" parent="Fruits/Node2D" instance=ExtResource("12_v6clt")]
+position = Vector2(876, 1480)
+item = ExtResource("13_1vlao")
+
 [node name="Plant Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
 position = Vector2(-1629, 5)
 item = ExtResource("13_1vlao")

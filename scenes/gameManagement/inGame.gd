@@ -102,12 +102,13 @@ func onCarryFinish(item,pos):
 func add_wall(wall: StaticBody2D):
 	$"NavigationRegion2D".add_child(wall)
 
-func spawnFollower(n_position, _state :Follower.State):
+func spawnFollower(n_position, state :Follower.State):
 	label.cowScore += 1
-	var newFollower = Follower.newFollower(n_position,Follower.State.WANDER)
+	var newFollower = Follower.newFollower(n_position,state)
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal
 	newFollower.player = player
+	# randomise colour a lil bit
 	var greyness = 1 - randf() * 0.2
 	newFollower.modulate = Color(greyness,greyness,greyness)
 	

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 class_name Follower
-const scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
+const follower_scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
 
 signal carryFinished(item :Carryable)
 #signal carryDropped(item: ItemData)
@@ -24,7 +24,8 @@ var TIMERVARIANCE = 0.1
 
 var direction := Vector2.ONE
 
-const enemy_minimum_followers := 0.2
+## How quickly followers are detected, big number = start attacking faster. 
+const detection_weight := 0.2
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
@@ -95,7 +96,7 @@ func onWhistle():
 
 
 static func newFollower(pos, startingState: State):
-	var follower :Follower = scene.instantiate()
+	var follower :Follower = follower_scene.instantiate()
 	follower.currentState = startingState
 	follower.global_position = pos
 	return follower

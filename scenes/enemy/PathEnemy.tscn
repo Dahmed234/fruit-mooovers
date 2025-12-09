@@ -20,4 +20,3 @@ script = ExtResource("2_mer1q")
 DIST_THRESHOLD = 100.0
 attack_patterns = Array[ExtResource("3_ds1xm")]([ExtResource("4_ig063"), ExtResource("5_c8v0p")])
 damage = 50.0
-range = 200.0

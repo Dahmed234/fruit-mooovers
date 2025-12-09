@@ -123,7 +123,7 @@ func update_alert(delta: float) -> void:
 	if cone_light.in_area.size() > 0:
 		for cow in cone_light.in_area:
 			# Factor in distance and the minimum_followers of the agent into how much it increases alertness
-			alert_level = min(max_alert * 2, alert_level + max(0,(attack_range - global_position.distance_to(cow.global_position)) * cow.enemy_minimum_followers * delta))
+			alert_level = min(max_alert * 2, alert_level + cow.detection_weight)
 	else:
 		alert_level = max(0,alert_level - 50 * delta)
 		

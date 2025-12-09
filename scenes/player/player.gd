@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal playerDies
 
 
-var enemy_minimum_followers := 0.4
+const detection_weight := 0.4
 
 @export var speed: float
 # The distance that a cow can be thrown from the player
