@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cyfbsfg3v8p46" path="res://scenes/enemy/projectile.gd" id="1_r7k8t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7k8t"]
-radius = 16.03122
+radius = 32.0
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 0

@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://bkfnhlp6epdjk"]
 
 [ext_resource type="Script" uid="uid://deu61gciq467g" path="res://scenes/enemy/projectile_resource.gd" id="1_6slai"]
-[ext_resource type="Texture2D" uid="uid://dw2sjki8n3ia2" path="res://assets/kenney_monochrome-rpg/Default/Tiles/tile_0014.png" id="2_g5ocv"]
+[ext_resource type="Texture2D" uid="uid://ccvwjniigotc1" path="res://assets/kenney_simple-space/PNG/Default/ship_B.png" id="2_g5ocv"]
 
 [resource]
 script = ExtResource("1_6slai")
 damage = 10.0
 speed = 400.0
 sprite = ExtResource("2_g5ocv")
-size = 1.0
+size = 0.5
 life_time = 1.0
-pierce = 5
+pierce = 3
 metadata/_custom_type_script = "uid://deu61gciq467g"

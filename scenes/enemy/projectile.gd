@@ -1,7 +1,12 @@
 extends Area2D
 class_name Projectile
 
+
 const PROJECTILE = preload("uid://1352s7d3laj7")
+
+## NOTE projectile sprites should be 64x64 or the hitbox will be the wrong size
+@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var pierced: Dictionary
 ## Damage dealt to target
@@ -83,6 +88,9 @@ func _physics_process(delta: float) -> void:
 		var target_direction = global_position.direction_to(homing_target.global_position)
 	
 		direction = Vector2.from_angle(lerp_angle(direction.angle(),target_direction.angle(),homing_factor * delta))
+	
+	rotation = direction.angle() + PI/2
+	
 	
 	global_position += direction * speed * delta
 

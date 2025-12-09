@@ -106,6 +106,8 @@ func _update_target(delta: float) -> void:
 				_next_attack_pattern()
 				attack_best_target()
 				
+				if !best_target: return
+				
 				# Stop attacking when the current attack is finished and there are no nearby targets
 				if global_position.distance_to(best_target.global_position) > attack_range * 2:
 					current_state = State.CHASING
