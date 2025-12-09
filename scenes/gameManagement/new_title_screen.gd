@@ -15,9 +15,11 @@ func _on_timer_timeout() -> void:
 
 
 func _start_game() -> void:
-	#var in_game = game_scene.instantiate()
+	var in_game = game_scene.instantiate()
 	#get_tree().change_scene_to_packed(in_game)
-	get_tree().change_scene_to_packed(game_scene)
+	#get_tree().change_scene_to_packed(game_scene)
+	get_tree().root.add_child(in_game)
+	queue_free()
 
 
 func _on_button_2_pressed() -> void:

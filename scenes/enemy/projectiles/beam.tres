@@ -13,7 +13,7 @@ gradient = SubResource("Gradient_61qyo")
 
 [resource]
 script = ExtResource("2_s8m43")
-damage = 9001.0
+damage = 100.0
 sprite = SubResource("GradientTexture2D_jdj1t")
 size = 1.0
 life_time = 2.0
