@@ -1,6 +1,6 @@
 extends Node2D
 
-const INITIAL_FOLLOWERS: int = 50
+const INITIAL_FOLLOWERS: int = 25
 
 @export
 var thown: PackedScene
@@ -99,19 +99,16 @@ func onCarryFinish(item,pos):
 	item.queue_free()
 
 
-func onCarryDrop(item :Carryable):
-	pass
-
 func add_wall(wall: StaticBody2D):
 	$"NavigationRegion2D".add_child(wall)
 
-func spawnFollower(position, state :Follower.State):
+func spawnFollower(n_position, state :Follower.State):
 	label.cowScore += 1
-	var newFollower = Follower.newFollower(position,Follower.State.WANDER)
-	newFollower.carryDropped.connect(onCarryDrop)
+	var newFollower = Follower.newFollower(n_position,state)
 	newFollower.carryFinished.connect(onCarryFinish)
 	newFollower.goal = goal
 	newFollower.player = player
+	# randomise colour a lil bit
 	var greyness = 1 - randf() * 0.2
 	newFollower.modulate = Color(greyness,greyness,greyness)
 	
@@ -140,7 +137,7 @@ func onThrowMade(startPosition,mousePosition,follower) ->void:
 	mooSoundPlayer.pitch_scale = randf_range(throwMooMinPitch, throwMooMaxPitch)
 	mooSoundPlayer.play()
 
-func onThrowFinish(position :Vector2,state :Follower.State, thrown):
+func onThrowFinish(_n_position :Vector2,_state :Follower.State, thrown):
 	thrown.follower.show()
 	thrown.follower.startInitial()
 

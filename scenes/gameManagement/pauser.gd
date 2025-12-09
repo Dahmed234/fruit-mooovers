@@ -13,7 +13,7 @@ func _ready() -> void:
 	get_tree().root.add_child.call_deferred(settings_layer)
 	settings_layer.hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		# Toggle pause
 		if get_tree().paused:

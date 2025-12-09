@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
 class_name Follower
-const scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
+const follower_scene :PackedScene = preload("res://scenes/follower/Follower.tscn")
 
 signal carryFinished(item :Carryable)
-signal carryDropped(item: ItemData)
-signal followerDies(follower)
+#signal carryDropped(item: ItemData)
+#signal followerDies(follower)
 
 var carryingItem :StaticBody2D = null
 var is_moving = false
@@ -24,7 +24,8 @@ var TIMERVARIANCE = 0.1
 
 var direction := Vector2.ONE
 
-const enemy_minimum_followers := 0.2
+## How quickly followers are detected, big number = start attacking faster. 
+const detection_weight := 0.2
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
@@ -46,6 +47,8 @@ var wander_behavior # FollowerWander
 var carry_behavior  # FollowerCarry
 var destroy_behavior # FollowerDestroy
 
+# V important, used to make _process wait for everything to be fully loaded
+var is_ready = false
 enum State {
 	INITIAL,
 	CARRYING,
@@ -95,7 +98,7 @@ func onWhistle():
 
 
 static func newFollower(pos, startingState: State):
-	var follower :Follower = scene.instantiate()
+	var follower :Follower = follower_scene.instantiate()
 	follower.currentState = startingState
 	follower.global_position = pos
 	return follower
@@ -214,6 +217,9 @@ func initState():
 
 
 func _ready() -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
 	max_health = health
 	health_bar.max_value = max_health
 	$Sprite2D/heldItem/Sprite.texture = null
@@ -226,11 +232,11 @@ func _ready() -> void:
 	destroy_behavior = FollowerDestroy.new(self)
 
 	# need to wait for all physics components to load in
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	
 
 	initState()
 
+	is_ready = true
 
 # --- delegated behaviours ---
 
@@ -261,7 +267,11 @@ func actor_setup():
 	await get_tree().physics_frame
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	if !is_ready: 
+		print("follower wait for ready")
+		return
+	
 	health_bar.value = health
 	
 	$Sprite2D.flip_h = velocity.x < 0

@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 		else: targets[target] = chaseTime
 		
 	
-func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_area_2d_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_index: int, _local_shape_index: int) -> void:
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
 	
@@ -98,7 +98,7 @@ func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_inde
 		other_shape_node.get_parent().get_parent().chasing[self] = true
 
 
-func _on_area_2d_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_area_2d_area_shape_exited(_area_rid: RID, area: Area2D, area_shape_index: int, _local_shape_index: int) -> void:
 	# Handles case of follower being thrown while in area
 	if !area:
 		return

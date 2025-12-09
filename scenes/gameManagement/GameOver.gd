@@ -3,16 +3,12 @@ extends Control
 @export 
 var label: Label
 
-var mainMenu: Control
+var mainMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func set_message(score: int, cows: int):
@@ -28,7 +24,7 @@ func set_message(score: int, cows: int):
 
 func _on_restart_pressed() -> void:
 	print("restart")
-	mainMenu = load("res://scenes/gameManagement/MainMenu.tscn").instantiate()
+	mainMenu = load("res://scenes/gameManagement/New Title Screen.tscn").instantiate()
 	get_tree().root.add_child(mainMenu)
 	queue_free()
 

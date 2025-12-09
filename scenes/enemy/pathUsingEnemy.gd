@@ -19,13 +19,22 @@ var direction:int = 1
 
 var path :Curve2D
 
+var best_target: CharacterBody2D
+
+
+
 func _ready():
+	await get_tree().process_frame
+	await get_tree().physics_frame
 	global_position = pathPoint.global_position
 	path = get_parent().curve
 	super()
 
 func _next_attack_pattern():
+	
 	attack_pattern_index = (attack_pattern_index + 1) % len(attack_patterns)
+	
+	
 	
 	attack_time = 0.0
 	attack_count = 0
@@ -33,7 +42,16 @@ func _next_attack_pattern():
 func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	attack_count += 1
 
-	owner.add_child(Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target))
+
+	var n_proj = Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target)
+	
+	# Beam attack needs to feed the spread to the projectile directly as it has atypical behaviour
+	match (pattern.projectile_data.projectile_type):
+		ProjectileResource.ProjType.BEAM:
+			n_proj.beam_sweep_angle = pattern.projectile_spread
+			n_proj.beam_emiitter = self
+
+	owner.add_child(n_proj)
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)
@@ -56,7 +74,7 @@ func _update_target(delta: float) -> void:
 			local_speed = 0.5
 			
 			while idle_time >= (idle_delay / 8.0):
-				var best_target = get_best_target()
+				best_target = get_best_target()
 				if !best_target:
 					current_state = State.IDLE 
 					return
@@ -77,13 +95,15 @@ func _update_target(delta: float) -> void:
 		# Chase the player
 		State.CHASING:
 			local_speed = 1.0
-			var best_target = get_best_target()
+			best_target = get_best_target()
 			if !best_target:
 				current_state = State.IDLE 
 				return
-			if global_position.distance_to(best_target.global_position) < range:
+			if global_position.distance_to(best_target.global_position) < attack_range:
+				
 				current_state = State.ATTACKING
 				_update_target(delta)
+				attack_best_target()
 			else:
 				navigation_agent_2d.target_position = best_target.position
 
@@ -96,23 +116,31 @@ func _update_target(delta: float) -> void:
 			
 			# Move to next attack if all 3 phases done
 			if (attack_time > pattern.windup + pattern.attack_time + pattern.cooldown):
+				# Logic for moving to the next attack
 				_next_attack_pattern()
+				attack_best_target()
+				
+				if !best_target: return
+				
+				# Stop attacking when the current attack is finished and there are no nearby targets
+				if global_position.distance_to(best_target.global_position) > attack_range * 1.5:
+					current_state = State.CHASING
 			
 			# try to shoot if the windup is done
 			elif (attack_time > pattern.windup and attack_time <  pattern.windup + pattern.attack_time):
-				
-				var best_target = get_best_target()
-				if !best_target: return
 				
 				while (pattern.projectile_count *
 					((attack_time - pattern.windup) / 
 					pattern.attack_time) > attack_count
 				):
-
-					_shoot(best_target,pattern)
+					# Pick a new target if the current one dies
+					if !is_instance_valid(best_target):
+						attack_best_target()
+					# Shoot if the newly picked target exists (i.e. there is something to shoot at)
+					if best_target:
+						_shoot(best_target,pattern)
 				
-				if global_position.distance_to(best_target.global_position) > range * 2:
-					current_state = State.CHASING
+				
 			# else do the windup animation (indicate that the enmy will shoot soon)
 			else:
 				pass
@@ -120,8 +148,17 @@ func _update_target(delta: float) -> void:
 		var other:
 			assert(false,"unexpected enemy state: " + State.keys()[other])
 
-func _physics_process(delta: float) -> void:
-	
+func attack_best_target():
+	#if is_instance_valid(best_target):
+		#best_target.modulate = Color(1,1,1,)
+	best_target = get_best_target()
+	#if best_target:
+		#best_target.modulate = Color(1,0,0)
+
+func _process(delta: float) -> void:
+	if !is_ready: 
+		print("path enemy wait for ready")
+		return
 	# Update where the enemy is targeting based on its state
 	_update_target(delta)
 

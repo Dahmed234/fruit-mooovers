@@ -7,7 +7,7 @@ func _init(_follower):
 	follower = _follower
 
 
-func navigate_to_target(delta: float) -> void:
+func navigate_to_target(_delta: float) -> void:
 	var navigation_agent_2d = follower.navigation_agent_2d
 
 	if navigation_agent_2d.is_navigation_finished():

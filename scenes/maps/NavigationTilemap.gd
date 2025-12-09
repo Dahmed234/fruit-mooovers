@@ -73,7 +73,7 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	
 	return false
 
-func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
+func _tile_data_runtime_update(_coords: Vector2i, _tile_data: TileData) -> void:
 	pass
 	#for layer in [low_walls,high_walls]:
 		#if coords in layer.get_used_cells_by_id(1):
@@ -82,7 +82,7 @@ func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
 		#tile_data.set_navigation_polygon(0, null)
 	#else:
 		#tile_data.set_navigation_polygon(0, tile_data.get_navigation_polygon(0))
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_changed:
 		first_time = false
 		is_changed = false
