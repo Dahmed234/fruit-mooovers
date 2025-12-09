@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://doxxoutiiumdq"]
+
+[ext_resource type="Script" uid="uid://deu61gciq467g" path="res://scenes/enemy/projectile_resource.gd" id="1_sy78c"]
+
+[sub_resource type="Gradient" id="Gradient_vhpgd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.71590906)
+colors = PackedColorArray(1, 0.7019608, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy78c"]
+gradient = SubResource("Gradient_vhpgd")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[resource]
+script = ExtResource("1_sy78c")
+damage = 15.0
+sprite = SubResource("GradientTexture2D_sy78c")
+size = 4.0
+life_time = 0.25
+projectile_type = 2
+pierce = 20
+metadata/_custom_type_script = "uid://deu61gciq467g"

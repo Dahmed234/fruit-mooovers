@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	if(Input.is_action_pressed("player_throw") and !clicked):
 		clicked = true
@@ -21,7 +21,3 @@ func _process(delta: float) -> void:
 		menuShow.emit()
 	
 	pass
-
-
-func _on_button_2_pressed() -> void:
-	pass # Replace with function body.

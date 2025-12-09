@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	var overlappingCarryables = get_tree().get_nodes_in_group("Carryable").filter(func( x):return x.bounds.has_point(x.get_local_mouse_position()))
 	

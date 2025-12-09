@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal playerDies
 
 
-var enemy_minimum_followers := 0.4
+const detection_weight := 5
 
 @export var speed: float
 # The distance that a cow can be thrown from the player
@@ -16,7 +16,7 @@ var chasing: Dictionary[CharacterBody2D,bool] = {}
 
 @export var health : float
 var max_health
-@onready var bar: Node2D = $Sprite2D/Bar
+@onready var bar: TextureProgressBar = $Sprite2D/Health
 
 var is_moving = true
 
@@ -32,7 +32,9 @@ func die() -> void:
 	for cone_light in chasing:
 		if !chasing[cone_light]: continue
 		cone_light.clear_target(self)
-		
+	
+	print("player die!!!!")
+	
 	playerDies.emit()
 
 func getThrowPosition():
@@ -40,7 +42,7 @@ func getThrowPosition():
 
 var direction: Vector2
 
-func move(delta: float) -> void:
+func move(_delta: float) -> void:
 	direction = Vector2.ZERO
 	# Apply left / right movement
 	direction.x = Input.get_axis("player_move_left", "player_move_right");

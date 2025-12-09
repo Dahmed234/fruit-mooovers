@@ -76,7 +76,7 @@ func restartGame():
 
 # Function for how fast to increase quota, should have some kind of exponential scaling
 func increaseQuota():
-	quota *= 1.5
+	quota = int(quota *  1.5)
 
 # Check if the player met quota by the end of the day
 func newDay() -> void:

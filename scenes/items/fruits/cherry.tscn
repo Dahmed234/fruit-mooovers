@@ -18,7 +18,7 @@ value = 5
 followerValue = 1
 maximum_followers = 2
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_swx1g")
 scale = Vector2(0.30899003, 0.30899003)
 texture = ExtResource("2_3vu7c")
@@ -31,4 +31,4 @@ position = Vector2(0, 48)
 [node name="GPUParticles2D" parent="." index="5"]
 position = Vector2(0, 15.000002)
 scale = Vector2(2.454813, 2.0715592)
-amount = 30
+amount = 16

@@ -17,7 +17,7 @@ var bounds :Rect2 = $Area2D/CollisionShape2D2.shape.get_rect()
 @export 
 var fruitName : String
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# If at least one follower is carrying, follow the main follower
 	if main_follower:
 		global_position = main_follower.global_position

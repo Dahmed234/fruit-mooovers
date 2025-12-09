@@ -31,7 +31,7 @@ func _ready() -> void:
 			if j == 99: break
 			var random = get_random_point()
 			if(coin_points\
-			.filter(func(i :Vector2): return i.distance_to(random) <distance))\
+			.filter(func(x :Vector2): return x.distance_to(random) <distance))\
 			.is_empty():
 					coin_points.append(random)
 					var new_coin :Node2D = coin_scene.instantiate() 
@@ -40,8 +40,3 @@ func _ready() -> void:
 					break
 					
 			
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

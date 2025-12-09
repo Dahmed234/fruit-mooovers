@@ -7,7 +7,6 @@ extends NavigationRegion2D
 var cachedMap :NavigationMeshSourceGeometryData2D
 func rebake():
 	bake_navigation_polygon(true)
-	pass
 	
 func _ready() -> void:
 	get_tree().get_nodes_in_group("destroyableWall").map(func(i) :
@@ -22,7 +21,8 @@ func _on_object_destroyed(wall :Node2D):
 	
 	await get_tree().physics_frame
 	rebake()
-	pass
+	
+	print("destroyed")
 
 
 # Maybe add a queue to handle rebaking multiple per tick?

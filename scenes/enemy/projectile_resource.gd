@@ -4,13 +4,15 @@ extends Resource
 enum ProjType {
 	REGULAR,
 	MISSILE,
+	EXPLOSION,
+	BEAM,
 }
 
 ## Damage dealt to target
 @export var damage: float
 ## Damage dealt to target
 @export var speed: float
-## Sprite to render
+## Sprite to render NOTE projectile sprites should be 64x64 or the hitbox will be the wrong size
 @export var sprite: Texture2D
 ## Radius of collision box
 @export var size: float
