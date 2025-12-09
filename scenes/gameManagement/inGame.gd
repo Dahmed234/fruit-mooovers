@@ -1,6 +1,6 @@
 extends Node2D
 
-const INITIAL_FOLLOWERS: int = 50
+const INITIAL_FOLLOWERS: int = 0
 
 @export
 var thown: PackedScene

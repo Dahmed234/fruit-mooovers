@@ -36,6 +36,8 @@ var expiration_attack: AttackPattern
 
 var source: Vector2
 
+var beam_sweep_angle
+
 func _ready():
 	speed =  projectile_data.speed
 	damage = projectile_data.damage
@@ -48,15 +50,19 @@ func _ready():
 	pierce_left = projectile_data.pierce
 	global_position = source
 	size = projectile_data.size
+	scale = Vector2(size,size)
+	# Fix sprites pointing 90
+	sprite_2d.rotation = PI/2
 	
+	# Specific staring logic for some projectiles
 	match(projectile_type):
 		ProjectileResource.ProjType.EXPLOSION:
 			scale = Vector2.ZERO
-		_:
-			scale = Vector2(size,size)
-
+		ProjectileResource.ProjType.BEAM:
+			# Point in the initil sweep angle
+			rotation = global_position.direction_to(homing_target.global_position).angle() - beam_sweep_angle / 2
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
-func update(_delta: float) -> void:
+func update(delta: float) -> void:
 	match(projectile_type):
 		ProjectileResource.ProjType.MISSILE:
 			if life_time < 0.75 * init_life_time:
@@ -73,7 +79,8 @@ func update(_delta: float) -> void:
 			# Scale up explosion until it reaches (1,1)
 			scale = Vector2(time * size,time * size)
 		ProjectileResource.ProjType.BEAM:
-			print("laserrrr")
+			#var time = (init_life_time - life_time) / (init_life_time * 0.5)
+			rotation += delta * beam_sweep_angle / init_life_time
 		_:
 			pass
 func _physics_process(delta: float) -> void:
@@ -81,19 +88,20 @@ func _physics_process(delta: float) -> void:
 		die()
 	life_time -= delta
 	
-	# Change targeting variables / speed mid flight
-	update(delta)
-	
-	if homing_target:
-		var target_direction = global_position.direction_to(homing_target.global_position)
-	
-		direction = Vector2.from_angle(lerp_angle(direction.angle(),target_direction.angle(),homing_factor * delta))
-	
-	rotation = direction.angle() + PI/2
-	
-	
-	global_position += direction * speed * delta
-
+	match (projectile_type):
+		ProjectileResource.ProjType.BEAM:
+			update(delta)
+			
+		_:
+			update(delta)
+			if homing_target:
+				var target_direction = global_position.direction_to(homing_target.global_position)
+		
+				direction = Vector2.from_angle(lerp_angle(direction.angle(),target_direction.angle(),homing_factor * delta))
+		
+			rotation = direction.angle()
+			
+			global_position += direction * speed * delta
 
 
 static func launch(n_projectile: Projectile,pattern: AttackPattern, n_source: Vector2, target_pos: Vector2,target: CharacterBody2D):

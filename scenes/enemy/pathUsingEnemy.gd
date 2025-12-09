@@ -38,7 +38,15 @@ func _next_attack_pattern():
 func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 	attack_count += 1
 
-	owner.add_child(Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target))
+
+	var n_proj = Projectile.launch(PROJECTILE.instantiate(),pattern,global_position,target.global_position,target)
+	
+	# Beam attack needs to feed the spread to the projectile directly as it has atypical behaviour
+	match (pattern.projectile_data.projectile_type):
+		ProjectileResource.ProjType.BEAM:
+			n_proj.beam_sweep_angle = pattern.projectile_spread
+
+	owner.add_child(n_proj)
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)
@@ -87,6 +95,7 @@ func _update_target(delta: float) -> void:
 				current_state = State.IDLE 
 				return
 			if global_position.distance_to(best_target.global_position) < attack_range:
+				
 				current_state = State.ATTACKING
 				_update_target(delta)
 				attack_best_target()
@@ -109,7 +118,7 @@ func _update_target(delta: float) -> void:
 				if !best_target: return
 				
 				# Stop attacking when the current attack is finished and there are no nearby targets
-				if global_position.distance_to(best_target.global_position) > attack_range * 2:
+				if global_position.distance_to(best_target.global_position) > attack_range * 1.5:
 					current_state = State.CHASING
 			
 			# try to shoot if the windup is done

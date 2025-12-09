@@ -201,6 +201,13 @@ func _update_target(delta: float) -> void:
 
 # Basic navigation code based on https://www.youtube.com/watch?v=7ZAF_fn3VOc
 func navigate_to_target(_delta: float) -> void:
+	
+	
+	match (current_state):
+		State.ATTACKING:
+			velocity = Vector2.ZERO
+			return
+	
 	# Store the current position of the enemy in [current_agent_position]
 	var current_agent_position = global_position
 	
