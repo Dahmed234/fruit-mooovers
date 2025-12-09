@@ -21,7 +21,11 @@ var path :Curve2D
 
 var best_target: CharacterBody2D
 
+
+
 func _ready():
+	await get_tree().process_frame
+	await get_tree().physics_frame
 	global_position = pathPoint.global_position
 	path = get_parent().curve
 	super()
@@ -151,8 +155,10 @@ func attack_best_target():
 	#if best_target:
 		#best_target.modulate = Color(1,0,0)
 
-func _physics_process(delta: float) -> void:
-	
+func _process(delta: float) -> void:
+	if !is_ready: 
+		print("path enemy wait for ready")
+		return
 	# Update where the enemy is targeting based on its state
 	_update_target(delta)
 

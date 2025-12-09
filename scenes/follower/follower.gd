@@ -47,6 +47,8 @@ var wander_behavior # FollowerWander
 var carry_behavior  # FollowerCarry
 var destroy_behavior # FollowerDestroy
 
+# V important, used to make _process wait for everything to be fully loaded
+var is_ready = false
 enum State {
 	INITIAL,
 	CARRYING,
@@ -215,6 +217,9 @@ func initState():
 
 
 func _ready() -> void:
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	
 	max_health = health
 	health_bar.max_value = max_health
 	$Sprite2D/heldItem/Sprite.texture = null
@@ -227,11 +232,11 @@ func _ready() -> void:
 	destroy_behavior = FollowerDestroy.new(self)
 
 	# need to wait for all physics components to load in
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	
 
 	initState()
 
+	is_ready = true
 
 # --- delegated behaviours ---
 
@@ -262,7 +267,11 @@ func actor_setup():
 	await get_tree().physics_frame
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	if !is_ready: 
+		print("follower wait for ready")
+		return
+	
 	health_bar.value = health
 	
 	$Sprite2D.flip_h = velocity.x < 0

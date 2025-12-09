@@ -57,9 +57,12 @@ var alert_level := 0.0
 
 var at_patrol_target = true
 
+var is_ready = false
 
 
 func _ready() -> void:
+	await get_tree().process_frame
+	await get_tree().physics_frame
 	# Make a line object used to show laser shooting
 	line = Line2D.new()
 	#line.texture = load("res://assets/dotted line.png")
@@ -77,6 +80,8 @@ func _ready() -> void:
 	line.points = poolVectorArray
 	add_child(line)
 	line.hide()
+	
+	is_ready = true
 
 func die() -> void:
 	for cow in cone_light.targets.keys():
@@ -229,7 +234,10 @@ func navigate_to_target(_delta: float) -> void:
 	else:
 		_on_navigation_agent_2d_velocity_computed(new_velocity)
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	if !is_ready: 
+		print("enemy wait for ready")
+		return
 	
 	# Update where the enemy is targeting based on its state
 	_update_target(delta)
