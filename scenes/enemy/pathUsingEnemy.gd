@@ -145,11 +145,11 @@ func _update_target(delta: float) -> void:
 			assert(false,"unexpected enemy state: " + State.keys()[other])
 
 func attack_best_target():
-	if is_instance_valid(best_target):
-		best_target.modulate = Color(1,1,1,)
+	#if is_instance_valid(best_target):
+		#best_target.modulate = Color(1,1,1,)
 	best_target = get_best_target()
-	if best_target:
-		best_target.modulate = Color(1,0,0)
+	#if best_target:
+		#best_target.modulate = Color(1,0,0)
 
 func _physics_process(delta: float) -> void:
 	

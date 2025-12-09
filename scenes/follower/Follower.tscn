@@ -205,7 +205,7 @@ playerDistance = 50.0
 BASESPEED = 230
 label = NodePath("Label")
 wanderDistance = 500.0
-health = 100.0
+health = 250.0
 
 [node name="viewRadius" type="Area2D" parent="."]
 position = Vector2(-0.25, -0.25)

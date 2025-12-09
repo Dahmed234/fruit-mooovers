@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="ProjectileResource" load_steps=3 format=3 uid="uid://bj6ajsebyukre"]
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://bj6ajsebyukre"]
 
-[ext_resource type="Texture2D" uid="uid://ct74rgqmuj4b3" path="res://assets/Beam.png" id="2_jdj1t"]
 [ext_resource type="Script" uid="uid://deu61gciq467g" path="res://scenes/enemy/projectile_resource.gd" id="2_s8m43"]
+
+[sub_resource type="Gradient" id="Gradient_61qyo"]
+offsets = PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.45, 0.5, 0.55, 0.6, 0.7, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0.6784314, 0.84705883, 0.9019608, 1, 0.41568628, 0.78039217, 0.9019608, 1, 0.4152647, 0.77991915, 0.9014706, 1, 0.11399998, 0.5985, 0.76, 1, 0.41442156, 0.77897304, 0.90049016, 1, 0.41399997, 0.77849996, 0.9, 1, 0.6784314, 0.84705883, 0.9019608, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jdj1t"]
+gradient = SubResource("Gradient_61qyo")
 
 [resource]
 script = ExtResource("2_s8m43")
-damage = 30.0
-sprite = ExtResource("2_jdj1t")
+damage = 125.0
+sprite = SubResource("GradientTexture2D_jdj1t")
 size = 1.0
 life_time = 2.0
 projectile_type = 3

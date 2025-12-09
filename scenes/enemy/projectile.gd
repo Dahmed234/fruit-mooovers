@@ -53,6 +53,7 @@ func _ready():
 	global_position = source
 	size = projectile_data.size
 	scale = Vector2(size,size)
+	
 	sprite_2d.region_rect.size = Vector2(64,64)
 	# Fix sprites pointing 90
 	sprite_2d.rotation = PI/2
@@ -67,8 +68,11 @@ func _ready():
 			sprite_2d.rotation += PI
 			# Point in the initil sweep angle
 			rotation = global_position.direction_to(homing_target.global_position).angle() - beam_sweep_angle / 2
-			#sprite_2d.texture_mode = Line2D.LINE_TEXTURE_TILE
-
+		ProjectileResource.ProjType.REGULAR:
+			modulate = Color(1,1,0)
+		ProjectileResource.ProjType.MISSILE:
+			modulate = Color(1,0,0)
+			
 func get_beam_length():
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(
@@ -102,11 +106,13 @@ func update(delta: float) -> void:
 			# Scale up explosion until it reaches (1,1)
 			scale = Vector2(time * size,time * size)
 		ProjectileResource.ProjType.BEAM:
-			#var time = (init_life_time - life_time) / (init_life_time * 0.5)
-			rotation += delta * beam_sweep_angle / init_life_time
+			var time = (init_life_time - life_time) / (init_life_time)
+			if time > 0.25 and time < 0.75:
+				rotation += delta * 2 * beam_sweep_angle / init_life_time
 			
 			var beam_length = get_beam_length()
-			
+			collision_shape_2d.scale = Vector2(beam_length / collision_shape_2d.shape.radius / 2,1)
+			collision_shape_2d.position = Vector2(beam_length/2,0)
 			sprite_2d.region_rect.size.y = beam_length
 			sprite_2d.offset = Vector2(0,beam_length/2)
 			
