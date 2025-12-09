@@ -4,6 +4,8 @@ extends Resource
 enum ProjType {
 	REGULAR,
 	MISSILE,
+	EXPLOSION,
+	BEAM,
 }
 
 ## Damage dealt to target

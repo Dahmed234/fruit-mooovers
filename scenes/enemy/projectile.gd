@@ -25,6 +25,8 @@ var life_time: float
 var init_life_time: float
 var projectile_type: ProjectileResource.ProjType
 
+var size: float
+
 var expiration_attack: AttackPattern
 
 var source: Vector2
@@ -40,6 +42,13 @@ func _ready():
 	expiration_attack = projectile_data.expiration_attack
 	pierce_left = projectile_data.pierce
 	global_position = source
+	size = projectile_data.size
+	
+	match(projectile_type):
+		ProjectileResource.ProjType.EXPLOSION:
+			scale = Vector2.ZERO
+		_:
+			scale = Vector2(size,size)
 
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
 func update(_delta: float) -> void:
@@ -48,6 +57,18 @@ func update(_delta: float) -> void:
 			if life_time < 0.75 * init_life_time:
 				homing_factor = 5.0
 				speed = 500
+		ProjectileResource.ProjType.EXPLOSION:
+			# Get time (moves from 0 to 1 with lifetime
+			var time = (init_life_time - life_time) / (init_life_time * 0.75)
+			
+			# Fade out explosion
+			if time > 1:
+				modulate.a = lerp(1,0,time - 1)
+			time = min(time,1)
+			# Scale up explosion until it reaches (1,1)
+			scale = Vector2(time * size,time * size)
+		ProjectileResource.ProjType.BEAM:
+			print("laserrrr")
 		_:
 			pass
 func _physics_process(delta: float) -> void:
@@ -89,6 +110,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and !pierced.get(body,false):
 		body.damage(damage)
 		pierced[body] = true
+		#print("Projectile hit: ",ProjectileResource.ProjType.keys()[projectile_type])
 		pierce_left -= 1
 	if pierce_left <= 0:
 		die()
