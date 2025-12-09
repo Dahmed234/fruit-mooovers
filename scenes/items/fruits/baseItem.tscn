@@ -85,7 +85,7 @@ position = Vector2(0, 17)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 scale = Vector2(1.8643138, 1.9391376)
-amount = 20
+amount = 5
 texture = ExtResource("3_bxj46")
 visibility_rect = Rect2(-98.86, -100, 200, 200)
 process_material = SubResource("ParticleProcessMaterial_06w3s")
