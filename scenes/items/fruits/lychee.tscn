@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://lnhhapkipvtt"]
+
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_jlwcx"]
+[ext_resource type="Texture2D" uid="uid://bmu7o04wdvj8p" path="res://assets/stockImages/lychee.png" id="2_qw1df"]
+
+[node name="lychee" instance=ExtResource("1_jlwcx")]
+fruitName = "Lychee"
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.18272069, 0.18272069)
+texture = ExtResource("2_qw1df")
+region_enabled = false

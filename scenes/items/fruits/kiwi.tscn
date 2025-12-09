@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsjrv0421b048"]
+
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_nut68"]
+[ext_resource type="Texture2D" uid="uid://cltm3tehpyyt1" path="res://assets/stockImages/Kiwi.png" id="2_ch1b8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlxrx"]
+radius = 130.7708
+
+[node name="kiwi" instance=ExtResource("1_nut68")]
+fruitName = "Kiwi"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-1, 1)
+scale = Vector2(0.88163704, 0.88163716)
+texture = ExtResource("2_ch1b8")
+region_enabled = false
+
+[node name="CollisionShape2D2" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_wlxrx")
+
+[node name="bottom" parent="." index="4"]
+position = Vector2(17, 80)

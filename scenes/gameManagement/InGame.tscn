@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=23 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -12,18 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
 [ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="12_cfroa"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
-[ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
-[ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="12_v6clt"]
-[ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
-[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="13_cfroa"]
-[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="14_qfp24"]
+[ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="14_1vlao"]
 [ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
+[ext_resource type="PackedScene" uid="uid://578l50o48qkk" path="res://scenes/items/fruits/persimmon.tscn" id="15_cfroa"]
+[ext_resource type="PackedScene" uid="uid://cjye54ls66xpx" path="res://scenes/items/fruits/melon.tscn" id="16_qfp24"]
+[ext_resource type="PackedScene" uid="uid://bsjrv0421b048" path="res://scenes/items/fruits/kiwi.tscn" id="18_j43d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
 size = Vector2(508, 179.3338)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vlao"]
-size = Vector2(282, 90.16748)
+size = Vector2(282, 92.17111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmcs"]
 size = Vector2(915.5, 573.5657)
@@ -88,9 +87,9 @@ shape = SubResource("RectangleShape2D_fg4jm")
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1882, 1673.9636)
+position = Vector2(1188, 15.882446)
 shape = SubResource("RectangleShape2D_1vlao")
-num_coins = 7
+num_coins = 38
 
 [node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
 position = Vector2(2108, 2365.2483)
@@ -103,23 +102,23 @@ shape = SubResource("RectangleShape2D_v6clt")
 [node name="Enemy Paths" type="Node2D" parent="."]
 
 [node name="Enemy Path" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
-position = Vector2(-9, 667)
+position = Vector2(-584, -68)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa"), ExtResource("13_cfroa")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa")])
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
 position = Vector2(97, 68)
 rotation = 0.029403297
 
 [node name="Enemy Path2" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
-position = Vector2(67, 718)
+position = Vector2(291, -440)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
 position = Vector2(-502, 413)
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("14_qfp24"), ExtResource("13_cfroa")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa")])
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
 position = Vector2(97, 68)
@@ -127,58 +126,40 @@ rotation = 0.029403297
 
 [node name="Fruits" type="Node2D" parent="."]
 
+[node name="cherry" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(385, 999)
+
+[node name="cherry2" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(531, 1030)
+
+[node name="cherry3" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(677, 1021)
+
+[node name="cherry4" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(247, 983)
+
+[node name="melon" parent="Fruits" instance=ExtResource("16_qfp24")]
+position = Vector2(-147, -616)
+
+[node name="persimmon" parent="Fruits" instance=ExtResource("15_cfroa")]
+position = Vector2(551, 494)
+
+[node name="kiwi" parent="Fruits" instance=ExtResource("18_j43d5")]
+position = Vector2(642, -940)
+
+[node name="persimmon2" parent="Fruits" instance=ExtResource("15_cfroa")]
+position = Vector2(-725, 196)
+
+[node name="cherry5" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-511, 418)
+
+[node name="cherry6" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-691, 448)
+
+[node name="cherry7" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(819, -207)
+
 [node name="Node2D" type="Node2D" parent="Fruits"]
-
-[node name="Plant Spawner2" parent="Fruits/Node2D" instance=ExtResource("12_v6clt")]
-position = Vector2(738, 511)
-item = ExtResource("13_1vlao")
-
-[node name="Plant Spawner7" parent="Fruits/Node2D" instance=ExtResource("12_v6clt")]
-position = Vector2(876, 1480)
-item = ExtResource("13_1vlao")
-
-[node name="Plant Spawner" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-1629, 5)
-item = ExtResource("13_1vlao")
-
-[node name="Plant Spawner3" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(260, -41)
-
-[node name="Plant Spawner4" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(688, 1004)
-
-[node name="Plant Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(193, 1004)
-
-[node name="Plant Spawner6" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(461, 1002)
-
-[node name="Plant Spawner12" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-1220, -990)
-
-[node name="Plant Spawner11" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-1204, -1093)
-
-[node name="Plant Spawner10" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(-1167, -997)
-
-[node name="Plant Spawner8" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(576, 997)
-
-[node name="Apple Spawner5" parent="Fruits/Node2D" instance=ExtResource("12_fg4jm")]
-position = Vector2(331, 1008)
-
-[node name="Apple Spawner" parent="Fruits" instance=ExtResource("12_fg4jm")]
-position = Vector2(714, -384)
-
-[node name="Apple Spawner2" parent="Fruits" instance=ExtResource("12_fg4jm")]
-position = Vector2(764, -379)
-
-[node name="Apple Spawner3" parent="Fruits" instance=ExtResource("12_fg4jm")]
-position = Vector2(834, -345)
-
-[node name="Apple Spawner4" parent="Fruits" instance=ExtResource("12_fg4jm")]
-position = Vector2(852, -262)
 
 [node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_v6clt")

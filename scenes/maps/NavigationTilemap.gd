@@ -4,7 +4,7 @@ signal tile_update
 
 var is_changed = false
 
-@onready var root: Node2D = $"../.."
+#@onready var root: Node2D = $"../.."
 
 # Load in the wall layers, these need to be marked as un-navigatable
 @onready var low_walls: TileMapLayer = $"../Walls"
@@ -24,54 +24,54 @@ var first_time = true
 			
 #@export var navPolygon: NavigationPolygon
 # Code for fixing navigation for wall layers: https://www.youtube.com/watch?v=7ZAF_fn3VOc
-func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
-	# Check if any of the wall layers overlap with this tile
-	for layer in [low_walls,destructible_walls,plants]:
-		if coords in layer.get_used_cells_by_id(0):
-			if first_time:
-				match layer:
-					#low_walls,high_walls:
-						#var n_wall = wall.instantiate()
+#func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+	## Check if any of the wall layers overlap with this tile
+	#for layer in [low_walls,destructible_walls,plants]:
+		#if coords in layer.get_used_cells_by_id(0):
+			#if first_time:
+				#match layer:
+					##low_walls,high_walls:
+						##var n_wall = wall.instantiate()
+						##n_wall.global_position = to_global(map_to_local(coords))
+						#
+						##Set the "throwables" collision layer to true if this is a high wall
+						##if layer == high_walls:  n_wall.collision_layer += 2 
+						#
+						##get_parent().get_parent().add_wall(n_wall)
+						#
+					#plants:
+						#var n_spawner = plantSpawner.instantiate()
+						#n_spawner.global_position = to_global(map_to_local(coords))
+						#var value = plants.get_cell_tile_data(coords).get_custom_data("Value")
+						#var followerValue = plants.get_cell_tile_data(coords).get_custom_data("Follower Value")
+						#var minimum_followers = plants.get_cell_tile_data(coords).get_custom_data("minimum_followers")
+						#var sprite = plants.get_cell_tile_data(coords).get_custom_data("Sprite")
+						#
+						#n_spawner.value = value
+						#n_spawner.followerValue = followerValue
+						#n_spawner.minimum_followers = minimum_followers
+						#n_spawner.sprite = sprite
+						#root.add_child(n_spawner)
+						#
+						#
+					#destructible_walls:
+						## If this breaks, it means minimum_followers is undefined for the destructible_walls layer
+						#var value = destructible_walls.get_cell_tile_data(coords).get_custom_data("Value")
+						#var followerValue = destructible_walls.get_cell_tile_data(coords).get_custom_data("Follower Value")
+						#var minimum_followers = destructible_walls.get_cell_tile_data(coords).get_custom_data("minimum_followers")
+						#if !minimum_followers: return false
+						#var n_wall = destructableItem.instantiate()
 						#n_wall.global_position = to_global(map_to_local(coords))
-						
-						#Set the "throwables" collision layer to true if this is a high wall
-						#if layer == high_walls:  n_wall.collision_layer += 2 
-						
-						#get_parent().get_parent().add_wall(n_wall)
-						
-					plants:
-						var n_spawner = plantSpawner.instantiate()
-						n_spawner.global_position = to_global(map_to_local(coords))
-						var value = plants.get_cell_tile_data(coords).get_custom_data("Value")
-						var followerValue = plants.get_cell_tile_data(coords).get_custom_data("Follower Value")
-						var minimum_followers = plants.get_cell_tile_data(coords).get_custom_data("minimum_followers")
-						var sprite = plants.get_cell_tile_data(coords).get_custom_data("Sprite")
-						
-						n_spawner.value = value
-						n_spawner.followerValue = followerValue
-						n_spawner.minimum_followers = minimum_followers
-						n_spawner.sprite = sprite
-						root.add_child(n_spawner)
-						
-						
-					destructible_walls:
-						# If this breaks, it means minimum_followers is undefined for the destructible_walls layer
-						var value = destructible_walls.get_cell_tile_data(coords).get_custom_data("Value")
-						var followerValue = destructible_walls.get_cell_tile_data(coords).get_custom_data("Follower Value")
-						var minimum_followers = destructible_walls.get_cell_tile_data(coords).get_custom_data("minimum_followers")
-						if !minimum_followers: return false
-						var n_wall = destructableItem.instantiate()
-						n_wall.global_position = to_global(map_to_local(coords))
-						n_wall.tilePos = coords
-						n_wall.tileMap = destructible_walls
-						n_wall.navMap = self
-						n_wall.value = value
-						n_wall.followerValue = followerValue
-						n_wall.minimum_followers = minimum_followers
-						root.add_wall(n_wall)
-	is_changed = true
-	
-	return false
+						#n_wall.tilePos = coords
+						#n_wall.tileMap = destructible_walls
+						#n_wall.navMap = self
+						#n_wall.value = value
+						#n_wall.followerValue = followerValue
+						#n_wall.minimum_followers = minimum_followers
+						#root.add_wall(n_wall)
+	#is_changed = true
+	#
+	#return false
 
 func _tile_data_runtime_update(_coords: Vector2i, _tile_data: TileData) -> void:
 	pass

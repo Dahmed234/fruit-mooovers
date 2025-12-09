@@ -147,7 +147,7 @@ advance_expression = "is_moving == false"
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_20koh"]
 states/RESET/node = SubResource("AnimationNodeAnimation_v42im")
 states/RESET/position = Vector2(336, 92.4)
-states/Start/position = Vector2(199.2, 100)
+states/Start/position = Vector2(200.8, 100)
 states/new_animation/node = SubResource("AnimationNodeAnimation_pn6s4")
 states/new_animation/position = Vector2(520, 72.399994)
 transitions = ["RESET", "new_animation", SubResource("AnimationNodeStateMachineTransition_7oing"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_5stf6"), "new_animation", "RESET", SubResource("AnimationNodeStateMachineTransition_180ig")]

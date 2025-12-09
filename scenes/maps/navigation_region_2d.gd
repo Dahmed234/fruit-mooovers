@@ -2,9 +2,6 @@ extends NavigationRegion2D
 @onready var navMap: TileMapLayer = $"Ground"
 
 
-
-@export
-var cachedMap :NavigationMeshSourceGeometryData2D
 func rebake():
 	bake_navigation_polygon(true)
 	
