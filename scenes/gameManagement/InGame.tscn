@@ -127,7 +127,7 @@ rotation = 0.029403297
 [node name="Fruits" type="Node2D" parent="."]
 
 [node name="cherry" parent="Fruits" instance=ExtResource("14_1vlao")]
-position = Vector2(385, 999)
+position = Vector2(389, 1047)
 
 [node name="cherry2" parent="Fruits" instance=ExtResource("14_1vlao")]
 position = Vector2(531, 1030)
@@ -136,7 +136,7 @@ position = Vector2(531, 1030)
 position = Vector2(677, 1021)
 
 [node name="cherry4" parent="Fruits" instance=ExtResource("14_1vlao")]
-position = Vector2(247, 983)
+position = Vector2(236, 1027)
 
 [node name="melon" parent="Fruits" instance=ExtResource("16_qfp24")]
 position = Vector2(-147, -616)

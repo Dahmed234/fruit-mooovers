@@ -8,6 +8,10 @@ radius = 130.7708
 
 [node name="kiwi" instance=ExtResource("1_nut68")]
 fruitName = "Kiwi"
+value = 25
+followerValue = 4
+minimum_followers = 4
+maximum_followers = 8
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(-1, 1)
@@ -20,3 +24,7 @@ shape = SubResource("CircleShape2D_wlxrx")
 
 [node name="bottom" parent="." index="4"]
 position = Vector2(17, 80)
+
+[node name="GPUParticles2D" parent="." index="5"]
+scale = Vector2(4.1636405, 4.1741967)
+amount = 12

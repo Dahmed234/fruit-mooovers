@@ -8,10 +8,10 @@ radius = 145.34442
 
 [node name="mango" instance=ExtResource("1_c42ht")]
 fruitName = "Mango"
-value = 70
+value = 100
 followerValue = 7
-minimum_followers = 15
-maximum_followers = 25
+minimum_followers = 10
+maximum_followers = 18
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.104271, 1.104271)

@@ -8,6 +8,10 @@ radius = 275.11633
 
 [node name="melon" instance=ExtResource("1_vppso")]
 fruitName = "Melon"
+value = 80
+followerValue = 20
+minimum_followers = 20
+maximum_followers = 30
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(10, -1)
@@ -20,3 +24,10 @@ position = Vector2(3, 0)
 
 [node name="CollisionShape2D2" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_mfd5p")
+
+[node name="bottom" parent="." index="4"]
+position = Vector2(0, 126)
+
+[node name="GPUParticles2D" parent="." index="5"]
+scale = Vector2(11.8660345, 12.112348)
+amount = 45
