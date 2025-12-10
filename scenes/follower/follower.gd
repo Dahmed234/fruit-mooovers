@@ -135,7 +135,8 @@ func die() -> void:
 			continue
 		cone_light.clear_target(self)
 	
-	
+	$"Enemy detection box".monitorable = false
+	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
 	$AnimationPlayer.play("Death")
 	print("death should be playing?")
