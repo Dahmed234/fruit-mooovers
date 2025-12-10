@@ -123,11 +123,9 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
-	if carryingItem:
-		var item = carryingItem
-		carryingItem = null
-		if item.has_method("onDrop"):
-			item.onDrop(self)
+	if currentState == State.CARRYING:
+		carry_behavior.stop()
+		
 
 	if currentState == State.THROWN:
 		stopThrow()
@@ -139,6 +137,10 @@ func die() -> void:
 			continue
 		cone_light.clear_target(self)
 	
+	collision_layer = 0
+	
+	$viewRadius.monitorable = false
+	$viewRadius.monitoring = false
 	$"Enemy detection box".monitorable = false
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false

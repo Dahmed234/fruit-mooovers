@@ -39,6 +39,7 @@ point_count = 5
 [node name="InGame" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
+INITIAL_FOLLOWERS = 1
 thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
