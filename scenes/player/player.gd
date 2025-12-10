@@ -20,6 +20,20 @@ var max_health
 
 var is_moving = true
 
+@onready
+var footstep_audio : AudioStreamPlayer = $AudioStreamPlayer;
+
+@export
+var footstep_interval = 0.0
+
+@export
+var footstep_max_pitch = 0.0
+
+@export
+var footstep_min_pitch = 0.0
+
+var footstep_timer = 0.0
+
 func _ready():
 	max_health = health
 	health_bar.max_value = max_health
@@ -68,3 +82,11 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 	
 	move_and_slide()
+	
+func _process(delta: float) -> void:
+	if velocity.length() != 0 && footstep_timer <= 0.0:
+		footstep_audio.pitch_scale = randf_range(footstep_min_pitch, footstep_max_pitch)
+		footstep_audio.play();
+		footstep_timer = footstep_interval
+	else:
+		footstep_timer = max(footstep_timer - delta, 0)
