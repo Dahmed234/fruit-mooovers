@@ -40,6 +40,8 @@ var beam_emiitter: CharacterBody2D
 var beam_sweep_angle
 var beam_visual: Line2D
 
+var particle_emitter: GPUParticles2D
+
 func _ready():
 	speed =  projectile_data.speed
 	damage = projectile_data.damage
@@ -57,6 +59,10 @@ func _ready():
 	sprite_2d.region_rect.size = Vector2(64,64)
 	# Fix sprites pointing 90
 	sprite_2d.rotation = PI/2
+	
+	if projectile_data.particle_type:
+		particle_emitter = projectile_data.particle_type.instantiate()#
+		get_parent().owner.add_child(particle_emitter)
 	
 	# Specific staring logic for some projectiles
 	match(projectile_type):
@@ -90,6 +96,7 @@ func get_beam_length():
 			
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
 func update(delta: float) -> void:
+	if particle_emitter: particle_emitter.global_position = global_position
 	match(projectile_type):
 		ProjectileResource.ProjType.MISSILE:
 			if life_time < 0.75 * init_life_time:
@@ -170,6 +177,7 @@ func _on_body_entered(body: Node2D) -> void:
 		die()
 
 func die():
+	if particle_emitter: particle_emitter.emitting = false
 	# Shoot new projectiles from final position when the projectile expires
 	if expiration_attack:
 		for i in range(expiration_attack.projectile_count):

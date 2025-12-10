@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ProjectileResource" load_steps=4 format=3 uid="uid://leyi7x50o6s2"]
+[gd_resource type="Resource" script_class="ProjectileResource" load_steps=5 format=3 uid="uid://leyi7x50o6s2"]
 
 [ext_resource type="Resource" uid="uid://dnd84tqmd4l1r" path="res://scenes/enemy/attacks/explosion.tres" id="1_krtwl"]
 [ext_resource type="Script" uid="uid://deu61gciq467g" path="res://scenes/enemy/projectile_resource.gd" id="1_x4k1d"]
+[ext_resource type="PackedScene" uid="uid://bs0yercqiq6hq" path="res://scenes/particles/smoke.tscn" id="2_ct25n"]
 [ext_resource type="Texture2D" uid="uid://ofryl1h3l7sm" path="res://assets/kenney_simple-space/PNG/Default/ship_L.png" id="3_krtwl"]
 
 [resource]
@@ -14,4 +15,5 @@ life_time = 2.0
 projectile_type = 1
 expiration_attack = ExtResource("1_krtwl")
 pierce = 1
+particle_type = ExtResource("2_ct25n")
 metadata/_custom_type_script = "uid://deu61gciq467g"
