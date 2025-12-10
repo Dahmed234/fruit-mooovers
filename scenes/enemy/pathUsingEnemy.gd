@@ -106,7 +106,7 @@ func _update_target(delta: float) -> void:
 			if global_position.distance_to(best_target.global_position) < attack_range:
 				
 				current_state = State.ATTACKING
-				_update_target(delta)
+				#_update_target(delta)
 				attack_best_target()
 			else:
 				navigation_agent_2d.target_position = best_target.position
@@ -129,6 +129,7 @@ func _update_target(delta: float) -> void:
 				# Stop attacking when the current attack is finished and there are no nearby targets
 				if !best_target or global_position.distance_to(best_target.global_position) > attack_range * 1.5:
 					current_state = State.CHASING
+			
 			
 			# try to shoot if the windup is done
 			elif (attack_time > pattern.windup and attack_time <  pattern.windup + pattern.attack_time):

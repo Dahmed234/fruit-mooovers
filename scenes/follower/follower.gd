@@ -89,7 +89,6 @@ func canBePushed():
 		_:
 			return false
 
-
 func onWhistle():
 	match currentState:
 		State.CARRYING, State.DESTROYING:

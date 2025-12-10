@@ -44,6 +44,7 @@ var beam_visual: Line2D
 var particle_emitter: GPUParticles2D
 
 func _ready():
+	hide()
 	speed =  projectile_data.speed
 	damage = projectile_data.damage
 	$Sprite2D.texture = projectile_data.sprite
@@ -99,6 +100,7 @@ func get_beam_length():
 			
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
 func update(delta: float) -> void:
+	show()
 	if particle_emitter and is_instance_valid(particle_emitter): particle_emitter.global_position = global_position
 	match(projectile_type):
 		ProjectileResource.ProjType.MISSILE:
@@ -119,7 +121,6 @@ func update(delta: float) -> void:
 			var time = (init_life_time - life_time) / (init_life_time)
 			if time > 0.25 and time < 0.75:
 				rotation += delta * 2 * beam_sweep_angle / init_life_time
-			
 			var beam_length = get_beam_length()
 			collision_shape_2d.scale = Vector2(beam_length / collision_shape_2d.shape.size.x,1)
 			collision_shape_2d.position = Vector2(beam_length/2,0)
@@ -173,7 +174,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and !pierced.get(body,false):
 		body.damage(damage)
 		pierced[body] = true
-		#print(ProjectileResource.ProjType.keys()[projectile_type]," hit ",body.name)
 		pierce_left -= 1
 	if pierce_left <= 0:
 		die()

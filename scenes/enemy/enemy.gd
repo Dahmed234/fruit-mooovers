@@ -243,12 +243,8 @@ func navigate_to_target(_delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if !is_ready: 
-		print("enemy wait for ready")
 		return
 	
-	# Update where the enemy is targeting based on its state
-	_update_target(delta)
-
 	# Move towards the target, avoiding obsticals
 	navigate_to_target(delta)
 
