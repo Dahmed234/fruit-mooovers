@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=22 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -10,13 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="11_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
-[ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="12_cfroa"]
+[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="12_cfroa"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://befrucnlp0dvr" path="res://scenes/items/Spawners/Apple_spawner.tscn" id="12_fg4jm"]
 [ext_resource type="PackedScene" uid="uid://doqc1gqfip2ts" path="res://scenes/items/Spawners/plant_spawner.tscn" id="12_v6clt"]
 [ext_resource type="PackedScene" uid="uid://eqeld234bmto" path="res://scenes/items/fruits/fish.tscn" id="13_1vlao"]
-[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="13_cfroa"]
-[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="14_qfp24"]
 [ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
@@ -37,7 +35,7 @@ _data = {
 }
 point_count = 5
 
-[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
+[node name="InGame" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
 thown = ExtResource("2_vwfvy")
@@ -102,21 +100,9 @@ position = Vector2(-9, 667)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa"), ExtResource("13_cfroa")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa")])
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
-position = Vector2(97, 68)
-rotation = 0.029403297
-
-[node name="Enemy Path2" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
-position = Vector2(67, 718)
-curve = SubResource("Curve2D_v6clt")
-
-[node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
-position = Vector2(-502, 413)
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("14_qfp24"), ExtResource("13_cfroa")])
-
-[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
 position = Vector2(97, 68)
 rotation = 0.029403297
 
@@ -184,4 +170,3 @@ stream = ExtResource("14_v6clt")
 [editable path="Player"]
 [editable path="UI"]
 [editable path="Enemy Paths/Enemy Path"]
-[editable path="Enemy Paths/Enemy Path2"]

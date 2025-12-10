@@ -18,4 +18,5 @@ cooldown = 0.5
 projectile_data = ExtResource("1_j4xr6")
 projectile_count = 35
 projectile_spread = 1.571
+indicator_colour = Color(1, 0.96862745, 0, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"
