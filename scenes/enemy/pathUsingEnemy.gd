@@ -9,6 +9,8 @@ const JUMP_VELOCITY = -400.0
 @export
 var pathPoint :PathFollow2D 
 
+@onready var attack_indicator: GPUParticles2D = $"Attack Indicator"
+
 @export var DIST_THRESHOLD :float
 
 @export var attack_patterns: Array[AttackPattern]
@@ -58,6 +60,8 @@ func _update_target(delta: float) -> void:
 	update_available_targets(delta)
 	line.hide()
 	idle_time += delta
+	
+	attack_indicator.emitting = false
 	
 	match current_state:
 		State.PATROLLING:
@@ -143,7 +147,12 @@ func _update_target(delta: float) -> void:
 				
 			# else do the windup animation (indicate that the enmy will shoot soon)
 			else:
-				pass
+				if !is_instance_valid(best_target):
+					attack_best_target()
+				attack_indicator.emitting = true
+				attack_indicator.modulate = pattern.indicator_colour
+				if best_target:
+					attack_indicator.global_position = global_position + global_position.direction_to(best_target.global_position) * 16.0
 		# If the state is invalid, throw an error
 		var other:
 			assert(false,"unexpected enemy state: " + State.keys()[other])

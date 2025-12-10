@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://lt11oexmku5s"]
+[gd_scene load_steps=9 format=3 uid="uid://lt11oexmku5s"]
 
 [ext_resource type="PackedScene" uid="uid://duws8qrfmixic" path="res://scenes/enemy/PathEnemy.tscn" id="1_xa2t5"]
 [ext_resource type="Script" uid="uid://b1wrrgkjathu" path="res://scenes/enemy/patrol_path.gd" id="2_7ff5p"]
+[ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="3_68p3r"]
 [ext_resource type="Script" uid="uid://chdu3d1i8di5" path="res://scenes/enemy/PathPositionTracker.gd" id="3_q5ea3"]
+[ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="4_5k4r6"]
 [ext_resource type="Texture2D" uid="uid://bbtqlucksus3d" path="res://icon.svg" id="4_77xt6"]
 
 [sub_resource type="Gradient" id="Gradient_yvq77"]
@@ -20,6 +22,7 @@ script = ExtResource("2_7ff5p")
 
 [node name="Enemy" parent="." index="0" node_paths=PackedStringArray("pathPoint")]
 pathPoint = NodePath("../PathFollow2D")
+attack_patterns = Array[ExtResource("3_68p3r")]([ExtResource("4_5k4r6")])
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." index="1"]
 position = Vector2(3, -10)

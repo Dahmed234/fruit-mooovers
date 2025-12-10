@@ -1,9 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://8y7gjhthiwsc"]
+[gd_scene load_steps=13 format=3 uid="uid://8y7gjhthiwsc"]
 
 [ext_resource type="Script" uid="uid://dbej3dlanmprm" path="res://scenes/enemy/enemy.gd" id="1_duu5m"]
+[ext_resource type="Texture2D" uid="uid://5qo18dx0b4ft" path="res://assets/kenney_particle-pack/PNG (Transparent)/star_08.png" id="2_44ybf"]
 [ext_resource type="Texture2D" uid="uid://cavic3xfatt3s" path="res://assets/UFO.png" id="2_duu5m"]
 [ext_resource type="PackedScene" uid="uid://1b0407sitqmb" path="res://scenes/enemy/ConeLight.tscn" id="4_duu5m"]
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://scenes/items/DestructableItem.tscn" id="5_hgomy"]
+
+[sub_resource type="Curve" id="Curve_img3j"]
+_data = [Vector2(0, 0.07404566), 0.0, 0.0, 0, 0, Vector2(0.47162163, 0.6303068), 0.0, 0.0, 0, 0, Vector2(1, 0.0007686615), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xvgg5"]
+curve = SubResource("Curve_img3j")
+
+[sub_resource type="Curve" id="Curve_k74vj"]
+_data = [Vector2(0.17972973, 0), 0.0, 0.0, 0, 0, Vector2(0.47972977, 0.38736546), 0.0, 0.0, 0, 0, Vector2(0.7554054, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_eg650"]
+curve = SubResource("Curve_k74vj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i722t"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.25
+angle_min = 1.0728835e-05
+angle_max = 74.30001
+spread = 180.0
+initial_velocity_max = 8.599999
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.0100021
+linear_accel_max = 1.4299977
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 6.299998
+scale_min = 0.02
+scale_max = 0.14999999
+color = Color(0.99, 0.99, 0.99, 1)
+alpha_curve = SubResource("CurveTexture_xvgg5")
+emission_curve = SubResource("CurveTexture_eg650")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kne1u"]
 radius = 4.0
@@ -19,7 +56,14 @@ speed = 170.0
 light_level = 64.0
 cone_light = NodePath("Cone light")
 damage = 20.0
-range = 250.0
+
+[node name="Attack Indicator" type="GPUParticles2D" parent="."]
+scale = Vector2(1.8643138, 1.9391376)
+amount = 50
+texture = ExtResource("2_44ybf")
+lifetime = 0.1
+visibility_rect = Rect2(-98.86, -100, 200, 200)
+process_material = SubResource("ParticleProcessMaterial_i722t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -30,7 +74,7 @@ texture = ExtResource("2_duu5m")
 shape = SubResource("CapsuleShape2D_kne1u")
 
 [node name="Cone light" parent="." instance=ExtResource("4_duu5m")]
-turn_speed = 0.7
+turn_speed = 2.0
 
 [node name="Sprite2D" parent="Cone light" index="0"]
 scale = Vector2(2, 1.855)
