@@ -256,7 +256,7 @@ collision_layer = 4
 script = ExtResource("1_glu7e")
 speed = 300.0
 throwDistance = 500.0
-health = 1000.0
+health = 10000000000000.0
 
 [node name="physics Collision2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)

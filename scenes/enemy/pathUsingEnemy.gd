@@ -132,12 +132,13 @@ func _update_target(delta: float) -> void:
 			
 			# try to shoot if the windup is done
 			elif (attack_time > pattern.windup and attack_time <  pattern.windup + pattern.attack_time):
-				
+				#print(pattern.projectile_count," * ",
+					#attack_time," - ",pattern.windup," / ", 
+					#pattern.attack_time, " > ",attack_count)
 				while (pattern.projectile_count *
 					((attack_time - pattern.windup) / 
 					pattern.attack_time) > attack_count
 				):
-					print("shoot pls")
 					# Pick a new target if the current one dies
 					if !is_instance_valid(best_target):
 						attack_best_target()
@@ -165,7 +166,7 @@ func attack_best_target():
 	#if best_target:
 		#best_target.modulate = Color(1,0,0)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !is_ready: 
 		return
 	# Update where the enemy is targeting based on its state

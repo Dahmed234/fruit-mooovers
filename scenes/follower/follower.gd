@@ -14,6 +14,8 @@ var is_moving = false
 @export var label: Label
 @export var wanderDistance: float
 
+var can_regen = false
+
 var goal: Sprite2D
 var player: CharacterBody2D 
 
@@ -105,6 +107,8 @@ static func newFollower(pos, startingState: State):
 
 
 func damage(enemy_damage):
+	can_regen = false
+	$"Regen timer".start()
 	match currentState:
 		State.CARRYING, State.DESTROYING:
 			if carryingItem and carryingItem.main_follower:
@@ -119,11 +123,9 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
-	if carryingItem:
-		var item = carryingItem
-		carryingItem = null
-		if item.has_method("onDrop"):
-			item.onDrop(self)
+	if currentState == State.CARRYING:
+		carry_behavior.stop()
+		
 
 	if currentState == State.THROWN:
 		stopThrow()
@@ -135,6 +137,10 @@ func die() -> void:
 			continue
 		cone_light.clear_target(self)
 	
+	collision_layer = 0
+	
+	$viewRadius.monitorable = false
+	$viewRadius.monitoring = false
 	$"Enemy detection box".monitorable = false
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
@@ -281,6 +287,9 @@ func _process(delta: float) -> void:
 		print("follower wait for ready")
 		return
 	
+	if can_regen:
+		health = max(max_health, health + max_health / 10 * delta)
+	
 	health_bar.value = health
 	
 	$Sprite2D.flip_h = velocity.x < 0
@@ -346,3 +355,7 @@ func navigate_to_target(delta: float) -> void:
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
+
+
+func _regen_timeout() -> void:
+	can_regen = true
