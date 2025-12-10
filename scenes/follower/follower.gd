@@ -132,6 +132,11 @@ func die() -> void:
 			continue
 		cone_light.clear_target(self)
 	
+	
+	$AnimationTree.active = false
+	$AnimationPlayer.play("Death")
+	print("death should be playing?")
+	await $AnimationPlayer.animation_finished
 	scoreholder.cowScore -= 1
 	queue_free()
 	
