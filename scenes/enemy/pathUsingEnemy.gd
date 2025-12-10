@@ -120,10 +120,10 @@ func _update_target(delta: float) -> void:
 				_next_attack_pattern()
 				attack_best_target()
 				
-				if !best_target: return
+				
 				
 				# Stop attacking when the current attack is finished and there are no nearby targets
-				if global_position.distance_to(best_target.global_position) > attack_range * 1.5:
+				if !best_target or global_position.distance_to(best_target.global_position) > attack_range * 1.5:
 					current_state = State.CHASING
 			
 			# try to shoot if the windup is done
@@ -157,7 +157,6 @@ func attack_best_target():
 
 func _process(delta: float) -> void:
 	if !is_ready: 
-		print("path enemy wait for ready")
 		return
 	# Update where the enemy is targeting based on its state
 	_update_target(delta)
