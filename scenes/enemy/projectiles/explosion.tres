@@ -14,9 +14,9 @@ fill_from = Vector2(0.5, 0.5)
 
 [resource]
 script = ExtResource("1_sy78c")
-damage = 15.0
+damage = 10.0
 sprite = SubResource("GradientTexture2D_sy78c")
-size = 4.0
+size = 2.0
 life_time = 0.25
 projectile_type = 2
 pierce = 20

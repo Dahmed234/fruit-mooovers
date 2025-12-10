@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs0yercqiq6hq"]
+[gd_scene load_steps=8 format=3 uid="uid://bs0yercqiq6hq"]
 
 [ext_resource type="Texture2D" uid="uid://byi0b8bs3hyxu" path="res://assets/kenney_particle-pack/PNG (Transparent)/circle_05.png" id="1_w7gg4"]
+[ext_resource type="Script" uid="uid://dddbmdjff81te" path="res://scenes/particles/smoke.gd" id="2_brruq"]
 
 [sub_resource type="Gradient" id="Gradient_brruq"]
 offsets = PackedFloat32Array(0, 0.19155844, 0.23701298, 0.52597404, 0.737013, 1)
@@ -26,7 +27,16 @@ scale_curve = SubResource("CurveTexture_brruq")
 color_ramp = SubResource("GradientTexture1D_rijgi")
 
 [node name="Smoke" type="GPUParticles2D"]
+modulate = Color(1, 1, 1, 0.33333334)
+scale = Vector2(8.661528, 5.6312733)
 amount = 64
 texture = ExtResource("1_w7gg4")
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_sp4y7")
+script = ExtResource("2_brruq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_kill_yourself"]

@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ddbecr7tflndk" path="res://assets/kenney_input-prompts_1 (1).4/Generic/Default/generic_button_circle_fill.png" id="1_gopfk"]
 [ext_resource type="Script" uid="uid://cyfbsfg3v8p46" path="res://scenes/enemy/projectile.gd" id="1_r7k8t"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_r7k8t"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7k8t"]
+size = Vector2(50, 50)
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 0
@@ -12,7 +12,7 @@ collision_mask = 4
 script = ExtResource("1_r7k8t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_r7k8t")
+shape = SubResource("RectangleShape2D_r7k8t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gopfk")

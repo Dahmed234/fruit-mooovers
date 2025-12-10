@@ -137,6 +137,7 @@ func _update_target(delta: float) -> void:
 					((attack_time - pattern.windup) / 
 					pattern.attack_time) > attack_count
 				):
+					print("shoot pls")
 					# Pick a new target if the current one dies
 					if !is_instance_valid(best_target):
 						attack_best_target()
@@ -146,7 +147,7 @@ func _update_target(delta: float) -> void:
 				
 				
 			# else do the windup animation (indicate that the enmy will shoot soon)
-			else:
+			elif attack_time < pattern.windup:
 				if !is_instance_valid(best_target):
 					attack_best_target()
 				attack_indicator.emitting = true

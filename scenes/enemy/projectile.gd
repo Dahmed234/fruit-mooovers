@@ -7,6 +7,7 @@ const PROJECTILE = preload("uid://1352s7d3laj7")
 ## NOTE projectile sprites should be 64x64 or the hitbox will be the wrong size
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var root: Node2D
 
 var pierced: Dictionary
 ## Damage dealt to target
@@ -60,9 +61,11 @@ func _ready():
 	# Fix sprites pointing 90
 	sprite_2d.rotation = PI/2
 	
+	root = get_node("/root/InGame")
+	
 	if projectile_data.particle_type:
-		particle_emitter = projectile_data.particle_type.instantiate()#
-		get_parent().owner.add_child(particle_emitter)
+		particle_emitter = projectile_data.particle_type.instantiate()
+		root.add_child(particle_emitter)
 	
 	# Specific staring logic for some projectiles
 	match(projectile_type):
@@ -118,7 +121,7 @@ func update(delta: float) -> void:
 				rotation += delta * 2 * beam_sweep_angle / init_life_time
 			
 			var beam_length = get_beam_length()
-			collision_shape_2d.scale = Vector2(beam_length / collision_shape_2d.shape.radius / 2,1)
+			collision_shape_2d.scale = Vector2(beam_length / collision_shape_2d.shape.size.x,1)
 			collision_shape_2d.position = Vector2(beam_length/2,0)
 			sprite_2d.region_rect.size.y = beam_length
 			sprite_2d.offset = Vector2(0,beam_length/2)
@@ -128,6 +131,7 @@ func update(delta: float) -> void:
 				
 		_:
 			pass
+			
 func _physics_process(delta: float) -> void:
 	if life_time < 0:
 		die()
@@ -171,7 +175,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and !pierced.get(body,false):
 		body.damage(damage)
 		pierced[body] = true
-		#print("Projectile hit: ",ProjectileResource.ProjType.keys()[projectile_type])
+		#print(ProjectileResource.ProjType.keys()[projectile_type]," hit ",body.name)
 		pierce_left -= 1
 	if pierce_left <= 0:
 		die()
