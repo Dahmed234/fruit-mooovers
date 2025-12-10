@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=37 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
 [ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cwb0gdf6mdhuy" path="res://scenes/ui/throw_marker.gd" id="6_1nynx"]
 [ext_resource type="Script" uid="uid://cebac1r02ercw" path="res://scenes/player/whistle_outline.gd" id="7_pn6s4"]
 [ext_resource type="Script" uid="uid://bvahw0aufjgr" path="res://scenes/player/animation_tree.gd" id="8_v42im"]
+[ext_resource type="AudioStream" uid="uid://bwdf26r1l7y1k" path="res://sounds/sound effects/footstep04.ogg" id="10_7oing"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
 radius = 6.8761363
@@ -257,6 +258,9 @@ script = ExtResource("1_glu7e")
 speed = 300.0
 throwDistance = 500.0
 health = 1000.0
+footstep_interval = 0.3
+footstep_max_pitch = 1.2
+footstep_min_pitch = 0.8
 
 [node name="physics Collision2" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
@@ -363,3 +367,6 @@ script = ExtResource("8_v42im")
 libraries = {
 &"": SubResource("AnimationLibrary_pn6s4")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_7oing")
