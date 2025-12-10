@@ -114,8 +114,11 @@ func damage(enemy_damage):
 		_:
 			health -= enemy_damage
 
-
+var dead = false
 func die() -> void:
+	if dead:
+		return
+	dead = true
 	if carryingItem:
 		var item = carryingItem
 		carryingItem = null
