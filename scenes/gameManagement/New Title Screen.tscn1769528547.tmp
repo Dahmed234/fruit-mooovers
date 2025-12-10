@@ -1,0 +1,277 @@
+[gd_scene load_steps=28 format=4 uid="uid://g3c2ige7t5fj"]
+
+[ext_resource type="Script" uid="uid://cy18gvef5fj7m" path="res://scenes/gameManagement/new_title_screen.gd" id="1_5auti"]
+[ext_resource type="TileSet" uid="uid://dx6rt5xlniow7" path="res://TileMap/tile_map.tres" id="1_86xu5"]
+[ext_resource type="PackedScene" uid="uid://cm1y181uyoq8b" path="res://scenes/gameManagement/AnimatedFollower.tscn" id="2_vohxw"]
+[ext_resource type="PackedScene" uid="uid://eb0mqkobwsnn" path="res://scenes/gameManagement/InGame.tscn" id="3_l8c22"]
+[ext_resource type="Script" uid="uid://dm0wkk03ng0wx" path="res://scenes/gameManagement/control.gd" id="4_kfpcf"]
+[ext_resource type="Texture2D" uid="uid://cf4cjv444dxd5" path="res://assets/kenney_particle-pack/PNG (Transparent)/star_01.png" id="4_kr5ls"]
+[ext_resource type="FontFile" uid="uid://bqmxj8wva533f" path="res://assets/Fonts/Kenney Future Narrow.ttf" id="5_56rmt"]
+[ext_resource type="AudioStream" uid="uid://ba164nyiy644s" path="res://sounds/music/344211_giomilko_c-major-9-bossa-nova-guitar.wav" id="8_8kkjl"]
+
+[sub_resource type="Gradient" id="Gradient_86xu5"]
+colors = PackedColorArray(0.02034074, 0.022444338, 0.13040045, 1, 0.08743333, 0.4358053, 0.37527052, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5auti"]
+gradient = SubResource("Gradient_86xu5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Curve" id="Curve_l8c22"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.23968256, 0.91117615), -3.8721635, -3.8721635, 0, 0, Vector2(0.79299355, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_56rmt"]
+curve = SubResource("Curve_l8c22")
+
+[sub_resource type="Curve" id="Curve_kr5ls"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.2494692, 0.3296054), 0.0, 0.0, 0, 0, Vector2(0.9437367, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_l8c22"]
+curve = SubResource("Curve_kr5ls")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e5q87"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+direction = Vector3(0, -1, 0)
+spread = 15.341
+initial_velocity_max = 2.76
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.19999999
+alpha_curve = SubResource("CurveTexture_56rmt")
+emission_curve = SubResource("CurveTexture_l8c22")
+hue_variation_min = -0.15000002
+hue_variation_max = 0.019999977
+anim_speed_min = 8.9
+anim_speed_max = 11.24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfpcf"]
+bg_color = Color(1.2032688e-08, 0.11593766, 0.09105315, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kkjl"]
+bg_color = Color(0.13, 0.039, 0.06630001, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8c22"]
+font_size = 46
+
+[sub_resource type="LabelSettings" id="LabelSettings_kfpcf"]
+font = ExtResource("5_56rmt")
+font_size = 76
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_56rmt"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kfpcf"]
+animation = &"new_animation"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8kkjl"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e5q87"]
+xfade_time = 0.2
+reset = false
+advance_mode = 2
+advance_expression = "clicked"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_21nd6"]
+states/RESET/node = SubResource("AnimationNodeAnimation_56rmt")
+states/RESET/position = Vector2(558.4, 124.08)
+states/new_animation/node = SubResource("AnimationNodeAnimation_kfpcf")
+states/new_animation/position = Vector2(361.6, 123.6)
+transitions = ["Start", "new_animation", SubResource("AnimationNodeStateMachineTransition_8kkjl"), "new_animation", "RESET", SubResource("AnimationNodeStateMachineTransition_e5q87")]
+
+[sub_resource type="Animation" id="Animation_dy8cx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t6yy8"]
+resource_name = "new_animation"
+length = 1.5000035
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7163966),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.13725491)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_skv1t"]
+_data = {
+&"RESET": SubResource("Animation_dy8cx"),
+&"new_animation": SubResource("Animation_t6yy8")
+}
+
+[node name="NewTitleScreen" type="Node2D"]
+script = ExtResource("1_5auti")
+followerScene = ExtResource("2_vohxw")
+game_scene = ExtResource("3_l8c22")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 225)
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -578.0
+offset_top = -325.0
+offset_right = 578.0
+offset_bottom = 326.0
+script = ExtResource("4_kfpcf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Camera2D/Control"]
+stream = ExtResource("8_8kkjl")
+volume_db = -0.35
+pitch_scale = 0.91
+bus = &"New Bus"
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_5auti")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D/Control"]
+position = Vector2(576, 348)
+rotation = -3.1415925
+scale = Vector2(6.2122355, -2.8807607)
+amount = 913
+texture = ExtResource("4_kr5ls")
+lifetime = 6.31
+process_material = SubResource("ParticleProcessMaterial_e5q87")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6911765
+anchor_top = 0.33640552
+anchor_right = 0.93252593
+anchor_bottom = 0.62058365
+offset_right = 5.0
+offset_bottom = 2.0
+pivot_offset = Vector2(108, 157.99998)
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Camera2D/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_kfpcf")
+text = "Start Game"
+
+[node name="HSeparator" type="HSeparator" parent="Camera2D/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Camera2D/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_8kkjl")
+text = "Quit"
+
+[node name="Label" type="Label" parent="Camera2D/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.564
+anchor_top = 0.5
+anchor_right = 0.94600004
+anchor_bottom = 0.57066053
+offset_left = 0.015991211
+offset_top = -11.5
+offset_right = -0.5760498
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Click To Continue..."
+label_settings = SubResource("LabelSettings_l8c22")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Camera2D/Control"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 39.0
+offset_right = 723.0
+offset_bottom = 125.0
+text = "Fruit Mooovers"
+label_settings = SubResource("LabelSettings_kfpcf")
+
+[node name="AnimationTree" type="AnimationTree" parent="Camera2D/Control"]
+tree_root = SubResource("AnimationNodeStateMachine_21nd6")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_skv1t")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="spawnPoint" type="Node2D" parent="CanvasLayer"]
+position = Vector2(-0.99999994, 536.99994)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+position = Vector2(0, 35.999996)
+scale = Vector2(3.2795372, 4)
+color = Color(0.03197839, 0.1004445, 0.13796234, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="CanvasLayer/CanvasModulate"]
+texture_filter = 1
+scale = Vector2(1.2196842, 0.99999994)
+tile_map_data = PackedByteArray("AAAAAAgAAAATABYAAAAAAAkAAAAAABYAAAABAAgAAAATABYAAAABAAkAAAAAABYAAAACAAgAAAATABYAAAACAAkAAAATABcAAAADAAgAAAATABYAAAADAAkAAAAAABYAAAAEAAgAAAATABYAAAAEAAkAAAAAABYAAAAFAAgAAAATABYAAAAFAAkAAAAAABYAAAAGAAgAAAATABYAAAAGAAkAAAAAABYAAAAHAAgAAAATABYAAAAHAAkAAAATABcAAAAIAAgAAAATABYAAAAIAAkAAAAAABYAAAAJAAgAAAATABYAAAAJAAkAAAAAABYAAAAKAAgAAAATABYAAAAKAAkAAAAAABYAAAALAAgAAAATABYAAAALAAkAAAAAABYAAAAMAAgAAAATABYAAAAMAAkAAAAAABYAAAANAAgAAAATABYAAAANAAkAAAAAABYAAAAOAAgAAAATABYAAAAOAAkAAAAAABYAAAAPAAgAAAATABYAAAAPAAkAAAATABcAAAAQAAgAAAATABYAAAAQAAkAAAAAABYAAAARAAgAAAATABYAAAARAAkAAAAAABYAAAAAAAoAAAAAABYAAAABAAoAAAATABcAAAACAAoAAAAAABYAAAADAAoAAAAAABYAAAAEAAoAAAATABcAAAAFAAoAAAAAABYAAAAGAAoAAAAAABYAAAAHAAoAAAAAABYAAAAIAAoAAAAAABYAAAAJAAoAAAAAABYAAAAKAAoAAAAAABYAAAALAAoAAAATABcAAAAMAAoAAAATABcAAAANAAoAAAAAABYAAAAOAAoAAAAAABYAAAAPAAoAAAAAABYAAAAQAAoAAAAAABYAAAARAAoAAAAAABYAAAA=")
+tile_set = ExtResource("1_86xu5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.81
+
+[connection signal="menuShow" from="Camera2D/Control" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Camera2D/Control/VBoxContainer/Button" to="." method="_start_game"]
+[connection signal="pressed" from="Camera2D/Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Camera2D/Control/VBoxContainer/Button2" to="Camera2D/Control" method="_on_button_2_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

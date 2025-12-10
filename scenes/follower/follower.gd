@@ -114,8 +114,11 @@ func damage(enemy_damage):
 		_:
 			health -= enemy_damage
 
-
+var dead = false
 func die() -> void:
+	if dead:
+		return
+	dead = true
 	if carryingItem:
 		var item = carryingItem
 		carryingItem = null
@@ -132,6 +135,12 @@ func die() -> void:
 			continue
 		cone_light.clear_target(self)
 	
+	$"Enemy detection box".monitorable = false
+	$"Enemy detection box".monitoring = false
+	$AnimationTree.active = false
+	$AnimationPlayer.play("Death")
+	print("death should be playing?")
+	await $AnimationPlayer.animation_finished
 	scoreholder.cowScore -= 1
 	queue_free()
 	

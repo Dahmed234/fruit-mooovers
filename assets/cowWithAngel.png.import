@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct74rgqmuj4b3"
-path="res://.godot/imported/Beam.png-b9d99ac64105b2f85d68a78d6a7b1dbe.ctex"
+uid="uid://c6m2shbbpxmm2"
+path="res://.godot/imported/cowWithAngel.png-303d3477df7e1d930d81c913bb97d710.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Beam.png"
-dest_files=["res://.godot/imported/Beam.png-b9d99ac64105b2f85d68a78d6a7b1dbe.ctex"]
+source_file="res://assets/cowWithAngel.png"
+dest_files=["res://.godot/imported/cowWithAngel.png-303d3477df7e1d930d81c913bb97d710.ctex"]
 
 [params]
 

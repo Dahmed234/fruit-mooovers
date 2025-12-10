@@ -106,21 +106,28 @@ func get_best_target() -> CharacterBody2D:
 	# The penalty for leaving the vision cone, will make the enemy prefer to target recently seen targets over close ones
 	const chaseTimePenalty = 100
 	for target in (cone_light.targets):
-		# Score is caluclated as distance to target * chase time factor, which is lower the more recently the target was visible
-		tmpScore = global_position.distance_to(target.global_position) + chaseTimePenalty * (1 - (cone_light.targets[target] / cone_light.chaseTime))
-		if tmpScore < bestScore:
-			bestScore = tmpScore
-			best = target
+		if is_instance_valid(target):
+			# Score is caluclated as distance to target * chase time factor, which is lower the more recently the target was visible
+			tmpScore = global_position.distance_to(target.global_position) + chaseTimePenalty * (1 - (cone_light.targets[target] / cone_light.chaseTime))
+			if tmpScore < bestScore:
+				bestScore = tmpScore
+				best = target
 	return best
 
 # Remove targets that haven't been seen in a while
 func update_available_targets(delta: float) -> void:
+	
+	var to_remove = []
+	
 	for target in (cone_light.targets):
-		if target:
+		if is_instance_valid(target):
 			cone_light.targets[target] -= delta
-			if cone_light.targets[target] < 0:
+			if cone_light.targets[target] < 0  or !is_instance_valid(target):
 				target.chasing.erase(cone_light)
-				cone_light.targets.erase(target)
+				to_remove.append(target)
+			
+	for target in to_remove:
+		cone_light.targets.erase(target)
 
 # Update the alert level based on which agents are in the cone light
 func update_alert(delta: float) -> void:

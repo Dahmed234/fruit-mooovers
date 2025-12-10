@@ -26,3 +26,5 @@ enum ProjType {
 @export var expiration_attack: AttackPattern
 
 @export var pierce: int
+
+@export var particle_type: PackedScene
