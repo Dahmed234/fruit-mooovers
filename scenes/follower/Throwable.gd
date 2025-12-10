@@ -38,10 +38,12 @@ func _physics_process(delta: float) -> void:
 	$Sprite2D.scale = baseScale * (1 +  60*quadratic(timer.wait_time - timer.time_left))
 	$Sprite2D.rotation = baseRotation + 5 * PI*(timer.wait_time - timer.time_left)
 	
-	follower.global_position = global_position
-	if (move_and_collide(velocity * delta)):
-		follower.startInitial()
-		queue_free()
+	if (is_instance_valid(follower)):
+		follower.global_position = global_position
+		
+		if (move_and_collide(velocity * delta)):
+			follower.startInitial()
+			queue_free()
 		#delete(Follower.State.FOLLOW)
 
 
@@ -50,7 +52,8 @@ func stopThrow():
 	
 func _on_timer_timeout() -> void:
 	#delete(Follower.State.WANDER)
-	follower.startInitial()
+	if (is_instance_valid(follower)):
+		follower.startInitial()
 	queue_free()
 	pass # Replace with function body.
 
