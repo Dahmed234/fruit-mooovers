@@ -99,7 +99,7 @@ func get_beam_length():
 			
 # handle special updates for projectiles, e.g. variables that should change or nonstandard movement.
 func update(delta: float) -> void:
-	if particle_emitter: particle_emitter.global_position = global_position
+	if particle_emitter and is_instance_valid(particle_emitter): particle_emitter.global_position = global_position
 	match(projectile_type):
 		ProjectileResource.ProjType.MISSILE:
 			if life_time < 0.75 * init_life_time:
@@ -125,10 +125,8 @@ func update(delta: float) -> void:
 			collision_shape_2d.position = Vector2(beam_length/2,0)
 			sprite_2d.region_rect.size.y = beam_length
 			sprite_2d.offset = Vector2(0,beam_length/2)
-			
-			global_position = beam_emiitter.global_position
-			
-				
+			if is_instance_valid(beam_emiitter):
+				global_position = beam_emiitter.global_position
 		_:
 			pass
 			
@@ -181,7 +179,7 @@ func _on_body_entered(body: Node2D) -> void:
 		die()
 
 func die():
-	if particle_emitter: particle_emitter.emitting = false
+	if particle_emitter and is_instance_valid(particle_emitter): particle_emitter.emitting = false
 	# Shoot new projectiles from final position when the projectile expires
 	if expiration_attack:
 		for i in range(expiration_attack.projectile_count):
