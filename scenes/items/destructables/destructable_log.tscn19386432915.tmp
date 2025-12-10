@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://tnrfudnvtjta"]
+[gd_scene load_steps=19 format=3 uid="uid://tnrfudnvtjta"]
 
 [ext_resource type="PackedScene" uid="uid://damapp5d6nnb2" path="res://scenes/items/destructables/placableDestructableItem.tscn" id="1_6gpvi"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
@@ -52,6 +52,11 @@ scale_max = 0.19999999
 scale_curve = SubResource("CurveTexture_fsvl5")
 alpha_curve = SubResource("CurveTexture_j1eha")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u6uv2"]
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("5_j1eha")
+
 [node name="Destructable Item" instance=ExtResource("1_6gpvi")]
 collision_layer = 7
 maximum_followers = -1
@@ -94,11 +99,8 @@ script = ExtResource("4_fsvl5")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
 position = Vector2(-6, 61)
-stream = ExtResource("5_j1eha")
+stream = SubResource("AudioStreamRandomizer_u6uv2")
 script = ExtResource("6_k85ee")
-interval = 0.25
-max_pitch = 0.6
-min_pitch = 1.4
 
 [node name="WhileDestroyingParticle2" type="GPUParticles2D" parent="." index="7"]
 position = Vector2(-6, 61)
