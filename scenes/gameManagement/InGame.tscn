@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=39 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -10,14 +10,18 @@
 [ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="11_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
-[ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="12_cfroa"]
+[ext_resource type="Resource" uid="uid://bkfnhlp6epdjk" path="res://scenes/enemy/projectiles/bullet.tres" id="12_cfroa"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
-[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="12_qfp24"]
 [ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="14_1vlao"]
+[ext_resource type="Resource" uid="uid://bj6ajsebyukre" path="res://scenes/enemy/projectiles/beam.tres" id="14_20nax"]
 [ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
 [ext_resource type="PackedScene" uid="uid://578l50o48qkk" path="res://scenes/items/fruits/persimmon.tscn" id="15_cfroa"]
+[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="15_ryuqu"]
 [ext_resource type="PackedScene" uid="uid://cjye54ls66xpx" path="res://scenes/items/fruits/melon.tscn" id="16_qfp24"]
+[ext_resource type="PackedScene" uid="uid://lnhhapkipvtt" path="res://scenes/items/fruits/lychee.tscn" id="17_25u3h"]
 [ext_resource type="PackedScene" uid="uid://bsjrv0421b048" path="res://scenes/items/fruits/kiwi.tscn" id="18_j43d5"]
+[ext_resource type="Resource" uid="uid://leyi7x50o6s2" path="res://scenes/enemy/projectiles/missile.tres" id="19_25u3h"]
+[ext_resource type="PackedScene" uid="uid://b1kwqy54sq4wa" path="res://scenes/items/fruits/mango.tscn" id="19_j43d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
 size = Vector2(508, 179.3338)
@@ -26,20 +30,108 @@ size = Vector2(508, 179.3338)
 size = Vector2(282, 92.17111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmcs"]
-size = Vector2(915.5, 573.5657)
+size = Vector2(504, 281.524)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6clt"]
-size = Vector2(539.5, 293.28503)
+size = Vector2(420.75, 243.82333)
+
+[sub_resource type="Curve2D" id="Curve2D_ryuqu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 93, -93.17328, -737.2455, -283.55615, 737.2455, 283.55615, 381, 967.7984, -143.7971, 324.71753, 143.7971, -324.71753, 2036, 720.33844, 0, 0, 0, 0, 1988, 320.59564)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_j43d5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -69, 26, 0, 0, 0, 0, 662, 272)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_t8sh3"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_20nax"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_t8sh3")
+attack_time = 0.1
+windup = 1.45
+cooldown = 2.0
+projectile_data = ExtResource("19_25u3h")
+projectile_count = 5
+projectile_spread = 2.7
+indicator_colour = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_j4xr6"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ryuqu"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_j4xr6")
+attack_time = 3.0
+windup = 0.5
+cooldown = 0.5
+projectile_data = ExtResource("12_cfroa")
+projectile_count = 7
+projectile_spread = 1.571
+indicator_colour = Color(1, 0.96862745, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_20nax"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 52, -207, 55.440002, -70.4, -55.440002, 70.4, -139, -147, -26.400002, -101.200005, 26.400002, 101.200005, -171, 36, 0, 0, 0, 0, -31, 168, -62.480003, 165.44002, 62.480003, -165.44002, 232, 64, 0, 0, 0, 0, 52, -207)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_hkxtu"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_nfh86"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_hkxtu")
+attack_time = 5.0
+windup = 6.0
+cooldown = 5.0
+projectile_data = ExtResource("14_20nax")
+projectile_count = 1
+projectile_spread = 1.047
+indicator_colour = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
 
 [sub_resource type="Curve2D" id="Curve2D_v6clt"]
 _data = {
-"points": PackedVector2Array(-149.6, -4.4, 149.6, 4.4, 97, 68, 126.5, -108.9, -126.5, 108.9, 80, 339, 132, 105.600006, -132, -105.600006, -437, 499, -53.9, 123.200005, 53.9, -123.200005, -400, 176, 0, 0, 0, 0, 97, 68)
+"points": PackedVector2Array(-60.738495, -71.43588, 60.738495, 71.43588, 102, 170, 126.5, -108.9, -126.5, 108.9, 80, 339, 132, 105.600006, -132, -105.600006, -384, 400, -53.9, 123.200005, 53.9, -123.200005, -400, 176, 0, 0, 0, 0, 18, 147, 0, 0, 0, 0, 102, 170)
 }
-point_count = 5
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_qfp24"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_j4xr6")
+attack_time = 6.0
+windup = 2.0
+cooldown = 5.0
+projectile_data = ExtResource("12_cfroa")
+projectile_count = 20
+projectile_spread = 0.32
+indicator_colour = Color(1, 0.96862745, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25u3h"]
+size = Vector2(179, 79)
 
 [node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
+INITIAL_FOLLOWERS = 10
 thown = ExtResource("2_vwfvy")
 splashText = ExtResource("3_s70h5")
 goal = NodePath("goal")
@@ -89,30 +181,51 @@ shape = SubResource("RectangleShape2D_fg4jm")
 num_coins = 17
 
 [node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(1188, 15.882446)
+position = Vector2(1266, -243.59976)
 shape = SubResource("RectangleShape2D_1vlao")
 num_coins = 38
 
 [node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(2108, 2365.2483)
+position = Vector2(-233, 1704.0195)
 shape = SubResource("RectangleShape2D_ctmcs")
+num_coins = 90
 
 [node name="CoinPile3" parent="coins" instance=ExtResource("12_ctmcs")]
-position = Vector2(-540, 2250.0342)
+position = Vector2(-1187, -241.59604)
 shape = SubResource("RectangleShape2D_v6clt")
+num_coins = 20
+
+[node name="Enemy Path" parent="coins" instance=ExtResource("11_v6clt")]
+position = Vector2(421, 1124.9435)
+curve = SubResource("Curve2D_ryuqu")
 
 [node name="Enemy Paths" type="Node2D" parent="."]
 
+[node name="Enemy Path3" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(575, -814)
+curve = SubResource("Curve2D_j43d5")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path3" index="0"]
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+damage = 15.0
+health = 100.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path3" index="1"]
+position = Vector2(-69, 26)
+rotation = 0.32462057
+
 [node name="Enemy Path" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
-position = Vector2(-584, -68)
-curve = SubResource("Curve2D_v6clt")
+position = Vector2(2174, -340)
+curve = SubResource("Curve2D_20nax")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_qfp24")])
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
-position = Vector2(97, 68)
-rotation = 0.029403297
+position = Vector2(52, -207)
+rotation = -3.065024
 
 [node name="Enemy Path2" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
 position = Vector2(291, -440)
@@ -120,11 +233,14 @@ curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
 position = Vector2(-502, 413)
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+shoot_length = 100.0
+shoot_cooldown = 10.0
+damage = 5.0
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
-position = Vector2(97, 68)
-rotation = 0.029403297
+position = Vector2(102, 170)
+rotation = 0.86615604
 
 [node name="Fruits" type="Node2D" parent="."]
 
@@ -141,13 +257,13 @@ position = Vector2(677, 1021)
 position = Vector2(236, 1027)
 
 [node name="melon" parent="Fruits" instance=ExtResource("16_qfp24")]
-position = Vector2(-147, -616)
+position = Vector2(-1718, -970)
 
 [node name="persimmon" parent="Fruits" instance=ExtResource("15_cfroa")]
 position = Vector2(551, 494)
 
 [node name="kiwi" parent="Fruits" instance=ExtResource("18_j43d5")]
-position = Vector2(642, -940)
+position = Vector2(768, -1208)
 
 [node name="persimmon2" parent="Fruits" instance=ExtResource("15_cfroa")]
 position = Vector2(-725, 196)
@@ -163,20 +279,61 @@ position = Vector2(819, -207)
 
 [node name="Node2D" type="Node2D" parent="Fruits"]
 
+[node name="lychee" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(468, -1109)
+
+[node name="lychee2" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(354, -999)
+
+[node name="lychee3" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(258, -862)
+
+[node name="lychee4" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(183, -736)
+
+[node name="lychee5" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(299, -932)
+
+[node name="mango" parent="Fruits" instance=ExtResource("19_j43d5")]
+position = Vector2(1702, -799)
+
+[node name="mango2" parent="Fruits" instance=ExtResource("19_j43d5")]
+position = Vector2(1167, 488)
+
+[node name="cherry8" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1076, 413)
+
+[node name="cherry9" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1084, 628)
+
+[node name="cherry10" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1084, 184)
+
+[node name="kiwi2" parent="Fruits" instance=ExtResource("18_j43d5")]
+position = Vector2(-37, -439)
+
 [node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_v6clt")
 volume_db = -2.5
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 420.0
+one_shot = true
 autostart = true
+
+[node name="CoinPile" parent="." instance=ExtResource("12_ctmcs")]
+position = Vector2(360, -1087)
+shape = SubResource("RectangleShape2D_25u3h")
+num_coins = 15
 
 [connection signal="cow_amount_update" from="." to="UI/Control" method="_on_cow_amount_update"]
 [connection signal="score_update" from="." to="UI/Control" method="_on_score_update"]
 [connection signal="numThrowable" from="Player/Radii/Throw Radius" to="UI/Control" method="_on_throw_radius_num_throwable"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Player"]
 [editable path="UI"]
+[editable path="Enemy Paths/Enemy Path3"]
 [editable path="Enemy Paths/Enemy Path"]
 [editable path="Enemy Paths/Enemy Path2"]

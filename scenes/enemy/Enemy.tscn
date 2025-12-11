@@ -53,7 +53,7 @@ radius = 4.0
 height = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6wwv"]
-radius = 40.04997
+radius = 70.45566
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qeto5"]
 random_pitch = 2.0
@@ -113,7 +113,7 @@ north = false
 east = false
 south = false
 west = false
-followerValue = 1
+maximum_followers = -1
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Destructable Item/Area2D" index="0"]
 shape = SubResource("CircleShape2D_s6wwv")

@@ -62,7 +62,7 @@ func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 func _update_target(delta: float) -> void:
 	update_alert(delta)
 	update_available_targets(delta)
-	line.hide()
+	#ine.hide()
 	idle_time += delta
 	
 	attack_indicator.emitting = false

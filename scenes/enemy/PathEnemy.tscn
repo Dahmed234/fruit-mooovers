@@ -9,9 +9,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_u7kdk"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 3, -10, 0, 0, 0, 0, 117, 47, 0, 0, 0, 0, -43, 151, 0, 0, 0, 0, -152, 77, 0, 0, 0, 0, 3, -10)
+"points": PackedVector2Array(0, 0, 0, 0, 117, 47, 0, 0, 0, 0, -43, 151, 0, 0, 0, 0, 3, -10)
 }
-point_count = 5
+point_count = 3
 
 [node name="Path" type="Path2D"]
 curve = SubResource("Curve2D_u7kdk")
@@ -20,5 +20,6 @@ curve = SubResource("Curve2D_u7kdk")
 script = ExtResource("2_mer1q")
 DIST_THRESHOLD = 100.0
 attack_patterns = Array[ExtResource("3_ds1xm")]([ExtResource("4_e03p6"), ExtResource("5_c8v0p"), ExtResource("4_ig063")])
+speed = 100.0
 damage = 50.0
 attack_range = 125.0

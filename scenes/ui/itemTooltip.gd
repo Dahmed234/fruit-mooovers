@@ -29,8 +29,9 @@ func _process(_delta: float) -> void:
 	
 	$HBoxContainer/fruitName.text = currentItem.fruitName
 	$HBoxContainer/cowAmountLabel.visible = currentItem.followerValue > 0
+
+	$HBoxContainer/cowAmountLabel.text = "+%d" %currentItem.followerValue
 	$HBoxContainer/cowIcon.visible = currentItem.followerValue > 0
-	$HBoxContainer/cowAmountLabel.text = str(currentItem.followerValue)
 	
 	
 	

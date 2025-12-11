@@ -25,6 +25,13 @@ position = Vector2(3, 0)
 [node name="CollisionShape2D2" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_mfd5p")
 
+[node name="Label" parent="." index="3"]
+offset_left = -19.0
+offset_top = 306.0
+offset_right = 21.0
+offset_bottom = 329.0
+theme_override_font_sizes/font_size = 48
+
 [node name="bottom" parent="." index="4"]
 position = Vector2(0, 126)
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm6k8hbvsf6db"
-path="res://.godot/imported/Untitled_Artwork.png-d139e766328e46b19f7db28ba0c2457c.ctex"
+path="res://.godot/imported/carry tutorial.png-af7a4a9ceaad4a0ccef6c396f45250d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tutorial/Untitled_Artwork.png"
-dest_files=["res://.godot/imported/Untitled_Artwork.png-d139e766328e46b19f7db28ba0c2457c.ctex"]
+source_file="res://assets/tutorial/carry tutorial.png"
+dest_files=["res://.godot/imported/carry tutorial.png-af7a4a9ceaad4a0ccef6c396f45250d3.ctex"]
 
 [params]
 
