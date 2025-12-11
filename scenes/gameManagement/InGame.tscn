@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=24 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
 [ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="12_cfroa"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
+[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="12_qfp24"]
 [ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="14_1vlao"]
 [ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
 [ext_resource type="PackedScene" uid="uid://578l50o48qkk" path="res://scenes/items/fruits/persimmon.tscn" id="15_cfroa"]
@@ -107,7 +108,7 @@ position = Vector2(-584, -68)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_cfroa")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("12_qfp24")])
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
 position = Vector2(97, 68)

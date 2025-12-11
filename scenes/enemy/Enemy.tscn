@@ -1,10 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://8y7gjhthiwsc"]
+[gd_scene load_steps=19 format=3 uid="uid://8y7gjhthiwsc"]
 
 [ext_resource type="Script" uid="uid://dbej3dlanmprm" path="res://scenes/enemy/enemy.gd" id="1_duu5m"]
 [ext_resource type="Texture2D" uid="uid://5qo18dx0b4ft" path="res://assets/kenney_particle-pack/PNG (Transparent)/star_08.png" id="2_44ybf"]
 [ext_resource type="Texture2D" uid="uid://cavic3xfatt3s" path="res://assets/UFO.png" id="2_duu5m"]
 [ext_resource type="PackedScene" uid="uid://1b0407sitqmb" path="res://scenes/enemy/ConeLight.tscn" id="4_duu5m"]
 [ext_resource type="PackedScene" uid="uid://kvexn7i2mmmy" path="res://scenes/items/DestructableItem.tscn" id="5_hgomy"]
+[ext_resource type="AudioStream" uid="uid://dbkups6wnpf3u" path="res://sounds/sound effects/laserSmall_004.ogg" id="6_5muo4"]
+[ext_resource type="AudioStream" uid="uid://bo1st1i6rodqf" path="res://sounds/sound effects/laserSmall_003.ogg" id="7_x2key"]
+[ext_resource type="AudioStream" uid="uid://b8er2qns4njdc" path="res://sounds/sound effects/laserSmall_002.ogg" id="8_moh7f"]
+[ext_resource type="AudioStream" uid="uid://wnt461cbqxej" path="res://sounds/sound effects/laserSmall_001.ogg" id="9_50hyi"]
+[ext_resource type="AudioStream" uid="uid://cabw368qqgdf2" path="res://sounds/sound effects/laserSmall_000.ogg" id="10_uhj2n"]
 
 [sub_resource type="Curve" id="Curve_img3j"]
 _data = [Vector2(0, 0.07404566), 0.0, 0.0, 0, 0, Vector2(0.47162163, 0.6303068), 0.0, 0.0, 0, 0, Vector2(1, 0.0007686615), 0.0, 0.0, 0, 0]
@@ -49,6 +54,15 @@ height = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s6wwv"]
 radius = 40.04997
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qeto5"]
+random_pitch = 2.0
+streams_count = 5
+stream_0/stream = ExtResource("6_5muo4")
+stream_1/stream = ExtResource("7_x2key")
+stream_2/stream = ExtResource("8_moh7f")
+stream_3/stream = ExtResource("9_50hyi")
+stream_4/stream = ExtResource("10_uhj2n")
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("cone_light")]
 collision_layer = 0
@@ -119,6 +133,10 @@ disabled = true
 [node name="Label" parent="Destructable Item" index="2"]
 offset_top = 22.0
 offset_bottom = 45.0
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_qeto5")
+volume_db = 7.5
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 
