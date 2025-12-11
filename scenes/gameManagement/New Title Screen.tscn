@@ -9,25 +9,25 @@
 [ext_resource type="FontFile" uid="uid://bqmxj8wva533f" path="res://assets/Fonts/Kenney Future Narrow.ttf" id="5_56rmt"]
 [ext_resource type="AudioStream" uid="uid://ba164nyiy644s" path="res://sounds/music/344211_giomilko_c-major-9-bossa-nova-guitar.wav" id="8_8kkjl"]
 
-[sub_resource type="Gradient" id="Gradient_86xu5"]
+[sub_resource type="Gradient" id="Gradient_8kkjl"]
 colors = PackedColorArray(0.02034074, 0.022444338, 0.13040045, 1, 0.08743333, 0.4358053, 0.37527052, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5auti"]
-gradient = SubResource("Gradient_86xu5")
+gradient = SubResource("Gradient_8kkjl")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="Curve" id="Curve_l8c22"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.23968256, 0.91117615), -3.8721635, -3.8721635, 0, 0, Vector2(0.79299355, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_56rmt"]
+[sub_resource type="CurveTexture" id="CurveTexture_e5q87"]
 curve = SubResource("Curve_l8c22")
 
 [sub_resource type="Curve" id="Curve_kr5ls"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.2494692, 0.3296054), 0.0, 0.0, 0, 0, Vector2(0.9437367, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_l8c22"]
+[sub_resource type="CurveTexture" id="CurveTexture_21nd6"]
 curve = SubResource("Curve_kr5ls")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e5q87"]
@@ -41,8 +41,8 @@ initial_velocity_max = 2.76
 gravity = Vector3(0, 0, 0)
 scale_min = 0.01
 scale_max = 0.19999999
-alpha_curve = SubResource("CurveTexture_56rmt")
-emission_curve = SubResource("CurveTexture_l8c22")
+alpha_curve = SubResource("CurveTexture_e5q87")
+emission_curve = SubResource("CurveTexture_21nd6")
 hue_variation_min = -0.15000002
 hue_variation_max = 0.019999977
 anim_speed_min = 8.9

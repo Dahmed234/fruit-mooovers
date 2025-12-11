@@ -309,7 +309,7 @@ func _process(delta: float) -> void:
 		global_position = player.global_position \
 			+ playerDistance * player.global_position.direction_to(global_position)
 	
-	if currentState == State.WANDER: modulate= Color("c58491db")
+	if currentState == State.WANDER: modulate= Color("9ef5ffff")
 	else: modulate = Color.WHITE
 
 	match currentState:

@@ -1,9 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=49 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
 [ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://scenes/ui/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="Shader" uid="uid://d242rwtw30hre" path="res://scenes/gameManagement/InGame.tres" id="4_rehj8"]
 [ext_resource type="PackedScene" uid="uid://c7vyvj7w3tuhu" path="res://Maps/Level1DRAFT2.tscn" id="4_v6clt"]
+[ext_resource type="Texture2D" uid="uid://88iovvlf3cg4" path="res://assets/kenney_monochrome-rpg/Default/Tiles/tile_0000.png" id="5_bkn5o"]
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
@@ -24,6 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://b1kwqy54sq4wa" path="res://scenes/items/fruits/mango.tscn" id="19_j43d5"]
 [ext_resource type="AudioStream" uid="uid://cq5hj2wjiac4s" path="res://sounds/music/609562_migfus20_background-music.ogg" id="23_hkxtu"]
 [ext_resource type="AudioStream" uid="uid://iowg0cpdmym7" path="res://sounds/sound effects/Tick2.wav" id="23_ryuqu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drb0v"]
+shader = ExtResource("4_rehj8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
 size = Vector2(508, 179.3338)
@@ -53,10 +58,10 @@ point_count = 2
 script = ExtResource("11_ctmcs")
 movement = SubResource("Curve2D_t8sh3")
 attack_time = 0.1
-windup = 1.45
+windup = 0.99
 cooldown = 2.0
 projectile_data = ExtResource("19_25u3h")
-projectile_count = 5
+projectile_count = 3
 projectile_spread = 2.7
 indicator_colour = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"
@@ -74,7 +79,7 @@ attack_time = 3.0
 windup = 0.5
 cooldown = 0.5
 projectile_data = ExtResource("12_cfroa")
-projectile_count = 7
+projectile_count = 15
 projectile_spread = 1.571
 indicator_colour = Color(1, 0.96862745, 0, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"
@@ -95,8 +100,8 @@ point_count = 2
 script = ExtResource("11_ctmcs")
 movement = SubResource("Curve2D_hkxtu")
 attack_time = 5.0
-windup = 6.0
-cooldown = 5.0
+windup = 2.9
+cooldown = 1.425
 projectile_data = ExtResource("14_20nax")
 projectile_count = 1
 projectile_spread = 1.047
@@ -157,6 +162,12 @@ size = Vector2(309, 265)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_25u3h"]
 size = Vector2(179, 79)
 
+[sub_resource type="Curve2D" id="Curve2D_bkn5o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -69, 26, 0, 0, 0, 0, 524, -195)
+}
+point_count = 2
+
 [node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
 texture_filter = 1
 script = ExtResource("1_27h4a")
@@ -171,6 +182,15 @@ throwMooMinPitch = 1.5
 throwMooMaxPitch = 1.25
 idleMooMinPitch = 0.75
 idleMooMaxPitch = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.25297853, 0.8099951, 0.8806063, 1)
+z_index = -5
+texture_repeat = 2
+material = SubResource("ShaderMaterial_drb0v")
+position = Vector2(201.49997, 175)
+scale = Vector2(400, 400)
+texture = ExtResource("5_bkn5o")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_v6clt")]
 
@@ -199,6 +219,12 @@ scale = Vector2(3.9375, 3.9375)
 offset_right = 2233.0
 offset_bottom = 1251.0
 levelTime = NodePath("../../Timer")
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+offset_left = -610.0
+offset_top = -346.0
+offset_right = 617.0
+offset_bottom = 389.0
 
 [node name="coins" type="Node2D" parent="."]
 position = Vector2(-1060, -184.85294)
@@ -272,11 +298,24 @@ curve = SubResource("Curve2D_v6clt")
 [node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
 position = Vector2(-502, 413)
 attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+damage = 5.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
+position = Vector2(102, 170)
+rotation = 0.86615604
+
+[node name="Enemy Path2" parent="Enemy Paths/Enemy Path2" instance=ExtResource("11_v6clt")]
+position = Vector2(-828, 341)
+curve = SubResource("Curve2D_v6clt")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path2/Enemy Path2" index="0"]
+position = Vector2(-502, 413)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
 shoot_length = 100.0
 shoot_cooldown = 10.0
 damage = 5.0
 
-[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2/Enemy Path2" index="1"]
 position = Vector2(102, 170)
 rotation = 0.86615604
 
@@ -441,6 +480,45 @@ position = Vector2(360, -1087)
 shape = SubResource("RectangleShape2D_25u3h")
 num_coins = 15
 
+[node name="Enemy Path" parent="." instance=ExtResource("11_v6clt")]
+position = Vector2(2174, -340)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path" parent="Enemy Path" instance=ExtResource("11_v6clt")]
+position = Vector2(-506, 1009)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Path/Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Path/Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path3" parent="." instance=ExtResource("11_v6clt")]
+position = Vector2(1655, -610)
+curve = SubResource("Curve2D_bkn5o")
+
+[node name="Enemy" parent="Enemy Path3" index="0"]
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+damage = 15.0
+health = 100.0
+
+[node name="PathFollow2D" parent="Enemy Path3" index="1"]
+position = Vector2(-69, 26)
+rotation = -0.35673627
+
 [connection signal="cow_amount_update" from="." to="UI/Control" method="_on_cow_amount_update"]
 [connection signal="score_update" from="." to="UI/Control" method="_on_score_update"]
 [connection signal="numThrowable" from="Player/Radii/Throw Radius" to="UI/Control" method="_on_throw_radius_num_throwable"]
@@ -453,4 +531,8 @@ num_coins = 15
 [editable path="Enemy Paths/Enemy Path"]
 [editable path="Enemy Paths/Enemy Path/Enemy Path"]
 [editable path="Enemy Paths/Enemy Path2"]
+[editable path="Enemy Paths/Enemy Path2/Enemy Path2"]
 [editable path="Enemy Paths/Enemy Path6"]
+[editable path="Enemy Path"]
+[editable path="Enemy Path/Enemy Path"]
+[editable path="Enemy Path3"]
