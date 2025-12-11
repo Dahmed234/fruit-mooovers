@@ -25,7 +25,8 @@ func _ready():
 	health_bar.max_value = max_health
 
 func damage(enemy_damage):
-	health -= enemy_damage
+	pass
+	#health -= enemy_damage
 
 func die() -> void:
 	# remove this follower from list of enemies chasing it

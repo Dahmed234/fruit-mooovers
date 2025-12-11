@@ -1,19 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1kwqy54sq4wa"]
+[gd_scene load_steps=4 format=3 uid="uid://b1kwqy54sq4wa"]
 
 [ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_c42ht"]
 [ext_resource type="Texture2D" uid="uid://v6fg04sxd6e" path="res://assets/stockImages/Mangos.png" id="2_lduqi"]
 
-[node name="Item" instance=ExtResource("1_c42ht")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dn38p"]
+radius = 145.34442
+
+[node name="mango" instance=ExtResource("1_c42ht")]
 fruitName = "Mango"
-value = 70
+value = 100
 followerValue = 7
-minimum_followers = 15
-maximum_followers = 25
+minimum_followers = 10
+maximum_followers = 18
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.104271, 1.104271)
 texture = ExtResource("2_lduqi")
 region_enabled = false
+
+[node name="CollisionShape2D2" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_dn38p")
 
 [node name="bottom" parent="." index="4"]
 position = Vector2(1, 114.00001)

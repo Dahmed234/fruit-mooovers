@@ -12,7 +12,7 @@
 radius = 204.07721
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8j6l1"]
-radius = 0.1
+radius = 17.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3g3wk"]
 radius = 1.6298006
@@ -372,6 +372,9 @@ shape = SubResource("CircleShape2D_8j6l1")
 
 [node name="WanderTimer" type="Timer" parent="."]
 
+[node name="Regen timer" type="Timer" parent="."]
+wait_time = 10.0
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 5.0
 target_desired_distance = 30.0
@@ -426,4 +429,5 @@ footstep_max_pitch = 1.2
 footstep_min_pitch = 0.8
 
 [connection signal="timeout" from="WanderTimer" to="." method="on_timeout"]
+[connection signal="timeout" from="Regen timer" to="." method="_regen_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

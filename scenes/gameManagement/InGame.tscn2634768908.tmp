@@ -164,14 +164,12 @@ position = Vector2(819, -207)
 
 [node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_v6clt")
-volume_db = -2.5
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 420.0
 autostart = true
 
-[connection signal="cow_amount_update" from="." to="UI/Control" method="_on_cow_amount_update"]
-[connection signal="score_update" from="." to="UI/Control" method="_on_score_update"]
+[connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="numThrowable" from="Player/Radii/Throw Radius" to="UI/Control" method="_on_throw_radius_num_throwable"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
 

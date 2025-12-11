@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://578l50o48qkk"]
+
+[ext_resource type="PackedScene" uid="uid://c2t31yxm0wwmr" path="res://scenes/items/fruits/baseItem.tscn" id="1_8dv3y"]
+[ext_resource type="Texture2D" uid="uid://bkwet0in4rs4o" path="res://assets/stockImages/persimmon.png" id="2_6x0nq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tynfa"]
+radius = 97.32934
+
+[node name="persimmon" instance=ExtResource("1_8dv3y")]
+fruitName = "Persimmon"
+value = 20
+followerValue = 4
+minimum_followers = 6
+maximum_followers = 11
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-6.0000005, 0)
+scale = Vector2(0.55738455, 0.55738455)
+texture = ExtResource("2_6x0nq")
+region_enabled = false
+
+[node name="CollisionShape2D2" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_tynfa")
+
+[node name="bottom" parent="." index="4"]
+position = Vector2(0, 56)
+scale = Vector2(0.9332985, 1.3746215)
+
+[node name="GPUParticles2D" parent="." index="5"]
+scale = Vector2(3.0695262, 2.6532679)
+amount = 17
