@@ -7,6 +7,7 @@ signal carryFinished(item :Carryable)
 #signal carryDropped(item: ItemData)
 #signal followerDies(follower)
 
+
 var carryingItem :StaticBody2D = null
 var is_moving = false
 @export var playerDistance: float
@@ -137,6 +138,8 @@ func die() -> void:
 		cone_light.clear_target(self)
 	
 	collision_layer = 0
+	
+	show()
 	
 	$viewRadius.monitorable = false
 	$viewRadius.monitoring = false
@@ -287,7 +290,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if can_regen:
-		health = max(max_health, health + max_health / 10 * delta)
+		health = min(max_health, health + max_health / 10 * delta)
 	
 	health_bar.value = health
 	

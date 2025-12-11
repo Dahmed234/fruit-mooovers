@@ -8,11 +8,7 @@ font_size = 32
 
 [node name="Destructable Item" groups=["destroyableWall"] instance=ExtResource("1_abqq1")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-position = Vector2(1, 1.9999962)
-scale = Vector2(0.45, 0.45)
-
-[node name="Area2D" parent="." index="1"]
+[node name="Area2D" parent="." index="0"]
 metadata/_edit_lock_ = true
 
 [node name="NdenySprite" type="Sprite2D" parent="Area2D/North" index="0"]
@@ -57,7 +53,7 @@ texture = ExtResource("2_ffqfc")
 region_enabled = true
 region_rect = Rect2(592, 336, 16, 16)
 
-[node name="Label" parent="." index="3"]
+[node name="Label" parent="." index="2"]
 offset_top = -23.0
 offset_bottom = 22.0
 text = "0"

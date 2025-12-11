@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal playerDies
 
+var can_regen
 
 const detection_weight := 5
 
@@ -25,6 +26,8 @@ func _ready():
 	health_bar.max_value = max_health
 
 func damage(enemy_damage):
+	can_regen = false
+	$"Regen timer".start()
 	health -= enemy_damage
 
 func die() -> void:
@@ -60,6 +63,10 @@ func move(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	
+	if can_regen:
+		health = min(max_health, health + max_health / 10 * delta)
+	
 	health_bar.value = health
 	
 	
@@ -67,3 +74,6 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 	
 	move_and_slide()
+
+func _regen_timeout() -> void:
+	can_regen = true

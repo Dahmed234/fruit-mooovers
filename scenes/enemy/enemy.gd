@@ -246,10 +246,10 @@ func _process(delta: float) -> void:
 		return
 	
 	# Move towards the target, avoiding obsticals
-	navigate_to_target(delta)
+	#navigate_to_target(delta)
 
-	move_and_slide()
-
+	#move_and_slide()
+	pass
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity

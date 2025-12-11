@@ -17,6 +17,6 @@ windup = 1.0
 cooldown = 2.0
 projectile_data = ExtResource("1_yuesr")
 projectile_count = 1
-projectile_spread = 1.047
+projectile_spread = 3.142
 indicator_colour = Color(0, 1, 1, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"

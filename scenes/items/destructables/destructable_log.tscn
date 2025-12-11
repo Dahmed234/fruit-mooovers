@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
 [ext_resource type="Texture2D" uid="uid://b25f8mp5q7igg" path="res://assets/kenney_particle-pack/PNG (Transparent)/dirt_01.png" id="3_k5tax"]
 [ext_resource type="Script" uid="uid://csxr1fqc0q501" path="res://scenes/items/destructables/particles.gd" id="4_fsvl5"]
-[ext_resource type="Script" path="res://scenes/items/destructables/while_destroying_particle_2.gd" id="5_fsvl5"]
+[ext_resource type="Script" uid="uid://jnuqoug5xdny" path="res://scenes/items/destructables/while_destroying_particle_2.gd" id="5_fsvl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsvl5"]
 size = Vector2(129, 20)
@@ -54,14 +54,6 @@ alpha_curve = SubResource("CurveTexture_j1eha")
 collision_layer = 7
 maximum_followers = -1
 
-[node name="Sprite2D" parent="." index="0"]
-texture_filter = 1
-position = Vector2(-1, -3.8146973e-06)
-scale = Vector2(8, 8)
-texture = ExtResource("2_bihxw")
-region_enabled = true
-region_rect = Rect2(288, 96, 16, 16)
-
 [node name="North" parent="Area2D" index="0"]
 position = Vector2(-0.5, -73)
 shape = SubResource("RectangleShape2D_fsvl5")
@@ -78,10 +70,23 @@ shape = SubResource("RectangleShape2D_k85ee")
 position = Vector2(-76.4375, 1)
 shape = SubResource("RectangleShape2D_j1eha")
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_bihxw")
 
-[node name="WhileDestroyingParticle" type="GPUParticles2D" parent="." index="5"]
+[node name="Sprite2D" parent="." index="3"]
+position = Vector2(-1, -3.8146973e-06)
+scale = Vector2(8, 8)
+texture = ExtResource("2_bihxw")
+region_enabled = true
+region_rect = Rect2(288, 96, 16, 16)
+
+[node name="Health" parent="Sprite2D" index="0"]
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 2.0
+offset_bottom = -13.0
+
+[node name="WhileDestroyingParticle" type="GPUParticles2D" parent="." index="4"]
 position = Vector2(-6, 61)
 amount = 16
 texture = ExtResource("3_k5tax")
@@ -90,7 +95,7 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_k85ee")
 script = ExtResource("4_fsvl5")
 
-[node name="WhileDestroyingParticle2" type="GPUParticles2D" parent="." index="6"]
+[node name="WhileDestroyingParticle2" type="GPUParticles2D" parent="." index="5"]
 position = Vector2(-6, 61)
 emitting = false
 amount = 16

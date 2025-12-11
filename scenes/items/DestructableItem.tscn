@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://kvexn7i2mmmy"]
 
 [ext_resource type="Script" uid="uid://c36hcwc8gorwa" path="res://scenes/items/Destructable.gd" id="1_3hrdc"]
-[ext_resource type="PackedScene" uid="uid://c0oriyclogl46" path="res://scenes/ui/bar.tscn" id="2_jr6qx"]
+[ext_resource type="PackedScene" uid="uid://cfp1kmchhvpv" path="res://scenes/ui/health_bar.tscn" id="2_dihw8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dihw8"]
 size = Vector2(125, 26)
@@ -23,6 +23,16 @@ collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_3hrdc")
 label = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+
+[node name="Health" parent="Sprite2D" instance=ExtResource("2_dihw8")]
+offset_left = -10.5
+offset_top = -10.5
+offset_right = 9.5
+offset_bottom = -5.5
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 17
@@ -62,7 +72,3 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "0/0"
 horizontal_alignment = 1
-
-[node name="Bar" parent="." instance=ExtResource("2_jr6qx")]
-visible = false
-position = Vector2(0, -40)
