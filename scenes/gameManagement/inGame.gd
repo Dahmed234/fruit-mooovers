@@ -158,3 +158,14 @@ func _onResume() -> void:
 
 func _onQuit() -> void:
 	get_tree().quit()
+
+
+func game_over():
+	var gameOver = load("res://scenes/gameManagement/GameOver.tscn").instantiate()
+	gameOver.set_message(score,total_cows)
+	get_tree().root.add_child(gameOver)
+	queue_free()
+
+
+func _on_timer_timeout() -> void:
+	game_over()

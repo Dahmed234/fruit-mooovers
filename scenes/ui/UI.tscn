@@ -14,13 +14,28 @@ bg_color = Color(0.0473, 0.052524995, 0.11, 0.5686275)
 [sub_resource type="LabelSettings" id="LabelSettings_bcuxr"]
 font = ExtResource("11_htlhs")
 font_size = 42
+outline_size = 5
+outline_color = Color(0.332, 0.33766666, 0.4, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3.36, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_p6rkd"]
 font = ExtResource("11_htlhs")
 font_size = 48
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.83137256)
+shadow_offset = Vector2(7.155, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_q5jec"]
 font_size = 52
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(7.23, 1)
 
 [node name="UI" type="CanvasLayer"]
 

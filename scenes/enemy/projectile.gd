@@ -61,7 +61,7 @@ func _ready():
 	# Fix sprites pointing 90
 	sprite_2d.rotation = PI/2
 	
-	root = get_node("/root/InGame")
+	root = get_node("/root/In Game")
 	
 	if projectile_data.particle_type:
 		particle_emitter = projectile_data.particle_type.instantiate()

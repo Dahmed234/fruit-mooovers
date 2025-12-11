@@ -123,8 +123,9 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
-	if currentState == State.CARRYING:
+	if currentState == State.CARRYING or currentState == State.DESTROYING:
 		carry_behavior.stop()
+	
 		
 
 	if currentState == State.THROWN:
@@ -285,7 +286,7 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
-	$Footsteps.play_footstep = velocity.length() != 0;
+	$Footsteps.play_footstep = is_moving and !dead;
 	
 	if !is_ready: 
 		print("follower wait for ready")
@@ -325,6 +326,7 @@ func _process(delta: float) -> void:
 			destroy_behavior.physics_update(delta)
 
 		State.FOLLOW:
+			
 			navigation_agent_2d.target_position = player.global_position
 			movement.navigate_to_target(delta)
 

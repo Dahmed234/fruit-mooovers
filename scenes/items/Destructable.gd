@@ -35,6 +35,7 @@ func _ready() -> void:
 
 	if isEnemy:
 		$CollisionShape2D.disabled = true
+		$Label.hide()
 	else:
 			
 		$Area2D/East/EdenySprite.visible = !east

@@ -5,6 +5,10 @@
 
 [node name="lychee" instance=ExtResource("1_jlwcx")]
 fruitName = "Lychee"
+value = 6
+followerValue = 2
+minimum_followers = 2
+maximum_followers = 3
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(0.18272069, 0.18272069)
