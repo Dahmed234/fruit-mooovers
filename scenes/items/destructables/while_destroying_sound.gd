@@ -18,7 +18,7 @@ func _on_destructable_item_carry_started(follower: CharacterBody2D, num_follower
 
 
 func _on_destructable_item_carry_stopped(follower: CharacterBody2D, num_followers: int, min_followers: int, max_followers: int) -> void:
-	should_play = num_followers < min_followers
+	should_play = num_followers >= min_followers
 
 func _process(delta: float) -> void:
 	if should_play && timer <= 0.0:
