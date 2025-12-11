@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=45 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://bsjrv0421b048" path="res://scenes/items/fruits/kiwi.tscn" id="18_j43d5"]
 [ext_resource type="Resource" uid="uid://leyi7x50o6s2" path="res://scenes/enemy/projectiles/missile.tres" id="19_25u3h"]
 [ext_resource type="PackedScene" uid="uid://b1kwqy54sq4wa" path="res://scenes/items/fruits/mango.tscn" id="19_j43d5"]
+[ext_resource type="AudioStream" uid="uid://cq5hj2wjiac4s" path="res://sounds/music/609562_migfus20_background-music.ogg" id="23_hkxtu"]
+[ext_resource type="AudioStream" uid="uid://iowg0cpdmym7" path="res://sounds/sound effects/Tick2.wav" id="23_ryuqu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
 size = Vector2(508, 179.3338)
@@ -415,6 +417,16 @@ position = Vector2(-2545, 512)
 
 [node name="lychee10" parent="Fruits" instance=ExtResource("17_25u3h")]
 position = Vector2(-2390, 574)
+
+[node name="ClockSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_ryuqu")
+volume_db = 15.0
+autoplay = true
+
+[node name="MusicSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_hkxtu")
+volume_db = 1.0
+autoplay = true
 
 [node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_v6clt")
