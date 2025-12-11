@@ -163,6 +163,7 @@ position = Vector2(852, -262)
 
 [node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_v6clt")
+volume_db = -2.5
 
 [connection signal="playerDies" from="Player" to="UI/Control/Label" method="_on_player_player_dies"]
 [connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]

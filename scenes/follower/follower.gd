@@ -277,6 +277,8 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
+	$AudioStreamPlayer2D.play_footstep = velocity.length() != 0;
+	
 	if !is_ready: 
 		print("follower wait for ready")
 		return
