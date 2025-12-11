@@ -2,7 +2,7 @@ extends Interactable
 class_name Destroyable
 
 # Used to make health bar smoother
-const health_bar_smoothing = 10.0
+var health_bar_smoothing = 10
 
 # Used to get the follower that should be damaged when hit by enemy (still via main_follower from base)
 
@@ -35,7 +35,7 @@ func _ready() -> void:
 	$Area2D/East.disabled = !east
 	$Area2D/South.disabled = !south
 	$Area2D/West.disabled = !west
-	health.max_value = lifespan * health_bar_smoothing
+	
 
 	if isEnemy:
 		$CollisionShape2D.disabled = true
@@ -46,7 +46,8 @@ func _ready() -> void:
 		$Area2D/North/NdenySprite.visible = !north
 		$Area2D/West/WdenySprite.visible =!west
 		$Area2D/South/SdenySprite.visible = !south
-
+		
+		$"Sprite2D/Health".max_value = lifespan * health_bar_smoothing
 
 func _physics_process(delta: float) -> void:
 	# Progress bar for destruction

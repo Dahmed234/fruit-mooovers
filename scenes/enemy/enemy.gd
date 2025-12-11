@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Enemy
 
+const health_bar_smoothing = 10.0
+
 @export var speed: float
 @export var light_level: float 
 @export var cone_light: CharacterBody2D
@@ -67,8 +69,8 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	
 	$"Destructable Item".lifespan = health
+	$"Destructable Item/Sprite2D/Health".max_value = health * health_bar_smoothing
 	
-	#
 	## Make a line object used to show laser shooting
 	#line = Line2D.new()
 	##line.texture = load("res://assets/dotted line.png")

@@ -183,7 +183,7 @@ offset_bottom = -62.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
-position = Vector2(-1632, 994)
+position = Vector2(376, 1202)
 metadata/_edit_group_ = true
 
 [node name="Sprite throw marker" parent="Player" index="5"]
