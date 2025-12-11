@@ -308,6 +308,9 @@ func _process(delta: float) -> void:
 	if canBePushed() and global_position.distance_to(player.global_position) < playerDistance:
 		global_position = player.global_position \
 			+ playerDistance * player.global_position.direction_to(global_position)
+	
+	if currentState == State.WANDER: modulate= Color("c58491db")
+	else: modulate = Color.WHITE
 
 	match currentState:
 		State.IDLE:
@@ -315,6 +318,7 @@ func _process(delta: float) -> void:
 				startFollow()
 
 		State.WANDER:
+			$NavigationAgent2D.target_desired_distance = 20
 			movement.navigate_to_target(delta)
 
 		State.CARRYING:
@@ -325,7 +329,7 @@ func _process(delta: float) -> void:
 			destroy_behavior.physics_update(delta)
 
 		State.FOLLOW:
-			
+			$NavigationAgent2D.target_desired_distance = 65
 			navigation_agent_2d.target_position = player.global_position
 			movement.navigate_to_target(delta)
 

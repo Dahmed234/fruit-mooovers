@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://dcsn06k5woifq"]
+[gd_scene load_steps=24 format=3 uid="uid://dcsn06k5woifq"]
 
 [ext_resource type="Script" uid="uid://gbt4mm2ghxhl" path="res://scenes/follower/follower.gd" id="1_jmfn7"]
-[ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
 [ext_resource type="Texture2D" uid="uid://c6m2shbbpxmm2" path="res://assets/cowWithAngel.png" id="2_56twi"]
 [ext_resource type="PackedScene" uid="uid://cfp1kmchhvpv" path="res://scenes/ui/health_bar.tscn" id="3_56twi"]
 [ext_resource type="AudioStream" uid="uid://ce6s81df1bq16" path="res://sounds/sound effects/Wilhelm_Scream.ogg" id="5_bcchq"]
@@ -359,7 +358,6 @@ scale = Vector2(0.5, 0.5)
 [node name="Sprite" type="Sprite2D" parent="Sprite2D/heldItem"]
 texture_filter = 1
 position = Vector2(1.5077715, -17.731564)
-texture = ExtResource("1_klxf7")
 region_enabled = true
 region_rect = Rect2(512, 160, 16, 16)
 
@@ -376,7 +374,7 @@ shape = SubResource("CircleShape2D_8j6l1")
 wait_time = 10.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 81.85
+target_desired_distance = 60.0
 avoidance_enabled = true
 max_speed = 500.0
 

@@ -5,6 +5,7 @@
 [node name="coin" instance=ExtResource("1_d5gmh")]
 fruitName = "coin"
 value = 2
+maximum_followers = 1
 
 [node name="Sprite2D" parent="." index="0"]
 region_rect = Rect2(352, 64, 16, 16)

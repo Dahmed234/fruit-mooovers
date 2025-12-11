@@ -158,3 +158,9 @@ func _onResume() -> void:
 
 func _onQuit() -> void:
 	get_tree().quit()
+
+
+
+func _on_timer_timeout() -> void:
+	get_tree().quit()
+	pass # Replace with function body.

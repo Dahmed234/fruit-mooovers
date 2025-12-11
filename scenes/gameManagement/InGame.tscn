@@ -183,7 +183,7 @@ offset_bottom = -62.0
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("7_b6xl3")]
-position = Vector2(376, 1202)
+position = Vector2(893, 1222)
 metadata/_edit_group_ = true
 
 [node name="Sprite throw marker" parent="Player" index="5"]
@@ -196,10 +196,8 @@ scale = Vector2(3.9375, 3.9375)
 [node name="UI" parent="." instance=ExtResource("10_s70h5")]
 
 [node name="Control" parent="UI" index="0" node_paths=PackedStringArray("levelTime")]
-offset_left = -14.0
-offset_top = 50.0
-offset_right = 2219.0
-offset_bottom = 1301.0
+offset_right = 2233.0
+offset_bottom = 1251.0
 levelTime = NodePath("../../Timer")
 
 [node name="coins" type="Node2D" parent="."]
@@ -366,6 +364,7 @@ position = Vector2(-511, 418)
 position = Vector2(-691, 448)
 
 [node name="cherry7" parent="Fruits" instance=ExtResource("14_1vlao")]
+modulate = Color(0.49640003, 0.6170933, 0.73, 0.85882354)
 position = Vector2(819, -207)
 
 [node name="Node2D" type="Node2D" parent="Fruits"]
