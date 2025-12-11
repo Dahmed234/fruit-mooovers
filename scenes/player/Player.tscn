@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=40 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
 [ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://cebac1r02ercw" path="res://scenes/player/whistle_outline.gd" id="7_pn6s4"]
 [ext_resource type="Script" uid="uid://bvahw0aufjgr" path="res://scenes/player/animation_tree.gd" id="8_v42im"]
 [ext_resource type="AudioStream" uid="uid://bwdf26r1l7y1k" path="res://sounds/sound effects/footstep04.ogg" id="10_7oing"]
+[ext_resource type="AudioStream" uid="uid://b0mudbmksvy82" path="res://sounds/sound effects/WhistleStart.wav" id="10_20koh"]
 [ext_resource type="Script" uid="uid://ctab56ctaq3l" path="res://scenes/follower/footstep_player.gd" id="11_5stf6"]
+[ext_resource type="AudioStream" uid="uid://dh4schweeerpe" path="res://sounds/sound effects/WhistleLoop.wav" id="13_ov1oi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p3xyx"]
 radius = 6.8761363
@@ -298,6 +300,7 @@ shape = SubResource("RectangleShape2D_glu7e")
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_p3xyx")
+whistle_decay_rate = 7.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radii/whistleBox"]
 shape = SubResource("CircleShape2D_wuy1y")
@@ -359,6 +362,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_pn6s4")
 }
 
+[node name="WhistleStart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_20koh")
+pitch_scale = 0.8
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_7oing")
 volume_db = 1.0
@@ -366,3 +373,7 @@ script = ExtResource("11_5stf6")
 footstep_interval = 0.5
 footstep_max_pitch = 1.2
 footstep_min_pitch = 0.8
+
+[node name="WhistleLoop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ov1oi")
+pitch_scale = 0.8
