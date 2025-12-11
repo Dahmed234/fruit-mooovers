@@ -111,7 +111,7 @@ south = false
 west = false
 value = 100
 followerValue = 5
-maximum_followers = 5
+maximum_followers = 20
 
 [node name="Sprite2D" parent="Destructable Item" index="0"]
 texture = ExtResource("2_duu5m")

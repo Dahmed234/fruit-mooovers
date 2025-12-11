@@ -28,7 +28,7 @@ var TIMERVARIANCE = 0.1
 var direction := Vector2.ONE
 
 ## How quickly followers are detected, big number = start attacking faster. 
-const detection_weight := 0.2
+const detection_weight := 1
 const ITEM_HEIGHT = 20.0
 
 var currentState = State.FOLLOW
@@ -194,19 +194,7 @@ func initState():
 			)
 			var closest
 
-			if !nearbyCarryable.is_empty():
-				var found = false
-				while !found and nearbyCarryable:
-					closest = getClosest(nearbyCarryable)
-					if closest.get_parent().hasCapacity():
-						found = true
-					else:
-						nearbyCarryable.erase(closest)
-				if found:
-					var obtainedItem :Carryable = closest.get_parent()
-					carryingItem = obtainedItem
-					startCarry(obtainedItem)
-					return
+			
 
 			if !nearbyDestroyable.is_empty():
 				var found_destroy = false
@@ -221,7 +209,21 @@ func initState():
 					carryingItem = obtainedDestroy
 					startDestroy(obtainedDestroy)
 					return
-
+			
+			if !nearbyCarryable.is_empty():
+				var found = false
+				while !found and nearbyCarryable:
+					closest = getClosest(nearbyCarryable)
+					if closest.get_parent().hasCapacity():
+						found = true
+					else:
+						nearbyCarryable.erase(closest)
+				if found:
+					var obtainedItem :Carryable = closest.get_parent()
+					carryingItem = obtainedItem
+					startCarry(obtainedItem)
+					return
+				
 			startWander()
 
 		State.WANDER:
@@ -327,6 +329,7 @@ func _process(delta: float) -> void:
 
 		State.DESTROYING:
 			destroy_behavior.physics_update(delta)
+			velocity = Vector2.ZERO
 
 		State.FOLLOW:
 			$NavigationAgent2D.target_desired_distance = 65

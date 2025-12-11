@@ -72,6 +72,10 @@ func _physics_process(delta: float) -> void:
 		# optional: idle visual feedback
 		pass
 
+func move_followers(amount: Vector2):
+	for follower in followersCarrying:
+		if follower and is_instance_valid(follower):
+			follower.global_position += amount
 
 func destroy(follower) -> void:
 	if isEnemy:

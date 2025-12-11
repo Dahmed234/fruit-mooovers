@@ -39,5 +39,6 @@ func start(item: Destroyable) -> void:
 
 
 func physics_update(_delta: float) -> void:
-	if follower.carryingItem:
-		follower.global_position = point
+	pass
+	#if follower.carryingItem:
+		#follower.global_position = point

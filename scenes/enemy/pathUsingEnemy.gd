@@ -24,8 +24,6 @@ var path :Curve2D
 
 var best_target: CharacterBody2D
 
-
-
 func _ready():
 	await get_tree().process_frame
 	await get_tree().physics_frame
@@ -36,8 +34,6 @@ func _ready():
 func _next_attack_pattern():
 	
 	attack_pattern_index = (attack_pattern_index + 1) % len(attack_patterns)
-	
-	
 	
 	attack_time = 0.0
 	attack_count = 0
@@ -180,4 +176,7 @@ func _physics_process(delta: float) -> void:
 	# Move towards the target, avoiding obsticals
 	navigate_to_target(delta)
 
-	move_and_slide()
+	global_position += velocity * delta
+	
+	destructable_item.move_followers(velocity * delta)
+	#move_and_slide()

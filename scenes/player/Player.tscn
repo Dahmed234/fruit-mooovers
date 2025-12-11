@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ca8kwae33nfxd"]
+[gd_scene load_steps=39 format=3 uid="uid://ca8kwae33nfxd"]
 
 [ext_resource type="Script" uid="uid://cnx47c3mqhr1r" path="res://scenes/player/player.gd" id="1_glu7e"]
 [ext_resource type="Script" uid="uid://35oyduh6tuxo" path="res://scenes/player/throwController.gd" id="2_p3xyx"]
@@ -253,7 +253,7 @@ _data = {
 &"new_animation": SubResource("Animation_npwbq")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 4
 script = ExtResource("1_glu7e")

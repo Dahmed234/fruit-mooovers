@@ -84,7 +84,7 @@ func _on_area_2d_area_shape_entered(_area_rid: RID, area: Area2D, area_shape_ind
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
 	
 	# Set the target as in the area and being chased
-	if other_shape_node.get_parent().get_parent():
+	if other_shape_node.get_parent().get_parent() and other_shape_node.get_parent().get_parent().is_in_group("Player"):
 		in_area[other_shape_node.get_parent().get_parent()] = true
 		other_shape_node.get_parent().get_parent().chasing[self] = true
 
