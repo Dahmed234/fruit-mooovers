@@ -1,10 +1,75 @@
-[gd_scene load_steps=3 format=3 uid="uid://kpu882lv5xud"]
+[gd_scene load_steps=8 format=4 uid="uid://kpu882lv5xud"]
 
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_bo1ix"]
-[ext_resource type="Script" uid="uid://drra8b724mxeb" path="res://scenes/gameManagement/GameOver.gd" id="2_3vs54"]
+[ext_resource type="Script" uid="uid://ddb40ak5g7ss2" path="res://scenes/gameManagement/game_over.gd" id="2_30ko0"]
+[ext_resource type="FontFile" uid="uid://bqmxj8wva533f" path="res://assets/Fonts/Kenney Future Narrow.ttf" id="6_njql3"]
+[ext_resource type="TileSet" uid="uid://dx6rt5xlniow7" path="res://TileMap/tile_map.tres" id="7_tbwg5"]
+
+[sub_resource type="Gradient" id="Gradient_86xu5"]
+colors = PackedColorArray(0.02034074, 0.022444338, 0.13040045, 1, 0.08743333, 0.4358053, 0.37527052, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lule6"]
+gradient = SubResource("Gradient_86xu5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_keip1"]
+font = ExtResource("6_njql3")
+font_size = 76
 
 [node name="Game Over" instance=ExtResource("1_bo1ix")]
-script = ExtResource("2_3vs54")
+script = ExtResource("2_30ko0")
+
+[node name="Camera2D" type="Camera2D" parent="." index="0"]
+
+[node name="Control" type="Control" parent="Camera2D" index="0"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -578.0
+offset_top = -325.0
+offset_right = 578.0
+offset_bottom = 326.0
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D/Control" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lule6")
+
+[node name="Label2" type="Label" parent="Camera2D/Control" index="1"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 39.0
+offset_right = 723.0
+offset_bottom = 125.0
+text = "Fruit Mooovers"
+label_settings = SubResource("LabelSettings_keip1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
+
+[node name="spawnPoint" type="Node2D" parent="CanvasLayer" index="0"]
+position = Vector2(-0.99999994, 536.99994)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer" index="1"]
+position = Vector2(0, 35.999996)
+scale = Vector2(3.2795372, 4)
+color = Color(0.03197839, 0.1004445, 0.13796234, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="CanvasLayer/CanvasModulate" index="0"]
+texture_filter = 1
+scale = Vector2(1.2196842, 0.99999994)
+tile_map_data = PackedByteArray("AAAAAAgAAAATABYAAAAAAAkAAAAAABYAAAABAAgAAAATABYAAAABAAkAAAAAABYAAAACAAgAAAATABYAAAACAAkAAAATABcAAAADAAgAAAATABYAAAADAAkAAAAAABYAAAAEAAgAAAATABYAAAAEAAkAAAAAABYAAAAFAAgAAAATABYAAAAFAAkAAAAAABYAAAAGAAgAAAATABYAAAAGAAkAAAAAABYAAAAHAAgAAAATABYAAAAHAAkAAAATABcAAAAIAAgAAAATABYAAAAIAAkAAAAAABYAAAAJAAgAAAATABYAAAAJAAkAAAAAABYAAAAKAAgAAAATABYAAAAKAAkAAAAAABYAAAALAAgAAAATABYAAAALAAkAAAAAABYAAAAMAAgAAAATABYAAAAMAAkAAAAAABYAAAANAAgAAAATABYAAAANAAkAAAAAABYAAAAOAAgAAAATABYAAAAOAAkAAAAAABYAAAAPAAgAAAATABYAAAAPAAkAAAATABcAAAAQAAgAAAATABYAAAAQAAkAAAAAABYAAAARAAgAAAATABYAAAARAAkAAAAAABYAAAAAAAoAAAAAABYAAAABAAoAAAATABcAAAACAAoAAAAAABYAAAADAAoAAAAAABYAAAAEAAoAAAATABcAAAAFAAoAAAAAABYAAAAGAAoAAAAAABYAAAAHAAoAAAAAABYAAAAIAAoAAAAAABYAAAAJAAoAAAAAABYAAAAKAAoAAAAAABYAAAALAAoAAAATABcAAAAMAAoAAAATABcAAAANAAoAAAAAABYAAAAOAAoAAAAAABYAAAAPAAoAAAAAABYAAAAQAAoAAAAAABYAAAARAAoAAAAAABYAAAA=")
+tile_set = ExtResource("7_tbwg5")
+
+[node name="Sprite2D" parent="." index="2"]
+position = Vector2(-804, -75)
+scale = Vector2(1, -1)
+
+[node name="VBoxContainer" parent="." index="3"]
+offset_left = -86.0
 
 [node name="Label" type="Label" parent="VBoxContainer" index="0"]
 layout_mode = 2

@@ -109,6 +109,9 @@ func add_wall(wall: StaticBody2D):
 func on_follower_death():
 	total_cows -= 1
 	cow_amount_update.emit(total_cows)
+	if(total_cows == 0):
+		end_game()
+		
 	
 func spawnFollower(n_position, state :Follower.State):
 	total_cows  += 1
@@ -159,8 +162,14 @@ func _onResume() -> void:
 func _onQuit() -> void:
 	get_tree().quit()
 
+func end_game():
+	var gameOver = load("res://scenes/gameManagement/GameOver.tscn").instantiate()
+	gameOver.set_message(score,total_cows)
+	get_tree().root.add_child(gameOver)
+	# ../../.. is the current root, which we free and replace with the gameOver scene root
+	queue_free()
 
 
 func _on_timer_timeout() -> void:
-	get_tree().quit()
+	end_game()
 	pass # Replace with function body.
