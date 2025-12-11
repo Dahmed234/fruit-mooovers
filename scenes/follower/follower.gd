@@ -139,6 +139,7 @@ func die() -> void:
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
 	$AnimationPlayer.play("Death")
+	$DeathSound.play()
 	print("death should be playing?")
 	await $AnimationPlayer.animation_finished
 	scoreholder.cowScore -= 1
@@ -277,7 +278,7 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
-	$AudioStreamPlayer2D.play_footstep = velocity.length() != 0;
+	$Footsteps.play_footstep = velocity.length() != 0;
 	
 	if !is_ready: 
 		print("follower wait for ready")

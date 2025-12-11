@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcsn06k5woifq"]
+[gd_scene load_steps=25 format=3 uid="uid://dcsn06k5woifq"]
 
 [ext_resource type="Script" uid="uid://gbt4mm2ghxhl" path="res://scenes/follower/follower.gd" id="1_jmfn7"]
 [ext_resource type="Texture2D" uid="uid://mscp3ld2ynnc" path="res://assets/kenney_1-bit-pack/Tilesheet/colored-transparent_packed.png" id="1_klxf7"]
 [ext_resource type="Texture2D" uid="uid://c6m2shbbpxmm2" path="res://assets/cowWithAngel.png" id="2_56twi"]
 [ext_resource type="PackedScene" uid="uid://cfp1kmchhvpv" path="res://scenes/ui/health_bar.tscn" id="3_56twi"]
+[ext_resource type="AudioStream" uid="uid://ce6s81df1bq16" path="res://sounds/sound effects/Wilhelm_Scream.ogg" id="5_bcchq"]
 [ext_resource type="Script" uid="uid://ctab56ctaq3l" path="res://scenes/follower/footstep_player.gd" id="5_odk4b"]
 [ext_resource type="AudioStream" uid="uid://bwdf26r1l7y1k" path="res://sounds/sound effects/footstep04.ogg" id="5_x6um6"]
 
@@ -311,6 +312,10 @@ states/walk/position = Vector2(524, 69.2)
 transitions = ["RESET", "walk", SubResource("AnimationNodeStateMachineTransition_odk4b"), "walk", "RESET", SubResource("AnimationNodeStateMachineTransition_x6um6"), "spawn", "RESET", SubResource("AnimationNodeStateMachineTransition_bcchq"), "Start", "spawn", SubResource("AnimationNodeStateMachineTransition_7t6oc")]
 graph_offset = Vector2(13, -34)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7t6oc"]
+streams_count = 1
+stream_0/stream = ExtResource("5_bcchq")
+
 [node name="Follower" type="CharacterBody2D" node_paths=PackedStringArray("label") groups=["Player"]]
 collision_layer = 4
 collision_mask = 17
@@ -407,7 +412,11 @@ tree_root = SubResource("AnimationNodeStateMachine_bcchq")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7t6oc")
+pitch_scale = 0.75
+
+[node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_x6um6")
 volume_db = -7.5
 bus = &"New Bus"
