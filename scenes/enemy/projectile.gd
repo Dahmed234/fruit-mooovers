@@ -128,6 +128,9 @@ func update(delta: float) -> void:
 			sprite_2d.offset = Vector2(0,beam_length/2)
 			if is_instance_valid(beam_emiitter):
 				global_position = beam_emiitter.global_position
+			else:
+				life_time = -1
+			
 		_:
 			pass
 			

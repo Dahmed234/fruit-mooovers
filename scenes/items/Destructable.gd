@@ -58,8 +58,7 @@ func _physics_process(delta: float) -> void:
 			if follower and is_instance_valid(follower):
 				destroy(follower)
 				return
-		assert(false,"destroyed but no followers")
-			
+		destroy(null)
 	elif followersCarrying.size() >= minimum_followers:
 		# Destruction speed scales with number of followers
 		time += delta * followersCarrying.size()
@@ -75,8 +74,9 @@ func _physics_process(delta: float) -> void:
 func destroy(follower) -> void:
 	if isEnemy:
 		get_parent().die()
-		
-	follower.carryFinished.emit(self, self.global_position)
+	
+	if follower:
+		follower.carryFinished.emit(self, self.global_position)
 	# Make all followers stop carrying this and go back to their own logic
 	dropAll()
 	requestDestroy.emit(self)
