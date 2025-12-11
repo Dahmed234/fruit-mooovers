@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 	
 	$ProgressBar.max_value = quota
 	$ProgressBar.value = score
-	cow_label.text = "x " + str(cowScore)
+	#cow_label.text = "x " + str(cowScore)
 
 func _ready():
 	#get_parent().get_parent().scale = Vector2.ONE / get_parent().get_parent().zoom

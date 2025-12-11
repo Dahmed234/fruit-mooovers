@@ -1,6 +1,6 @@
 extends Area2D
 signal throwMade(startPosition, mousePosition,follower)
-
+signal numThrowable(num)
 @export
 var throwCooldown := 0.25
 @export
@@ -39,10 +39,13 @@ func shouldThrow(delta) -> bool:
 		time = 0
 		return false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 func _process(delta: float) -> void:
 	throwables  = self.get_overlapping_bodies().filter(func(item): return item is Follower) #get all pikmin within area
 		
 	throwables= throwables.filter(func(item): return item.canBeThrown())
+	numThrowable.emit(throwables.size())
 	#on mouse input pressed
 	if shouldThrow(delta):
 		if(throwables.is_empty()):

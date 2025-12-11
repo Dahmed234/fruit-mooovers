@@ -41,8 +41,8 @@ var max_health
 
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
-@onready var scoreholder: Label = $"../../UI/Control/Label"
 
+signal cow_died
 # --- NEW: behaviour objects ---
 var movement        # FollowerMovement
 var wander_behavior # FollowerWander
@@ -76,7 +76,7 @@ func inThrowRange():
 
 func canBeThrown():
 	match currentState:
-		State.FOLLOW, State.IDLE, State.WANDER:
+		State.FOLLOW, State.IDLE:
 			return true
 		_:
 			return false
@@ -139,6 +139,7 @@ func die() -> void:
 	
 	collision_layer = 0
 	
+	cow_died.emit()
 	$viewRadius.monitorable = false
 	$viewRadius.monitoring = false
 	$"Enemy detection box".monitorable = false
@@ -147,7 +148,7 @@ func die() -> void:
 	$AnimationPlayer.play("Death")
 	print("death should be playing?")
 	await $AnimationPlayer.animation_finished
-	scoreholder.cowScore -= 1
+	#scoreholder.cowScore -= 1
 	queue_free()
 	
 
