@@ -12,9 +12,9 @@ point_count = 2
 [resource]
 script = ExtResource("2_cu2xh")
 movement = SubResource("Curve2D_j4xr6")
-attack_time = 5.0
+attack_time = 4.0
 windup = 1.0
-cooldown = 2.0
+cooldown = 0.5
 projectile_data = ExtResource("1_yuesr")
 projectile_count = 1
 projectile_spread = 3.142

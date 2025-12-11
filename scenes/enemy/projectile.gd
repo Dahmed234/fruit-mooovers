@@ -119,13 +119,19 @@ func update(delta: float) -> void:
 			scale = Vector2(time * size,time * size)
 		ProjectileResource.ProjType.BEAM:
 			var time = (init_life_time - life_time) / (init_life_time)
+			var beam_length = get_beam_length()
+			var extension_factor = 1
 			if time > 0.25 and time < 0.75:
 				rotation += delta * 2 * beam_sweep_angle / init_life_time
-			var beam_length = get_beam_length()
-			collision_shape_2d.scale = Vector2(beam_length / collision_shape_2d.shape.size.x,1)
-			collision_shape_2d.position = Vector2(beam_length/2,0)
-			sprite_2d.region_rect.size.y = beam_length
-			sprite_2d.offset = Vector2(0,beam_length/2)
+			elif time <= 0.25:
+				extension_factor = time * 4
+			else:
+				extension_factor = (1-time) * 4
+			
+			collision_shape_2d.scale = Vector2(extension_factor * beam_length / collision_shape_2d.shape.size.x,1)
+			collision_shape_2d.position = Vector2(extension_factor * beam_length/2,0)
+			sprite_2d.region_rect.size.y = extension_factor * beam_length
+			sprite_2d.offset = Vector2(0,extension_factor * beam_length/2)
 			if is_instance_valid(beam_emiitter):
 				global_position = beam_emiitter.global_position
 			else:
