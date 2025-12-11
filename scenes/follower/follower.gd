@@ -42,8 +42,8 @@ var max_health
 
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
-@onready var scoreholder: Label = $"../../UI/Control/Label"
 
+signal cow_died
 # --- NEW: behaviour objects ---
 var movement        # FollowerMovement
 var wander_behavior # FollowerWander
@@ -77,7 +77,7 @@ func inThrowRange():
 
 func canBeThrown():
 	match currentState:
-		State.FOLLOW, State.IDLE, State.WANDER:
+		State.FOLLOW, State.IDLE:
 			return true
 		_:
 			return false
@@ -123,8 +123,9 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
-	if currentState == State.CARRYING:
+	if currentState == State.CARRYING or currentState == State.DESTROYING:
 		carry_behavior.stop()
+	
 		
 
 	if currentState == State.THROWN:
@@ -139,16 +140,17 @@ func die() -> void:
 	
 	collision_layer = 0
 	
-	show()
-	
+	cow_died.emit()
 	$viewRadius.monitorable = false
 	$viewRadius.monitoring = false
 	$"Enemy detection box".monitorable = false
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
 	$AnimationPlayer.play("Death")
+	$DeathSound.play()
+	print("death should be playing?")
 	await $AnimationPlayer.animation_finished
-	scoreholder.cowScore -= 1
+	#scoreholder.cowScore -= 1
 	queue_free()
 	
 
@@ -284,6 +286,8 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
+	$Footsteps.play_footstep = is_moving and !dead;
+	
 	if !is_ready: 
 		return
 	
@@ -321,6 +325,7 @@ func _process(delta: float) -> void:
 			destroy_behavior.physics_update(delta)
 
 		State.FOLLOW:
+			
 			navigation_agent_2d.target_position = player.global_position
 			movement.navigate_to_target(delta)
 

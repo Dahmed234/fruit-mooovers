@@ -15,6 +15,6 @@ extends Resource
 ## How many projectiles the enemy should use
 @export var projectile_count: int
 ## How spread projectiles should be
-@export var projectile_spread: float
+@export_range(0,2*PI,0.02,"°") var projectile_spread: float
 ## COlour of particle forshadowing attack
 @export var indicator_colour: Color

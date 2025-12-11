@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://tnrfudnvtjta"]
+[gd_scene load_steps=17 format=3 uid="uid://tnrfudnvtjta"]
 
 [ext_resource type="PackedScene" uid="uid://damapp5d6nnb2" path="res://scenes/items/destructables/placableDestructableItem.tscn" id="1_6gpvi"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="2_bihxw"]
 [ext_resource type="Texture2D" uid="uid://b25f8mp5q7igg" path="res://assets/kenney_particle-pack/PNG (Transparent)/dirt_01.png" id="3_k5tax"]
 [ext_resource type="Script" uid="uid://csxr1fqc0q501" path="res://scenes/items/destructables/particles.gd" id="4_fsvl5"]
-[ext_resource type="Script" uid="uid://jnuqoug5xdny" path="res://scenes/items/destructables/while_destroying_particle_2.gd" id="5_fsvl5"]
+[ext_resource type="AudioStream" uid="uid://k7ct66ptqipj" path="res://sounds/sound effects/chop.ogg" id="5_j1eha"]
+[ext_resource type="Script" uid="uid://b76yscspyh30v" path="res://scenes/items/destructables/while_destroying_sound.gd" id="6_k85ee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsvl5"]
 size = Vector2(129, 20)
@@ -95,17 +96,16 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_k85ee")
 script = ExtResource("4_fsvl5")
 
-[node name="WhileDestroyingParticle2" type="GPUParticles2D" parent="." index="5"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
 position = Vector2(-6, 61)
-emitting = false
-amount = 16
-texture = ExtResource("3_k5tax")
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_k85ee")
-script = ExtResource("5_fsvl5")
+stream = ExtResource("5_j1eha")
+script = ExtResource("6_k85ee")
+interval = 0.25
+max_pitch = 0.6
+min_pitch = 1.4
 
 [connection signal="carry_started" from="." to="WhileDestroyingParticle" method="_on_destructable_item_carry_started"]
+[connection signal="carry_started" from="." to="AudioStreamPlayer2D" method="_on_destructable_item_carry_started"]
 [connection signal="carry_stopped" from="." to="WhileDestroyingParticle" method="_on_destructable_item_carry_stopped"]
+[connection signal="carry_stopped" from="." to="AudioStreamPlayer2D" method="_on_destructable_item_carry_stopped"]
 [connection signal="requestDestroy" from="." to="WhileDestroyingParticle" method="_on_destructable_item_request_destroy"]

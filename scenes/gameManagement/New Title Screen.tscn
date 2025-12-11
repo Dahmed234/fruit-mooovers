@@ -31,6 +31,7 @@ point_count = 4
 curve = SubResource("Curve_kr5ls")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e5q87"]
+lifetime_randomness = 0.19
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(100, 100, 1)
@@ -179,10 +180,11 @@ texture = SubResource("GradientTexture2D_5auti")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D/Control"]
 position = Vector2(576, 348)
 rotation = -3.1415925
-scale = Vector2(6.2122355, -2.8807607)
-amount = 913
+scale = Vector2(6.2122355, -3.760761)
+amount = 500
 texture = ExtResource("4_kr5ls")
-lifetime = 6.31
+lifetime = 5.04
+preprocess = 0.1
 process_material = SubResource("ParticleProcessMaterial_e5q87")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/Control"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://k7ct66ptqipj"
+path="res://.godot/imported/chop.ogg-d92da9158247ac8a5a856a81d0781d4c.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/sound effects/chop.ogg"
+dest_files=["res://.godot/imported/chop.ogg-d92da9158247ac8a5a856a81d0781d4c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

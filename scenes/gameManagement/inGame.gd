@@ -12,9 +12,6 @@ var splashText: PackedScene
 var goal: Sprite2D
 @export
 var player: CharacterBody2D
-
-@onready var label: Label = $UI/Control/Label
-
 @export 
 var zoom_strength := 0.1
 
@@ -50,6 +47,13 @@ var idleMooMinPitch : float = 0;
 @export
 var idleMooMaxPitch : float = 0;
 
+
+var total_cows = 0
+var score = 0
+signal cow_amount_update(num :int)
+signal score_update(newScore :int)
+
+
 func _ready() -> void:
 	for i in range(INITIAL_FOLLOWERS):
 		spawnFollower($goal.global_position + Vector2(randf(),randf()),Follower.State.WANDER)
@@ -78,9 +82,8 @@ func _process(delta):
 			timeSinceLastMoo += delta;
 
 func onCarryFinish(item,pos):
-	label.score += item.value
-	label.totalScore += item.value
-	
+	score += item.value
+	score_update.emit(score)
 	for i in item.followerValue:
 		spawnFollower(pos,Follower.State.INITIAL)
 	# Spawn splash text when the item is droped off
@@ -100,19 +103,27 @@ func onCarryFinish(item,pos):
 
 
 func add_wall(wall: StaticBody2D):
-	$"NavigationRegion2D".add_child(wall)
+	$NavigationRegion2D.add_child(wall)
 
+
+func on_follower_death():
+	total_cows -= 1
+	cow_amount_update.emit(total_cows)
+	
 func spawnFollower(n_position, state :Follower.State):
-	label.cowScore += 1
+	total_cows  += 1
+	
 	var newFollower = Follower.newFollower(n_position,state)
 	newFollower.carryFinished.connect(onCarryFinish)
+	newFollower.cow_died.connect(on_follower_death)
 	newFollower.goal = goal
 	newFollower.player = player
 	# randomise colour a lil bit
 	var greyness = 1 - randf() * 0.2
 	newFollower.modulate = Color(greyness,greyness,greyness)
 	
-	$"NavigationRegion2D".add_child(newFollower)
+	$NavigationRegion2D.add_child(newFollower)
+	cow_amount_update.emit(total_cows)
 	
 func new_throwable(currentLocation: Vector2, targetPoint: Vector2) -> Throwable:
 	

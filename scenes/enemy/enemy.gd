@@ -49,6 +49,8 @@ var shoot_time := 0.0
 # Damage dealt per second of being hit by laser
 var damage := 50.0
 
+
+@export var health :float = 5.0
 @export 
 var attack_range := 50.0
 
@@ -63,23 +65,27 @@ var is_ready = false
 func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().physics_frame
-	# Make a line object used to show laser shooting
-	line = Line2D.new()
-	#line.texture = load("res://assets/dotted line.png")
-	#line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
-	#line.texture_mode = Line2D.LINE_TEXTURE_TILE
-	#line.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	line.z_index = 1
-	line.width = 8
-	line.modulate = laser_colour
-	line.scale = Vector2.ONE / scale
-	var poolVectorArray : PackedVector2Array = []
-	poolVectorArray.append(Vector2.ZERO)
-	# 2nd point will be moved to point at player
-	poolVectorArray.append(Vector2.ZERO)
-	line.points = poolVectorArray
-	add_child(line)
-	line.hide()
+	
+	$"Destructable Item".lifespan = health
+	
+	#
+	## Make a line object used to show laser shooting
+	#line = Line2D.new()
+	##line.texture = load("res://assets/dotted line.png")
+	##line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	##line.texture_mode = Line2D.LINE_TEXTURE_TILE
+	##line.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	#line.z_index = 1
+	#line.width = 8
+	#line.modulate = laser_colour
+	#line.scale = Vector2.ONE / scale
+	#var poolVectorArray : PackedVector2Array = []
+	#poolVectorArray.append(Vector2.ZERO)
+	## 2nd point will be moved to point at player
+	#poolVectorArray.append(Vector2.ZERO)
+	#line.points = poolVectorArray
+	#add_child(line)
+	#line.hide()
 	
 	is_ready = true
 

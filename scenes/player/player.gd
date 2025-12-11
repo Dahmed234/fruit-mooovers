@@ -26,9 +26,8 @@ func _ready():
 	health_bar.max_value = max_health
 
 func damage(enemy_damage):
-	can_regen = false
-	$"Regen timer".start()
-	health -= enemy_damage
+	pass
+	#health -= enemy_damage
 
 func die() -> void:
 	# remove this follower from list of enemies chasing it
@@ -75,3 +74,6 @@ func _physics_process(delta: float) -> void:
 
 func _regen_timeout() -> void:
 	can_regen = true
+	
+func _process(delta: float) -> void:
+	$AudioStreamPlayer.play_footstep = velocity.length() != 0

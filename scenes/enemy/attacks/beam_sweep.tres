@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bj6ajsebyukre" path="res://scenes/enemy/projectiles/beam.tres" id="1_yuesr"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="2_cu2xh"]
 
-[sub_resource type="Curve2D" id="Curve2D_j4xr6"]
+[sub_resource type="Curve2D" id="Curve2D_hkxtu"]
 _data = {
 "points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
 }

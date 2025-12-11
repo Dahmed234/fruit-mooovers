@@ -13,7 +13,8 @@ shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/number_of_images = Vector2(1, 1)
 
-[node name="Item" instance=ExtResource("1_5ty7o")]
+[node name="cherry" instance=ExtResource("1_5ty7o")]
+fruitName = "Cherry"
 value = 5
 followerValue = 1
 maximum_followers = 2
@@ -24,6 +25,15 @@ scale = Vector2(0.30899003, 0.30899003)
 texture = ExtResource("2_3vu7c")
 region_enabled = false
 region_rect = Rect2(528, 288, 16, 16)
+
+[node name="CollisionShape2D2" parent="Area2D" index="0"]
+position = Vector2(0, 12)
+
+[node name="Label" parent="." index="3"]
+offset_left = -21.0
+offset_top = 56.0
+offset_right = 19.0
+offset_bottom = 79.0
 
 [node name="bottom" parent="." index="4"]
 position = Vector2(0, 48)

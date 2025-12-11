@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://leyi7x50o6s2" path="res://scenes/enemy/projectiles/missile.tres" id="1_bsye0"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="2_jbfjg"]
 
-[sub_resource type="Curve2D" id="Curve2D_j4xr6"]
+[sub_resource type="Curve2D" id="Curve2D_t8sh3"]
 _data = {
 "points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
 }
@@ -11,12 +11,12 @@ point_count = 2
 
 [resource]
 script = ExtResource("2_jbfjg")
-movement = SubResource("Curve2D_j4xr6")
+movement = SubResource("Curve2D_t8sh3")
 attack_time = 0.1
-windup = 1.0
+windup = 6.0
 cooldown = 2.0
 projectile_data = ExtResource("1_bsye0")
 projectile_count = 5
-projectile_spread = 6.283
+projectile_spread = 2.7
 indicator_colour = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"

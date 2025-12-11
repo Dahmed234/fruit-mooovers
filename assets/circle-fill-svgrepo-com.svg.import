@@ -1,0 +1,20 @@
+[remap]
+
+importer="svg"
+type="DPITexture"
+uid="uid://5oo5uu3griox"
+path="res://.godot/imported/circle-fill-svgrepo-com.svg-585a75775996898c41b2110f38be153b.dpitex"
+
+[deps]
+
+source_file="res://assets/circle-fill-svgrepo-com.svg"
+dest_files=["res://.godot/imported/circle-fill-svgrepo-com.svg-585a75775996898c41b2110f38be153b.dpitex"]
+
+[params]
+
+base_scale=4.347
+saturation=0.25
+color_map={
+Color(1, 1, 1, 1): Color(1, 1, 1, 0.38039216)
+}
+compress=false

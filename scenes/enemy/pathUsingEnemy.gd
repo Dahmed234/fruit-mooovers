@@ -10,6 +10,7 @@ const JUMP_VELOCITY = -400.0
 var pathPoint :PathFollow2D 
 
 @onready var attack_indicator: GPUParticles2D = $"Attack Indicator"
+@onready var attack_sound: AudioStreamPlayer2D = $"AttackSound"
 
 @export var DIST_THRESHOLD :float
 
@@ -52,13 +53,16 @@ func _shoot(target: CharacterBody2D,pattern: AttackPattern):
 		ProjectileResource.ProjType.BEAM:
 			n_proj.beam_sweep_angle = pattern.projectile_spread
 			n_proj.beam_emiitter = self
-
+	
+	if !attack_sound.playing:
+		attack_sound.play()
+		 
 	owner.add_child(n_proj)
 
 func _update_target(delta: float) -> void:
 	update_alert(delta)
 	update_available_targets(delta)
-	line.hide()
+	#ine.hide()
 	idle_time += delta
 	
 	attack_indicator.emitting = false
@@ -140,9 +144,12 @@ func _update_target(delta: float) -> void:
 					# Pick a new target if the current one dies
 					if !is_instance_valid(best_target):
 						attack_best_target()
+						
 					# Shoot if the newly picked target exists (i.e. there is something to shoot at)
 					if best_target:
 						_shoot(best_target,pattern)
+					else:
+						attack_count +=1
 				
 				
 			# else do the windup animation (indicate that the enmy will shoot soon)
