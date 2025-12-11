@@ -147,7 +147,6 @@ func die() -> void:
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
 	$AnimationPlayer.play("Death")
-	print("death should be playing?")
 	await $AnimationPlayer.animation_finished
 	scoreholder.cowScore -= 1
 	queue_free()
@@ -286,7 +285,6 @@ func actor_setup():
 
 func _process(delta: float) -> void:
 	if !is_ready: 
-		print("follower wait for ready")
 		return
 	
 	if can_regen:

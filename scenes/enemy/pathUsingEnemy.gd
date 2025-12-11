@@ -133,9 +133,6 @@ func _update_target(delta: float) -> void:
 			
 			# try to shoot if the windup is done
 			elif (attack_time > pattern.windup and attack_time <  pattern.windup + pattern.attack_time):
-				#print(pattern.projectile_count," * ",
-					#attack_time," - ",pattern.windup," / ", 
-					#pattern.attack_time, " > ",attack_count)
 				while (pattern.projectile_count *
 					((attack_time - pattern.windup) / 
 					pattern.attack_time) > attack_count

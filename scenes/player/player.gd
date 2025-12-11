@@ -36,8 +36,6 @@ func die() -> void:
 		if !chasing[cone_light]: continue
 		cone_light.clear_target(self)
 	
-	print("player die!!!!")
-	
 	playerDies.emit()
 
 func getThrowPosition():

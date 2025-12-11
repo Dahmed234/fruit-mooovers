@@ -51,15 +51,6 @@ func update_light(delta: float) -> void:
 		
 	# Where we want to be pointing, get the angle from the current vector to the target vector
 	angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))
-
-	
-	#if( fposmod(rotation - angle_delta, TAU) > PI):
-		#print("true")
-		#rotation = rotation + (angle_delta - TAU) * delta
-	#else:
-		#print("false")
-	#global_rotation = lerp_angle(global_rotation,angle_delta, delta)
-	# Move towards this angle at a fixed speed
 	
 	
 	
