@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c7vyvj7w3tuhu"]
+[gd_scene load_steps=21 format=4 uid="uid://c7vyvj7w3tuhu"]
 
 [ext_resource type="Script" uid="uid://dpesvm36egxov" path="res://scenes/maps/navigation_region_2d.gd" id="1_ea602"]
 [ext_resource type="TileSet" uid="uid://dx6rt5xlniow7" path="res://TileMap/tile_map.tres" id="2_1e1j4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ejek3nqjxk3" path="res://assets/point tutorial.png" id="7_ckjlb"]
 [ext_resource type="Texture2D" uid="uid://cri7qvrtnve77" path="res://assets/Merged tilemap.png" id="7_gj5cg"]
 [ext_resource type="Texture2D" uid="uid://dyuippnmq7x0p" path="res://assets/tutorial/throw tutorial.png" id="7_n5v7l"]
+[ext_resource type="Texture2D" uid="uid://bqubaceyw7vqd" path="res://assets/tutorialAssign.png" id="7_yyurw"]
 [ext_resource type="Texture2D" uid="uid://bw0wm5hld6dvt" path="res://assets/tutorial/call tutorial.png" id="8_ckjlb"]
 [ext_resource type="PackedScene" uid="uid://tnrfudnvtjta" path="res://scenes/items/destructables/destructable_log.tscn" id="9_11qxb"]
 [ext_resource type="Texture2D" uid="uid://dm6k8hbvsf6db" path="res://assets/tutorial/carry tutorial.png" id="9_gj5cg"]
@@ -2224,6 +2225,11 @@ wall = ExtResource("4_ccvpi")
 destructableItem = ExtResource("5_n5v7l")
 plantSpawner = ExtResource("6_ckjlb")
 metadata/_edit_lock_ = true
+
+[node name="TutorialAssign" type="Sprite2D" parent="Ground"]
+position = Vector2(-274.25, 142.25)
+scale = Vector2(0.4638672, 0.4638672)
+texture = ExtResource("7_yyurw")
 
 [node name="PointTutorial" type="Sprite2D" parent="Ground"]
 position = Vector2(-94.5, 79.5)
