@@ -249,17 +249,13 @@ func navigate_to_target(_delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if !is_ready: 
-		print("enemy wait for ready")
 		return
 	
-	# Update where the enemy is targeting based on its state
-	_update_target(delta)
-
 	# Move towards the target, avoiding obsticals
-	navigate_to_target(delta)
+	#navigate_to_target(delta)
 
-	move_and_slide()
-
+	#move_and_slide()
+	pass
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity

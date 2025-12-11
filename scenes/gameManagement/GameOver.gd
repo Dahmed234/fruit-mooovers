@@ -23,7 +23,6 @@ func set_message(score: int, cows: int):
 
 
 func _on_restart_pressed() -> void:
-	print("restart")
 	mainMenu = load("res://scenes/gameManagement/New Title Screen.tscn").instantiate()
 	get_tree().root.add_child(mainMenu)
 	queue_free()

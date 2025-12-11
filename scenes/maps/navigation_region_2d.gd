@@ -21,8 +21,6 @@ func _on_object_destroyed(wall :Node2D):
 	await get_tree().physics_frame
 	rebake()
 	
-	print("destroyed")
-
 
 # Maybe add a queue to handle rebaking multiple per tick?
 func _on_baking_done() -> void:
