@@ -19,7 +19,7 @@ func set_message(score: int, cows: int):
 	if cows == 0:
 		cow_score_label.text = "All your cows died :("
 	else:
-		cow_score_label.text = str(score) + " cows."
+		cow_score_label.text = str(cows) + " cows."
 		
 
 

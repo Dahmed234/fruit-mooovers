@@ -93,7 +93,8 @@ func _ready() -> void:
 
 func die() -> void:
 	for cow in cone_light.targets.keys():
-		cow.chasing.erase(cone_light)
+		if cow and is_instance_valid(cow):
+			cow.chasing.erase(cone_light)
 	#get_parent().enemy_alive_count -= 1
 	queue_free()
 

@@ -172,4 +172,3 @@ func end_game():
 
 func _on_timer_timeout() -> void:
 	end_game()
-	pass # Replace with function body.
