@@ -23,6 +23,7 @@ Pauser="*res://scenes/gameManagement/pauser.gd"
 [display]
 
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=2
 
 [dotnet]
 

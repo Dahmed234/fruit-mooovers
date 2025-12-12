@@ -1,28 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://iirnlrmeohsh"]
+[gd_scene load_steps=4 format=3 uid="uid://iirnlrmeohsh"]
 
 [ext_resource type="PackedScene" uid="uid://dvybpltglhtsl" path="res://scenes/gameManagement/Menu.tscn" id="1_77dpn"]
 [ext_resource type="Script" uid="uid://dwpatjcixe48u" path="res://scenes/gameManagement/settings.gd" id="2_diy1p"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="3_7bus2"]
 
 [node name="Settings" instance=ExtResource("1_77dpn")]
 process_mode = 2
 z_index = 10
+offset_top = 76.0
+offset_bottom = 76.0
 script = ExtResource("2_diy1p")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -142.5)
+scale = Vector2(1, 1.0533334)
+region_rect = Rect2(0, 0, 300, 375)
 
 [node name="VBoxContainer" parent="." index="1"]
 ui_scale = 50
 
-[node name="Settings" type="Label" parent="VBoxContainer" index="0"]
-layout_mode = 2
-text = "Settings"
-horizontal_alignment = 1
-
-[node name="Resume Game" type="Button" parent="VBoxContainer" index="1"]
+[node name="Resume Game" type="Button" parent="VBoxContainer" index="0"]
 layout_mode = 2
 text = "Resume"
+
+[node name="Restart" type="Button" parent="VBoxContainer" index="1"]
+layout_mode = 2
+text = "Restart"
 
 [node name="Quit" type="Button" parent="VBoxContainer" index="2"]
 layout_mode = 2
 text = "Quit"
 
+[node name="Help" parent="VBoxContainer/Quit" index="0" instance=ExtResource("3_7bus2")]
+layout_mode = 0
+offset_left = -72.0
+offset_top = -352.0
+offset_right = -32.0
+offset_bottom = -312.0
+
 [connection signal="pressed" from="VBoxContainer/Resume Game" to="." method="_on_resume"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit"]

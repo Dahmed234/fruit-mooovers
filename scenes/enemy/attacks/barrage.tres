@@ -12,11 +12,11 @@ point_count = 2
 [resource]
 script = ExtResource("1_x5erf")
 movement = SubResource("Curve2D_j4xr6")
-attack_time = 1.0
-windup = 0.5
-cooldown = 0.5
+attack_time = 1.5
+windup = 1.0
+cooldown = 1.0
 projectile_data = ExtResource("1_j4xr6")
 projectile_count = 35
-projectile_spread = 1.571
+projectile_spread = 0.5
 indicator_colour = Color(1, 0.96862745, 0, 1)
 metadata/_custom_type_script = "uid://ce7vo2v20oshu"

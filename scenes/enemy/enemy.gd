@@ -129,7 +129,7 @@ func update_available_targets(delta: float) -> void:
 	var to_remove = []
 	
 	for target in (cone_light.targets):
-		if is_instance_valid(target):
+		if target and is_instance_valid(target):
 			cone_light.targets[target] -= delta
 			if cone_light.targets[target] < 0  or !is_instance_valid(target):
 				target.chasing.erase(cone_light)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://eb0mqkobwsnn"]
+[gd_scene load_steps=40 format=3 uid="uid://eb0mqkobwsnn"]
 
 [ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
 [ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
@@ -9,23 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
 [ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
 [ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
-[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
 [ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="11_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
-[ext_resource type="Resource" uid="uid://bkfnhlp6epdjk" path="res://scenes/enemy/projectiles/bullet.tres" id="12_cfroa"]
 [ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
 [ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="14_1vlao"]
-[ext_resource type="Resource" uid="uid://bj6ajsebyukre" path="res://scenes/enemy/projectiles/beam.tres" id="14_20nax"]
 [ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
 [ext_resource type="PackedScene" uid="uid://578l50o48qkk" path="res://scenes/items/fruits/persimmon.tscn" id="15_cfroa"]
 [ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="15_ryuqu"]
 [ext_resource type="PackedScene" uid="uid://cjye54ls66xpx" path="res://scenes/items/fruits/melon.tscn" id="16_qfp24"]
 [ext_resource type="PackedScene" uid="uid://lnhhapkipvtt" path="res://scenes/items/fruits/lychee.tscn" id="17_25u3h"]
+[ext_resource type="Resource" uid="uid://cmp1nm61nk2sj" path="res://scenes/enemy/attacks/barrage.tres" id="18_bkn5o"]
 [ext_resource type="PackedScene" uid="uid://bsjrv0421b048" path="res://scenes/items/fruits/kiwi.tscn" id="18_j43d5"]
-[ext_resource type="Resource" uid="uid://leyi7x50o6s2" path="res://scenes/enemy/projectiles/missile.tres" id="19_25u3h"]
 [ext_resource type="PackedScene" uid="uid://b1kwqy54sq4wa" path="res://scenes/items/fruits/mango.tscn" id="19_j43d5"]
 [ext_resource type="AudioStream" uid="uid://cq5hj2wjiac4s" path="res://sounds/music/609562_migfus20_background-music.ogg" id="23_hkxtu"]
 [ext_resource type="AudioStream" uid="uid://iowg0cpdmym7" path="res://sounds/sound effects/Tick2.wav" id="23_ryuqu"]
+[ext_resource type="Resource" uid="uid://bji8tcr37ipyd" path="res://scenes/enemy/attacks/beam_sweep.tres" id="25_bkn5o"]
+[ext_resource type="Texture2D" uid="uid://c6whl6wew2oth" path="res://assets/kenney_input-prompts_1 (1).4/Keyboard & Mouse/Default/keyboard_escape.png" id="25_nfh86"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drb0v"]
 shader = ExtResource("4_rehj8")
@@ -48,83 +47,17 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_t8sh3"]
-_data = {
-"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
-}
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_20nax"]
-script = ExtResource("11_ctmcs")
-movement = SubResource("Curve2D_t8sh3")
-attack_time = 0.1
-windup = 0.99
-cooldown = 2.0
-projectile_data = ExtResource("19_25u3h")
-projectile_count = 3
-projectile_spread = 2.7
-indicator_colour = Color(1, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce7vo2v20oshu"
-
-[sub_resource type="Curve2D" id="Curve2D_j4xr6"]
-_data = {
-"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
-}
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_ryuqu"]
-script = ExtResource("11_ctmcs")
-movement = SubResource("Curve2D_j4xr6")
-attack_time = 3.0
-windup = 0.5
-cooldown = 0.5
-projectile_data = ExtResource("12_cfroa")
-projectile_count = 15
-projectile_spread = 1.571
-indicator_colour = Color(1, 0.96862745, 0, 1)
-metadata/_custom_type_script = "uid://ce7vo2v20oshu"
-
 [sub_resource type="Curve2D" id="Curve2D_20nax"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -473, -9, -64.20906, -2.4059525, 64.20906, 2.4059525, -310, 141, -26.400002, -101.200005, 26.400002, 101.200005, -132, 43, 0, 0, 0, 0, -31, 168, -96.072624, -60.754486, 96.072624, 60.754486, 256, 192, 0, 0, 0, 0, 431, 24)
 }
 point_count = 6
 
-[sub_resource type="Curve2D" id="Curve2D_hkxtu"]
-_data = {
-"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
-}
-point_count = 2
-
-[sub_resource type="Resource" id="Resource_nfh86"]
-script = ExtResource("11_ctmcs")
-movement = SubResource("Curve2D_hkxtu")
-attack_time = 5.0
-windup = 2.9
-cooldown = 1.425
-projectile_data = ExtResource("14_20nax")
-projectile_count = 1
-projectile_spread = 1.047
-indicator_colour = Color(0, 1, 1, 1)
-metadata/_custom_type_script = "uid://ce7vo2v20oshu"
-
 [sub_resource type="Curve2D" id="Curve2D_v6clt"]
 _data = {
 "points": PackedVector2Array(-60.738495, -71.43588, 60.738495, 71.43588, 102, 170, 126.5, -108.9, -126.5, 108.9, 80, 339, 132, 105.600006, -132, -105.600006, -384, 400, -53.9, 123.200005, 53.9, -123.200005, -400, 176, 0, 0, 0, 0, 18, 147, 0, 0, 0, 0, 102, 170)
 }
 point_count = 6
-
-[sub_resource type="Resource" id="Resource_qfp24"]
-script = ExtResource("11_ctmcs")
-movement = SubResource("Curve2D_j4xr6")
-attack_time = 6.0
-windup = 2.0
-cooldown = 5.0
-projectile_data = ExtResource("12_cfroa")
-projectile_count = 20
-projectile_spread = 0.32
-indicator_colour = Color(1, 0.96862745, 0, 1)
-metadata/_custom_type_script = "uid://ce7vo2v20oshu"
 
 [sub_resource type="Curve2D" id="Curve2D_ryuqu"]
 _data = {
@@ -143,18 +76,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -82, 191, 0, 0, 0, 0, 334, 185)
 }
 point_count = 2
-
-[sub_resource type="Resource" id="Resource_hkxtu"]
-script = ExtResource("11_ctmcs")
-movement = SubResource("Curve2D_t8sh3")
-attack_time = 0.1
-windup = 0.1
-cooldown = 3.315
-projectile_data = ExtResource("19_25u3h")
-projectile_count = 3
-projectile_spread = 2.7
-indicator_colour = Color(1, 0, 0, 1)
-metadata/_custom_type_script = "uid://ce7vo2v20oshu"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20nax"]
 size = Vector2(309, 265)
@@ -193,12 +114,6 @@ scale = Vector2(600, 600)
 texture = ExtResource("5_bkn5o")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_v6clt")]
-
-[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
-offset_left = -1475.0
-offset_top = -102.0
-offset_right = -1435.0
-offset_bottom = -62.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -257,7 +172,7 @@ position = Vector2(575, -814)
 curve = SubResource("Curve2D_j43d5")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path3" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("15_ryuqu"), ExtResource("18_bkn5o")])
 damage = 15.0
 health = 100.0
 
@@ -271,7 +186,7 @@ curve = SubResource("Curve2D_20nax")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
 scale = Vector2(1.81, 1.81)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("15_ryuqu"), ExtResource("18_bkn5o")])
 health = 70.0
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
@@ -284,7 +199,7 @@ curve = SubResource("Curve2D_20nax")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path/Enemy Path" index="0"]
 scale = Vector2(1.81, 1.81)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("15_ryuqu"), ExtResource("18_bkn5o")])
 health = 70.0
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path/Enemy Path" index="1"]
@@ -297,7 +212,7 @@ curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
 position = Vector2(-502, 413)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("18_bkn5o")])
 damage = 5.0
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
@@ -305,12 +220,12 @@ position = Vector2(102, 170)
 rotation = 0.86615604
 
 [node name="Enemy Path2" parent="Enemy Paths/Enemy Path2" instance=ExtResource("11_v6clt")]
-position = Vector2(-828, 341)
+position = Vector2(-819, 321)
 curve = SubResource("Curve2D_v6clt")
 
 [node name="Enemy" parent="Enemy Paths/Enemy Path2/Enemy Path2" index="0"]
 position = Vector2(-502, 413)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("18_bkn5o")])
 shoot_length = 100.0
 shoot_cooldown = 10.0
 damage = 5.0
@@ -323,6 +238,10 @@ rotation = 0.86615604
 position = Vector2(-2149.4846, 36.665527)
 curve = SubResource("Curve2D_ryuqu")
 
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path5" index="1"]
+position = Vector2(93, -93.17328)
+rotation = 2.772077
+
 [node name="Enemy Path4" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
 position = Vector2(-639, 938.0001)
 scale = Vector2(1, 0.9981417)
@@ -331,9 +250,6 @@ curve = SubResource("Curve2D_nfh86")
 [node name="Enemy Path6" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
 position = Vector2(-1428, 1138)
 curve = SubResource("Curve2D_rehj8")
-
-[node name="Enemy" parent="Enemy Paths/Enemy Path6" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_hkxtu")])
 
 [node name="PathFollow2D" parent="Enemy Paths/Enemy Path6" index="1"]
 position = Vector2(-82, 191)
@@ -486,7 +402,7 @@ curve = SubResource("Curve2D_20nax")
 
 [node name="Enemy" parent="Enemy Path" index="0"]
 scale = Vector2(1.81, 1.81)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("15_ryuqu"), ExtResource("25_bkn5o")])
 health = 70.0
 
 [node name="PathFollow2D" parent="Enemy Path" index="1"]
@@ -498,13 +414,25 @@ position = Vector2(1655, -610)
 curve = SubResource("Curve2D_bkn5o")
 
 [node name="Enemy" parent="Enemy Path3" index="0"]
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+attack_patterns = Array[ExtResource("11_ctmcs")]([ExtResource("18_bkn5o"), ExtResource("15_ryuqu")])
 damage = 15.0
 health = 100.0
 
 [node name="PathFollow2D" parent="Enemy Path3" index="1"]
 position = Vector2(-69, 26)
 rotation = -0.35673627
+
+[node name="KeyboardEscape" type="Sprite2D" parent="Enemy Path3"]
+position = Vector2(-866, 2077.9998)
+scale = Vector2(0.65625, 0.65625)
+texture = ExtResource("25_nfh86")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 729.0
+offset_top = 1456.0
+offset_right = 875.0
+offset_bottom = 1479.0
+text = "Press         to pause"
 
 [connection signal="cow_amount_update" from="." to="UI/Control" method="_on_cow_amount_update"]
 [connection signal="score_update" from="." to="UI/Control" method="_on_score_update"]
@@ -519,6 +447,7 @@ rotation = -0.35673627
 [editable path="Enemy Paths/Enemy Path/Enemy Path"]
 [editable path="Enemy Paths/Enemy Path2"]
 [editable path="Enemy Paths/Enemy Path2/Enemy Path2"]
+[editable path="Enemy Paths/Enemy Path5"]
 [editable path="Enemy Paths/Enemy Path6"]
 [editable path="Enemy Path"]
 [editable path="Enemy Path3"]

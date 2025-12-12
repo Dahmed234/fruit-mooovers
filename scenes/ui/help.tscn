@@ -28,9 +28,9 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 72
-text = ": Throw cows at objects.
+text = ": Throw followers at objects.
 : Tell nearby cows to stop and 
-follow you
+follow your commands
             : Move
 
   Throw cows to steal food and 
