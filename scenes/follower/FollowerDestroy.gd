@@ -44,5 +44,10 @@ func start(item: Destroyable) -> void:
 	follower.animation_player.play("Destroy",-1,2.0)
 
 
-func physics_update(delta):
-	pass
+func physics_update(_delta):
+	var item = follower.carryingItem
+	if not item:
+		return
+
+	if(item.followersCarrying.size() < item.minimum_followers):
+		follower.gpu_particles_2d.emitting = true

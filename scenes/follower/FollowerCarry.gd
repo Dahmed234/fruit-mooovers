@@ -7,6 +7,9 @@ func _init(_follower):
 	follower = _follower
 
 func start(item: Carryable) -> void:
+	
+	
+	
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var label: Label = follower.label
 	var held_item = follower.get_node("Sprite2D/heldItem")
@@ -62,6 +65,7 @@ func physics_update(delta: float) -> void:
 	
 	if(item.followersCarrying.size() < item.minimum_followers):
 		label.modulate = Color.ORANGE
+		follower.gpu_particles_2d.emitting = true
 	elif  (item.followersCarrying.size() >= item.maximum_followers):
 		label.modulate = Color.AQUA
 	else:
@@ -79,6 +83,12 @@ func physics_update(delta: float) -> void:
 
 
 func stop() -> void:
+	
+	follower.animation_tree.active = true
+	#follower.animation_player.stop()
+	#follower.animation_player.play("walk")
+	follower.animation_tree.get("parameters/playback").start("walk")
+	
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var held_item = follower.get_node("Sprite2D/heldItem")
 	var label: Label = follower.label

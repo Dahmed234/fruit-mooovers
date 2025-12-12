@@ -45,7 +45,7 @@ var chasing: Dictionary[CharacterBody2D,bool] = {}
 var max_health
 @export var health : float
 @onready var health_bar: TextureProgressBar = $Sprite2D/Health
-
+@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -183,6 +183,7 @@ func die() -> void:
 	$"Enemy detection box".monitorable = false
 	$"Enemy detection box".monitoring = false
 	$AnimationTree.active = false
+	$Sprite2D/Health.hide()
 	$AnimationPlayer.play("Death")
 	$DeathSound.play()
 	await $AnimationPlayer.animation_finished
@@ -273,6 +274,7 @@ func initState():
 
 
 func _ready() -> void:
+	gpu_particles_2d.emitting = false
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	
@@ -320,6 +322,12 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
+	
+	gpu_particles_2d.emitting = false
+	
+	if !is_ready:
+		return
+	
 	if can_regen:
 		health = min(max_health, health + max_health / 10 * delta)
 	health_bar.value = health
@@ -355,6 +363,7 @@ func _process(delta: float) -> void:
 
 		State.WANDER:
 			$NavigationAgent2D.target_desired_distance = 20
+			
 			movement.navigate_to_target(delta)
 
 		State.CARRYING:
