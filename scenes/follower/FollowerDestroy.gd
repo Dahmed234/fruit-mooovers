@@ -10,7 +10,7 @@ var point : Vector2
 func start(item: Destroyable) -> void:
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var label: Label = follower.label
-
+	
 	label.hide()
 
 	item.onPickup(follower)
@@ -36,6 +36,12 @@ func start(item: Destroyable) -> void:
 
 	# disable collision with other followers
 	navigation_agent_2d.avoidance_mask = 0
+
+	follower.animation_tree.active = false
+	follower.navigation_agent_2d.set_velocity_forced(Vector2.ZERO)
+	follower.navigation_agent_2d.target_position = follower.global_position
+	
+	follower.animation_player.play("Destroy",-1,2.0)
 
 
 func physics_update(delta):

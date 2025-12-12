@@ -1,4 +1,6 @@
 extends Area2D
+@onready var sprite_throw_marker: Sprite2D = $"../../Sprite throw marker"
+
 signal throwMade(startPosition, mousePosition,follower)
 signal numThrowable(num)
 @export
@@ -52,6 +54,13 @@ func _process(delta: float) -> void:
 			return
 		var pikminToThrow :Node2D = getClosest(throwables)
 		#pikminToThrow.startThrow()
+		
+		var inaccuracy = global_position.distance_to(sprite_throw_marker.global_position) / 15
+		
 		# Throw to the mouse, constrained by the player throwable distance
-		throwMade.emit(global_position,player.global_position + player.getThrowPosition(),pikminToThrow)
+		throwMade.emit(
+			global_position,
+			global_position + player.getThrowPosition() + Vector2(randf_range(-inaccuracy,inaccuracy),randf_range(-inaccuracy,inaccuracy)),
+			pikminToThrow
+			)
 	

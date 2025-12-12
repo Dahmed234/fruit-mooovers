@@ -48,6 +48,8 @@ var max_health
 
 @onready var timer := $WanderTimer
 @onready var navigation_agent_2d :NavigationAgent2D = $NavigationAgent2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
 
 signal cow_died
 # --- NEW: behaviour objects ---
@@ -362,9 +364,16 @@ func _process(delta: float) -> void:
 		State.DESTROYING:
 			destroy_behavior.physics_update(delta)
 			velocity = Vector2.ZERO
+			
+			
+			
+			#await $AnimationPlayer.animation_finished
+			#$AnimationTree.active = true
+			#
+			#$AnimationTree.get("parameters/playback").start("walk")
 
 		State.FOLLOW:
-			$NavigationAgent2D.target_desired_distance = 65
+			navigation_agent_2d.target_desired_distance = 65
 			navigation_agent_2d.target_position = player.global_position
 			movement.navigate_to_target(delta)
 
