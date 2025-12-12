@@ -189,7 +189,7 @@ z_index = -5
 texture_repeat = 2
 material = SubResource("ShaderMaterial_drb0v")
 position = Vector2(201.49997, 175)
-scale = Vector2(400, 400)
+scale = Vector2(600, 600)
 texture = ExtResource("5_bkn5o")
 
 [node name="NavigationRegion2D" parent="." instance=ExtResource("4_v6clt")]
@@ -471,7 +471,7 @@ stream = ExtResource("14_v6clt")
 volume_db = -2.5
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 20.0
 one_shot = true
 autostart = true
 

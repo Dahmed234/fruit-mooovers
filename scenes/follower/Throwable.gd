@@ -55,7 +55,6 @@ func _on_timer_timeout() -> void:
 	if (is_instance_valid(follower)):
 		follower.startInitial()
 	queue_free()
-	pass # Replace with function body.
 
 
 func delete(state :Follower.State):

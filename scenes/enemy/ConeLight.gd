@@ -46,8 +46,6 @@ func update_light(delta: float) -> void:
 				rotation += PI
 				target_angle = rotation
 				rotation = tmp
-		_:
-			pass
 		
 	# Where we want to be pointing, get the angle from the current vector to the target vector
 	angle_delta = Vector2.from_angle(target_angle).angle_to(Vector2.from_angle(global_rotation - PI/2))

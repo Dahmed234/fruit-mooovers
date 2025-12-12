@@ -5,11 +5,32 @@ var score :int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$clock.max_value = levelTime.wait_time
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+# Converts time to am/pm format
+func amPm(s: String) -> String:
+	var num_value = int(s)
+	if  num_value >= 12: num_value -= 12
+	if num_value == 0: return "12"
+	assert(num_value <= 12,"Invalid hour")
+	return str(num_value)
+
+func leadingZero(s: String,length: int) -> String:
+	while s.length() < length:
+		s = "0" + s
+	return s
+
+# Gets the current time of day and updates the current day
+func getTime() -> String:
+	var fraction =  (levelTime.wait_time - levelTime.time_left) / levelTime.wait_time
+	
+
+	var time_hours := int(fraction * 24)
+	var time_minutes := int(fraction * 24 * 60) - 60 * time_hours
+	return amPm(str(time_hours)) + ":" + leadingZero(str(time_minutes),2) + ("am" if time_hours <= 11 else "pm")
+
+
+func _process(_delta: float) -> void:
 	if(levelTime.is_stopped()):
 		$clock.hide()
 	else:
@@ -19,12 +40,7 @@ func _process(delta: float) -> void:
 	$ScoreLabel.text = "Score: %d" % score
 		
 	$clock.value = levelTime.time_left
-	var textTime
-	if (levelTime.time_left as int / 60) > 0:
-		$Time.text = str(levelTime.time_left as int / 60)
-	else:
-		$Time.text = str(levelTime.time_left as int % 60)
-	pass
+	$Time.text = getTime()
 
 
 func _on_throw_radius_num_throwable(num: Variant) -> void:

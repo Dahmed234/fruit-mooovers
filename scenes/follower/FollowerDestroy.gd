@@ -38,7 +38,5 @@ func start(item: Destroyable) -> void:
 	navigation_agent_2d.avoidance_mask = 0
 
 
-func physics_update(_delta: float) -> void:
+func physics_update(delta):
 	pass
-	#if follower.carryingItem:
-		#follower.global_position = point

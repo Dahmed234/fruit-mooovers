@@ -11,10 +11,11 @@ signal carryFinished(item :Carryable)
 # Used to prevent cows instantly dropping objects, they instead take [stop_carry_time] seconds
 @export var stop_carry_time: float = 0.5
 var whistled_time : float = 0
-var whistled = false
 
 var carryingItem :StaticBody2D = null
 var is_moving = false
+# flag for stopping movement during whistle animation
+var is_whistled = false
 @export var playerDistance: float
 @export var BASESPEED = 20000
 @export var label: Label
@@ -101,10 +102,37 @@ func onWhistle(delta: float) -> void:
 			whistled_time += delta * 2
 			if whistled_time > stop_carry_time:
 				stopCarrying()
+				
+				$AnimationTree.active = false
+			
+				is_whistled = true
+			
+				$AnimationPlayer.play("Whistled",-1,2.0)
+				await $AnimationPlayer.animation_finished
+				
+				is_whistled = false
+				
+				$AnimationTree.active = true
+				
+				$AnimationTree.get("parameters/playback").start("walk")
+				
 		State.WANDER:
 			endWander()
 			startFollow()
-
+			
+			$AnimationTree.active = false
+		
+			is_whistled = true
+		
+			$AnimationPlayer.play("Whistled",-1,2.0)
+			
+			await $AnimationPlayer.animation_finished
+			
+			is_whistled = false
+			
+			$AnimationTree.active = true
+			
+			$AnimationTree.get("parameters/playback").start("walk")
 
 static func newFollower(pos, startingState: State):
 	var follower :Follower = follower_scene.instantiate()
@@ -274,10 +302,6 @@ func startDestroy(item: Destroyable) -> void:
 	destroy_behavior.start(item)
 
 
-func startThrow():
-	# TODO: implement throw behaviour
-	pass
-
 
 func stopThrow():
 	thrower.stopThrow()
@@ -294,22 +318,22 @@ func actor_setup():
 
 
 func _process(delta: float) -> void:
-	$Footsteps.play_footstep = is_moving and !dead;
-	
-	if !is_ready: 
-		return
-	
-	whistled_time = max(0,whistled_time - delta)
-	
 	if can_regen:
 		health = min(max_health, health + max_health / 10 * delta)
-	
 	health_bar.value = health
 	
 	$Sprite2D.flip_h = velocity.x < 0
 	
 	if health <= 0:
 		die()
+	
+	$Footsteps.play_footstep = is_moving and !dead;
+	
+	if is_whistled:
+		return
+	
+	whistled_time = max(0,whistled_time - delta)
+	
 
 	modulate.a = 1.0
 	if canBeThrown():

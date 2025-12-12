@@ -136,8 +136,6 @@ func update(delta: float) -> void:
 				global_position = beam_emiitter.global_position
 			else:
 				life_time = -1
-		_:
-			pass
 			
 func _physics_process(delta: float) -> void:
 	if life_time < 0:

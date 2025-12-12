@@ -250,11 +250,6 @@ func navigate_to_target(_delta: float) -> void:
 	else:
 		_on_navigation_agent_2d_velocity_computed(new_velocity)
 
-func _process(delta: float) -> void:
-	if !is_ready: 
-		return
-
-	pass
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
