@@ -124,7 +124,6 @@ func _update_target(delta: float) -> void:
 				_next_attack_pattern()
 				attack_best_target()
 				
-				print(str(pattern))
 				
 				
 				# Stop attacking when the current attack is finished and there are no nearby targets
@@ -138,7 +137,6 @@ func _update_target(delta: float) -> void:
 					((attack_time - pattern.windup) / 
 					pattern.attack_time) > attack_count
 				):
-					print("shoot")
 					# Pick a new target if the current one dies
 					if !is_instance_valid(best_target):
 						attack_best_target()
