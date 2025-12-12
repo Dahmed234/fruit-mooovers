@@ -177,6 +177,9 @@ static func launch(n_projectile: Projectile,pattern: AttackPattern, n_source: Ve
 
 
 func _on_body_entered(body: Node2D) -> void:
+	# Before it starts homing, make rockets ignore collisions
+	if projectile_type == ProjectileResource.ProjType.MISSILE and life_time > 0.75 * init_life_time:
+		return
 	if body.is_in_group("Player") and !pierced.get(body,false):
 		body.damage(damage)
 		pierced[body] = true
