@@ -13,11 +13,11 @@ var timer = 0.0
 
 var should_play = false
 
-func _on_destructable_item_carry_started(follower: CharacterBody2D, num_followers: int, min_followers: int, max_followers: int) -> void:
+func _on_destructable_item_carry_started(_follower: CharacterBody2D, num_followers: int, min_followers: int, _max_followers: int) -> void:
 	should_play = num_followers >= min_followers
 
 
-func _on_destructable_item_carry_stopped(follower: CharacterBody2D, num_followers: int, min_followers: int, max_followers: int) -> void:
+func _on_destructable_item_carry_stopped(_follower: CharacterBody2D, num_followers: int, min_followers: int, _max_followers: int) -> void:
 	should_play = num_followers >= min_followers
 
 func _process(delta: float) -> void:

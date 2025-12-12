@@ -25,7 +25,7 @@ func _ready():
 	max_health = health
 	health_bar.max_value = max_health
 
-func damage(enemy_damage):
+func damage(_enemy_damage):
 	pass
 	#health -= enemy_damage
 
@@ -75,5 +75,5 @@ func _physics_process(delta: float) -> void:
 func _regen_timeout() -> void:
 	can_regen = true
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$AudioStreamPlayer.play_footstep = velocity.length() != 0

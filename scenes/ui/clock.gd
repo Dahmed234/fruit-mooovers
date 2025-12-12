@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$redbit.max_value = max_value
 	# -4 so that it loops twice per 24 hours
 	$hand.rotation = -2 * PI * (value/max_value)
