@@ -8,6 +8,11 @@ signal carryFinished(item :Carryable)
 #signal followerDies(follower)
 
 
+# Used to prevent cows instantly dropping objects, they instead take [stop_carry_time] seconds
+@export var stop_carry_time: float = 0.5
+var whistled_time : float = 0
+var whistled = false
+
 var carryingItem :StaticBody2D = null
 var is_moving = false
 @export var playerDistance: float
@@ -90,10 +95,12 @@ func canBePushed():
 		_:
 			return false
 
-func onWhistle():
+func onWhistle(delta: float) -> void:
 	match currentState:
 		State.CARRYING, State.DESTROYING:
-			stopCarrying()
+			whistled_time += delta * 2
+			if whistled_time > stop_carry_time:
+				stopCarrying()
 		State.WANDER:
 			endWander()
 			startFollow()
@@ -291,6 +298,8 @@ func _process(delta: float) -> void:
 	
 	if !is_ready: 
 		return
+	
+	whistled_time = max(0,whistled_time - delta)
 	
 	if can_regen:
 		health = min(max_health, health + max_health / 10 * delta)

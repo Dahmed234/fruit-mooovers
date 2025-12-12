@@ -6,7 +6,6 @@ var follower
 func _init(_follower):
 	follower = _follower
 
-
 func start(item: Carryable) -> void:
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var label: Label = follower.label

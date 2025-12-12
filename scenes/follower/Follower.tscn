@@ -321,6 +321,7 @@ collision_mask = 17
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_jmfn7")
+stop_carry_time = 0.25
 playerDistance = 50.0
 BASESPEED = 230
 label = NodePath("Label")

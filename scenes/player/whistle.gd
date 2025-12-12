@@ -15,11 +15,6 @@ var original_whistle_volume : float = whistle_loop_player.volume_db
 @export
 var whistle_decay_rate :float = 0.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -34,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		isWhistling = true
 		#$whistleAnim.play("grow_whistle")
 		var throwables  = self.get_overlapping_bodies().filter(func(item): return item is Follower) #get all pikmin within area
-		throwables.map(func(item): item.onWhistle())
+		throwables.map(func(item): item.onWhistle(delta))
 		
 		if !whistle_start_played:
 			whistle_start_player.play()
