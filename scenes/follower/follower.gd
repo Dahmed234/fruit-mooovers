@@ -148,7 +148,6 @@ func die() -> void:
 	$AnimationTree.active = false
 	$AnimationPlayer.play("Death")
 	$DeathSound.play()
-	print("death should be playing?")
 	await $AnimationPlayer.animation_finished
 	#scoreholder.cowScore -= 1
 	queue_free()

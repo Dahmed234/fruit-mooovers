@@ -2,18 +2,19 @@
 
 [ext_resource type="Script" uid="uid://c5a1t4e0j4uum" path="res://scenes/ui/health_bar.gd" id="1_1vcc2"]
 
-[sub_resource type="Gradient" id="Gradient_v42im"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_8ymem"]
+colors = PackedColorArray(1, 1, 1, 1, 0.44, 0.44, 0.44, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pn6s4"]
-gradient = SubResource("Gradient_v42im")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qi2ti"]
+gradient = SubResource("Gradient_8ymem")
 width = 20
 height = 5
-fill_from = Vector2(1, 0.012820513)
+fill_from = Vector2(0.26068377, 0.26068377)
 fill_to = Vector2(1, 1)
 
 [node name="Health" type="TextureProgressBar"]
 texture_filter = 2
+texture_repeat = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,5 +26,7 @@ offset_right = 1.0
 offset_bottom = -16.765
 grow_horizontal = 2
 grow_vertical = 2
-texture_progress = SubResource("GradientTexture2D_pn6s4")
+texture_under = SubResource("GradientTexture2D_qi2ti")
+texture_progress = SubResource("GradientTexture2D_qi2ti")
+tint_under = Color(0.10980392, 0.10980392, 0.10980392, 1)
 script = ExtResource("1_1vcc2")

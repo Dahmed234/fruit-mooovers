@@ -1,0 +1,538 @@
+[gd_scene load_steps=49 format=3 uid="uid://eb0mqkobwsnn"]
+
+[ext_resource type="Script" uid="uid://b3mkhon5v6ukl" path="res://scenes/gameManagement/inGame.gd" id="1_27h4a"]
+[ext_resource type="PackedScene" uid="uid://begsm8mhsqea2" path="res://scenes/follower/ThrownObject.tscn" id="2_vwfvy"]
+[ext_resource type="PackedScene" uid="uid://b172ae4cqawdl" path="res://scenes/ui/SplashText.tscn" id="3_s70h5"]
+[ext_resource type="Shader" uid="uid://d242rwtw30hre" path="res://scenes/gameManagement/InGame.tres" id="4_rehj8"]
+[ext_resource type="PackedScene" uid="uid://c7vyvj7w3tuhu" path="res://Maps/Level1DRAFT2.tscn" id="4_v6clt"]
+[ext_resource type="Texture2D" uid="uid://88iovvlf3cg4" path="res://assets/kenney_monochrome-rpg/Default/Tiles/tile_0000.png" id="5_bkn5o"]
+[ext_resource type="PackedScene" uid="uid://ca8kwae33nfxd" path="res://scenes/player/Player.tscn" id="7_b6xl3"]
+[ext_resource type="PackedScene" uid="uid://c5s1pf53yirhm" path="res://scenes/maps/Goal.tscn" id="10_27h4a"]
+[ext_resource type="PackedScene" uid="uid://bwcpcthxmi484" path="res://scenes/ui/UI.tscn" id="10_s70h5"]
+[ext_resource type="PackedScene" uid="uid://bmkn1mud67i5y" path="res://scenes/ui/help.tscn" id="10_vwfvy"]
+[ext_resource type="Script" uid="uid://ce7vo2v20oshu" path="res://scenes/enemy/attack_pattern.gd" id="11_ctmcs"]
+[ext_resource type="PackedScene" uid="uid://lt11oexmku5s" path="res://scenes/enemy/MPP.tscn" id="11_v6clt"]
+[ext_resource type="Resource" uid="uid://bkfnhlp6epdjk" path="res://scenes/enemy/projectiles/bullet.tres" id="12_cfroa"]
+[ext_resource type="PackedScene" uid="uid://bbvli5wds5jss" path="res://scenes/items/coinPile.tscn" id="12_ctmcs"]
+[ext_resource type="PackedScene" uid="uid://c4vmf1bx5jtnk" path="res://scenes/items/fruits/cherry.tscn" id="14_1vlao"]
+[ext_resource type="Resource" uid="uid://bj6ajsebyukre" path="res://scenes/enemy/projectiles/beam.tres" id="14_20nax"]
+[ext_resource type="AudioStream" uid="uid://dv0u2q40c3e4x" path="res://sounds/sound effects/MOO SFXv2.wav" id="14_v6clt"]
+[ext_resource type="PackedScene" uid="uid://578l50o48qkk" path="res://scenes/items/fruits/persimmon.tscn" id="15_cfroa"]
+[ext_resource type="Resource" uid="uid://cocveucwl50wa" path="res://scenes/enemy/attacks/missiles.tres" id="15_ryuqu"]
+[ext_resource type="PackedScene" uid="uid://cjye54ls66xpx" path="res://scenes/items/fruits/melon.tscn" id="16_qfp24"]
+[ext_resource type="PackedScene" uid="uid://lnhhapkipvtt" path="res://scenes/items/fruits/lychee.tscn" id="17_25u3h"]
+[ext_resource type="PackedScene" uid="uid://bsjrv0421b048" path="res://scenes/items/fruits/kiwi.tscn" id="18_j43d5"]
+[ext_resource type="Resource" uid="uid://leyi7x50o6s2" path="res://scenes/enemy/projectiles/missile.tres" id="19_25u3h"]
+[ext_resource type="PackedScene" uid="uid://b1kwqy54sq4wa" path="res://scenes/items/fruits/mango.tscn" id="19_j43d5"]
+[ext_resource type="AudioStream" uid="uid://cq5hj2wjiac4s" path="res://sounds/music/609562_migfus20_background-music.ogg" id="23_hkxtu"]
+[ext_resource type="AudioStream" uid="uid://iowg0cpdmym7" path="res://sounds/sound effects/Tick2.wav" id="23_ryuqu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drb0v"]
+shader = ExtResource("4_rehj8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4jm"]
+size = Vector2(508, 179.3338)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vlao"]
+size = Vector2(282, 92.17111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctmcs"]
+size = Vector2(504, 281.524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6clt"]
+size = Vector2(420.75, 243.82333)
+
+[sub_resource type="Curve2D" id="Curve2D_j43d5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -69, 26, 0, 0, 0, 0, 662, 272)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_t8sh3"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_20nax"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_t8sh3")
+attack_time = 0.1
+windup = 0.99
+cooldown = 2.0
+projectile_data = ExtResource("19_25u3h")
+projectile_count = 3
+projectile_spread = 2.7
+indicator_colour = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_j4xr6"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ryuqu"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_j4xr6")
+attack_time = 3.0
+windup = 0.5
+cooldown = 0.5
+projectile_data = ExtResource("12_cfroa")
+projectile_count = 15
+projectile_spread = 1.571
+indicator_colour = Color(1, 0.96862745, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_20nax"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -473, -9, -64.20906, -2.4059525, 64.20906, 2.4059525, -310, 141, -26.400002, -101.200005, 26.400002, 101.200005, -132, 43, 0, 0, 0, 0, -31, 168, -96.072624, -60.754486, 96.072624, 60.754486, 256, 192, 0, 0, 0, 0, 431, 24)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_hkxtu"]
+_data = {
+"points": PackedVector2Array(0, 0, 5, 5, 0, 0, 10, 0, 0, 0, 5, 5)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_nfh86"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_hkxtu")
+attack_time = 5.0
+windup = 2.9
+cooldown = 1.425
+projectile_data = ExtResource("14_20nax")
+projectile_count = 1
+projectile_spread = 1.047
+indicator_colour = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_v6clt"]
+_data = {
+"points": PackedVector2Array(-60.738495, -71.43588, 60.738495, 71.43588, 102, 170, 126.5, -108.9, -126.5, 108.9, 80, 339, 132, 105.600006, -132, -105.600006, -384, 400, -53.9, 123.200005, 53.9, -123.200005, -400, 176, 0, 0, 0, 0, 18, 147, 0, 0, 0, 0, 102, 170)
+}
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_qfp24"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_j4xr6")
+attack_time = 6.0
+windup = 2.0
+cooldown = 5.0
+projectile_data = ExtResource("12_cfroa")
+projectile_count = 20
+projectile_spread = 0.32
+indicator_colour = Color(1, 0.96862745, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="Curve2D" id="Curve2D_ryuqu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 93, -93.17328, -737.2455, -283.55615, 737.2455, 283.55615, 156.48462, 451.33447, 0, 0, 0, 0, 591.4846, -5.6655273)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_nfh86"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 93, -93.17328, -737.2455, -283.55615, 737.2455, 283.55615, 296, 973.8095, 0, 0, 0, 0, 1846, 907.6867, 0, 0, 0, 0, 2014, 293.54535)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_rehj8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -82, 191, 0, 0, 0, 0, 334, 185)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_hkxtu"]
+script = ExtResource("11_ctmcs")
+movement = SubResource("Curve2D_t8sh3")
+attack_time = 0.1
+windup = 0.1
+cooldown = 3.315
+projectile_data = ExtResource("19_25u3h")
+projectile_count = 3
+projectile_spread = 2.7
+indicator_colour = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://ce7vo2v20oshu"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20nax"]
+size = Vector2(309, 265)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25u3h"]
+size = Vector2(179, 79)
+
+[sub_resource type="Curve2D" id="Curve2D_bkn5o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -69, 26, 0, 0, 0, 0, 524, -195)
+}
+point_count = 2
+
+[node name="In Game" type="Node2D" node_paths=PackedStringArray("goal", "player")]
+texture_filter = 1
+script = ExtResource("1_27h4a")
+INITIAL_FOLLOWERS = 3
+thown = ExtResource("2_vwfvy")
+splashText = ExtResource("3_s70h5")
+goal = NodePath("goal")
+player = NodePath("Player")
+minTimeBetweenMoos = 10.0
+maxTimeBetweenMoos = 20.0
+throwMooMinPitch = 1.5
+throwMooMaxPitch = 1.25
+idleMooMinPitch = 0.75
+idleMooMaxPitch = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.25297853, 0.8099951, 0.8806063, 1)
+z_index = -5
+texture_repeat = 2
+material = SubResource("ShaderMaterial_drb0v")
+position = Vector2(201.49997, 175)
+scale = Vector2(400, 400)
+texture = ExtResource("5_bkn5o")
+
+[node name="NavigationRegion2D" parent="." instance=ExtResource("4_v6clt")]
+
+[node name="Help" parent="." instance=ExtResource("10_vwfvy")]
+offset_left = -1475.0
+offset_top = -102.0
+offset_right = -1435.0
+offset_bottom = -62.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("7_b6xl3")]
+position = Vector2(893, 1222)
+metadata/_edit_group_ = true
+
+[node name="Sprite throw marker" parent="Player" index="5"]
+position = Vector2(753, 135)
+
+[node name="goal" parent="." instance=ExtResource("10_27h4a")]
+position = Vector2(204.00002, 1094.0001)
+scale = Vector2(3.9375, 3.9375)
+
+[node name="UI" parent="." instance=ExtResource("10_s70h5")]
+
+[node name="Control" parent="UI" index="0" node_paths=PackedStringArray("levelTime")]
+offset_right = 2233.0
+offset_bottom = 1251.0
+levelTime = NodePath("../../Timer")
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+offset_left = -610.0
+offset_top = -346.0
+offset_right = 617.0
+offset_bottom = 389.0
+
+[node name="coins" type="Node2D" parent="."]
+position = Vector2(-1060, -184.85294)
+scale = Vector2(1, 0.9981417)
+
+[node name="CollisionShape2D" parent="coins" instance=ExtResource("12_ctmcs")]
+position = Vector2(461, 1611.8483)
+shape = SubResource("RectangleShape2D_fg4jm")
+num_coins = 17
+
+[node name="CoinPile" parent="coins" instance=ExtResource("12_ctmcs")]
+position = Vector2(1266, -243.59976)
+shape = SubResource("RectangleShape2D_1vlao")
+num_coins = 38
+
+[node name="CoinPile2" parent="coins" instance=ExtResource("12_ctmcs")]
+position = Vector2(-233, 1704.0195)
+shape = SubResource("RectangleShape2D_ctmcs")
+num_coins = 90
+
+[node name="CoinPile3" parent="coins" instance=ExtResource("12_ctmcs")]
+position = Vector2(-1187, -241.59604)
+shape = SubResource("RectangleShape2D_v6clt")
+num_coins = 20
+
+[node name="Enemy Paths" type="Node2D" parent="."]
+
+[node name="Enemy Path3" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(575, -814)
+curve = SubResource("Curve2D_j43d5")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path3" index="0"]
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+damage = 15.0
+health = 100.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path3" index="1"]
+position = Vector2(-69, 26)
+rotation = 0.32462057
+
+[node name="Enemy Path" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(2174, -340)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path" parent="Enemy Paths/Enemy Path" instance=ExtResource("11_v6clt")]
+position = Vector2(-506, 1009)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path/Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path/Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path2" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(291, -440)
+curve = SubResource("Curve2D_v6clt")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path2" index="0"]
+position = Vector2(-502, 413)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+damage = 5.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2" index="1"]
+position = Vector2(102, 170)
+rotation = 0.86615604
+
+[node name="Enemy Path2" parent="Enemy Paths/Enemy Path2" instance=ExtResource("11_v6clt")]
+position = Vector2(-828, 341)
+curve = SubResource("Curve2D_v6clt")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path2/Enemy Path2" index="0"]
+position = Vector2(-502, 413)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_qfp24")])
+shoot_length = 100.0
+shoot_cooldown = 10.0
+damage = 5.0
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path2/Enemy Path2" index="1"]
+position = Vector2(102, 170)
+rotation = 0.86615604
+
+[node name="Enemy Path5" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(-2149.4846, 36.665527)
+curve = SubResource("Curve2D_ryuqu")
+
+[node name="Enemy Path4" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(-639, 938.0001)
+scale = Vector2(1, 0.9981417)
+curve = SubResource("Curve2D_nfh86")
+
+[node name="Enemy Path6" parent="Enemy Paths" instance=ExtResource("11_v6clt")]
+position = Vector2(-1428, 1138)
+curve = SubResource("Curve2D_rehj8")
+
+[node name="Enemy" parent="Enemy Paths/Enemy Path6" index="0"]
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_hkxtu")])
+
+[node name="PathFollow2D" parent="Enemy Paths/Enemy Path6" index="1"]
+position = Vector2(-82, 191)
+rotation = -0.014422077
+
+[node name="cherry" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(-357, 2052)
+
+[node name="cherry2" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(88, 2098)
+
+[node name="cherry3" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(672, 2114)
+
+[node name="cherry4" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(1373, 1804)
+
+[node name="cherry5" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(1517, 1452)
+
+[node name="cherry6" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(-702, 1785)
+
+[node name="cherry7" parent="Enemy Paths" instance=ExtResource("14_1vlao")]
+position = Vector2(2257, 422)
+
+[node name="CoinPile" parent="Enemy Paths" instance=ExtResource("12_ctmcs")]
+position = Vector2(2302.5, 1175.5)
+shape = SubResource("RectangleShape2D_20nax")
+num_coins = 27
+
+[node name="Fruits" type="Node2D" parent="."]
+
+[node name="cherry" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(389, 1047)
+
+[node name="cherry2" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(531, 1030)
+
+[node name="cherry3" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(677, 1021)
+
+[node name="cherry4" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(236, 1027)
+
+[node name="melon" parent="Fruits" instance=ExtResource("16_qfp24")]
+position = Vector2(-1718, -970)
+minimum_followers = 25
+maximum_followers = 35
+
+[node name="persimmon" parent="Fruits" instance=ExtResource("15_cfroa")]
+position = Vector2(551, 494)
+
+[node name="kiwi" parent="Fruits" instance=ExtResource("18_j43d5")]
+position = Vector2(768, -1208)
+
+[node name="persimmon3" parent="Fruits" instance=ExtResource("15_cfroa")]
+position = Vector2(-1736, -419)
+
+[node name="persimmon2" parent="Fruits" instance=ExtResource("15_cfroa")]
+position = Vector2(-725, 196)
+
+[node name="cherry5" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-511, 418)
+
+[node name="cherry6" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-691, 448)
+
+[node name="cherry7" parent="Fruits" instance=ExtResource("14_1vlao")]
+modulate = Color(0.49640003, 0.6170933, 0.73, 0.85882354)
+position = Vector2(819, -207)
+
+[node name="Node2D" type="Node2D" parent="Fruits"]
+
+[node name="lychee" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(468, -1109)
+
+[node name="lychee2" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(354, -999)
+
+[node name="lychee3" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(258, -862)
+
+[node name="lychee4" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(183, -736)
+
+[node name="lychee5" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(299, -932)
+
+[node name="mango" parent="Fruits" instance=ExtResource("19_j43d5")]
+position = Vector2(1702, -799)
+
+[node name="mango2" parent="Fruits" instance=ExtResource("19_j43d5")]
+position = Vector2(1167, 488)
+
+[node name="cherry8" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1076, 413)
+
+[node name="cherry9" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1084, 628)
+
+[node name="cherry10" parent="Fruits" instance=ExtResource("14_1vlao")]
+position = Vector2(-1084, 184)
+
+[node name="kiwi2" parent="Fruits" instance=ExtResource("18_j43d5")]
+position = Vector2(-37, -439)
+
+[node name="lychee6" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(-2289, 27)
+
+[node name="lychee7" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(-2396, 151)
+
+[node name="lychee8" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(-2532, 330)
+
+[node name="lychee9" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(-2545, 512)
+
+[node name="lychee10" parent="Fruits" instance=ExtResource("17_25u3h")]
+position = Vector2(-2390, 574)
+
+[node name="ClockSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_ryuqu")
+volume_db = 15.0
+autoplay = true
+
+[node name="MusicSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_hkxtu")
+volume_db = 1.0
+autoplay = true
+
+[node name="MooSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_v6clt")
+volume_db = -2.5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 420.0
+one_shot = true
+autostart = true
+
+[node name="CoinPile" parent="." instance=ExtResource("12_ctmcs")]
+position = Vector2(360, -1087)
+shape = SubResource("RectangleShape2D_25u3h")
+num_coins = 15
+
+[node name="Enemy Path" parent="." instance=ExtResource("11_v6clt")]
+position = Vector2(2174, -340)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path" parent="Enemy Path" instance=ExtResource("11_v6clt")]
+position = Vector2(-506, 1009)
+curve = SubResource("Curve2D_20nax")
+
+[node name="Enemy" parent="Enemy Path/Enemy Path" index="0"]
+scale = Vector2(1.81, 1.81)
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
+health = 70.0
+
+[node name="PathFollow2D" parent="Enemy Path/Enemy Path" index="1"]
+position = Vector2(-473, -9)
+rotation = 0.98094356
+
+[node name="Enemy Path3" parent="." instance=ExtResource("11_v6clt")]
+position = Vector2(1655, -610)
+curve = SubResource("Curve2D_bkn5o")
+
+[node name="Enemy" parent="Enemy Path3" index="0"]
+attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_20nax"), SubResource("Resource_ryuqu")])
+damage = 15.0
+health = 100.0
+
+[node name="PathFollow2D" parent="Enemy Path3" index="1"]
+position = Vector2(-69, 26)
+rotation = -0.35673627
+
+[connection signal="cow_amount_update" from="." to="UI/Control" method="_on_cow_amount_update"]
+[connection signal="score_update" from="." to="UI/Control" method="_on_score_update"]
+[connection signal="numThrowable" from="Player/Radii/Throw Radius" to="UI/Control" method="_on_throw_radius_num_throwable"]
+[connection signal="throwMade" from="Player/Radii/Throw Radius" to="." method="onThrowMade"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Player"]
+[editable path="UI"]
+[editable path="Enemy Paths/Enemy Path3"]
+[editable path="Enemy Paths/Enemy Path"]
+[editable path="Enemy Paths/Enemy Path/Enemy Path"]
+[editable path="Enemy Paths/Enemy Path2"]
+[editable path="Enemy Paths/Enemy Path2/Enemy Path2"]
+[editable path="Enemy Paths/Enemy Path6"]
+[editable path="Enemy Path"]
+[editable path="Enemy Path/Enemy Path"]
+[editable path="Enemy Path3"]

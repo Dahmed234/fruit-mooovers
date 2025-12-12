@@ -51,6 +51,10 @@ func physics_update(delta: float) -> void:
 	if not item:
 		return
 
+	if item.main_follower != follower:
+		follower.global_position = item.global_position
+		return
+
 	var navigation_agent_2d = follower.navigation_agent_2d
 	var label: Label = follower.label
 
