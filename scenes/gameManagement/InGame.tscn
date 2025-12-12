@@ -493,19 +493,6 @@ health = 70.0
 position = Vector2(-473, -9)
 rotation = 0.98094356
 
-[node name="Enemy Path" parent="Enemy Path" instance=ExtResource("11_v6clt")]
-position = Vector2(-506, 1009)
-curve = SubResource("Curve2D_20nax")
-
-[node name="Enemy" parent="Enemy Path/Enemy Path" index="0"]
-scale = Vector2(1.81, 1.81)
-attack_patterns = Array[ExtResource("11_ctmcs")]([SubResource("Resource_nfh86"), ExtResource("15_ryuqu")])
-health = 70.0
-
-[node name="PathFollow2D" parent="Enemy Path/Enemy Path" index="1"]
-position = Vector2(-473, -9)
-rotation = 0.98094356
-
 [node name="Enemy Path3" parent="." instance=ExtResource("11_v6clt")]
 position = Vector2(1655, -610)
 curve = SubResource("Curve2D_bkn5o")
@@ -534,5 +521,4 @@ rotation = -0.35673627
 [editable path="Enemy Paths/Enemy Path2/Enemy Path2"]
 [editable path="Enemy Paths/Enemy Path6"]
 [editable path="Enemy Path"]
-[editable path="Enemy Path/Enemy Path"]
 [editable path="Enemy Path3"]

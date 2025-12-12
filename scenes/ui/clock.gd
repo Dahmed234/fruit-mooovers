@@ -12,4 +12,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$redbit.max_value = max_value
 	# -4 so that it loops twice per 24 hours
-	$hand.rotation = -4 * PI * (value/max_value)
+	$hand.rotation = -2 * PI * (value/max_value)

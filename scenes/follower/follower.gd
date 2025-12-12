@@ -331,12 +331,6 @@ func _process(delta: float) -> void:
 	
 	$Footsteps.play_footstep = is_moving and !dead;
 	
-	if is_whistled:
-		return
-	
-	whistled_time = max(0,whistled_time - delta)
-	
-
 	modulate.a = 1.0
 	if canBeThrown():
 		modulate.a = 1.0 if inThrowRange() else 0.6
@@ -347,6 +341,12 @@ func _process(delta: float) -> void:
 	
 	if currentState == State.WANDER: modulate= Color("9ef5ffff")
 	else: modulate = Color.WHITE
+	
+	whistled_time = max(0,whistled_time - delta)
+	
+	if is_whistled:
+		return
+	
 
 	match currentState:
 		State.IDLE:

@@ -90,7 +90,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
@@ -101,7 +101,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
@@ -112,7 +112,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(2),
-"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/3/type = "value"
@@ -286,7 +286,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(4.318307, -0.06666666, -7.655207, 0.033333346, -4.48969),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
