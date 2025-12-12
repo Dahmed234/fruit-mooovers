@@ -85,7 +85,7 @@ func onCarryFinish(item,pos):
 	score += item.value
 	score_update.emit(score)
 	for i in item.followerValue:
-		spawnFollower(pos,Follower.State.INITIAL)
+		spawnFollower(pos,Follower.State.WANDER)
 	# Spawn splash text when the item is droped off
 	if item.value > 0:
 		var value = splashText.instantiate()
