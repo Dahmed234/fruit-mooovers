@@ -13,6 +13,14 @@ Animated player sprite (unused) https://xzany.itch.io/top-down-adventurer-charac
 - Modify to suit your needs.
 - You are NOT allowed to turn any of my assets to an NFT.
 
+Sprites that were made / adapted by members of the group:
+UFO sprite - Tom.
+Laser Beam sprite - Tom.
+Unused clock sprites - Tom.
+
+Game tutorial drawings - Danyal.
+Modified kenney's cow sprite to have angel wings and halo for death animation - Danyal.
+
 ## Stock Images
 
 * <https://commons.wikimedia.org/wiki/File:Carambola_Starfruit.jpg> by SMasters (CC-BY-SA 3.0 )
