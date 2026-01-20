@@ -14,6 +14,7 @@ Animated player sprite (unused) https://xzany.itch.io/top-down-adventurer-charac
 - You are NOT allowed to turn any of my assets to an NFT.
 
 Sprites that were made / adapted by members of the group:
+
 UFO sprite - Tom.
 Laser Beam sprite - Tom.
 Unused clock sprites - Tom.
