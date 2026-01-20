@@ -3,6 +3,16 @@
 various kenney asset packs : Created/distributed by Kenney (<www.kenney.nl>)
 License: (Creative Commons Zero, CC0)
 
+Animated player sprite (unused) https://xzany.itch.io/top-down-adventurer-character
+
+##################### LICENSE ##################### 
+
+- You can use this asset in any game project, personal or commercial.
+- DO NOT resell or redistribute AS A GAME ASSET, it has to be part of a project.
+- Credit is not required but it is appreciated.
+- Modify to suit your needs.
+- You are NOT allowed to turn any of my assets to an NFT.
+
 ## Stock Images
 
 * <https://commons.wikimedia.org/wiki/File:Carambola_Starfruit.jpg> by SMasters (CC-BY-SA 3.0 )
