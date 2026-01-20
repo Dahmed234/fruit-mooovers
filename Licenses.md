@@ -15,12 +15,12 @@ Animated player sprite (unused) https://xzany.itch.io/top-down-adventurer-charac
 
 Sprites that were made / adapted by members of the group:
 
-UFO sprite - Tom.
-Laser Beam sprite - Tom.
-Unused clock sprites - Tom.
+- UFO sprite - Tom.
+- Laser Beam sprite - Tom.
+- Unused clock sprites - Tom.
 
-Game tutorial drawings - Danyal.
-Modified kenney's cow sprite to have angel wings and halo for death animation - Danyal.
+- Game tutorial drawings - Danyal.
+- Modified kenney's cow sprite to have angel wings and halo for death animation - Danyal.
 
 ## Stock Images
 
